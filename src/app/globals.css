@@ -14,6 +14,43 @@
   }
 }
 
+@theme {
+  /* White 계열 */
+  --color-w1: #f6f6f6;
+  --color-w2: #ededed;
+  --color-w3: #fafafa;
+  --color-w4: #f0f0f0;
+  --color-w5: #eaeaea;
+  --color-w6: #efefef;
+
+  /* Black & Gray 계열 */
+  --color-b1: #3c3c3c;
+  --color-b2: #4c4c4c;
+  --color-b3: #5a5a62;
+  --color-g1: #919191;
+  --color-g2: #b8b8b8;
+  --color-g3: #c7c7c7;
+  --color-g4: #d8d8d8;
+
+  /* Green 계열 */
+  --color-gn1: #80a281;
+  --color-gn2: rgba(128, 162, 129, 0.7); /* 70% */
+  --color-gn3: rgba(128, 162, 129, 0.4); /* 40% */
+  --color-gn4: rgba(128, 162, 129, 0.2); /* 20% */
+  --color-gn5: #79987a;
+  --color-gn6: #a5d0a6;
+  --color-gn7: #b2d8b3;
+  --color-gn8: rgba(178, 216, 179, 0.3);
+  --color-gn9: #afc6af;
+  --color-gn10: #bbccbb;
+  --color-gn11: #e7e9e7;
+  --color-gn12: #627262;
+
+  /* Red / Yellow */
+  --color-r: #ed9092;
+  --color-y: #fee500; /* 카카오 노랑 */
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
