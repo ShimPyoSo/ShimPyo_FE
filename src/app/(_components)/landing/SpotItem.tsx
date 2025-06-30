@@ -10,7 +10,7 @@ export default function SpotItem() {
 
   return (
     <li className="max-w-[102px] flex flex-col">
-      <div className="w-[102px] h-[102px] rounded-lg border border-gray-300 bg-white relative">
+      <div className="w-[102px] h-[102px] rounded-lg border border-g3 bg-white relative">
         <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-2%]">
           대구
         </div>

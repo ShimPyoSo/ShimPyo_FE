@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const pathname = usePathname();
-  const notRendering = ['/'];
+  const notRendering = ['/', '/signup'];
 
   if (notRendering.includes(pathname)) return null;
 
