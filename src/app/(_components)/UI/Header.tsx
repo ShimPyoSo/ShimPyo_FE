@@ -9,6 +9,7 @@ export default function Header() {
   const notRendering = ['/', '/signup'];
   const title: { [key: string]: string } = {
     '/signup/email': '회원가입',
+    '/login': '로그인',
   };
 
   if (notRendering.includes(pathname)) return null;

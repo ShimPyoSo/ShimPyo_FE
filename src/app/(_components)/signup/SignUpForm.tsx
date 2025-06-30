@@ -4,10 +4,10 @@ import PasswordInput from './PasswordInput';
 
 export default function SignUpForm() {
   return (
-    <form>
+    <>
       <IdInput />
       <PasswordInput />
       <EmailAuthInput />
-    </form>
+    </>
   );
 }

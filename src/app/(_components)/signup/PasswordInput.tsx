@@ -9,6 +9,9 @@ export default function PasswordInput() {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
 
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordConfirmFocused, setIsPasswordConfirmFocused] = useState(false);
+
   return (
     <>
       <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
@@ -19,15 +22,19 @@ export default function PasswordInput() {
             className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => setIsPasswordFocused(false)}
           />
-          <Image
-            className="absolute right-[16px] top-[28px] cursor-pointer"
-            src={passwordOpen ? close : open}
-            alt={'password'}
-            width={24}
-            height={24}
-            onClick={() => setPasswordOpen(!passwordOpen)}
-          />
+          {isPasswordFocused && (
+            <Image
+              className="absolute right-[16px] top-[28px] cursor-pointer"
+              src={passwordOpen ? close : open}
+              alt={'password'}
+              width={24}
+              height={24}
+              onClick={() => setPasswordOpen(!passwordOpen)}
+            />
+          )}
         </div>
       </label>
 
@@ -38,15 +45,19 @@ export default function PasswordInput() {
             className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
+            onFocus={() => setIsPasswordConfirmFocused(true)}
+            onBlur={() => setIsPasswordConfirmFocused(false)}
           />
-          <Image
-            className="absolute right-[16px] top-[28px] cursor-pointer"
-            src={passwordConfirmOpen ? close : open}
-            alt={'password'}
-            width={24}
-            height={24}
-            onClick={() => setPasswordConfirmOpen(!passwordConfirmOpen)}
-          />
+          {isPasswordConfirmFocused && (
+            <Image
+              className="absolute right-[16px] top-[28px] cursor-pointer"
+              src={passwordConfirmOpen ? close : open}
+              alt={'password'}
+              width={24}
+              height={24}
+              onClick={() => setPasswordConfirmOpen(!passwordConfirmOpen)}
+            />
+          )}
         </div>
       </label>
     </>
