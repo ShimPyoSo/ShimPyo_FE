@@ -7,6 +7,9 @@ import { usePathname } from 'next/navigation';
 export default function Header() {
   const pathname = usePathname();
   const notRendering = ['/', '/signup'];
+  const title: { [key: string]: string } = {
+    '/signup/email': '회원가입',
+  };
 
   if (notRendering.includes(pathname)) return null;
 
@@ -16,7 +19,7 @@ export default function Header() {
         <Image src={prev} alt="이전 페이지" width={23} height={23} />
       </button>
 
-      <h1 className="font-semibold">헤더</h1>
+      <h1 className="font-semibold">{title[pathname] || '헤더'}</h1>
     </header>
   );
 }
