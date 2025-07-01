@@ -13,7 +13,7 @@ export default function PasswordCheck({ isFocused, isOpen, setIsOpen }: Password
     <>
       {isFocused && (
         <Image
-          className="absolute right-[16px] top-[28px] cursor-pointer"
+          className="absolute right-[16px] top-[16px] cursor-pointer"
           src={isOpen ? close : open}
           alt={'password'}
           width={24}

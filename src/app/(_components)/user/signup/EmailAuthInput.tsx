@@ -1,14 +1,16 @@
 'use client';
 
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+
 import AuthCodeInput from './AuthCodeInput';
 import { ISignUp } from '@/app/(_utils)/type';
 import Image from 'next/image';
-import { UseFormRegister } from 'react-hook-form';
 import arrow from '/public/images/icons/selectArrow.svg';
 import { useState } from 'react';
 
 interface EmailAuthInputProps {
   register: UseFormRegister<ISignUp>;
+  watch: UseFormWatch<ISignUp>;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 

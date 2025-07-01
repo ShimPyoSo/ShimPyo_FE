@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
 export default function SignUpForm() {
-  const { register, handleSubmit } = useForm<ISignUp>();
+  const { register, handleSubmit, watch } = useForm<ISignUp>();
   const [isVerified, setIsVerified] = useState(false);
 
   const onSubmit = async (data: ISignUp) => {
@@ -29,8 +29,8 @@ export default function SignUpForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <IdInput register={register} />
-      <PasswordInput register={register} />
-      <EmailAuthInput register={register} setIsVerified={setIsVerified} />
+      <PasswordInput register={register} watch={watch} />
+      <EmailAuthInput register={register} setIsVerified={setIsVerified} watch={watch} />
 
       <div className="sticky bottom-0 bg-w1 py-[30px] flex flex-col items-center">
         <button className="w-full py-[16px] bg-gn1 rounded-lg border border-gn5 text-white font-semibold cursor-pointer">

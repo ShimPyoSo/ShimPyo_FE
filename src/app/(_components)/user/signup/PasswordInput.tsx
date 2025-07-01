@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, useFormContext } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import { ISignUp } from '@/app/(_utils)/type';
 import PasswordCheck from '../PasswordCheck';
@@ -8,26 +8,26 @@ import { useState } from 'react';
 
 interface PasswordInputProps {
   register: UseFormRegister<ISignUp>;
+  watch: UseFormWatch<ISignUp>;
 }
 
-export default function PasswordInput({ register }: PasswordInputProps) {
+export default function PasswordInput({ register, watch }: PasswordInputProps) {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isPasswordConfirmFocused, setIsPasswordConfirmFocused] = useState(false);
 
-  const { watch } = useFormContext();
   const password = watch('password');
 
   return (
     <>
       <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호
-        <small className="text-xs text-g1">8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요</small>
+        <small className="text-xs text-g1 mb-[12px]">8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요</small>
         <div className="relative">
           <input
-            className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+            className="w-full p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
             {...register('password', {
@@ -44,11 +44,11 @@ export default function PasswordInput({ register }: PasswordInputProps) {
         </div>
       </label>
 
-      <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
+      <label className="mt-[40px] mb-[12px]  flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호 확인
         <div className="relative">
           <input
-            className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+            className="w-full p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
             {...register('passwordConfirm', {
