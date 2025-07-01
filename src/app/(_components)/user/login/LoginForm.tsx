@@ -6,23 +6,32 @@ import Link from 'next/link';
 import LoginInput from './LoginInput';
 import RememberMeInput from './RememberMeInput';
 import axios from 'axios';
+import { loginAtom } from '@/app/(_store)/auth';
+import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function LoginForm() {
   const { register, handleSubmit } = useForm<ILogin>();
+  const [, login] = useAtom(loginAtom);
+  const router = useRouter();
+  const [isLoginFailed, setIsLoginFailed] = useState(false);
 
   const onSubmit = async (data: ILogin) => {
     try {
       const response = await axios.post<IMember>('/login', data);
-      console.log(response); // 전역 상태 관리 구현 후 수정
-    } catch (error) {
-      console.log(error); // error 처리 컴포넌트 구현 후 수정
+      login(response.data);
+      router.push('/');
+    } catch {
+      setIsLoginFailed(true);
     }
   };
 
   return (
     <form className="mt-[145px]" onSubmit={handleSubmit(onSubmit)}>
-      <LoginInput register={register} />
+      <LoginInput register={register} isLoginFailed={isLoginFailed} />
+      {isLoginFailed && <p className="text-xs text-r">아이디 또는 비밀번호를 다시 입력해 주세요</p>}
       <div className="mt-[16px] flex justify-between items-center text-xs text-g1">
         <RememberMeInput register={register} />
         <div className="flex gap-[6px]">

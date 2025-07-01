@@ -7,22 +7,27 @@ import { useState } from 'react';
 
 interface LoginInputProps {
   register: UseFormRegister<ILogin>;
+  isLoginFailed: boolean;
 }
 
-export default function LoginInput({ register }: LoginInputProps) {
+export default function LoginInput({ register, isLoginFailed }: LoginInputProps) {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
   return (
     <>
       <input
-        className="w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border border-w4 outline-none focus:border-gn1 text-black"
+        className={`w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black ${
+          isLoginFailed ? 'border-r' : 'border-w4'
+        }`}
         placeholder="아이디를 입력해 주세요"
         {...register('username', { required: true })}
       />
       <div className="relative">
         <input
-          className="w-full p-[16px] bg-w3 rounded-lg border border-w4 outline-none focus:border-gn1 text-black"
+          className={`w-full p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black ${
+            isLoginFailed ? 'border-r' : 'border-w4'
+          }`}
           type={passwordOpen ? 'text' : 'password'}
           placeholder="비밀번호를 입력해 주세요"
           {...register('password', { required: true })}
