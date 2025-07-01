@@ -1,12 +1,12 @@
-import { ISignUp } from '@/app/(_utils)/type';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { IFind, ISignUp } from '@/app/(_utils)/type';
 
-interface AuthCodeInputProps {
+interface AuthCodeInputProps<T extends FieldValues> {
   isAuthStart: boolean;
-  register: UseFormRegister<ISignUp>;
+  register: UseFormRegister<T>;
 }
 
-export default function AuthCodeInput({ isAuthStart, register }: AuthCodeInputProps) {
+export default function AuthCodeInput<T extends ISignUp | IFind>({ isAuthStart, register }: AuthCodeInputProps<T>) {
   return (
     <>
       {isAuthStart && (
@@ -16,7 +16,7 @@ export default function AuthCodeInput({ isAuthStart, register }: AuthCodeInputPr
             <input
               className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
               placeholder="인증코드를 입력해 주세요"
-              {...(register('email'), { required: true })}
+              {...(register('email' as Path<T>), { required: true })}
             />
           </label>
           <button className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]">

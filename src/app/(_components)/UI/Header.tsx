@@ -2,15 +2,12 @@
 
 import Image from 'next/image';
 import prev from '/public/images/icons/prevButton.svg';
+import { title } from '@/app/(_utils)/constants';
 import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const pathname = usePathname();
   const notRendering = ['/', '/signup'];
-  const title: { [key: string]: string } = {
-    '/signup/email': '회원가입',
-    '/login': '로그인',
-  };
 
   if (notRendering.includes(pathname)) return null;
 

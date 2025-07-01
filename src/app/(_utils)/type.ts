@@ -16,3 +16,8 @@ export interface ISignUp {
   email: string;
   authcode: string;
 }
+
+export interface IFind {
+  username?: string;
+  email: string;
+}

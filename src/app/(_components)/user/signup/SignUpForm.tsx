@@ -1,8 +1,8 @@
 'use client';
 
-import EmailAuthInput from './EmailAuthInput';
+import EmailAuthInput from '../EmailAuthInput';
 import { ISignUp } from '@/app/(_utils)/type';
-import IdInput from './IdInput';
+import IdInput from '../IdInput';
 import Link from 'next/link';
 import PasswordInput from './PasswordInput';
 import axios from 'axios';
@@ -28,7 +28,7 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <IdInput register={register} />
+      <IdInput register={register} type="signup" />
       <PasswordInput register={register} watch={watch} />
       <EmailAuthInput register={register} setIsVerified={setIsVerified} watch={watch} />
 
