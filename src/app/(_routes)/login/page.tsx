@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import LoginForm from '@/app/(_components)/login/LoginForm';
+import LoginForm from '@/app/(_components)/user/login/LoginForm';
 import kakao from '/public/images/icons/kakao.svg';
 
 export default function Login() {

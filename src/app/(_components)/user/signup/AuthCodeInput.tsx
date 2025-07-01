@@ -1,4 +1,12 @@
-export default function AuthCodeInput({ isAuthStart }: { isAuthStart: boolean }) {
+import { ISignUp } from '@/app/(_utils)/type';
+import { UseFormRegister } from 'react-hook-form';
+
+interface AuthCodeInputProps {
+  isAuthStart: boolean;
+  register: UseFormRegister<ISignUp>;
+}
+
+export default function AuthCodeInput({ isAuthStart, register }: AuthCodeInputProps) {
   return (
     <>
       {isAuthStart && (
@@ -8,6 +16,7 @@ export default function AuthCodeInput({ isAuthStart }: { isAuthStart: boolean })
             <input
               className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
               placeholder="인증코드를 입력해 주세요"
+              {...(register('email'), { required: true })}
             />
           </label>
           <button className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]">

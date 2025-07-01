@@ -1,11 +1,18 @@
 'use client';
 
 import AuthCodeInput from './AuthCodeInput';
+import { ISignUp } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import { UseFormRegister } from 'react-hook-form';
 import arrow from '/public/images/icons/selectArrow.svg';
 import { useState } from 'react';
 
-export default function EmailAuthInput() {
+interface EmailAuthInputProps {
+  register: UseFormRegister<ISignUp>;
+  setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function EmailAuthInput({ register }: EmailAuthInputProps) {
   const [isAuthStart, setIsAuthStart] = useState(false);
 
   return (
@@ -16,6 +23,13 @@ export default function EmailAuthInput() {
           <input
             className="w-[158px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black font-normal"
             placeholder="이메일을 입력하세요"
+            {...register('email', {
+              required: '이메일은 필수 입력입니다.',
+              pattern: {
+                value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                message: '유효한 이메일 형식이 아닙니다.',
+              },
+            })}
           />
           @
           <div className="relative">
@@ -41,7 +55,7 @@ export default function EmailAuthInput() {
       </button>
       <p className="mt-[6px] text-xs text-b3">이메일 입력 후 인증을 진행해 주세요</p>
 
-      <AuthCodeInput isAuthStart={isAuthStart} />
+      <AuthCodeInput isAuthStart={isAuthStart} register={register} />
     </>
   );
 }

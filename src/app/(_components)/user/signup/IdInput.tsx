@@ -1,4 +1,11 @@
-export default function IdInput() {
+import { ISignUp } from '@/app/(_utils)/type';
+import { UseFormRegister } from 'react-hook-form';
+
+interface IdInputProps {
+  register: UseFormRegister<ISignUp>;
+}
+
+export default function IdInput({ register }: IdInputProps) {
   return (
     <>
       <label className="flex flex-col text-sm text-b3 tracking-[-2%]">
@@ -6,6 +13,7 @@ export default function IdInput() {
         <input
           className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
           placeholder="아이디를 입력해 주세요"
+          {...(register('username'), { required: true })}
         />
       </label>
       <button className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]">

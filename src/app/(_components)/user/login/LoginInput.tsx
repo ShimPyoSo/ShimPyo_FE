@@ -1,10 +1,8 @@
 'use client';
 
 import { ILogin } from '@/app/(_utils)/type';
-import Image from 'next/image';
+import PasswordCheck from '../PasswordCheck';
 import { UseFormRegister } from 'react-hook-form';
-import close from '/public/images/icons/closeEye.svg';
-import open from '/public/images/icons/openEye.svg';
 import { useState } from 'react';
 
 interface LoginInputProps {
@@ -31,16 +29,7 @@ export default function LoginInput({ register }: LoginInputProps) {
           onFocus={() => setIsPasswordFocused(true)}
           onBlur={() => setIsPasswordFocused(false)}
         />
-        {isPasswordFocused && (
-          <Image
-            className="absolute right-[16px] top-[26px] cursor-pointer"
-            src={passwordOpen ? close : open}
-            alt={'password'}
-            width={24}
-            height={24}
-            onClick={() => setPasswordOpen(!passwordOpen)}
-          />
-        )}
+        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} />
       </div>
     </>
   );

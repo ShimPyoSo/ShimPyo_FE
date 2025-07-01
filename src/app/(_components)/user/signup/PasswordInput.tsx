@@ -1,16 +1,24 @@
 'use client';
 
-import Image from 'next/image';
-import close from '/public/images/icons/closeEye.svg';
-import open from '/public/images/icons/openEye.svg';
+import { UseFormRegister, useFormContext } from 'react-hook-form';
+
+import { ISignUp } from '@/app/(_utils)/type';
+import PasswordCheck from '../PasswordCheck';
 import { useState } from 'react';
 
-export default function PasswordInput() {
+interface PasswordInputProps {
+  register: UseFormRegister<ISignUp>;
+}
+
+export default function PasswordInput({ register }: PasswordInputProps) {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isPasswordConfirmFocused, setIsPasswordConfirmFocused] = useState(false);
+
+  const { watch } = useFormContext();
+  const password = watch('password');
 
   return (
     <>
@@ -22,19 +30,17 @@ export default function PasswordInput() {
             className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
+            {...register('password', {
+              required: '비밀번호는 필수 입력입니다.',
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*])[A-Za-z\d~!@#$%^&*]{8,}$/,
+                message: '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
+              },
+            })}
             onFocus={() => setIsPasswordFocused(true)}
             onBlur={() => setIsPasswordFocused(false)}
           />
-          {isPasswordFocused && (
-            <Image
-              className="absolute right-[16px] top-[28px] cursor-pointer"
-              src={passwordOpen ? close : open}
-              alt={'password'}
-              width={24}
-              height={24}
-              onClick={() => setPasswordOpen(!passwordOpen)}
-            />
-          )}
+          <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} />
         </div>
       </label>
 
@@ -45,19 +51,18 @@ export default function PasswordInput() {
             className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
+            {...register('passwordConfirm', {
+              required: '비밀번호 확인은 필수입니다.',
+              validate: (value) => value === password || '비밀번호가 일치하지 않습니다.',
+            })}
             onFocus={() => setIsPasswordConfirmFocused(true)}
             onBlur={() => setIsPasswordConfirmFocused(false)}
           />
-          {isPasswordConfirmFocused && (
-            <Image
-              className="absolute right-[16px] top-[28px] cursor-pointer"
-              src={passwordConfirmOpen ? close : open}
-              alt={'password'}
-              width={24}
-              height={24}
-              onClick={() => setPasswordConfirmOpen(!passwordConfirmOpen)}
-            />
-          )}
+          <PasswordCheck
+            isFocused={isPasswordConfirmFocused}
+            isOpen={passwordConfirmOpen}
+            setIsOpen={setPasswordConfirmOpen}
+          />
         </div>
       </label>
     </>
