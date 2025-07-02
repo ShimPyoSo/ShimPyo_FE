@@ -1,6 +1,5 @@
-import Image from 'next/image';
+import KakaoButton from '@/app/(_components)/user/KakaoButton';
 import Link from 'next/link';
-import kakao from '/public/images/icons/kakao.svg';
 
 export default function SignUp() {
   return (
@@ -14,10 +13,7 @@ export default function SignUp() {
         </div>
       </h1>
       <div className="flex flex-col items-center">
-        <button className="flex gap-[8px] justify-center items-center w-full rounded-lg py-[16px] bg-y text-b1 font-semibold tracking-[-1.3%]">
-          <Image src={kakao} alt="카카오" width={20} height={20} />
-          카카오로 회원가입
-        </button>
+        <KakaoButton />
         <Link
           className="mt-[8px] w-full rounded-lg py-[16px] bg-white border border-w4 text-b1 font-semibold tracking-[-1.3%] text-center"
           href={'/signup/email'}

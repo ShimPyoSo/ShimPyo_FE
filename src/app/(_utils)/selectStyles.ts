@@ -6,7 +6,7 @@ interface DomainOption {
   isLast?: boolean;
 }
 
-const reactSelectStyles: StylesConfig<DomainOption, false> = {
+const SelectStyles: StylesConfig<DomainOption, false> = {
   control: (base, state) => ({
     ...base,
     backgroundColor: '#fafafa',
@@ -61,5 +61,5 @@ const reactSelectStyles: StylesConfig<DomainOption, false> = {
   }),
 };
 
-export default reactSelectStyles;
+export default SelectStyles;
 export type { DomainOption };
