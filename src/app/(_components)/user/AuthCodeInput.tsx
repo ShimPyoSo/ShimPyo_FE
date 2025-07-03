@@ -1,12 +1,45 @@
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+'use client';
+
+import { FieldValues, Path, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { IFind, ISignUp } from '@/app/(_utils)/type';
+
+import axios from 'axios';
+import { useState } from 'react';
 
 interface AuthCodeInputProps<T extends FieldValues> {
   isAuthStart: boolean;
   register: UseFormRegister<T>;
+  watch: UseFormWatch<T>;
+  setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  domain: string;
 }
 
-export default function AuthCodeInput<T extends ISignUp | IFind>({ isAuthStart, register }: AuthCodeInputProps<T>) {
+export default function AuthCodeInput<T extends ISignUp | IFind>({
+  isAuthStart,
+  register,
+  watch,
+  setIsVerified,
+  domain,
+}: AuthCodeInputProps<T>) {
+  const [codeState, setCodeState] = useState<'prev' | 'finished' | 'failed'>('prev');
+  const authCode = watch('authCode' as Path<T>);
+  const email = watch('email' as Path<T>);
+
+  const handleAuthCodeCheck = async () => {
+    if (authCode === '') {
+      // code를 입력하지 않는 경우 return 코드 추가 예정
+      return;
+    }
+
+    try {
+      await axios.post('/email/validation', { email: `${email}@${domain}`, code: authCode });
+      setCodeState('finished');
+      setIsVerified(true);
+    } catch {
+      setCodeState('failed');
+    }
+  };
+
   return (
     <>
       {isAuthStart && (
@@ -14,15 +47,26 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({ isAuthStart, 
           <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
             인증 코드
             <input
-              className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+              className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+                codeState === 'failed' ? 'border-red-500' : 'border-w4'
+              }`}
               placeholder="인증코드를 입력해 주세요"
-              {...(register('email' as Path<T>), { required: true })}
+              {...(register('authCode' as Path<T>), { required: true })}
             />
           </label>
-          <button className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]">
+          <button
+            className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]"
+            onClick={handleAuthCodeCheck}
+          >
             확인하기
           </button>
-          <p className="mt-[6px] text-xs text-b3">인증 코드를 입력한 후 확인하기를 눌러주세요</p>
+          <p className={`mt-[6px] text-xs ${codeState === 'failed' ? 'text-r' : 'text-b3'}`}>
+            {codeState === 'prev'
+              ? '인증 코드를 입력한 후 확인하기를 눌러주세요'
+              : codeState === 'finished'
+              ? '인증이 완료되었어요'
+              : '인증 번호를 다시 확인해 주세요'}
+          </p>
         </>
       )}
     </>

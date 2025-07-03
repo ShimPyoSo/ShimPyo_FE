@@ -2,26 +2,26 @@
 
 import { useEffect, useState } from 'react';
 
+import { IDomain } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import Select from 'react-select';
 import arrow from '/public/images/icons/selectArrow.svg';
+import { domainOptions } from '@/app/(_utils)/constants';
 import selectStyles from '@/app/(_utils)/selectStyles';
 
 interface DomainInputProps {
   customDomain: string;
   setCustomDomain: React.Dispatch<React.SetStateAction<string>>;
+  selectedDomain: IDomain;
+  setSelectedDomain: React.Dispatch<React.SetStateAction<IDomain>>;
 }
 
-export default function DomainInput({ customDomain, setCustomDomain }: DomainInputProps) {
-  const domainOptions = [
-    { value: 'gmail.com', label: 'gmail.com' },
-    { value: 'naver.com', label: 'naver.com' },
-    { value: 'hanmail.net', label: 'hanmail.net' },
-    { value: 'daum.net', label: 'daum.net' },
-    { value: 'custom', label: '직접 입력', isLast: true },
-  ];
-
-  const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
+export default function DomainInput({
+  customDomain,
+  setCustomDomain,
+  selectedDomain,
+  setSelectedDomain,
+}: DomainInputProps) {
   const [forceOpen, setForceOpen] = useState(false);
   const isCustom = selectedDomain.value === 'custom';
 

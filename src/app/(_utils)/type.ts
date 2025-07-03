@@ -14,10 +14,15 @@ export interface ISignUp {
   password: string;
   passwordConfirm: string;
   email: string;
-  authcode: string;
+  authCode: string;
 }
 
 export interface IFind {
   username?: string;
   email: string;
+}
+
+export interface IDomain {
+  value: string;
+  label: string;
 }

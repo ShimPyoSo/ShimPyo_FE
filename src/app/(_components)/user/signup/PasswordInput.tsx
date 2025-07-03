@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import { ISignUp } from '@/app/(_utils)/type';
 import PasswordCheck from '../PasswordCheck';
@@ -9,9 +9,10 @@ import { useState } from 'react';
 interface PasswordInputProps {
   register: UseFormRegister<ISignUp>;
   watch: UseFormWatch<ISignUp>;
+  errors: FieldErrors<ISignUp>;
 }
 
-export default function PasswordInput({ register, watch }: PasswordInputProps) {
+export default function PasswordInput({ register, watch, errors }: PasswordInputProps) {
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
 
@@ -24,10 +25,16 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
     <>
       <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호
-        <small className="text-xs text-g1 mb-[12px]">8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요</small>
+        <small className={`text-xs text-g1 mb-[12px] ${errors.password ? 'text-r' : 'text-g2'}`}>
+          {errors.password
+            ? '비밀번호를 양식에 맞춰 설정해 주세요'
+            : '8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요'}
+        </small>
         <div className="relative">
           <input
-            className="w-full p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+              errors.password ? 'border-red-500' : 'border-w4'
+            }`}
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
             {...register('password', {
@@ -46,9 +53,14 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
 
       <label className="mt-[40px] mb-[12px]  flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호 확인
+        <small className={`text-xs text-g1 mb-[12px] ${errors.password ? 'text-r' : 'text-g2'}`}>
+          {errors.password ? '비밀번호가 일치하지 않아요' : '비밀번호를 한 번 더 입력해 주세요'}
+        </small>
         <div className="relative">
           <input
-            className="w-full p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+              errors.passwordConfirm ? 'border-red-500' : 'border-w4'
+            }`}
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
             {...register('passwordConfirm', {
