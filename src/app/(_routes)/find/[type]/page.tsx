@@ -1,6 +1,6 @@
 'use client';
 
-import EmailAuthInput from '@/app/(_components)/user/EmailAuthInput';
+import EmailAuth from '@/app/(_components)/user/EmailAuth';
 import { IFind } from '@/app/(_utils)/type';
 import IdInput from '@/app/(_components)/user/IdInput';
 import axios from 'axios';
@@ -30,8 +30,8 @@ export default function Find() {
     <div className="min-h-full bg-w1 flex flex-col justify-between px-[16px]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 justify-between">
         <section>
-          {type === 'password' && <IdInput register={register} type={'find'} />}
-          <EmailAuthInput register={register} watch={watch} setIsVerified={setIsVerified} />
+          {type === 'password' && <IdInput register={register} watch={watch} type={'find'} />}
+          <EmailAuth register={register} watch={watch} setIsVerified={setIsVerified} />
         </section>
 
         <button className="w-full bg-gn1 py-[16px] border border-gn5 text-white font-semibold rounded-lg mb-[40px]">

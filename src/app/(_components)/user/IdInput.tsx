@@ -11,15 +11,15 @@ interface IdInputProps<T extends FieldValues> {
   watch: UseFormWatch<T>;
   type: 'signup' | 'find';
 
-  isIdChecked: boolean;
-  setIsIdChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  isIdChecked?: boolean;
+  setIsIdChecked?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function IdInput<T extends ISignUp | IFind>({
   register,
   watch,
   type,
-  isIdChecked,
+  isIdChecked = false,
   setIsIdChecked,
 }: IdInputProps<T>) {
   const username = watch('username' as Path<T>);
@@ -33,7 +33,7 @@ export default function IdInput<T extends ISignUp | IFind>({
 
     try {
       await axios.get(`/check?id=${username}`);
-      setIsIdChecked(true);
+      setIsIdChecked?.(true);
     } catch {
       setIsIdDuplicated(true);
     }
