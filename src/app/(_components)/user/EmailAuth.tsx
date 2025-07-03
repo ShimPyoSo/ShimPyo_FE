@@ -3,12 +3,12 @@
 import { FieldValues, Path } from 'react-hook-form';
 import { IFind, ISignUp } from '@/app/(_utils)/type';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 import AuthCodeInput from './AuthCodeInput';
 import EmailAuthInput from './EmailAuthInput';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
-import { useState } from 'react';
 
 interface EmailAuthInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
@@ -27,6 +27,10 @@ export default function EmailAuth<T extends ISignUp | IFind>({
   const [customDomain, setCustomDomain] = useState('');
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
   const email = watch('email' as Path<T>);
+
+  useEffect(() => {
+    setIsEmailError(false); // email 값 수정 시 emailError 해제
+  }, [email, customDomain, selectedDomain]);
 
   const handleSendEmail = async () => {
     if (email === '' && selectedDomain.value === 'custom' && customDomain === '') {

@@ -14,6 +14,7 @@ interface DomainInputProps {
   setCustomDomain: React.Dispatch<React.SetStateAction<string>>;
   selectedDomain: IDomain;
   setSelectedDomain: React.Dispatch<React.SetStateAction<IDomain>>;
+  isEmailError: boolean;
 }
 
 export default function DomainInput({
@@ -21,6 +22,7 @@ export default function DomainInput({
   setCustomDomain,
   selectedDomain,
   setSelectedDomain,
+  isEmailError,
 }: DomainInputProps) {
   const [forceOpen, setForceOpen] = useState(false);
   const isCustom = selectedDomain.value === 'custom';
@@ -36,7 +38,9 @@ export default function DomainInput({
       {isCustom ? (
         <div className="relative">
           <input
-            className="w-[158px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black font-normal"
+            className={`w-[158px] p-[16px] bg-w3 rounded-lg border text-base font-normal outline-none focus:border-gn1 text-black ${
+              isEmailError ? 'border-r' : 'border-w4'
+            }`}
             placeholder="도메인 선택"
             value={customDomain}
             onChange={(e) => setCustomDomain(e.target.value)}
@@ -58,7 +62,7 @@ export default function DomainInput({
           options={domainOptions}
           placeholder="도메인 선택"
           onChange={(val) => setSelectedDomain(val!)}
-          styles={selectStyles}
+          styles={selectStyles(isEmailError)}
           menuIsOpen={forceOpen ? true : undefined}
           onMenuOpen={() => {
             setForceOpen(false);

@@ -48,7 +48,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
             인증 코드
             <input
               className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
-                codeState === 'failed' ? 'border-red-500' : 'border-w4'
+                codeState === 'failed' ? 'border-r' : 'border-w4'
               }`}
               placeholder="인증코드를 입력해 주세요"
               {...(register('authCode' as Path<T>), { required: true })}

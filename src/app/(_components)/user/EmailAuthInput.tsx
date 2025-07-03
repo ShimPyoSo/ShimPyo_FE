@@ -37,7 +37,7 @@ export default function EmailAuthInput<T extends ISignUp | IFind>({
     <div className="mt-[12px] flex justify-between items-center text-sm font-semibold text-[#242424]">
       <input
         className={`w-[158px] p-[16px] bg-w3 rounded-lg border text-base font-normal outline-none focus:border-gn1 text-black ${
-          isEmailError ? 'border-red-500' : 'border-w4'
+          isEmailError ? 'border-r' : 'border-w4'
         }`}
         placeholder="이메일 입력"
         {...register('email' as Path<T>, {
@@ -54,6 +54,7 @@ export default function EmailAuthInput<T extends ISignUp | IFind>({
         setCustomDomain={setCustomDomain}
         selectedDomain={selectedDomain}
         setSelectedDomain={setSelectedDomain}
+        isEmailError={isEmailError}
       />
     </div>
   );

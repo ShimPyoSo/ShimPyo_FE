@@ -59,7 +59,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
         <div className="relative">
           <input
             className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
-              errors.passwordConfirm ? 'border-red-500' : 'border-w4'
+              errors.passwordConfirm ? 'border-r' : 'border-w4'
             }`}
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
