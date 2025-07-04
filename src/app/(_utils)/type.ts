@@ -22,6 +22,11 @@ export interface IFind {
   email: string;
 }
 
+export interface IFindResult {
+  username: string;
+  createdAt: string;
+}
+
 export interface IDomain {
   value: string;
   label: string;
