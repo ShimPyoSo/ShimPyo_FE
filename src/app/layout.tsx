@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="w-[375px] h-screen overflow-hidden relative z-10 flex justify-center items-center">
             <div className="bg-white h-full w-full flex flex-col relative">
               <Header />
-              <div className="flex-1 overflow-auto scrollbar-hide">{children}</div>
+              <div className="flex-1 overflow-auto scrollbar-hide pb-[56px]">{children}</div>
               <TabBar />
             </div>
           </div>
