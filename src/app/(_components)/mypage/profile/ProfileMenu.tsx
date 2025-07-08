@@ -1,0 +1,56 @@
+'use client';
+
+import Image from 'next/image';
+import arrow from '/public/images/icons/arrow.svg';
+import { useState } from 'react';
+
+export default function ProfileMenu() {
+  const [activeMenu, setActiveMenu] = useState<null | 'profile' | 'password' | 'withdraw'>(null);
+
+  return (
+    <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
+      <li
+        className="py-[18px] border-b border-w6 flex justify-between items-center"
+        onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}
+      >
+        프로필 관리
+        <Image
+          className={`transition-transform duration-300 ${activeMenu === 'profile' ? 'rotate-180' : ''}`}
+          src={arrow}
+          alt="더보기"
+          width={24}
+          height={24}
+        />
+      </li>
+      <li
+        className="py-[18px] border-b border-w6 flex justify-between items-center"
+        onClick={() => setActiveMenu(activeMenu === 'password' ? null : 'password')}
+      >
+        비밀번호 관리
+        <Image
+          className={`transition-transform duration-300 ${activeMenu === 'password' ? 'rotate-180' : ''}`}
+          src={arrow}
+          alt="더보기"
+          width={24}
+          height={24}
+        />
+      </li>
+      <li className="py-[18px] border-b border-w6 flex justify-between items-center">
+        로그아웃<button className="text-w3 bg-gn1 border-gn5 rounded-md px-[12px] py-[7px]">로그아웃</button>
+      </li>
+      <li
+        className="py-[18px] border-b border-w6 flex justify-between items-center"
+        onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}
+      >
+        회원 탈퇴
+        <Image
+          className={`transition-transform duration-300 ${activeMenu === 'withdraw' ? 'rotate-180' : ''}`}
+          src={arrow}
+          alt="더보기"
+          width={24}
+          height={24}
+        />
+      </li>
+    </ul>
+  );
+}
