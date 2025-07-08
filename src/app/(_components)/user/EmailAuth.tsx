@@ -9,20 +9,26 @@ import AuthCodeInput from './AuthCodeInput';
 import EmailAuthInput from './EmailAuthInput';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
+import getRemainTime from '@/app/(_utils)/getRemainTime';
+import { useTimer } from '@/app/(_utils)/hooks/useTimer';
 
 interface EmailAuthInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
   watch: UseFormWatch<T>;
+  isVertified: boolean;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function EmailAuth<T extends ISignUp | IFind>({
   register,
   watch,
+  isVertified,
   setIsVerified,
 }: EmailAuthInputProps<T>) {
+  const [timeLeft, setTimeLeft] = useState(180);
   const [isAuthStart, setIsAuthStart] = useState(false);
   const [isEmailError, setIsEmailError] = useState(false);
+  useTimer(timeLeft, setTimeLeft, isAuthStart);
 
   const [customDomain, setCustomDomain] = useState('');
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
@@ -69,7 +75,8 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       >
         인증하기
       </button>
-      <p className="mt-[6px] text-xs text-b3">이메일 입력 후 인증을 진행해 주세요</p>
+      {isAuthStart && !isVertified && <p className="mt-[6px] text-r text-xs">{getRemainTime(timeLeft)}</p>}
+      <p className="mt-[4px] text-xs text-b3">이메일 입력 후 인증을 진행해 주세요</p>
 
       <AuthCodeInput
         isAuthStart={isAuthStart}
