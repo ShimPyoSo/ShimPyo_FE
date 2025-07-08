@@ -9,7 +9,6 @@ import AuthCodeInput from './AuthCodeInput';
 import EmailAuthInput from './EmailAuthInput';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
-import getRemainTime from '@/app/(_utils)/getRemainTime';
 import { useTimer } from '@/app/(_utils)/hooks/useTimer';
 
 interface EmailAuthInputProps<T extends FieldValues> {
@@ -75,7 +74,6 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       >
         인증하기
       </button>
-      {isAuthStart && !isVertified && <p className="mt-[6px] text-r text-xs">{getRemainTime(timeLeft)}</p>}
       <p className="mt-[4px] text-xs text-b3">이메일 입력 후 인증을 진행해 주세요</p>
 
       <AuthCodeInput
@@ -83,7 +81,9 @@ export default function EmailAuth<T extends ISignUp | IFind>({
         register={register}
         watch={watch}
         setIsVerified={setIsVerified}
+        isVertified={isVertified}
         domain={selectedDomain.value === 'custom' ? customDomain : selectedDomain.value}
+        timeLeft={timeLeft}
       />
     </>
   );

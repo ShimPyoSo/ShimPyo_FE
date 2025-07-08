@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export default function Find() {
   const { type } = useParams();
-  const [isFinded, setIsFinded] = useState(true);
+  const [isFinded, setIsFinded] = useState(false);
   const [result, setResult] = useState<null | IFindResult>(null);
 
   return (

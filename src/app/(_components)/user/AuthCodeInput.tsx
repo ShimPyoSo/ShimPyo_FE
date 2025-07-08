@@ -4,22 +4,27 @@ import { FieldValues, Path, UseFormRegister, UseFormWatch } from 'react-hook-for
 import { IFind, ISignUp } from '@/app/(_utils)/type';
 
 import axios from 'axios';
+import getRemainTime from '@/app/(_utils)/getRemainTime';
 import { useState } from 'react';
 
 interface AuthCodeInputProps<T extends FieldValues> {
   isAuthStart: boolean;
   register: UseFormRegister<T>;
   watch: UseFormWatch<T>;
+  isVertified: boolean;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
   domain: string;
+  timeLeft: number;
 }
 
 export default function AuthCodeInput<T extends ISignUp | IFind>({
   isAuthStart,
   register,
   watch,
+  isVertified,
   setIsVerified,
   domain,
+  timeLeft,
 }: AuthCodeInputProps<T>) {
   const [codeState, setCodeState] = useState<'prev' | 'finished' | 'failed'>('prev');
   const authCode = watch('authCode' as Path<T>);
@@ -60,6 +65,9 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
           >
             확인하기
           </button>
+          {isAuthStart && !isVertified && (
+            <p className="mt-[6px] font-semibold text-r text-xs">{getRemainTime(timeLeft)}</p>
+          )}
           <p className={`mt-[6px] text-xs ${codeState === 'failed' ? 'text-r' : 'text-b3'}`}>
             {codeState === 'prev'
               ? '인증 코드를 입력한 후 확인하기를 눌러주세요'

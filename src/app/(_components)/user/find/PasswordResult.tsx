@@ -12,22 +12,13 @@ export default function PasswordResult() {
         </p>
       </span>
 
-      <div className="flex flex-col">
-        <Link
-          className="w-full bg-gn1 py-[16px] border border-gn5 text-white font-semibold rounded-lg text-center"
-          href={'/login'}
-          role="button"
-        >
-          로그인 하기
-        </Link>
-        <Link
-          className="w-full bg-white  py-[16px] mt-[8px] mb-[40px] border border-w4 text-b1 font-semibold rounded-lg text-center"
-          href={'/find/id'}
-          role="button"
-        >
-          아이디 찾기
-        </Link>
-      </div>
+      <Link
+        className="w-full bg-gn1 py-[16px] border border-gn5 text-white font-semibold rounded-lg text-center"
+        href={'/login'}
+        role="button"
+      >
+        로그인 하기
+      </Link>
     </>
   );
 }

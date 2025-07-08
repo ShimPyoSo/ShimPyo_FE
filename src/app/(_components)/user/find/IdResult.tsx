@@ -14,7 +14,7 @@ export default function IdResult({ username, createdAt }: IFindResult) {
       </span>
 
       {/* 추후 border 파일 받으면 수정 필요 */}
-      <div className="w-[260px] px-[16px] py-[24px] border border-gn1 rounded-2xl mx-auto">
+      <div className="w-[260px] h-[107px] bg-[url('/images/findIdBox.png')] bg-cover bg-center mx-auto flex flex-col justify-center px-[18px]">
         <span className="flex gap-[9px] text-gn1 tracking-[-1.3%]">
           아이디 <p className="text-b1">{username}</p>
         </span>
