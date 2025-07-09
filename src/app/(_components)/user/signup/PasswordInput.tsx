@@ -47,7 +47,12 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
             onFocus={() => setIsPasswordFocused(true)}
             onBlur={() => setIsPasswordFocused(false)}
           />
-          <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} />
+          <PasswordCheck
+            isFocused={isPasswordFocused}
+            isOpen={passwordOpen}
+            setIsOpen={setPasswordOpen}
+            marginTop={16}
+          />
         </div>
       </label>
 
@@ -74,6 +79,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
             isFocused={isPasswordConfirmFocused}
             isOpen={passwordConfirmOpen}
             setIsOpen={setPasswordConfirmOpen}
+            marginTop={16}
           />
         </div>
       </label>

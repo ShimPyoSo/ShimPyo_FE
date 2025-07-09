@@ -6,14 +6,15 @@ interface PasswordCheckProps {
   isFocused: boolean;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  marginTop: number;
 }
 
-export default function PasswordCheck({ isFocused, isOpen, setIsOpen }: PasswordCheckProps) {
+export default function PasswordCheck({ isFocused, isOpen, setIsOpen, marginTop }: PasswordCheckProps) {
   return (
     <>
       {isFocused && (
         <Image
-          className="absolute right-[16px] top-[16px] cursor-pointer"
+          className={`absolute right-[16px] top-[${marginTop}px] cursor-pointer`}
           src={isOpen ? close : open}
           alt={'password'}
           width={24}

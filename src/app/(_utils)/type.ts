@@ -9,10 +9,13 @@ export interface IMember {
   nickname: string;
 }
 
-export interface ISignUp {
-  username: string;
+export interface IPassword {
   password: string;
   passwordConfirm: string;
+}
+
+export interface ISignUp extends IPassword {
+  username: string;
   email: string;
   authCode: string;
 }
@@ -25,6 +28,10 @@ export interface IFind {
 export interface IFindResult {
   username: string;
   createdAt: string;
+}
+
+export interface IPasswordChange extends IPassword {
+  nowPassword: string;
 }
 
 export interface IDomain {
