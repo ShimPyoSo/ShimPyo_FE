@@ -40,7 +40,13 @@ export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 justify-between">
       <section>
         {type === 'password' && <IdInput register={register} watch={watch} type={'find'} />}
-        <EmailAuth register={register} watch={watch} setIsVerified={setIsVerified} isVertified={isVerified} />
+        <EmailAuth
+          register={register}
+          watch={watch}
+          setIsVerified={setIsVerified}
+          isVertified={isVerified}
+          type="find"
+        />
       </section>
 
       <button className="w-full bg-gn1 py-[16px] border border-gn5 text-white font-semibold rounded-lg mb-[40px]">

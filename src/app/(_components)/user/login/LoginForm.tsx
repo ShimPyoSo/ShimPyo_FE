@@ -22,6 +22,7 @@ export default function LoginForm() {
     try {
       const response = await axios.post<IMember>('/login', data);
       login(response.data);
+      if (data.isRememberMe) localStorage.setItem('isRememberMe', 'true');
       router.push('/');
     } catch {
       setIsLoginFailed(true);

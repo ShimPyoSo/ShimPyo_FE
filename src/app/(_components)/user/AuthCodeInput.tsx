@@ -37,7 +37,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
     }
 
     try {
-      await axios.post('/email/validation', { email: `${email}@${domain}`, code: authCode });
+      await axios.post('/email/verify', { email: `${email}@${domain}`, code: authCode });
       setCodeState('finished');
       setIsVerified(true);
     } catch {

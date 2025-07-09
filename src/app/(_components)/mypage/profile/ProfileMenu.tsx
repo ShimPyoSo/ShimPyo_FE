@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import LogoutButton from './LogoutButton';
 import NicknameChange from './NicknameChange';
 import PasswordChange from './PasswordChange';
 import arrow from '/public/images/icons/arrow.svg';
@@ -48,9 +49,7 @@ export default function ProfileMenu() {
 
         {activeMenu === 'password' && <PasswordChange />}
       </li>
-      <li className="py-[18px] border-b border-w6 flex justify-between items-center">
-        로그아웃<button className="text-w3 bg-gn1 border-gn5 rounded-md px-[12px] py-[7px]">로그아웃</button>
-      </li>
+      <LogoutButton />
       <li
         className="py-[18px] border-b border-w6 flex justify-between items-center"
         onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}

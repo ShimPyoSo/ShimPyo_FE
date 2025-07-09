@@ -24,7 +24,7 @@ export default function NicknameChange() {
 
     debounceRef.current = setTimeout(async () => {
       try {
-        await axios.get(`/nickname?nickname=${nickname}`);
+        await axios.get(`/nickname?nickname=${nickname}`, { withCredentials: true });
         setIsAvailable(true);
       } catch (error) {
         console.error(error);

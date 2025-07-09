@@ -16,6 +16,7 @@ interface EmailAuthInputProps<T extends FieldValues> {
   watch: UseFormWatch<T>;
   isVertified: boolean;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
+  type: 'register' | 'find';
 }
 
 export default function EmailAuth<T extends ISignUp | IFind>({
@@ -23,6 +24,7 @@ export default function EmailAuth<T extends ISignUp | IFind>({
   watch,
   isVertified,
   setIsVerified,
+  type,
 }: EmailAuthInputProps<T>) {
   const [timeLeft, setTimeLeft] = useState(180);
   const [isAuthStart, setIsAuthStart] = useState(false);
@@ -46,7 +48,7 @@ export default function EmailAuth<T extends ISignUp | IFind>({
     const fullEmail = `${email}@${selectedDomain.value === 'custom' ? customDomain : selectedDomain.value}`;
 
     try {
-      await axios.post('/email', { email: fullEmail });
+      await axios.post('/email', { email: fullEmail, type: type });
       setIsAuthStart(true);
     } catch {
       setIsEmailError(true);

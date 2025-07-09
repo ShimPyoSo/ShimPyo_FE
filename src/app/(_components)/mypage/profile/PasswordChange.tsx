@@ -12,11 +12,15 @@ export default function PasswordChange() {
 
   const onSubmit = async (data: IPasswordChange) => {
     try {
-      await axios.put('/password', {
-        nowPassword: data.nowPassword,
-        newPassword: data.password,
-        checkNewPassword: data.passwordConfirm,
-      });
+      await axios.put(
+        '/password',
+        {
+          nowPassword: data.nowPassword,
+          newPassword: data.password,
+          checkNewPassword: data.passwordConfirm,
+        },
+        { withCredentials: true }
+      );
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
     }

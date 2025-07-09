@@ -45,7 +45,13 @@ export default function SignUpForm() {
         setIsIdChecked={setIsIdChecked}
       />
       <PasswordInput register={register} watch={watch} errors={errors} />
-      <EmailAuth register={register} setIsVerified={setIsVerified} watch={watch} isVertified={isVerified} />
+      <EmailAuth
+        register={register}
+        setIsVerified={setIsVerified}
+        watch={watch}
+        isVertified={isVerified}
+        type="register"
+      />
 
       <div className="sticky bottom-0 bg-w1 py-[30px] flex flex-col items-center">
         <button
