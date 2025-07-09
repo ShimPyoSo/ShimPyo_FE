@@ -24,3 +24,13 @@ export const logoutAtom = atom(null, (get, set) => {
   set(isLoggedInAtom, false);
   set(userAtom, null);
 });
+
+export const updateNicknameAtom = atom(null, (get, set, newNickname: string) => {
+  const user = get(userAtom);
+  if (user) {
+    set(userAtom, {
+      ...user,
+      nickname: newNickname,
+    });
+  }
+});

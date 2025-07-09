@@ -1,6 +1,8 @@
 'use client';
 
 import Image from 'next/image';
+import NicknameChange from './NicknameChange';
+import PasswordChange from './PasswordChange';
 import arrow from '/public/images/icons/arrow.svg';
 import { useState } from 'react';
 
@@ -9,31 +11,42 @@ export default function ProfileMenu() {
 
   return (
     <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
-      <li
-        className="py-[18px] border-b border-w6 flex justify-between items-center"
-        onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}
-      >
-        프로필 관리
-        <Image
-          className={`transition-transform duration-300 ${activeMenu === 'profile' ? 'rotate-180' : ''}`}
-          src={arrow}
-          alt="더보기"
-          width={24}
-          height={24}
-        />
+      <li>
+        <div
+          className={`py-[18px] flex justify-between items-center ${
+            activeMenu === 'profile' ? '' : 'border-b border-w6'
+          }`}
+          onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}
+        >
+          <p>프로필 관리</p>
+          <Image
+            className={`transition-transform duration-300 ${activeMenu === 'profile' ? '' : 'rotate-180'}`}
+            src={arrow}
+            alt="더보기"
+            width={24}
+            height={24}
+          />
+        </div>
+        {activeMenu === 'profile' && <NicknameChange />}
       </li>
-      <li
-        className="py-[18px] border-b border-w6 flex justify-between items-center"
-        onClick={() => setActiveMenu(activeMenu === 'password' ? null : 'password')}
-      >
-        비밀번호 관리
-        <Image
-          className={`transition-transform duration-300 ${activeMenu === 'password' ? 'rotate-180' : ''}`}
-          src={arrow}
-          alt="더보기"
-          width={24}
-          height={24}
-        />
+      <li>
+        <div
+          className={`py-[18px] flex justify-between items-center ${
+            activeMenu === 'password' ? '' : 'border-b border-w6'
+          }`}
+          onClick={() => setActiveMenu(activeMenu === 'password' ? null : 'password')}
+        >
+          <p>비밀번호 관리</p>
+          <Image
+            className={`transition-transform duration-300 ${activeMenu === 'password' ? '' : 'rotate-180'}`}
+            src={arrow}
+            alt="더보기"
+            width={24}
+            height={24}
+          />
+        </div>
+
+        {activeMenu === 'password' && <PasswordChange />}
       </li>
       <li className="py-[18px] border-b border-w6 flex justify-between items-center">
         로그아웃<button className="text-w3 bg-gn1 border-gn5 rounded-md px-[12px] py-[7px]">로그아웃</button>
@@ -44,7 +57,7 @@ export default function ProfileMenu() {
       >
         회원 탈퇴
         <Image
-          className={`transition-transform duration-300 ${activeMenu === 'withdraw' ? 'rotate-180' : ''}`}
+          className={`transition-transform duration-300 ${activeMenu === 'withdraw' ? '' : 'rotate-180'}`}
           src={arrow}
           alt="더보기"
           width={24}
