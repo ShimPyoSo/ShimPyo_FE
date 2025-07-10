@@ -1,37 +1,16 @@
 'use client';
 
-import { useRef, useState } from 'react';
-
 import axios from 'axios';
 import { updateNicknameAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
+import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 
 export default function NicknameChange() {
   const { register, handleSubmit, watch } = useForm<{ nickname: string }>();
   const nickname = watch('nickname');
-  const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
-  const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const [, updateNickname] = useAtom(updateNicknameAtom);
-
-  const checkDuplicate = (nickname: string) => {
-    if (!nickname || nickname.trim() === '') {
-      setIsAvailable(null);
-      return;
-    }
-
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-
-    debounceRef.current = setTimeout(async () => {
-      try {
-        await axios.get(`/nickname?nickname=${nickname}`, { withCredentials: true });
-        setIsAvailable(true);
-      } catch (error) {
-        console.error(error);
-        setIsAvailable(null);
-      }
-    }, 500);
-  };
+  const { isAvailable, checkDuplicate } = useNicknameCheck();
 
   const onSubmit = async (data: { nickname: string }) => {
     if (!isAvailable) {
