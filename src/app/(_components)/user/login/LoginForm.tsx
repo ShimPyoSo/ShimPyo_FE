@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function LoginForm() {
-  const { register, handleSubmit } = useForm<ILogin>();
+  const { register, watch, handleSubmit } = useForm<ILogin>();
   const [, login] = useAtom(loginAtom);
   const router = useRouter();
   const [isLoginFailed, setIsLoginFailed] = useState(false);
@@ -34,7 +34,7 @@ export default function LoginForm() {
       <LoginInput register={register} isLoginFailed={isLoginFailed} />
       {isLoginFailed && <p className="text-xs text-r">아이디 또는 비밀번호를 다시 입력해 주세요</p>}
       <div className="mt-[16px] flex justify-between items-center text-xs text-g1">
-        <RememberMeInput register={register} />
+        <RememberMeInput register={register} watch={watch} />
         <div className="flex gap-[6px]">
           <Link href={'/find/id'}>아이디 찾기</Link>
           <span className="text-w4">|</span>

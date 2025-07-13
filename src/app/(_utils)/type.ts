@@ -34,6 +34,11 @@ export interface IPasswordChange extends IPassword {
   nowPassword: string;
 }
 
+export interface IWithdraw {
+  password: string;
+  isConfirmed: boolean;
+}
+
 export interface IDomain {
   value: string;
   label: string;

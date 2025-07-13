@@ -19,7 +19,7 @@ export default function TabBar() {
   if (notRendering.includes(pathname)) return null;
   return (
     <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px]">
-      <ul className="flex justify-between items-center text-sm text-b3 pt-[20px] pb-[26px]">
+      <ul className="flex justify-between items-center text-sm text-b3 pt-[20px] pb-[20px]">
         <li>
           <Link
             className={`min-w-[93.75px] flex flex-col items-center ${pathname === '/' ? 'text-gn1' : ''}`}

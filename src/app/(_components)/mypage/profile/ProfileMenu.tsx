@@ -4,6 +4,7 @@ import Image from 'next/image';
 import LogoutButton from './LogoutButton';
 import NicknameChange from './NicknameChange';
 import PasswordChange from './PasswordChange';
+import Withdraw from './Withdraw';
 import arrow from '/public/images/icons/arrow.svg';
 import { useState } from 'react';
 
@@ -50,18 +51,23 @@ export default function ProfileMenu() {
         {activeMenu === 'password' && <PasswordChange />}
       </li>
       <LogoutButton />
-      <li
-        className="py-[18px] border-b border-w6 flex justify-between items-center"
-        onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}
-      >
-        회원 탈퇴
-        <Image
-          className={`transition-transform duration-300 ${activeMenu === 'withdraw' ? '' : 'rotate-180'}`}
-          src={arrow}
-          alt="더보기"
-          width={24}
-          height={24}
-        />
+      <li>
+        <div
+          className={`py-[18px] flex justify-between items-center ${
+            activeMenu === 'withdraw' ? '' : 'border-b border-w6'
+          }`}
+          onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}
+        >
+          <p>회원탈퇴</p>
+          <Image
+            className={`transition-transform duration-300 ${activeMenu === 'withdraw' ? '' : 'rotate-180'}`}
+            src={arrow}
+            alt="더보기"
+            width={24}
+            height={24}
+          />
+        </div>
+        {activeMenu === 'withdraw' && <Withdraw />}
       </li>
     </ul>
   );
