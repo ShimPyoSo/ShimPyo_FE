@@ -4,7 +4,6 @@ import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import { IPasswordChange } from '@/app/(_utils)/type';
 import PasswordCheck from '../../user/PasswordCheck';
-import { error } from 'console';
 import { useState } from 'react';
 
 interface PasswordInputProps {
