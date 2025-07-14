@@ -13,6 +13,7 @@ export default function WithdrawForm() {
   const { isValid } = useFormState({ control });
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
 
   const onSubmit = async (data: IWithdraw) => {
     try {
@@ -20,8 +21,8 @@ export default function WithdrawForm() {
         data: { password: data.password },
         withCredentials: true,
       });
-    } catch (error) {
-      console.log(error); // error 처리 컴포넌트 구현 후 수정
+    } catch {
+      setIsFailed(true);
     }
   };
 
@@ -30,7 +31,9 @@ export default function WithdrawForm() {
       <label className="text-sm text-b1 font-semibold tracking-[-2%]">비밀번호 확인</label>
       <div className="mt-[12px] relative">
         <input
-          className="w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none"
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+            isFailed ? 'border-r' : 'border-w4'
+          }`}
           type={passwordOpen ? 'text' : 'password'}
           placeholder="현재 비밀번호를 입력해 주세요"
           {...register('password', {
@@ -41,6 +44,7 @@ export default function WithdrawForm() {
         />
         <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={8} />
       </div>
+      {isFailed && <p className="mt-[8px] text-r text-xs tracking-[-2%]">비밀번호를 다시 입력해 주세요</p>}
       <label className="mt-[32px] flex items-center space-x-2 cursor-pointer">
         <CheckBox register={register} watch={watch} name={'isConfirmed'} />
         <span className="text-xs text-b3">모든 사항을 꼼꼼히 읽었으며 탈퇴에 동의해요</span>

@@ -30,10 +30,6 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           placeholder="현재 비밀번호를 입력해 주세요"
           {...register('nowPassword', {
             required: '현재 비밀번호는 필수 입력입니다.',
-            pattern: {
-              value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*])[A-Za-z\d~!@#$%^&*]{8,}$/,
-              message: '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.',
-            },
           })}
           onFocus={() => setIsNowPasswordFocused(true)}
           onBlur={() => setIsNowPasswordFocused(false)}
@@ -42,7 +38,7 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           isFocused={isNowPasswordFocused}
           isOpen={nowPasswordOpen}
           setIsOpen={setNowPasswordOpen}
-          marginTop={12}
+          marginTop={8}
         />
       </div>
 
@@ -61,7 +57,7 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           onFocus={() => setIsPasswordFocused(true)}
           onBlur={() => setIsPasswordFocused(false)}
         />
-        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={12} />
+        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={8} />
       </div>
 
       <div className="relative">
@@ -80,7 +76,7 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           isFocused={isPasswordConfirmFocused}
           isOpen={passwordConfirmOpen}
           setIsOpen={setPasswordConfirmOpen}
-          marginTop={12}
+          marginTop={8}
         />
       </div>
     </div>
