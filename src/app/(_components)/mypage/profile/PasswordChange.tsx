@@ -53,7 +53,7 @@ export default function PasswordChange() {
             ? '비밀번호가 일치하지 않아요'
             : '8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요'}
         </p>
-        <PasswordInput register={register} watch={watch} />
+        <PasswordInput register={register} watch={watch} errors={errors} />
         <button
           className={`mt-[16px] border px-[12px] py-[8px] rounded-md ${
             isValid ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'

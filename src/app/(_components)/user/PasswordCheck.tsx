@@ -14,12 +14,14 @@ export default function PasswordCheck({ isFocused, isOpen, setIsOpen, marginTop 
     <>
       {isFocused && (
         <Image
-          className={`absolute right-[16px] top-[${marginTop}px] cursor-pointer`}
+          className="absolute right-[16px] cursor-pointer"
+          style={{ top: `${marginTop}px` }}
           src={isOpen ? close : open}
           alt={'password'}
           width={24}
           height={24}
           onClick={() => setIsOpen(!isOpen)}
+          onMouseDown={(e) => e.preventDefault()}
         />
       )}
     </>

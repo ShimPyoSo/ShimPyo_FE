@@ -1,17 +1,19 @@
 'use client';
 
-import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 import { IPasswordChange } from '@/app/(_utils)/type';
 import PasswordCheck from '../../user/PasswordCheck';
+import { error } from 'console';
 import { useState } from 'react';
 
 interface PasswordInputProps {
   register: UseFormRegister<IPasswordChange>;
   watch: UseFormWatch<IPasswordChange>;
+  errors: FieldErrors<IPasswordChange>;
 }
 
-export default function PasswordInput({ register, watch }: PasswordInputProps) {
+export default function PasswordInput({ register, watch, errors }: PasswordInputProps) {
   const password = watch('password');
   const [nowPasswordOpen, setNowPasswordOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);
@@ -38,13 +40,15 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           isFocused={isNowPasswordFocused}
           isOpen={nowPasswordOpen}
           setIsOpen={setNowPasswordOpen}
-          marginTop={8}
+          marginTop={10}
         />
       </div>
 
       <div className="relative">
         <input
-          className="w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none"
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+            errors.password ? 'border-r' : 'border-w4'
+          }`}
           type={passwordOpen ? 'text' : 'password'}
           placeholder="새로운 비밀번호를 입력해 주세요"
           {...register('password', {
@@ -57,12 +61,14 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           onFocus={() => setIsPasswordFocused(true)}
           onBlur={() => setIsPasswordFocused(false)}
         />
-        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={8} />
+        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={10} />
       </div>
 
       <div className="relative">
         <input
-          className="w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none"
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+            errors.passwordConfirm ? 'border-r' : 'border-w4'
+          }`}
           type={passwordConfirmOpen ? 'text' : 'password'}
           placeholder="새로운 비밀번호를 다시 입력해 주세요"
           {...register('passwordConfirm', {
@@ -76,7 +82,7 @@ export default function PasswordInput({ register, watch }: PasswordInputProps) {
           isFocused={isPasswordConfirmFocused}
           isOpen={passwordConfirmOpen}
           setIsOpen={setPasswordConfirmOpen}
-          marginTop={8}
+          marginTop={10}
         />
       </div>
     </div>

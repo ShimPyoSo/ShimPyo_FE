@@ -42,7 +42,7 @@ export default function WithdrawForm() {
           onFocus={() => setIsPasswordFocused(true)}
           onBlur={() => setIsPasswordFocused(false)}
         />
-        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={8} />
+        <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={10} />
       </div>
       {isFailed && <p className="mt-[8px] text-r text-xs tracking-[-2%]">비밀번호를 다시 입력해 주세요</p>}
       <label className="mt-[32px] flex items-center space-x-2 cursor-pointer">
