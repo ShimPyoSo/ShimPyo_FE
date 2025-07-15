@@ -34,3 +34,11 @@ export const updateNicknameAtom = atom(null, (get, set, newNickname: string) => 
     });
   }
 });
+
+export const isHydratedAtom = atom(false);
+export const hydratedAtom = atom(
+  (get) => get(isHydratedAtom),
+  (get, set) => {
+    set(isHydratedAtom, true);
+  }
+);
