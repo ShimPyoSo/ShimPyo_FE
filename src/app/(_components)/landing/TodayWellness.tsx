@@ -1,3 +1,4 @@
+import CurrentLocation from './CurrentLocation';
 import Image from 'next/image';
 import gps from '/public/images/icons/gps.svg';
 
@@ -7,7 +8,7 @@ export default function TodayWellness() {
       <h3 className="font-[kkubulim] text-gn1 text-xl">오늘 웰니스 지수</h3>
       <div className="mt-[2px] flex items-center gap-[4px]">
         <Image src={gps} alt="위치" width={16} height={16} />
-        <p className="text-sm text-g1">서울특별시 영등포구 여의나루로 121</p>
+        <CurrentLocation />
       </div>
 
       <ul className="mt-[16px] w-full flex items-center justify-between px-[10px] py-[20px] bg-gn11 rounded-xl">
