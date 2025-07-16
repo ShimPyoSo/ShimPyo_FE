@@ -1,23 +1,25 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+
 import Image from 'next/image';
 import KakaoLogin from 'react-kakao-login';
 import axios from 'axios';
 import kakao from '/public/images/icons/kakao.svg';
 import { loginAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
 
 export default function KakaoButton() {
   const [, login] = useAtom(loginAtom);
   const router = useRouter();
+  const params = useSearchParams();
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSuccess = async (data: any) => {
     try {
       const response = await axios.post('/social/login', { accessToken: data.response.access_token });
       login(response.data);
-      router.push('/');
+      router.push(decodeURIComponent(params.get('redirect') ?? '/'));
     } catch (error: unknown) {
       handleFailure(error);
     }

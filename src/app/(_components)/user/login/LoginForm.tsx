@@ -1,6 +1,7 @@
 'use client';
 
 import { ILogin, IMember } from '@/app/(_utils)/type';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import Link from 'next/link';
 import LoginInput from './LoginInput';
@@ -9,13 +10,13 @@ import axios from 'axios';
 import { loginAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function LoginForm() {
   const { register, watch, handleSubmit } = useForm<ILogin>();
   const [, login] = useAtom(loginAtom);
   const router = useRouter();
+  const params = useSearchParams();
   const [isLoginFailed, setIsLoginFailed] = useState(false);
 
   const onSubmit = async (data: ILogin) => {
@@ -23,7 +24,7 @@ export default function LoginForm() {
       const response = await axios.post<IMember>('/login', data);
       login(response.data);
       if (data.isRememberMe) localStorage.setItem('isRememberMe', 'true');
-      router.push('/');
+      router.push(decodeURIComponent(params.get('redirect') ?? '/'));
     } catch {
       setIsLoginFailed(true);
     }
