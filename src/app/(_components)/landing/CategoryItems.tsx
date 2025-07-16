@@ -14,7 +14,7 @@ export default function CategoryItems({ category }: { category: string }) {
       >
         <Image src={item?.icon} alt={item?.label} width={30} height={30} />
       </Link>
-      명상
+      {item.label}
     </li>
   );
 }
