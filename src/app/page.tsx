@@ -3,7 +3,7 @@ import Image from 'next/image';
 import LikedSpot from './(_components)/landing/LikedSpot';
 import MainSlider from './(_components)/landing/MainSlider';
 import Recommend from './(_components)/landing/Recommend';
-import TodayWellness from './(_components)/landing/TodayWellness';
+import TodayWellness from './(_components)/landing/wellness/TodayWellness';
 import logo from '/public/images/icons/logo.svg';
 
 export default function Home() {
