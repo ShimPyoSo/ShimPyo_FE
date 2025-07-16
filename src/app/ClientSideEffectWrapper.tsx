@@ -1,17 +1,17 @@
 'use client';
 
 import { hydratedAtom, isHydratedAtom, isLoggedInAtom, loginAtom } from './(_store)/auth';
+import { useAtom, useAtomValue } from 'jotai';
 
 import { IMember } from './(_utils)/type';
 import axios from 'axios';
-import { useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { useNavigationHistory } from './(_utils)/hooks/useNavigationHistory';
 
 export default function ClientSideEffectWrapper() {
   const [, setHydrated] = useAtom(hydratedAtom);
-  const isHydrated = useAtom(isHydratedAtom);
-  const isLoggedIn = useAtom(isLoggedInAtom);
+  const isHydrated = useAtomValue(isHydratedAtom);
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
   const [, login] = useAtom(loginAtom);
   useNavigationHistory(); // 이전 페이지 관리
 
