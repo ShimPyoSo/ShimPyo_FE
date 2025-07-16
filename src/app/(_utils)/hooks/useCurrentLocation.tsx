@@ -1,7 +1,4 @@
-'use client';
-
-import Script from 'next/script';
-import { useState } from 'react';
+import { ILocation } from '../type';
 
 declare global {
   interface Window {
@@ -38,12 +35,10 @@ type KakaoAddressResult = {
   };
 }[];
 
-export default function CurrentLocation() {
-  const [address, setAddress] = useState<string | null>(null);
-
-  const getCurrentAddress = () => {
+export const getCurrentLocation = async (): Promise<ILocation> => {
+  return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      alert('브라우저가 위치 정보를 지원하지 않습니다.');
+      reject('브라우저가 위치 정보를 지원하지 않습니다.');
       return;
     }
 
@@ -57,36 +52,23 @@ export default function CurrentLocation() {
         geocoder.coord2Address(coord.getLng(), coord.getLat(), (result: KakaoAddressResult, status: string) => {
           if (status === window.kakao.maps.services.Status.OK) {
             if (result[0]) {
-              setAddress(
-                `${result[0].address.region_1depth_name} ${result[0].address.region_2depth_name} ${result[0].address.region_3depth_name}`
-              );
+              const { address } = result[0];
+              resolve({
+                region_1depth_name: address.region_1depth_name,
+                region_2depth_name: address.region_2depth_name,
+                region_3depth_name: address.region_3depth_name,
+              });
             } else {
-              alert('주소 정보를 찾을 수 없습니다.');
+              reject('주소 정보를 찾을 수 없습니다.');
             }
           } else {
-            alert('주소 변환에 실패했습니다.');
+            reject('주소 변환에 실패했습니다.');
           }
         });
       },
       (err) => {
-        alert('위치 정보를 가져오는 데 실패했습니다: ' + err.message);
+        reject('위치 정보를 가져오는 데 실패했습니다: ' + err.message);
       }
     );
-  };
-
-  return (
-    <>
-      <Script
-        src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_CLIENT_KAKAO_JS_KEY}&autoload=false&libraries=services`}
-        strategy="afterInteractive"
-        onLoad={() => {
-          window.kakao.maps.load(() => {
-            getCurrentAddress();
-          });
-        }}
-      />
-
-      <p className="text-sm text-g1">{address}</p>
-    </>
-  );
-}
+  });
+};

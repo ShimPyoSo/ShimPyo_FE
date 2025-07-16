@@ -54,7 +54,6 @@ export async function GET(req: Request) {
   const data = await res.json();
 
   const items = data.response.body.items.item;
-  console.log(items);
   const temperature = items.find((i: WeatherItem) => i.category === 'T1H')?.obsrValue || null;
   const rainfall = items.find((i: WeatherItem) => i.category === 'RN1')?.obsrValue || null;
   const pty = items.find((i: WeatherItem) => i.category === 'PTY')?.obsrValue || null;
