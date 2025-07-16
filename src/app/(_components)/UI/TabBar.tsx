@@ -55,7 +55,7 @@ export default function TabBar() {
               width={28}
               height={28}
             />
-            채팅목록
+            쉼표 테스트
           </Link>
         </li>
         <li>
