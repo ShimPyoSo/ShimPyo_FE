@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import KakaoButton from '../KakaoButton';
 import Link from 'next/link';
+import illustration from '/public/images/icons/illustration/signup.svg';
 
 export default function SignUpComponent() {
   return (
@@ -12,6 +14,7 @@ export default function SignUpComponent() {
           <span className="font-[kkubulim] text-gn1 font-normal">가입</span>해 보세요
         </div>
       </h1>
+      <Image className="mx-auto" src={illustration} alt="회원가입" width={265} height={263} />
       <div className="flex flex-col items-center">
         <KakaoButton />
         <Link

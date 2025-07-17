@@ -17,7 +17,7 @@ export default function LoginInput({ register, isLoginFailed }: LoginInputProps)
   return (
     <>
       <input
-        className={`w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black ${
+        className={`w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black placeholder:text-g3 ${
           isLoginFailed ? 'border-r' : 'border-w4'
         }`}
         placeholder="아이디를 입력해 주세요"
@@ -25,7 +25,7 @@ export default function LoginInput({ register, isLoginFailed }: LoginInputProps)
       />
       <div className="relative">
         <input
-          className={`w-full p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black ${
+          className={`w-full p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black placeholder:text-g3 ${
             isLoginFailed ? 'border-r' : 'border-w4'
           }`}
           type={passwordOpen ? 'text' : 'password'}

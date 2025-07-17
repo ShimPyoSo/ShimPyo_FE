@@ -38,7 +38,7 @@ export default function DomainInput({
       {isCustom ? (
         <div className="relative">
           <input
-            className={`w-[158px] p-[16px] bg-w3 rounded-lg border text-base font-normal outline-none focus:border-gn1 text-black ${
+            className={`w-[158px] p-[16px] bg-w3 rounded-lg border text-base font-normal outline-none focus:border-gn1 text-black placeholder:text-g3 ${
               isEmailError ? 'border-r' : 'border-w4'
             }`}
             placeholder="도메인 선택"

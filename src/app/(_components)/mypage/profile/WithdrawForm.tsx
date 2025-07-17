@@ -31,7 +31,7 @@ export default function WithdrawForm() {
       <label className="text-sm text-b1 font-semibold tracking-[-2%]">비밀번호 확인</label>
       <div className="mt-[12px] relative">
         <input
-          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
             isFailed ? 'border-r' : 'border-w4'
           }`}
           type={passwordOpen ? 'text' : 'password'}

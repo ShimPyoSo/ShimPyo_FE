@@ -29,7 +29,7 @@ export default function NicknameChange() {
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="mt-[12px] w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none"
+          className="mt-[12px] w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3"
           placeholder="닉네임을 입력해 주세요"
           {...register('nickname', {
             required: '닉네임은 필수 입력입니다.',

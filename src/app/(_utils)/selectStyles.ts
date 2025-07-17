@@ -60,6 +60,10 @@ const SelectStyles = (hasError: boolean): StylesConfig<DomainOption, false> => {
     indicatorSeparator: () => ({
       display: 'none',
     }),
+    placeholder: (base) => ({
+      ...base,
+      color: '#c7c7c7',
+    }),
   };
 };
 

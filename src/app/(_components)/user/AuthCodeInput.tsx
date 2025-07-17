@@ -52,7 +52,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
           <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
             인증 코드
             <input
-              className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+              className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
                 codeState === 'failed' ? 'border-r' : 'border-w4'
               }`}
               placeholder="인증코드를 입력해 주세요"

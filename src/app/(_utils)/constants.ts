@@ -12,6 +12,7 @@ export const title: { [key: string]: string } = {
   '/find/password': '비밀번호 찾기',
   '/mypage': '마이페이지',
   '/mypage/profile': '계정 관리',
+  '/search': '여행지 찾기',
 };
 
 export const domainOptions = [

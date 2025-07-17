@@ -44,7 +44,7 @@ export default function IdInput<T extends ISignUp | IFind>({
       <label className={`flex flex-col text-sm text-b3 tracking-[-2%] ${type === 'find' ? 'mt-[30px]' : ''}`}>
         아이디
         <input
-          className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black"
+          className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black placeholder:text-g3"
           placeholder="아이디를 입력해 주세요"
           {...register('username' as Path<T>, { required: '아이디는 필수입니다.' })}
         />

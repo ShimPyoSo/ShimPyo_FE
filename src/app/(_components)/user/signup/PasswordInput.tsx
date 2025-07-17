@@ -32,7 +32,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
         </small>
         <div className="relative">
           <input
-            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
               errors.password ? 'border-red-500' : 'border-w4'
             }`}
             type={passwordOpen ? 'text' : 'password'}
@@ -63,7 +63,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
         </small>
         <div className="relative">
           <input
-            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black ${
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
               errors.passwordConfirm ? 'border-r' : 'border-w4'
             }`}
             type={passwordConfirmOpen ? 'text' : 'password'}

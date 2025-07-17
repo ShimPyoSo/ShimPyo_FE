@@ -26,7 +26,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
     <div className="mt-[12px] flex flex-col gap-[12px]">
       <div className="relative">
         <input
-          className="w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none"
+          className="w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3"
           type={nowPasswordOpen ? 'text' : 'password'}
           placeholder="현재 비밀번호를 입력해 주세요"
           {...register('nowPassword', {
@@ -45,7 +45,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
 
       <div className="relative">
         <input
-          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
             errors.password ? 'border-r' : 'border-w4'
           }`}
           type={passwordOpen ? 'text' : 'password'}
@@ -65,7 +65,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
 
       <div className="relative">
         <input
-          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none ${
+          className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
             errors.passwordConfirm ? 'border-r' : 'border-w4'
           }`}
           type={passwordConfirmOpen ? 'text' : 'password'}

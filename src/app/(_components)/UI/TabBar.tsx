@@ -14,7 +14,7 @@ import { usePathname } from 'next/navigation';
 
 export default function TabBar() {
   const pathname = usePathname();
-  const notRendering = ['/search', '/login', '/singup', '/find'];
+  const notRendering = ['/login', '/singup', '/find'];
 
   if (notRendering.includes(pathname)) return null;
   return (
