@@ -2,9 +2,9 @@
 
 import { FieldValues, Path, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { IFind, ISignUp } from '@/app/(_utils)/type';
+import { useEffect, useState } from 'react';
 
 import axios from 'axios';
-import { useState } from 'react';
 
 interface IdInputProps<T extends FieldValues> {
   register: UseFormRegister<T>;
@@ -39,6 +39,12 @@ export default function IdInput<T extends ISignUp | IFind>({
     }
   };
 
+  useEffect(() => {
+    if (isIdChecked && setIsIdChecked) {
+      setIsIdChecked(false);
+    }
+  }, [username, isIdChecked, setIsIdChecked]);
+
   return (
     <>
       <label className={`flex flex-col text-sm text-b3 tracking-[-2%] ${type === 'find' ? 'mt-[30px]' : ''}`}>
@@ -47,7 +53,6 @@ export default function IdInput<T extends ISignUp | IFind>({
           className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black placeholder:text-g3"
           placeholder="아이디를 입력해 주세요"
           {...register('username' as Path<T>, { required: '아이디는 필수입니다.' })}
-          disabled={isIdChecked}
         />
       </label>
       {type === 'signup' && (
