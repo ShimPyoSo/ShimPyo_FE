@@ -1,16 +1,15 @@
 'use client';
 
+import { notRendering, title } from '@/app/(_utils)/constants';
 import { usePathname, useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
 import prev from '/public/images/icons/prevButton.svg';
-import { title } from '@/app/(_utils)/constants';
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const notRendering = ['/', '/signup'];
 
   const handleMoveToPrev = () => {
     const previousPath = getPrevPathname();
