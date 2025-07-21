@@ -14,7 +14,7 @@ export default function NicknameChange() {
 
   const onSubmit = async (data: { nickname: string }) => {
     try {
-      await axios.patch('/nickname', data);
+      await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data);
       updateNickname(nickname);
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정

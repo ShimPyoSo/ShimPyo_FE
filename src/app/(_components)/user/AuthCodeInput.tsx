@@ -37,7 +37,10 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
     }
 
     try {
-      await axios.post('/email/verify', { email: `${email}@${domain}`, code: authCode });
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/email/verify`, {
+        email: `${email}@${domain}`,
+        authKey: authCode,
+      });
       setCodeState('finished');
       setIsVerified(true);
     } catch {

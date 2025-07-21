@@ -24,7 +24,11 @@ export default function ClientSideEffectWrapper() {
     if (isHydrated && !isLoggedIn && isRememberMe) {
       const doRelogin = async () => {
         try {
-          const response = await axios.post<IMember>('relogin', {}, { withCredentials: true });
+          const response = await axios.post<IMember>(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/relogin`, // 추후 URL 수정
+            {},
+            { withCredentials: true }
+          );
           login(response.data);
         } catch (error) {
           console.log(error); // 추후 error 처리 수정

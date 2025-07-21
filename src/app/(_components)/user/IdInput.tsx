@@ -32,7 +32,7 @@ export default function IdInput<T extends ISignUp | IFind>({
     }
 
     try {
-      await axios.get(`/check?id=${username}`);
+      await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/duplicate/username?username=${username}`);
       setIsIdChecked?.(true);
     } catch {
       setIsIdDuplicated(true);

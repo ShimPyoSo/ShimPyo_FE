@@ -11,7 +11,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      await axios.post('logout', {}, { withCredentials: true });
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/logout`, {}, { withCredentials: true });
       logout();
       localStorage.removeItem('isRememberMe');
       router.push('/');

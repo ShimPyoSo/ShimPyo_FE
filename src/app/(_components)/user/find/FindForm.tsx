@@ -27,9 +27,10 @@ export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
 
     try {
       if (type === 'id') {
-        const response = await axios.post('/username', data);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/username`, data);
         setResult(response.data);
-      } else if (type === 'password') await axios.patch('/password', data);
+      } else if (type === 'password')
+        await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/password`, data);
       setIsFinded(true);
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정

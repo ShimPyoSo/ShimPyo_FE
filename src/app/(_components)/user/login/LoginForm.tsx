@@ -21,7 +21,7 @@ export default function LoginForm() {
 
   const onSubmit = async (data: ILogin) => {
     try {
-      const response = await axios.post<IMember>('/login', data);
+      const response = await axios.post<IMember>(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/login`, data);
       login(response.data);
       if (data.isRememberMe) localStorage.setItem('isRememberMe', 'true');
       router.push(decodeURIComponent(params.get('redirect') ?? '/'));

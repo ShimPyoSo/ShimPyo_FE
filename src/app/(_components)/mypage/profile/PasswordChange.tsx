@@ -22,7 +22,7 @@ export default function PasswordChange() {
   const onSubmit = async (data: IPasswordChange) => {
     try {
       await axios.put(
-        '/password',
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/password`,
         {
           nowPassword: data.nowPassword,
           newPassword: data.password,

@@ -17,7 +17,9 @@ export default function KakaoButton() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSuccess = async (data: any) => {
     try {
-      const response = await axios.post('/social/login', { accessToken: data.response.access_token });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/social/login`, {
+        accessToken: data.response.access_token,
+      });
       login(response.data);
       router.push(decodeURIComponent(params.get('redirect') ?? '/'));
     } catch (error: unknown) {

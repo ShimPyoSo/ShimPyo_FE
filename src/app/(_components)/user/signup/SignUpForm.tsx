@@ -29,7 +29,7 @@ export default function SignUpForm() {
     }
 
     try {
-      await axios.post('/signup', data);
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/signup`, data);
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
     }

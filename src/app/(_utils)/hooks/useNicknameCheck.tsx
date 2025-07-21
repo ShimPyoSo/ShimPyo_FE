@@ -16,7 +16,9 @@ export function useNicknameCheck() {
 
     debounceRef.current = setTimeout(async () => {
       try {
-        await axios.get(`/nickname?nickname=${nickname}`, { withCredentials: true });
+        await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/duplicate?nickname=${nickname}`, {
+          withCredentials: true,
+        });
         setIsAvailable(true);
       } catch (error) {
         console.error(error);
