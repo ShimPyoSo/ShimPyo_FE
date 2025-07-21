@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "axios": "^1.10.0",
+    "framer-motion": "^12.23.6",
     "jotai": "^2.12.5",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-focus-lock": "^2.13.6",
     "react-hook-form": "^7.59.0",
     "react-kakao-login": "^2.1.1",
     "react-kakao-maps-sdk": "^1.2.0",
