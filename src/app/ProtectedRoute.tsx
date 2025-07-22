@@ -16,14 +16,14 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const isHydrated = useAtomValue(isHydratedAtom);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (isHydrated && !isLoggedIn) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
     }
   }, [isHydrated, isLoggedIn, pathname, router]);
 
   if (!isHydrated) return null;
-  if (!isLoggedIn) return null;*/
+  if (!isLoggedIn) return null;
 
   return <>{children}</>;
 }
