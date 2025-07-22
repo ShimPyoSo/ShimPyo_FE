@@ -18,6 +18,7 @@ export const title: { [key: string]: string } = {
   '/find/password': '비밀번호 찾기',
   '/mypage': '마이페이지',
   '/mypage/profile': '계정 관리',
+  '/mypage/like': '찜한 목록',
   '/search': '여행지 찾기',
 };
 
@@ -30,6 +31,12 @@ export const notRendering = [
   '/category/nature',
   '/category/spa',
   '/category/meditation',
+  '/mypage/like/spot',
+  '/mypage/like/spot/food',
+  '/mypage/like/spot/beauty',
+  '/mypage/like/spot/nature',
+  '/mypage/like/spot/spa',
+  '/mypage/like/spot/meditation',
 ];
 
 export const domainOptions = [
@@ -42,7 +49,7 @@ export const domainOptions = [
 
 export const categoryList = [
   {
-    href: '/category/meditation',
+    href: 'meditation',
     label: '명상',
     icon: meditation,
     illustration: meditationIllu,
@@ -50,7 +57,7 @@ export const categoryList = [
     subDescription: '필요한 분들께 추천해요',
   },
   {
-    href: '/category/spa',
+    href: 'spa',
     label: '스파',
     icon: spa,
     illustration: spaIllu,
@@ -58,7 +65,7 @@ export const categoryList = [
     subDescription: '싶은 분들께 추천해요',
   },
   {
-    href: '/category/beauty',
+    href: 'beauty',
     label: 'K-뷰티',
     icon: beauty,
     illustration: beautyIllu,
@@ -66,7 +73,7 @@ export const categoryList = [
     subDescription: '싶은 분들께 추천해요',
   },
   {
-    href: '/category/nature',
+    href: 'nature',
     label: '자연친화',
     icon: nature,
     illustration: natureIllu,
@@ -74,7 +81,7 @@ export const categoryList = [
     subDescription: '분들께 추천해요',
   },
   {
-    href: '/category/food',
+    href: 'food',
     label: '건강식',
     icon: food,
     illustration: foodIllu,
@@ -82,7 +89,7 @@ export const categoryList = [
     subDescription: '원하는 분들께 추천해요',
   },
   {
-    href: '/category',
+    href: '',
     label: '전체',
     icon: all,
     illustration: allIllu,

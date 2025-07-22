@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 import CategoryDescription from './CategoryDescription';
 import Image from 'next/image';
@@ -9,10 +9,9 @@ import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
 import prev from '/public/images/category/categoryArrow.svg';
 
 export default function CategoryHeader() {
-  const pathname = usePathname();
   const { type } = useParams();
   const router = useRouter();
-  const item = categoryList.find((el) => el.href === pathname);
+  const item = categoryList.find((el) => el.href === (type ?? ''));
   if (!item) return null;
 
   const handleMoveToPrev = () => {

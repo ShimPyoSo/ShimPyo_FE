@@ -8,7 +8,7 @@ export default function Category() {
       <p className="text-sm text-g1">다양한 유형의 여행지를 확인해 보세요</p>
       <ul className="mt-[16px] flex justify-between">
         {categoryList.map((item) => (
-          <CategoryItems key={item.label} category={item.label} />
+          <CategoryItems key={item.label} category={item.label} type="search" />
         ))}
       </ul>
     </section>

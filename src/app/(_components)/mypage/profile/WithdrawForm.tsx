@@ -17,7 +17,7 @@ export default function WithdrawForm() {
 
   const onSubmit = async (data: IWithdraw) => {
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth`, {
         data: { password: data.password },
         withCredentials: true,
       });
