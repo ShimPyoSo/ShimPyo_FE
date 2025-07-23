@@ -23,6 +23,7 @@ export interface ISignUp extends IPassword {
 export interface IFind {
   username?: string;
   email: string;
+  authCode: string;
 }
 
 export interface IFindResult {
