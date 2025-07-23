@@ -11,14 +11,9 @@ import axios from 'axios';
 import { useState } from 'react';
 
 export default function SignUpForm() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    control,
-    formState: { errors },
-  } = useForm<ISignUp>();
-  const { isValid } = useFormState({ control });
+  const { register, handleSubmit, watch, control } = useForm<ISignUp>({ mode: 'onBlur' });
+
+  const { errors, isValid } = useFormState({ control });
   const [isVerified, setIsVerified] = useState(false);
   const [isIdChecked, setIsIdChecked] = useState(false);
 

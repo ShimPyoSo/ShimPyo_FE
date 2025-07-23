@@ -26,7 +26,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
       <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호
         <small className={`text-xs text-g1 mb-[12px] ${errors.password ? 'text-r' : 'text-g2'}`}>
-          {errors.password
+          {errors.password?.message === '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
             ? '비밀번호를 양식에 맞춰 설정해 주세요'
             : '8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요'}
         </small>
@@ -58,8 +58,10 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
 
       <label className="mt-[40px] mb-[12px]  flex flex-col text-sm text-b3 tracking-[-2%]">
         비밀번호 확인
-        <small className={`text-xs text-g1 mb-[12px] ${errors.password ? 'text-r' : 'text-g2'}`}>
-          {errors.password ? '비밀번호가 일치하지 않아요' : '비밀번호를 한 번 더 입력해 주세요'}
+        <small className={`text-xs text-g1 mb-[12px] ${errors.passwordConfirm ? 'text-r' : 'text-g2'}`}>
+          {errors.passwordConfirm?.message === '비밀번호가 일치하지 않습니다.'
+            ? '비밀번호가 일치하지 않아요'
+            : '비밀번호를 한 번 더 입력해 주세요'}
         </small>
         <div className="relative">
           <input

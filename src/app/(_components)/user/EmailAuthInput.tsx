@@ -42,10 +42,6 @@ export default function EmailAuthInput<T extends ISignUp | IFind>({
         placeholder="이메일 입력"
         {...register('email' as Path<T>, {
           required: '이메일은 필수 입력입니다.',
-          pattern: {
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-            message: '유효한 이메일 형식이 아닙니다.',
-          },
         })}
       />
       @

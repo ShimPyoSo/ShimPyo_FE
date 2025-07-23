@@ -31,7 +31,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
   const email = watch('email' as Path<T>);
 
   const handleAuthCodeCheck = async () => {
-    if (authCode === '') {
+    if (!authCode) {
       // code를 입력하지 않는 경우 return 코드 추가 예정
       return;
     }
@@ -59,12 +59,17 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
                 codeState === 'failed' ? 'border-r' : 'border-w4'
               }`}
               placeholder="인증코드를 입력해 주세요"
-              {...(register('authCode' as Path<T>), { required: true })}
+              {...register('authCode' as Path<T>, {
+                required: '이름은 필수 입력 항목입니다',
+              })}
             />
           </label>
           <button
-            className="mt-[16px] px-[15px] py-[10px] rounded-md border border-[#EDEDED] bg-w2 text-sm text-b2 font-semibold tracking-[-2%]"
+            className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-2%] ${
+              codeState === 'finished' ? 'border-gn7 bg-gn8 text-gn1' : 'bg-w2 text-b2 border-[#EDEDED]'
+            }`}
             onClick={handleAuthCodeCheck}
+            type="button"
           >
             확인하기
           </button>

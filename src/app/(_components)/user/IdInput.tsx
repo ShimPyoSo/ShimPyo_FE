@@ -24,9 +24,10 @@ export default function IdInput<T extends ISignUp | IFind>({
 }: IdInputProps<T>) {
   const username = watch('username' as Path<T>);
   const [isIdDuplicated, setIsIdDuplicated] = useState(false);
+  const [prevUsername, setPrevUsername] = useState('');
 
   const handleCheckId = async () => {
-    if (username === '') {
+    if (!username) {
       // id를 입력하지 않는 경우 return 코드 추가 예정
       return;
     }
@@ -34,16 +35,17 @@ export default function IdInput<T extends ISignUp | IFind>({
     try {
       await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/duplicate/username?username=${username}`);
       setIsIdChecked?.(true);
+      setPrevUsername(username);
     } catch {
       setIsIdDuplicated(true);
     }
   };
 
   useEffect(() => {
-    if (isIdChecked && setIsIdChecked) {
+    if (username !== prevUsername && isIdChecked && setIsIdChecked) {
       setIsIdChecked(false);
     }
-  }, [username, isIdChecked, setIsIdChecked]);
+  }, [prevUsername, username, isIdChecked, setIsIdChecked]);
 
   return (
     <>
@@ -67,7 +69,11 @@ export default function IdInput<T extends ISignUp | IFind>({
             중복확인
           </button>
           <p className={`mt-[6px] text-xs ${isIdDuplicated ? 'text-r' : 'text-b3'}`}>
-            {isIdDuplicated ? '이미 존재하는 아이디예요' : '아이디 입력 후 중복 확인을 진행해 주세요'}
+            {isIdDuplicated
+              ? '이미 존재하는 아이디예요'
+              : isIdChecked
+              ? '사용할 수 있는 아이디예요'
+              : '아이디 입력 후 중복 확인을 진행해 주세요'}
           </p>
         </>
       )}
