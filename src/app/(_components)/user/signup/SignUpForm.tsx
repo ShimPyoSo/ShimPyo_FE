@@ -23,7 +23,6 @@ export default function SignUpForm() {
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
 
   const onSubmit = async (data: ISignUp) => {
-    console.log('d');
     if (!isVerified) {
       // 인증 완료하지 않은 회원 return 코드 추가 예정
       return;

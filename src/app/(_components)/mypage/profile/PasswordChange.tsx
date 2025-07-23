@@ -1,23 +1,22 @@
 'use client';
 
-import { useForm, useFormState } from 'react-hook-form';
-
 import { IPasswordChange } from '@/app/(_utils)/type';
 import PasswordInput from './PasswordInput';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { useLogout } from '@/app/(_utils)/hooks/useLogout';
 
 export default function PasswordChange() {
   const {
     register,
     handleSubmit,
-    control,
     watch,
     formState: { errors },
   } = useForm<IPasswordChange>({
     mode: 'onBlur',
     reValidateMode: 'onChange',
   });
-  const { isValid } = useFormState({ control });
+  const { handleLogout } = useLogout();
 
   const onSubmit = async (data: IPasswordChange) => {
     try {
@@ -30,6 +29,7 @@ export default function PasswordChange() {
         },
         { withCredentials: true }
       );
+      handleLogout();
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
     }
@@ -56,7 +56,7 @@ export default function PasswordChange() {
         <PasswordInput register={register} watch={watch} errors={errors} />
         <button
           className={`mt-[16px] border px-[12px] py-[8px] rounded-md ${
-            isValid ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'
+            true ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'
           }`}
         >
           변경하기

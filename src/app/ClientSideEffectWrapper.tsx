@@ -25,7 +25,7 @@ export default function ClientSideEffectWrapper() {
       const doRelogin = async () => {
         try {
           const response = await axios.post<IMember>(
-            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/relogin`, // 추후 URL 수정
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/relogin`,
             {},
             { withCredentials: true }
           );
