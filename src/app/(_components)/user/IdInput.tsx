@@ -35,6 +35,7 @@ export default function IdInput<T extends ISignUp | IFind>({
     try {
       await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/duplicate/username?username=${username}`);
       setIsIdChecked?.(true);
+      setIsIdDuplicated(false);
       setPrevUsername(username);
     } catch {
       setIsIdDuplicated(true);
@@ -54,7 +55,13 @@ export default function IdInput<T extends ISignUp | IFind>({
         <input
           className="w-full mt-[12px] p-[16px] bg-w3 rounded-lg border border-w4 text-base outline-none focus:border-gn1 text-black placeholder:text-g3"
           placeholder="아이디를 입력해 주세요"
-          {...register('username' as Path<T>, { required: '아이디는 필수입니다.' })}
+          {...register('username' as Path<T>, {
+            required: '아이디는 필수입니다.',
+            pattern: {
+              value: /^[a-z0-9]{6,12}$/,
+              message: '아이디는 영소문자와 숫자로 6~12자여야 합니다.',
+            },
+          })}
         />
       </label>
       {type === 'signup' && (

@@ -1,14 +1,13 @@
 'use client';
 
 import { FieldValues, Path } from 'react-hook-form';
-import { IFind, ISignUp } from '@/app/(_utils)/type';
+import { IDomain, IFind, ISignUp } from '@/app/(_utils)/type';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
 import AuthCodeInput from './AuthCodeInput';
 import EmailAuthInput from './EmailAuthInput';
 import axios from 'axios';
-import { domainOptions } from '@/app/(_utils)/constants';
 import { useTimer } from '@/app/(_utils)/hooks/useTimer';
 
 interface EmailAuthInputProps<T extends FieldValues> {
@@ -17,6 +16,10 @@ interface EmailAuthInputProps<T extends FieldValues> {
   isVertified: boolean;
   setIsVerified: React.Dispatch<React.SetStateAction<boolean>>;
   type: 'register' | 'find';
+  customDomain: string;
+  setCustomDomain: React.Dispatch<React.SetStateAction<string>>;
+  selectedDomain: IDomain;
+  setSelectedDomain: React.Dispatch<React.SetStateAction<IDomain>>;
 }
 
 export default function EmailAuth<T extends ISignUp | IFind>({
@@ -25,14 +28,16 @@ export default function EmailAuth<T extends ISignUp | IFind>({
   isVertified,
   setIsVerified,
   type,
+  customDomain,
+  setCustomDomain,
+  selectedDomain,
+  setSelectedDomain,
 }: EmailAuthInputProps<T>) {
   const [timeLeft, setTimeLeft] = useState(180);
   const [isAuthStart, setIsAuthStart] = useState(false);
   const [isEmailError, setIsEmailError] = useState(false);
   useTimer(timeLeft, setTimeLeft, isAuthStart);
 
-  const [customDomain, setCustomDomain] = useState('');
-  const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
   const email = watch('email' as Path<T>);
 
   useEffect(() => {

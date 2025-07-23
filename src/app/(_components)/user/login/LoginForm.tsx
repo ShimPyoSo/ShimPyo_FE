@@ -33,7 +33,7 @@ export default function LoginForm() {
   return (
     <form className="mt-[145px]" onSubmit={handleSubmit(onSubmit)}>
       <LoginInput register={register} isLoginFailed={isLoginFailed} />
-      {isLoginFailed && <p className="text-xs text-r">아이디 또는 비밀번호를 다시 입력해 주세요</p>}
+      {isLoginFailed && <p className="mt-[12px] text-xs text-r">아이디 또는 비밀번호를 다시 입력해 주세요</p>}
       <div className="mt-[16px] flex justify-between items-center text-xs text-g1">
         <RememberMeInput register={register} watch={watch} />
         <div className="flex gap-[6px]">
