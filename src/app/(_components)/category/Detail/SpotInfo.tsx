@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import MapRender from '../../spot/MapRender';
 import call from '/public/images/icons/spot/call.svg';
 import home from '/public/images/icons/spot/home.svg';
 import location from '/public/images/icons/spot/location.svg';
@@ -7,6 +8,9 @@ import reservation from '/public/images/icons/spot/reservation.svg';
 import time from '/public/images/icons/spot/time.svg';
 
 export default function SpotInfo() {
+  const latitude = 37.5665;
+  const longitude = 126.978;
+
   return (
     <ul className="mt-[16px] px-[16px]">
       <li className="py-[12px] border-b border-g4">
@@ -14,7 +18,8 @@ export default function SpotInfo() {
           <Image src={location} alt="장소" width={14} height={14} />
           <p className="text-b3 text-sm tracking-[-2%]">장소</p>
         </div>
-        <p className="mt-[5px] text-xs text-g1 tracking-[-2%]">대구 중구 교동1길 16 3층 우측호수</p>
+        <p className="mt-[5px] mb-[12px] text-xs text-g1 tracking-[-2%]">대구 중구 교동1길 16 3층 우측호수</p>
+        <MapRender latitude={latitude} longitude={longitude} />
       </li>
       <li className="py-[12px] border-b border-g4">
         <div className="flex items-center gap-[4px]">
