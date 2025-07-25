@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-export default function ReviewItem() {
+interface ReviewItemProps {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ReviewItem({ setIsOpen }: ReviewItemProps) {
   const [hasImage, setHasImage] = useState(false); // UI용 임시 state 추후 삭제
 
   const handleImage = () => {
@@ -31,10 +35,10 @@ export default function ReviewItem() {
 
       {hasImage && (
         <ul className="mt-[16px] flex items-center gap-[8px]">
-          <li className="w-[56px] h-[62px] rounded-sm bg-w1"></li>
-          <li className="w-[56px] h-[62px] rounded-sm bg-w1"></li>
-          <li className="w-[56px] h-[62px] rounded-sm bg-w1"></li>
-          <li className="w-[56px] h-[62px] rounded-sm bg-w1"></li>
+          <li className="w-[56px] h-[62px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+          <li className="w-[56px] h-[62px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+          <li className="w-[56px] h-[62px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+          <li className="w-[56px] h-[62px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
         </ul>
       )}
     </li>

@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-export default function ReviewItem() {
+interface ReviewItemProps {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ReviewItem({ setIsOpen }: ReviewItemProps) {
   const [isMore, setIsMore] = useState(false);
   const [hasImage, setHasImage] = useState(false); // UI용 임시 state 추후 삭제
 
@@ -29,11 +33,11 @@ export default function ReviewItem() {
       {hasImage && (
         <section className="mt-[16px] flex items-center">
           <ul className="flex items-center gap-[6px]">
-            <li className="w-[50px] h-[56px] rounded-sm bg-w1"></li>
-            <li className="w-[50px] h-[56px] rounded-sm bg-w1"></li>
-            <li className="w-[50px] h-[56px] rounded-sm bg-w1"></li>
-            <li className="w-[50px] h-[56px] rounded-sm bg-w1"></li>
-            <li className="w-[50px] h-[56px] rounded-sm bg-w1"></li>
+            <li className="w-[50px] h-[56px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+            <li className="w-[50px] h-[56px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+            <li className="w-[50px] h-[56px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+            <li className="w-[50px] h-[56px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
+            <li className="w-[50px] h-[56px] rounded-sm bg-w1" onClick={() => setIsOpen(true)}></li>
           </ul>
           <div className="ml-[8px] py-[2px] px-[6px] rounded-[80px] bg-w1 border border-w4 text-xs text-b3">+ 8</div>
         </section>
