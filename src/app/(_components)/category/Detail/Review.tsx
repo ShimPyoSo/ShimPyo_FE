@@ -23,7 +23,7 @@ export default function Review() {
         <small className="text-g1">쉼표 유저들의 생생한 방문 후기를 들어보세요</small>
       </div>
       <Carousel>
-        <ul className="mt-[16px] pr-[16px] flex gap-[12px] flex-nowrap w-max">
+        <ul className="mt-[16px] px-[16px] flex gap-[12px] flex-nowrap w-max">
           <ReviewItem />
           <ReviewItem />
           <ReviewItem />

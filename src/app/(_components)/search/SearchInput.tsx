@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import search from '/public/images/icons/search.svg';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -33,37 +32,23 @@ export default function SearchInput({ isActive }: SearchInputProps) {
   };
 
   return (
-    <section className="mt-[30px]">
-      <h2 className="font-[kkubulim] text-gn1 text-xl">여행지 찾기</h2>
-      <div className="relative">
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="mt-[12px] mb-[8px] w-full bg-white rounded-lg border border-w4 text-sm py-[12px] px-[16px] outline-none placeholder:text-g3"
-          placeholder="어떤 여행지에 쉼표를 찍어볼까요?"
-        />
-        <Image
-          className="absolute right-[16px] top-[22px] cursor-pointer"
-          src={search}
-          alt="검색"
-          width={22}
-          height={22}
-          onClick={handleSearch}
-          role="button"
-        />
-      </div>
-
-      <span className="flex gap-[16px] tracking-[-2%] text-xs">
-        <p className="text-b3 font-semibold">추천 검색어</p>
-        <ul className="text-g1 flex gap-[8px]">
-          {['템플스테이', '요가', '촌캉스', '스파', '비건'].map((keyword) => (
-            <li key={keyword}>
-              <Link href={`/search/${keyword}`}>{keyword}</Link>
-            </li>
-          ))}
-        </ul>
-      </span>
-    </section>
+    <div className="relative">
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
+        className="mt-[12px] mb-[8px] w-full bg-white rounded-lg border border-w4 text-sm py-[12px] px-[16px] outline-none placeholder:text-g3 hover:border-gn1 focus:border-gn1"
+        placeholder="어떤 여행지에 쉼표를 찍어볼까요?"
+      />
+      <Image
+        className="absolute right-[16px] top-[22px] cursor-pointer"
+        src={search}
+        alt="검색"
+        width={22}
+        height={22}
+        onClick={handleSearch}
+        role="button"
+      />
+    </div>
   );
 }

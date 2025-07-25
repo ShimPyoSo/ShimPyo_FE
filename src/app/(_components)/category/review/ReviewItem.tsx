@@ -23,11 +23,9 @@ export default function ReviewItem() {
         위치나 다른 것보다 가격이 가장 컸는데 버스 정류장이나 지하철역도 가까워서 이동도 생각보다 굉장히 편했습니다!
         정말 깔끔하고 소품들도 정성스럽게 꾸며놓으신 티가 났어요 덕분에 정말 행복한 하루 보냈습니다 ㅎㅎ
       </p>
-      {!isMore && (
-        <button className="mt-[6px] text-xs text-g1 underline" onClick={() => setIsMore(true)}>
-          더보기
-        </button>
-      )}
+      <button className="mt-[6px] text-xs text-g1 underline" onClick={() => setIsMore(!isMore)}>
+        {isMore ? '접기' : '더보기'}
+      </button>
       {hasImage && (
         <section className="mt-[16px] flex items-center">
           <ul className="flex items-center gap-[6px]">
