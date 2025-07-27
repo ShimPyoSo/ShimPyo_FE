@@ -1,5 +1,6 @@
 'use client';
 
+import Discomfort from './Discomfort';
 import Image from 'next/image';
 import cloudy from '/public/images/icons/wellness/weatherCloudy.svg';
 import precipitation from '/public/images/icons/wellness/precipitation.svg';
@@ -40,6 +41,7 @@ export default function WeatherAndRain() {
         <p className="mt-[12px] text-g1 tracking-[-2%]">강수량</p>
         <p className="mt-[4px] text-b3 font-semibold tracking-[-2%]">{weather.rainfall}mm</p>
       </li>
+      <Discomfort temperature={weather.temperature} humidity={weather.humidity} />
     </>
   );
 }

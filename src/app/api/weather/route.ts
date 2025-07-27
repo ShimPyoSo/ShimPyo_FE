@@ -58,12 +58,14 @@ export async function GET(req: Request) {
   const rainfall = items.find((i: WeatherItem) => i.category === 'RN1')?.obsrValue || null;
   const pty = items.find((i: WeatherItem) => i.category === 'PTY')?.obsrValue || null;
   const sky = items.find((i: WeatherItem) => i.category === 'SKY')?.obsrValue || null;
+  const humidity = items.find((i: WeatherItem) => i.category === 'REH')?.obsrValue || null;
 
   const weather = pty !== null ? getWeatherDescription(pty, sky) : '정보 없음';
 
   const result = {
     temperature: temperature !== null ? Number(temperature) : null,
     rainfall: rainfall !== null ? Number(rainfall) : null,
+    humidity: humidity !== null ? Number(humidity) : null,
     weather,
   };
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export function useFetchWeather() {
-  const [weather, setWeather] = useState({ rainfall: null, temperature: null, weather: null });
+  const [weather, setWeather] = useState({ rainfall: null, temperature: null, weather: null, humidity: null });
 
   useEffect(() => {
     const fetchWeather = async () => {
