@@ -1,18 +1,21 @@
 'use client';
 
+import { useForm, useFormState } from 'react-hook-form';
+
 import axios from 'axios';
 import { updateNicknameAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
-import { useForm } from 'react-hook-form';
 import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 
 export default function NicknameChange() {
-  const { register, handleSubmit, watch } = useForm<{ nickname: string }>();
+  const { register, handleSubmit, watch, control } = useForm<{ nickname: string }>({ mode: 'onChange' });
+  const { errors } = useFormState({ control });
   const nickname = watch('nickname');
   const [, updateNickname] = useAtom(updateNicknameAtom);
   const { isAvailable, checkDuplicate } = useNicknameCheck();
 
   const onSubmit = async (data: { nickname: string }) => {
+    if (nickname.length < 2 && nickname.length > 8) return; // 닉네임 길이 오류 수 처리 추후 수정
     try {
       await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data);
       updateNickname(nickname);
@@ -29,7 +32,9 @@ export default function NicknameChange() {
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          className="mt-[12px] w-full bg-white border border-w4 px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3"
+          className={`mt-[12px] w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
+            errors.nickname ? 'border-r' : 'border-w4'
+          }`}
           placeholder="닉네임을 입력해 주세요"
           {...register('nickname', {
             required: '닉네임은 필수 입력입니다.',

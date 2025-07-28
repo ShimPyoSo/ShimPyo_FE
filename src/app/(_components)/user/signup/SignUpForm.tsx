@@ -1,7 +1,5 @@
 'use client';
 
-import { useForm, useFormState } from 'react-hook-form';
-
 import EmailAuth from '../EmailAuth';
 import { ISignUp } from '@/app/(_utils)/type';
 import IdInput from '../IdInput';
@@ -9,14 +7,14 @@ import Link from 'next/link';
 import PasswordInput from './PasswordInput';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function SignUpForm() {
-  const { register, handleSubmit, watch, control } = useForm<ISignUp>({ mode: 'onBlur' });
+  const { register, handleSubmit, watch, control } = useForm<ISignUp>({ mode: 'onChange' });
   const router = useRouter();
 
-  const { errors } = useFormState({ control });
   const [isVerified, setIsVerified] = useState(false);
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [customDomain, setCustomDomain] = useState('');
@@ -48,10 +46,11 @@ export default function SignUpForm() {
         register={register}
         type="signup"
         watch={watch}
+        control={control}
         isIdChecked={isIdChecked}
         setIsIdChecked={setIsIdChecked}
       />
-      <PasswordInput register={register} watch={watch} errors={errors} />
+      <PasswordInput register={register} watch={watch} control={control} />
       <EmailAuth
         register={register}
         setIsVerified={setIsVerified}

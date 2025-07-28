@@ -1,21 +1,17 @@
 'use client';
 
+import { useForm, useFormState } from 'react-hook-form';
+
 import { IPasswordChange } from '@/app/(_utils)/type';
 import PasswordInput from './PasswordInput';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
 import { useLogout } from '@/app/(_utils)/hooks/useLogout';
 
 export default function PasswordChange() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IPasswordChange>({
-    mode: 'onBlur',
-    reValidateMode: 'onChange',
+  const { register, handleSubmit, watch, control } = useForm<IPasswordChange>({
+    mode: 'onChange',
   });
+  const { errors } = useFormState({ control });
   const { handleLogout } = useLogout();
 
   const onSubmit = async (data: IPasswordChange) => {
@@ -53,7 +49,7 @@ export default function PasswordChange() {
             ? '비밀번호가 일치하지 않아요'
             : '8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요'}
         </p>
-        <PasswordInput register={register} watch={watch} errors={errors} />
+        <PasswordInput register={register} watch={watch} control={control} />
         <button
           className={`mt-[16px] border px-[12px] py-[8px] rounded-md ${
             true ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'

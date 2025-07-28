@@ -17,7 +17,7 @@ interface FindFormProps {
 
 export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
   const { type } = useParams();
-  const { register, handleSubmit, watch } = useForm<IFind>();
+  const { register, handleSubmit, watch, control } = useForm<IFind>();
   const [isVerified, setIsVerified] = useState(false);
   const [customDomain, setCustomDomain] = useState('');
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
@@ -50,7 +50,7 @@ export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 justify-between">
       <section>
-        {type === 'password' && <IdInput register={register} watch={watch} type={'find'} />}
+        {type === 'password' && <IdInput register={register} watch={watch} type={'find'} control={control} />}
         <EmailAuth
           register={register}
           watch={watch}

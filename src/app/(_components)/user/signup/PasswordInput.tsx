@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { Control, UseFormRegister, UseFormWatch, useFormState } from 'react-hook-form';
 
 import { ISignUp } from '@/app/(_utils)/type';
 import PasswordCheck from '../PasswordCheck';
@@ -9,10 +9,11 @@ import { useState } from 'react';
 interface PasswordInputProps {
   register: UseFormRegister<ISignUp>;
   watch: UseFormWatch<ISignUp>;
-  errors: FieldErrors<ISignUp>;
+  control: Control<ISignUp>;
 }
 
-export default function PasswordInput({ register, watch, errors }: PasswordInputProps) {
+export default function PasswordInput({ register, watch, control }: PasswordInputProps) {
+  const { errors } = useFormState({ control });
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
 
@@ -33,7 +34,7 @@ export default function PasswordInput({ register, watch, errors }: PasswordInput
         <div className="relative">
           <input
             className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-              errors.password ? 'border-red-500' : 'border-w4'
+              errors.password ? 'border-r' : 'border-w4'
             }`}
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"

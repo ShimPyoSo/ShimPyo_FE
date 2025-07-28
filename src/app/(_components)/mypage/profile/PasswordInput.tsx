@@ -1,6 +1,6 @@
 'use client';
 
-import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { Control, UseFormRegister, UseFormWatch, useFormState } from 'react-hook-form';
 
 import { IPasswordChange } from '@/app/(_utils)/type';
 import PasswordCheck from '../../user/PasswordCheck';
@@ -9,10 +9,11 @@ import { useState } from 'react';
 interface PasswordInputProps {
   register: UseFormRegister<IPasswordChange>;
   watch: UseFormWatch<IPasswordChange>;
-  errors: FieldErrors<IPasswordChange>;
+  control: Control<IPasswordChange>;
 }
 
-export default function PasswordInput({ register, watch, errors }: PasswordInputProps) {
+export default function PasswordInput({ register, watch, control }: PasswordInputProps) {
+  const { errors } = useFormState({ control });
   const password = watch('password');
   const [nowPasswordOpen, setNowPasswordOpen] = useState(false);
   const [passwordOpen, setPasswordOpen] = useState(false);
