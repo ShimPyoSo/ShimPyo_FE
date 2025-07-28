@@ -1,12 +1,8 @@
 import Category from './(_components)/landing/Category';
 import Image from 'next/image';
-import LikedSpot from './(_components)/landing/LikedSpot';
+import MainContent from './(_components)/landing/MainContent';
 import MainSlider from './(_components)/landing/MainSlider';
-import Recommend from './(_components)/landing/Recommend';
-import dynamic from 'next/dynamic';
 import logo from '/public/images/icons/logo.svg';
-
-const TodayWellness = dynamic(() => import('./(_components)/landing/wellness/TodayWellness'));
 
 export default function Home() {
   return (
@@ -16,9 +12,7 @@ export default function Home() {
       </h2>
       <MainSlider />
       <Category />
-      <Recommend />
-      <LikedSpot />
-      <TodayWellness />
+      <MainContent />
     </div>
   );
 }
