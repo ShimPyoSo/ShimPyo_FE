@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import FilterItems from './FilterItem';
+import { IFilter } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import arrow from '/public/images/icons/arrow.svg';
 import { region } from '@/app/(_utils)/constants';
@@ -10,6 +11,7 @@ import { region } from '@/app/(_utils)/constants';
 interface AreaFilterProps {
   selectedFilter: string | null;
   filterKey: string;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
 export default function AreaFilter({ selectedFilter, filterKey }: AreaFilterProps) {

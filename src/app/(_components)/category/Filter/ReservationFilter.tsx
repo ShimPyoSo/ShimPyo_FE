@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 
 import FilterItems from './FilterItem';
+import { IFilter } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import arrow from '/public/images/icons/arrow.svg';
 
 interface ReservationFilterProps {
   selectedFilter: string | null;
   filterKey: string;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
 export default function ReservationFilter({ selectedFilter, filterKey }: ReservationFilterProps) {

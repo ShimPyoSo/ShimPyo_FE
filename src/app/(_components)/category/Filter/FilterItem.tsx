@@ -1,5 +1,3 @@
-'use client';
-
 interface FilterItemsProps {
   isSelected: boolean;
   index: number;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import FilterItems from './FilterItem';
+import { IFilter } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import arrow from '/public/images/icons/arrow.svg';
 import { spotType } from '@/app/(_utils)/constants';
@@ -10,6 +11,7 @@ import { spotType } from '@/app/(_utils)/constants';
 interface TypeFilterProps {
   selectedFilter: string | null;
   filterKey: string;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
 export default function TypeFilter({ selectedFilter, filterKey }: TypeFilterProps) {

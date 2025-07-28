@@ -3,6 +3,7 @@ import './globals.css';
 import ClientSideEffectWrapper from './ClientSideEffectWrapper';
 import Header from './(_components)/UI/Header';
 import type { Metadata } from 'next';
+import Providers from './Providers';
 import TabBar from './(_components)/UI/TabBar';
 
 export const metadata: Metadata = {
@@ -17,10 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="relative flex justify-center items-center min-h-screen">
           <div className="w-[375px] h-screen overflow-hidden relative z-10 flex justify-center items-center">
             <div className="bg-white h-full w-full flex flex-col relative">
-              <ClientSideEffectWrapper />
-              <Header />
-              <div className="flex-1 overflow-auto scrollbar-hide pb-[90px] bg-w1">{children}</div>
-              <TabBar />
+              <Providers>
+                <ClientSideEffectWrapper />
+                <Header />
+                <div className="flex-1 overflow-auto scrollbar-hide pb-[90px] bg-w1">{children}</div>
+                <TabBar />
+              </Providers>
             </div>
           </div>
 

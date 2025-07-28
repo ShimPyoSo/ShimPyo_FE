@@ -50,3 +50,30 @@ export interface ILocation {
   region_2depth_name: string;
   region_3depth_name: string;
 }
+
+export type Region = '강원' | '서울';
+export type Type = '숙소' | '식당';
+export type Reservation = '가능' | '불가능';
+export type Service = '주차' | '반려동물';
+export type Target = '20대' | '여성';
+export type Time = '낮' | '밤';
+
+export type IFilter = {
+  region?: Region[];
+  type?: Type[];
+  reservation?: Reservation[];
+  service?: Service[];
+  target?: Target[];
+  time?: Time[];
+};
+
+export type ISpot = {
+  id: number;
+  region: string;
+  images: string;
+  category: string[];
+  title: string;
+  isLiked: boolean;
+  operationTime?: string;
+  address?: string;
+};
