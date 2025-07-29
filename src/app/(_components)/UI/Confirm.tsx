@@ -8,9 +8,10 @@ interface ConfirmProps {
   confirmText: string;
   cancelText: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onConfirm: () => void;
 }
 
-export default function Confirm({ title, description, confirmText, cancelText, setIsOpen }: ConfirmProps) {
+export default function Confirm({ title, description, confirmText, cancelText, setIsOpen, onConfirm }: ConfirmProps) {
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       <motion.div
@@ -18,6 +19,7 @@ export default function Confirm({ title, description, confirmText, cancelText, s
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        onClick={() => setIsOpen(false)}
       >
         <motion.div
           className="w-[342px] h-[182px] rounded-2xl px-[16px] py-[18px] bg-w1"
@@ -29,7 +31,10 @@ export default function Confirm({ title, description, confirmText, cancelText, s
           <p className="text-xs text-g1 tracking-[-2%] text-center">{title}</p>
           <p className="mt-[6px] font-semibold text-b1 whitespace-pre-line text-center">{description}</p>
           <div className="mt-[16px] flex items-center justify-between gap-[12px]">
-            <button className="grow-1 py-[16px] bg-gn1 border border-gn5 text-white text-sm font-semibold rounded-lg text-center">
+            <button
+              className="grow-1 py-[16px] bg-gn1 border border-gn5 text-white text-sm font-semibold rounded-lg text-center"
+              onClick={onConfirm}
+            >
               {confirmText}
             </button>
             <button
