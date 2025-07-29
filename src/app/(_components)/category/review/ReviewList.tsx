@@ -5,6 +5,7 @@ import NoReview from '../NoReview';
 import ReviewItem from './ReviewItem';
 import ReviewSkeleton from './ReviewSkeleton';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
 import { useParams } from 'next/navigation';
@@ -22,7 +23,13 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=8&touristId=${id}${reviewIdParam}`
     );
 
-    return res.data;
+    const data = res.data;
+
+    return {
+      reviews: Array.isArray(data.reviews) ? data.reviews : [],
+      hasMore: !!data.hasMore,
+      nextPage: data.nextPage ?? 0,
+    };
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
@@ -32,9 +39,10 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
     getNextPageParam: (lastPage) => (lastPage.hasMore ? lastPage.nextPage : undefined),
   });
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
-
-  const allReviews = data?.pages.flatMap((page) => page.reviews) ?? [];
 
   return (
     <>
@@ -44,13 +52,11 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
             <ReviewSkeleton key={i} />
           ))}
         </ul>
-      ) : allReviews.length > 0 ? (
+      ) : true ? (
         <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
-          {data?.pages.map((page) =>
-            page.reviews.map((review: IReview) => (
-              <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} />
-            ))
-          )}
+          {data?.pages[0].reviews.map((review: IReview) => (
+            <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} />
+          ))}
           {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
           <div ref={observerRef} className="h-10" />
         </ul>

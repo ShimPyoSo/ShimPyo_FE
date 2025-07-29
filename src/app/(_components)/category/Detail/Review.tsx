@@ -20,12 +20,14 @@ export default function Review() {
 
   const fetchReviews = async (): Promise<IReview[]> => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=4&touristId=${id}`);
-    return res.data;
+    const data = res.data;
+    return Array.isArray(data) ? data : [];
   };
 
   const { data: reviews = [], isLoading } = useQuery({
     queryKey: ['reviews', id],
     queryFn: fetchReviews,
+    refetchOnWindowFocus: false,
   });
 
   return (

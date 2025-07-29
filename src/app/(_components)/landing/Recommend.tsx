@@ -22,6 +22,7 @@ export default function Recommend() {
   const { data: spots = [], isLoading } = useQuery({
     queryKey: ['spots'],
     queryFn: fetchSpots,
+    refetchOnWindowFocus: false,
   });
 
   return (
