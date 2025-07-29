@@ -77,3 +77,11 @@ export type ISpot = {
   operationTime?: string;
   address?: string;
 };
+
+export type IReview = {
+  reviewId: number;
+  nickname: string;
+  createdAt: string;
+  contents: string;
+  images: string[];
+};

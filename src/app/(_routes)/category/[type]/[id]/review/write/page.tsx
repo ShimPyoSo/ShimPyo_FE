@@ -1,7 +1,7 @@
 'use client';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
-import ImageList from '@/app/(_components)/category/review/ImageList';
+import ImageInput from '@/app/(_components)/category/review/ImageInput';
 import ReviewInput from '@/app/(_components)/category/review/ReviewInput';
 import { useState } from 'react';
 
@@ -12,7 +12,7 @@ export default function ReviewWrite() {
     <>
       <div className="min-h-full bg-w1 px-[16px]">
         <ReviewInput />
-        <ImageList />
+        <ImageInput />
         <button
           className="mt-[60px] mb-[40px] w-full py-[16px] bg-gn1 border border-gn5 rounded-lg text-white tracking-[-1.3%]"
           onClick={() => setIsOpen(true)}

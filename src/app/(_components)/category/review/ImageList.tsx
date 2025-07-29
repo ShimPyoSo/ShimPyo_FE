@@ -1,42 +1,27 @@
-'use client';
-
 import Image from 'next/image';
-import ImageItem from './ImageItem';
-import camera from '/public/images/icons/camera.svg';
-import { useState } from 'react';
 
-export default function ImageList() {
-  const [images, setImages] = useState<number[]>([]);
+interface ImageListProps {
+  images: string[];
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-  const handleAddImage = () => {
-    if (images.length < 8) {
-      setImages((prev) => [...prev, Date.now()]); // 임시 이미지 추가 코드 추후 수정
-    }
-  };
-
+export default function ImageList({ images, setIsOpen }: ImageListProps) {
   return (
-    <section className="mt-[60px] tracking-[-2%]">
-      <span className="text-gn1 text-sm flex items-baseline">
-        <p className="font-[kkubulim] text-lg">사진 업로드</p>(선택)
-      </span>
-      <small className="text-sm text-g1">여행지를 실감나게 보여주는 사진을 업로드해 주세요</small>
-
-      <ul className="mt-[16px] grid grid-cols-3 gap-y-[12px] gap-x-[12px]">
-        <li>
-          <button
-            type="button"
-            className="w-[105px] h-[105px] border border-g3 border-dashed rounded-lg flex flex-col items-center justify-center"
-            onClick={handleAddImage}
-          >
-            <Image className="mb-[4px]" src={camera} alt="이미지" width={24} height={24} />
-            <p className="text-g1 text-xs">사진 업로드</p>
-          </button>
-        </li>
-
-        {images.map((id) => (
-          <ImageItem key={id} />
-        ))}
+    <section className="mt-[16px] flex items-center">
+      <ul className="flex items-center gap-[6px]">
+        {images.map((img, idx) => {
+          return (
+            <li className="w-[50px] h-[56px] rounded-sm relative" onClick={() => setIsOpen(true)} key={idx}>
+              <Image className="w-[50px] h-[56px] rounded-sm object-cover" src={img} alt={'후기 이미지'} fill />
+            </li>
+          );
+        })}
       </ul>
+      {images.length > 5 && (
+        <div className="ml-[8px] py-[2px] px-[6px] rounded-[80px] bg-w1 border border-w4 text-xs text-b3">
+          + {images.length - 5}
+        </div>
+      )}
     </section>
   );
 }

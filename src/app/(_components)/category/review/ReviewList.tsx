@@ -1,33 +1,62 @@
-import Image from 'next/image';
+'use client';
+
+import { IReview } from '@/app/(_utils)/type';
+import NoReview from '../NoReview';
 import ReviewItem from './ReviewItem';
-import noReview from '/public/images/noReview.svg';
+import ReviewSkeleton from './ReviewSkeleton';
+import axios from 'axios';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
+import { useParams } from 'next/navigation';
 
 interface ReviewListProps {
-  hasReview: boolean;
-  setHasReview: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ReviewList({ hasReview, setHasReview, setIsOpen }: ReviewListProps) {
+export default function ReviewList({ setIsOpen }: ReviewListProps) {
+  const { id } = useParams();
+
+  const fetchReviews = async ({ pageParam = 0 }) => {
+    const reviewIdParam = pageParam !== 0 ? `&reviewId=${pageParam}` : '';
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=8&touristId=${id}${reviewIdParam}`
+    );
+
+    return res.data;
+  };
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ['reviews', id],
+    queryFn: fetchReviews,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => (lastPage.hasMore ? lastPage.nextPage : undefined),
+  });
+
+  const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+
+  const allReviews = data?.pages.flatMap((page) => page.reviews) ?? [];
+
   return (
     <>
-      {hasReview ? (
+      {isLoading ? (
         <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
-          <ReviewItem setIsOpen={setIsOpen} />
-          <ReviewItem setIsOpen={setIsOpen} />
-          <ReviewItem setIsOpen={setIsOpen} />
-          <ReviewItem setIsOpen={setIsOpen} />
-          <ReviewItem setIsOpen={setIsOpen} />
-          <ReviewItem setIsOpen={setIsOpen} />
+          {Array.from({ length: 5 }).map((_, i) => (
+            <ReviewSkeleton key={i} />
+          ))}
+        </ul>
+      ) : allReviews.length > 0 ? (
+        <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
+          {data?.pages.map((page) =>
+            page.reviews.map((review: IReview) => (
+              <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} />
+            ))
+          )}
+          {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
+          <div ref={observerRef} className="h-10" />
         </ul>
       ) : (
-        <div
-          className="flex flex-col justify-center items-center h-[calc(100vh-120px)]"
-          onClick={() => setHasReview(true)}
-        >
-          <Image className="mb-[24px]" src={noReview} alt="리뷰 없음" width={172} height={95} />
-          <p className="text-xs text-g1 tracking-[-2%]">가장 먼저 후기를 남겨보세요!</p>
-          <p className="text-sm text-b3 font-semibold tracking-[-1.3%]">아직 방문객 후기가 없어요</p>
+        <div className="flex flex-col justify-center items-center h-[calc(100vh-120px)]">
+          <NoReview />
         </div>
       )}
     </>

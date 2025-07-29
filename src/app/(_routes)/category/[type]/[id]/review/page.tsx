@@ -8,7 +8,6 @@ import { useState } from 'react';
 
 export default function Review() {
   const { type, id } = useParams();
-  const [hasReview, setHasReview] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -28,7 +27,7 @@ export default function Review() {
           </Link>
         </div>
 
-        <ReviewList hasReview={hasReview} setHasReview={setHasReview} setIsOpen={setIsOpen} />
+        <ReviewList setIsOpen={setIsOpen} />
       </div>
       {isOpen && <ImageModal setIsOpen={setIsOpen} />}
     </>

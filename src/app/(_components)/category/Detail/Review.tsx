@@ -1,17 +1,32 @@
 'use client';
 
 import Carousel from '../../landing/Carousel';
+import { IReview } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import ImageModal from '../../image/ImageModal';
 import Link from 'next/link';
+import NoReview from '../NoReview';
 import ReviewItem from './ReviewItem';
+import ReviewSkeleton from './ReviewSkeleton';
 import arrow from '/public/images/icons/arrow.svg';
+import axios from 'axios';
 import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 export default function Review() {
   const { type, id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+
+  const fetchReviews = async (): Promise<IReview[]> => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=4&touristId=${id}`);
+    return res.data;
+  };
+
+  const { data: reviews = [], isLoading } = useQuery({
+    queryKey: ['reviews', id],
+    queryFn: fetchReviews,
+  });
 
   return (
     <>
@@ -28,11 +43,15 @@ export default function Review() {
         </div>
         <Carousel>
           <ul className="mt-[16px] px-[16px] flex gap-[12px] flex-nowrap w-max">
-            <ReviewItem setIsOpen={setIsOpen} />
-            <ReviewItem setIsOpen={setIsOpen} />
-            <ReviewItem setIsOpen={setIsOpen} />
-            <ReviewItem setIsOpen={setIsOpen} />
-            <ReviewItem setIsOpen={setIsOpen} />
+            {isLoading ? (
+              Array.from({ length: 4 }).map((_, i) => <ReviewSkeleton key={i} />)
+            ) : reviews.length === 0 ? (
+              <div className="mt-[12px] w-[350px] flex flex-col justify-center items-center">
+                <NoReview />
+              </div>
+            ) : (
+              reviews.map((review) => <ReviewItem setIsOpen={setIsOpen} review={review} key={review.reviewId} />)
+            )}
           </ul>
         </Carousel>
       </section>
