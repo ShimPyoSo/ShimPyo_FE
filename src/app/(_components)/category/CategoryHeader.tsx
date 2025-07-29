@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import CategoryDescription from './CategoryDescription';
 import Image from 'next/image';
@@ -9,7 +9,9 @@ import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
 import prev from '/public/images/category/categoryArrow.svg';
 
 export default function CategoryHeader() {
-  const { type } = useParams();
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type') ?? 'default';
+
   const router = useRouter();
   const item = categoryList.find((el) => el.href === (type ?? ''));
   if (!item) return null;

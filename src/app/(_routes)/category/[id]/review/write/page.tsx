@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function ReviewWrite() {
-  const { type, id } = useParams();
+  const { id } = useParams();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [images, setImages] = useState<string[]>([]);
@@ -60,7 +60,7 @@ export default function ReviewWrite() {
           description={'후기가 정상적으로 등록되었습니다.'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
-          onConfirm={() => router.push(`/category/${type}/${id}/review`)}
+          onConfirm={() => router.push(`/category/${id}/review`)}
         />
       )}
     </>

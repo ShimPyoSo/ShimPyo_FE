@@ -37,7 +37,7 @@ export default function SpotListItem() {
         <div className="grow-1">
           <Link
             className="text-sm text-b3 font-semibold tracking-[-2%] line-clamp-2 cursor-pointer"
-            href={`/category/meditation/1`}
+            href={`/category/1`}
           >
             최대 두 줄의 텍스트를 입력해 주세요
           </Link>

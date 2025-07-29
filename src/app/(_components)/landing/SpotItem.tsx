@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function SpotItem({ spot }: { spot: ISpot }) {
   return (
     <li className="max-w-[102px] flex flex-col" title={spot.title || ''}>
-      <Link href={`/category/${spot.category}/${spot.id}`}>
+      <Link href={`/category/${spot.id}`}>
         <div className="relative w-[102px] h-[102px] rounded-lg border border-g3">
           {spot.images && (
             <Image

@@ -1,3 +1,5 @@
+'use client';
+
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import Filter from './Filter/Filter';
 import SpotListItem from './SpotListItem';

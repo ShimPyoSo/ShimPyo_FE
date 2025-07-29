@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Review() {
-  const { type, id } = useParams();
+  const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,7 +20,7 @@ export default function Review() {
           </div>
           <Link
             className="text-sm text-w3 bg-gn1 border border-gn5 rounded-md py-[6px] px-[12px]"
-            href={`/category/${type}/${id}/review/write`}
+            href={`/category/${id}/review/write`}
             role="button"
           >
             작성하기

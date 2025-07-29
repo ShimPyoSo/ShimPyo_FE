@@ -15,7 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 export default function Review() {
-  const { type, id } = useParams();
+  const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
 
   const fetchReviews = async (): Promise<IReview[]> => {
@@ -36,7 +36,7 @@ export default function Review() {
         <div className="mt-[60px] px-[16px]">
           <div className="flex justify-between">
             <p className="font-[kkubulim] text-lg text-gn1 tracking-[-2%]">방문객 후기</p>
-            <Link href={`/category/${type}/${id}/review`} className="flex items-center gap-[2px] text-g3 text-xs">
+            <Link href={`/category/${id}/review`} className="flex items-center gap-[2px] text-g3 text-xs">
               전체보기
               <Image className="rotate-90" src={arrow} alt="전체보기" width={16} height={16} />
             </Link>
