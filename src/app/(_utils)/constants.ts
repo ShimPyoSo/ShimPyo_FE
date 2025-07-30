@@ -39,6 +39,20 @@ export const notRendering = [
   '/mypage/like/spot/meditation',
 ];
 
+export const notRenderingTab = [
+  '/login',
+  '/signup',
+  '/find/id',
+  '/find/password',
+  '/signup/email',
+  '/category',
+  '/category?type=food',
+  '/category?type=beauty',
+  '/category?type=nature',
+  '/category?type=spa',
+  '/category?type=meditation',
+];
+
 export const domainOptions = [
   { value: 'gmail.com', label: 'gmail.com' },
   { value: 'naver.com', label: 'naver.com' },

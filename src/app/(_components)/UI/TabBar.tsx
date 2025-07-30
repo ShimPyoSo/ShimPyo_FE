@@ -6,6 +6,7 @@ import home from '/public/images/icons/tabbar/home.svg';
 import homeActive from '/public/images/icons/tabbar/homeActive.svg';
 import mypage from '/public/images/icons/tabbar/mypage.svg';
 import mypageActive from '/public/images/icons/tabbar/mypageActive.svg';
+import { notRenderingTab } from '@/app/(_utils)/constants';
 import search from '/public/images/icons/tabbar/search.svg';
 import searchActive from '/public/images/icons/tabbar/searchActive.svg';
 import test from '/public/images/icons/tabbar/test.svg';
@@ -14,9 +15,8 @@ import { usePathname } from 'next/navigation';
 
 export default function TabBar() {
   const pathname = usePathname();
-  const notRendering = ['/login', '/signup', '/find'];
 
-  if (notRendering.includes(pathname)) return null;
+  if (notRenderingTab.includes(pathname)) return null;
   return (
     <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px]">
       <ul className="flex justify-between items-center text-sm text-b3 pt-[20px] pb-[20px]">
