@@ -47,7 +47,7 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
             exit={{ opacity: 0 }}
           />
           <motion.div
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full overflow-y-auto scrollbar-hide p-4"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full overflow-y-auto scrollbar-hide px-[16px] pb-[16px]"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -58,7 +58,9 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
             ref={sheetRef}
           >
             <FocusLock>
-              <div className="h-1 w-10 bg-g2 rounded-full mx-auto my-2" />
+              <div className="py-[16px] sticky top-0 z-10 bg-w1 py-2">
+                <div className="h-1 w-10 bg-g2 rounded-full mx-auto" />
+              </div>
               {children}
             </FocusLock>
           </motion.div>

@@ -133,3 +133,14 @@ export const region = [
 ];
 
 export const spotType = ['숙소', '식당', '유형', '유형', '유형'];
+
+export const service = [
+  '주차 시설',
+  '장애인 편의 시설',
+  '무료 Wi-Fi',
+  '대여 서비스',
+  '충전 서비스',
+  '관광/안내 데스크',
+  '반려동물 동반 시설',
+  '유아 동반 시설',
+];

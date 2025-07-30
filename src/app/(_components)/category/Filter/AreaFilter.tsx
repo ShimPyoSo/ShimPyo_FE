@@ -29,7 +29,7 @@ export default function AreaFilter({ selectedFilter, filterKey }: AreaFilterProp
       <div className="flex items-center justify-between">
         <p className="font-[kkubulim] text-lg text-gn1">지역</p>
         <Image
-          className={`${isExpanded ? 'rotate-180' : ''}`}
+          className={`${isExpanded ? '' : 'rotate-180'}`}
           src={arrow}
           alt="더보기"
           width={24}

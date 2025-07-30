@@ -16,9 +16,9 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter }: Fil
     { label: '지역', key: 'region' },
     { label: '여행지 유형', key: 'type' },
     { label: '예약', key: 'reservation' },
+    { label: '주 운영 시간', key: 'time' },
     { label: '제공 서비스', key: 'service' },
-    { label: '성별, 연령층', key: 'target' },
-    { label: '운영 시간', key: 'time' },
+    { label: '성별과 연령대', key: 'target' },
   ];
 
   return (

@@ -28,7 +28,7 @@ export default function ReservationFilter({ selectedFilter, filterKey }: Reserva
       <div className="flex items-center justify-between">
         <p className="font-[kkubulim] text-lg text-gn1">예약</p>
         <Image
-          className={`${isExpanded ? 'rotate-180' : ''}`}
+          className={`${isExpanded ? '' : 'rotate-180'}`}
           src={arrow}
           alt="더보기"
           width={24}
