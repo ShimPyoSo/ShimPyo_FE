@@ -20,6 +20,8 @@ interface EmailAuthInputProps<T extends FieldValues> {
   setCustomDomain: React.Dispatch<React.SetStateAction<string>>;
   selectedDomain: IDomain;
   setSelectedDomain: React.Dispatch<React.SetStateAction<IDomain>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function EmailAuth<T extends ISignUp | IFind>({
@@ -32,6 +34,8 @@ export default function EmailAuth<T extends ISignUp | IFind>({
   setCustomDomain,
   selectedDomain,
   setSelectedDomain,
+  setIsOpen,
+  setIsLoading,
 }: EmailAuthInputProps<T>) {
   const [timeLeft, setTimeLeft] = useState(180);
   const [isAuthStart, setIsAuthStart] = useState(false);
@@ -49,12 +53,13 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       // id를 입력하지 않는 경우 return 코드 추가 예정
       return;
     }
-
     const fullEmail = `${email}@${selectedDomain.value === 'custom' ? customDomain : selectedDomain.value}`;
-
     try {
+      setIsLoading(true);
       await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/email`, { email: fullEmail, type: type });
       setIsAuthStart(true);
+      setIsOpen(true);
+      setIsLoading(false);
     } catch {
       setIsEmailError(true);
     }

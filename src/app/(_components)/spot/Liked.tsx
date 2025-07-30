@@ -25,9 +25,10 @@ export default function Liked({ liked, id }: LikedProps) {
 
   const mutation = useMutation({
     mutationFn: async () => {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/likes/tourist`,
-        { tourId: id },
+      if (!isLoggedIn) return;
+      const res = await axios.patch(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/likes`,
+        { id },
         {
           withCredentials: true,
         }
@@ -42,13 +43,8 @@ export default function Liked({ liked, id }: LikedProps) {
     },
   });
 
-  const handleLiked = () => {
-    if (!isLoggedIn) return;
-    mutation.mutate();
-  };
-
   return (
-    <button onClick={handleLiked}>
+    <button onClick={() => mutation.mutate()}>
       <Image
         className={`cursor-pointer ${isLoggedIn ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         src={isLiked ? like : noLike}

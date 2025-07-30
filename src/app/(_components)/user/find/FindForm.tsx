@@ -12,10 +12,12 @@ import { useState } from 'react';
 
 interface FindFormProps {
   setIsFinded: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEmailOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setResult: React.Dispatch<React.SetStateAction<null | IFindResult>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
+export default function FindForm({ setResult, setIsFinded, setIsEmailOpen, setIsLoading }: FindFormProps) {
   const { type } = useParams();
   const { register, handleSubmit, watch, control } = useForm<IFind>();
   const [isVerified, setIsVerified] = useState(false);
@@ -61,6 +63,8 @@ export default function FindForm({ setResult, setIsFinded }: FindFormProps) {
           setCustomDomain={setCustomDomain}
           selectedDomain={selectedDomain}
           setSelectedDomain={setSelectedDomain}
+          setIsOpen={setIsEmailOpen}
+          setIsLoading={setIsLoading}
         />
       </section>
 
