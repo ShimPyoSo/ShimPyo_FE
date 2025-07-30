@@ -6,7 +6,7 @@ import SpotListItem from './SpotListItem';
 
 export default function CategoryComponent() {
   return (
-    <>
+    <div className="bg-w1">
       <CategoryHeader />
       <Filter />
       <ul className="px-[16px] pb-[20px] flex-1 overflow-y-auto">
@@ -24,6 +24,6 @@ export default function CategoryComponent() {
         <SpotListItem />
         <SpotListItem />
       </ul>
-    </>
+    </div>
   );
 }

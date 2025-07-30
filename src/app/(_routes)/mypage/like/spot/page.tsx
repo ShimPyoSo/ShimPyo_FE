@@ -1,9 +1,10 @@
 import CategoryComponent from '@/app/(_components)/category/CategoryComponent';
+import { Suspense } from 'react';
 
 export default function LikedSpotList() {
   return (
-    <div className="min-h-full bg-w1">
+    <Suspense>
       <CategoryComponent />
-    </div>
+    </Suspense>
   );
 }

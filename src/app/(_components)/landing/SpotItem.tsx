@@ -23,7 +23,7 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
 
         <div className="mt-[20px] flex justify-between items-center">
           <p className="text-xs text-g3 tracking-[-2%]">{spot.category.join(', ')}</p>
-          <Liked liked={spot.isLiked} id={spot.id} />
+          <Liked liked={spot.isLiked || false} id={spot.id} />
         </div>
         <p className="mt-[8px] font-semibold text-xs text-b3 tracking-[-2%] line-clamp-2">{spot.title}</p>
       </Link>
