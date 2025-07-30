@@ -73,7 +73,7 @@ export type ISpot = {
   images: string;
   category: string[];
   title: string;
-  isLiked: boolean;
+  isLiked?: boolean;
   operationTime?: string;
   address?: string;
 };

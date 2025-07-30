@@ -1,7 +1,12 @@
+'use client';
+
 import Review from '@/app/(_components)/category/Detail/Review';
 import SpotInfo from '@/app/(_components)/category/Detail/SpotInfo';
+import { useRecentSpots } from '@/app/(_utils)/hooks/useRecentSpots';
 
 export default function SpotDetail() {
+  useRecentSpots();
+
   return (
     <div className="min-h-full bg-w1 pb-[40px]">
       <div className="mt-[30px] h-[206px] mx-[16px] bg-white border border-w4 rounded-2xl"></div>
