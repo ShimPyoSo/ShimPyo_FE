@@ -4,8 +4,23 @@ export default function Withdraw() {
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
       <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">회원 탈퇴</h3>
-      <div className="mt-[12px] w-full min-h-[128px] rounded-lg border border-w4 bg-white p-[12px] "></div>
-      <div className="mt-[8px] w-full min-h-[128px] rounded-lg border border-w4 bg-white p-[12px] "></div>
+      <div className="mt-[12px] w-full h-[128px] overflow-y-scroll rounded-lg border border-w4 bg-white p-[12px] ">
+        <p className="font-semibold">[회원 탈퇴 시 처리 안내]</p> <br />
+        회원 탈퇴를 신청하실 경우, 아래 내용을 반드시 확인해주시기 바랍니다.
+        <br />
+        <br /> 1. 회원 탈퇴가 완료되면, 회원님의 계정 및 개인정보는 『개인정보 보호법』 등 관련 법령에 따라 일정 기간
+        보관된 후 안전하게 파기됩니다.
+        <br />
+        2. 탈퇴 이후에는 로그인 및 모든 개인 맞춤형 서비스 이용이 불가능하며, 계정 복구 또한 불가합니다. <br />
+        3. 회원님이 작성하신 관광지 후기, 댓글, 기타 게시물은 서비스의 공공성과 정보의 연속성을 위해 탈퇴 후에도
+        삭제되지 않습니다. 단, 해당 게시물에는 개인정보가 노출되지 않도록 필요한 조치를 취합니다. <br />
+        4. 서비스 운영 상 필요한 경우(예: 부정 이용 방지, 민원 처리 등), 관계 법령에 근거하여 최소한의 정보는 일정 기간
+        동안 보관될 수 있습니다.
+        <br />
+        5. 동일한 이메일 주소로 재가입은 가능하지만, 기존에 작성하신 후기나 기록은 새로운 계정으로 이전되지 않습니다.
+        <br />
+        <br />위 내용을 충분히 숙지하였으며, 이에 동의하고 회원 탈퇴를 진행합니다.
+      </div>
       <WithdrawForm />
     </section>
   );

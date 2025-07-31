@@ -21,8 +21,8 @@ export function useNicknameCheck() {
         });
         setIsAvailable(true);
       } catch (error) {
-        console.error(error);
-        setIsAvailable(null);
+        console.log(error);
+        setIsAvailable(false);
       }
     }, 500);
   };
