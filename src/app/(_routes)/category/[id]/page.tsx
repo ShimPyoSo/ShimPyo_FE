@@ -2,6 +2,7 @@
 
 import Review from '@/app/(_components)/category/Detail/Review';
 import SpotInfo from '@/app/(_components)/category/Detail/SpotInfo';
+import Wellness from '@/app/(_components)/category/Detail/Wellness';
 import { useRecentSpots } from '@/app/(_utils)/hooks/useRecentSpots';
 
 export default function SpotDetail() {
@@ -18,6 +19,7 @@ export default function SpotDetail() {
       </div>
       <SpotInfo />
       <Review />
+      <Wellness />
     </div>
   );
 }

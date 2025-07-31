@@ -4,7 +4,7 @@ import { ILocation } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import Script from 'next/script';
 import WellnessFactor from './WellnessFactor';
-import { getCurrentLocation } from '@/app/(_utils)/hooks/useCurrentLocation';
+import { getAddressFromCoords } from '@/app/(_utils)/hooks/useGetLocation';
 import gps from '/public/images/icons/gps.svg';
 import { useState } from 'react';
 import wellness from '/public/images/icons/wellness/wellness.svg';
@@ -14,10 +14,27 @@ export default function TodayWellness() {
 
   const fetchAddress = async () => {
     try {
-      const addr = await getCurrentLocation();
-      setLocation(addr);
+      await new Promise<GeolocationPosition>((resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error('브라우저가 위치 정보를 지원하지 않습니다.'));
+        }
+
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 5000,
+        });
+      })
+        .then(async (position) => {
+          const { latitude, longitude } = position.coords;
+          const address = await getAddressFromCoords(latitude, longitude);
+          setLocation(address);
+        })
+        .catch(async () => {
+          const fallbackAddress = await getAddressFromCoords(37.5665, 126.978); // 위치 정보 불러오기 실패 시 default 값
+          setLocation(fallbackAddress);
+        });
     } catch (error) {
-      alert(error);
+      alert('주소를 가져오는 데 실패했습니다: ' + error);
     }
   };
 

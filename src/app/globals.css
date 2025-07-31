@@ -46,9 +46,10 @@
   --color-gn11: #e7e9e7;
   --color-gn12: #627262;
 
-  /* Red / Yellow */
+  /* Red / Yellow / Blue */
   --color-r: #ed9092;
   --color-y: #fee500; /* 카카오 노랑 */
+  --color-b: #658eff;
 }
 
 input:-webkit-autofill,
