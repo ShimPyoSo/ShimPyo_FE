@@ -1,3 +1,9 @@
+import ServiceMenu from '@/app/(_components)/mypage/service/ServiceMenu';
+
 export default function Service() {
-  return <div className="bg-w1 pl-[16px] pb-[70px]"></div>;
+  return (
+    <div className="min-h-full bg-w1 px-[16px]">
+      <ServiceMenu />
+    </div>
+  );
 }
