@@ -1,10 +1,15 @@
+'use client';
+
 import Image from 'next/image';
 import WellnessItem from './WellnessItem';
 import getWeeklyDate from '@/app/(_utils)/getWeeklyDate';
 import illu from '/public/images/icons/illustration/wellness.svg';
+import { useFetchWeeklyWeather } from '@/app/(_utils)/hooks/useFetchWeeklyWeather';
 
 export default function WeeklyWellness() {
   const weekData = getWeeklyDate();
+  useFetchWeeklyWeather();
+
   return (
     <section>
       <div className="relative mb-[30px]">
