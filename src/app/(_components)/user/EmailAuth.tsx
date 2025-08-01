@@ -59,9 +59,10 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/email`, { email: fullEmail, type: type });
       setIsAuthStart(true);
       setIsOpen(true);
-      setIsLoading(false);
     } catch {
       setIsEmailError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
