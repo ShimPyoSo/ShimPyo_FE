@@ -24,7 +24,7 @@ export default function SignUpComponent() {
         >
           이메일로 회원가입
         </Link>
-        <p className="mt-[30px] text-xs text-g1 tracking-[-2%]">
+        <p className="my-[30px] text-xs text-g1 tracking-[-2%]">
           이미 계정이 있으신가요?{' '}
           <Link className="text-b1 underline" href={'/login'}>
             로그인

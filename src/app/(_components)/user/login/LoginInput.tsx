@@ -28,6 +28,7 @@ export default function LoginInput({ register, isLoginFailed }: LoginInputProps)
           className={`w-full p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black placeholder:text-g3 ${
             isLoginFailed ? 'border-r' : 'border-w4'
           }`}
+          autoComplete="off"
           type={passwordOpen ? 'text' : 'password'}
           placeholder="비밀번호를 입력해 주세요"
           {...register('password', { required: true })}
