@@ -44,7 +44,7 @@ export default function SignUpForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="h-full relative" onSubmit={handleSubmit(onSubmit)}>
         <IdInput
           register={register}
           type="signup"

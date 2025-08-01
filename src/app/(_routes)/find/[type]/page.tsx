@@ -35,7 +35,7 @@ export default function Find() {
       {isEmailOpen && (
         <Alert
           title="이메일 인증"
-          description="✉️ 인증 메일이 전송되었습니다.\n이메일을 확인해 주세요."
+          description={'✉️ 인증 메일이 전송되었습니다.\n이메일을 확인해 주세요.'}
           confirmText="확인"
           setIsOpen={setIsEmailOpen}
           onConfirm={() => {}}
