@@ -46,7 +46,7 @@ export default function WithdrawForm() {
       </div>
       {isFailed && <p className="mt-[8px] text-r text-xs tracking-[-2%]">비밀번호를 다시 입력해 주세요</p>}
       <label className="mt-[32px] flex items-center space-x-2 cursor-pointer">
-        <CheckBox register={register} watch={watch} name={'isConfirmed'} />
+        <CheckBox register={register} watch={watch} name={'isConfirmed'} required={true} />
         <span className="text-xs text-b3">모든 사항을 꼼꼼히 읽었으며 탈퇴에 동의해요</span>
       </label>
 

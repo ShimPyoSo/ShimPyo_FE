@@ -13,7 +13,7 @@ interface RememberMeInputProps {
 export default function RememberMeInput({ register, watch }: RememberMeInputProps) {
   return (
     <label className="flex items-center space-x-2 cursor-pointer">
-      <CheckBox register={register} watch={watch} name={'isRememberMe'} />
+      <CheckBox register={register} watch={watch} name={'isRememberMe'} required={false} />
       <span className="text-xs text-g1">자동 로그인</span>
     </label>
   );
