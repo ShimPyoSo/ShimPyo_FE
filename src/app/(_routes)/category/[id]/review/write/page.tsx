@@ -22,7 +22,7 @@ export default function ReviewWrite() {
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews`,
         {
           id,
-          images,
+          images: images.length === 0 ? null : images,
           contents,
         },
         { withCredentials: true }
