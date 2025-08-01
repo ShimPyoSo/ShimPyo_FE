@@ -7,15 +7,20 @@ import rain from '/public/images/icons/wellness/weatherRain.svg';
 import snow from '/public/images/icons/wellness/weatherSnow.svg';
 import sunny from '/public/images/icons/wellness/weatherSunny.svg';
 
-export default function WellnessItem() {
+interface WellnessItemProps {
+  date: string;
+  day: string;
+}
+
+export default function WellnessItem({ date, day }: WellnessItemProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const unusedImages = [bad, mid, rain, snow, sunny];
 
   return (
     <>
       <div className="text-xs tracking-[-2%]">
-        <p className="text-b1">오늘</p>
-        <p className="text-g1">07.31</p>
+        <p className="text-b1">{day}</p>
+        <p className="text-g1">{date}</p>
       </div>
       <div className="grow-1 flex items-center justify-between">
         <div className="px-[8px] py-[8px] ml-[24px] flex items-center justify-between bg-white rounded-lg text-xs text-b3">
