@@ -11,12 +11,11 @@ export default function ServiceMenu() {
 
   return (
     <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
-      <li>
+      <li onClick={() => setActiveMenu(activeMenu === 'terms' ? null : 'terms')}>
         <div
           className={`py-[18px] flex justify-between items-center ${
             activeMenu === 'terms' ? '' : 'border-b border-w6'
           }`}
-          onClick={() => setActiveMenu(activeMenu === 'terms' ? null : 'terms')}
         >
           <p>서비스 약관</p>
           <Image
@@ -29,12 +28,11 @@ export default function ServiceMenu() {
         </div>
         {activeMenu === 'terms' && <TermsOfService />}
       </li>
-      <li>
+      <li onClick={() => setActiveMenu(activeMenu === 'privacy' ? null : 'privacy')}>
         <div
           className={`py-[18px] flex justify-between items-center ${
             activeMenu === 'privacy' ? '' : 'border-b border-w6'
           }`}
-          onClick={() => setActiveMenu(activeMenu === 'privacy' ? null : 'privacy')}
         >
           <p>개인정보 처리 방침</p>
           <Image

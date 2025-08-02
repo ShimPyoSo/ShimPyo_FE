@@ -17,14 +17,21 @@ export default function Mypage() {
               <p className="font-[kkubulim] text-gn1 text-lg">{user?.nickname || '닉네임'}</p>님
             </span>
           </li>
-          <li className="py-[18px] border-b border-w6">
-            <Link href={'/mypage/profile'}>계정 관리</Link>{' '}
+
+          <li className="border-b border-w6">
+            <Link href="/mypage/profile" className="block py-[18px] w-full">
+              계정 관리
+            </Link>
           </li>
-          <li className="py-[18px] border-b border-w6">
-            <Link href={'/mypage/like'}>찜한 목록</Link>
+          <li className="border-b border-w6">
+            <Link href="/mypage/like" className="block py-[18px] w-full">
+              찜한 목록
+            </Link>
           </li>
-          <li className="py-[18px] border-b border-w6">
-            <Link href={'/mypage/service'}>서비스 안내</Link>
+          <li className="border-b border-w6">
+            <Link href="/mypage/service" className="block py-[18px] w-full">
+              서비스 안내
+            </Link>
           </li>
         </ul>
       </div>

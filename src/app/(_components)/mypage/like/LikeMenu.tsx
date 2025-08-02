@@ -11,12 +11,9 @@ export default function LikeMenu() {
 
   return (
     <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
-      <li>
-        <div
-          className={`py-[18px] flex justify-between items-center ${isActive ? '' : 'border-b border-w6'}`}
-          onClick={() => setIsActive(!isActive)}
-        >
-          <p>여행지</p>
+      <li className="w-full py-[18px]" onClick={() => setIsActive(!isActive)}>
+        <div className={`flex justify-between items-center ${isActive ? '' : 'border-b border-w6'}`}>
+          <p>카테고리별 여행지</p>
           <Image
             className={`transition-transform duration-300 ${isActive ? '' : 'rotate-180'}`}
             src={arrow}
@@ -28,10 +25,10 @@ export default function LikeMenu() {
         {isActive && <Category />}
       </li>
       <li className="py-[18px] border-b border-w6">
-        <Link href={'/mypage/like/course'}>내 코스</Link>
+        <Link href={'/mypage/like/course'}>맞춤 쉼표 코스</Link>
       </li>
       <li className="py-[18px] border-b border-w6">
-        <Link href={'/mypage/like/recent'}>최근 본 항목</Link>
+        <Link href={'/mypage/like/recent'}>최근 본 여행지</Link>
       </li>
     </ul>
   );
