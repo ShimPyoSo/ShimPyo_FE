@@ -48,7 +48,7 @@ export async function GET(req: Request) {
   const base = getBaseDateAndTime();
 
   const apiKey = process.env.WEATHER_SERVICE_KEY;
-  const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${apiKey}&dataType=JSON&base_date=${base.baseDate}&base_time=${base.baseDate}&nx=${nx}&ny=${ny}`;
+  const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey=${apiKey}&dataType=JSON&base_date=${base.baseDate}&base_time=${base.baseTime}&nx=${nx}&ny=${ny}`;
 
   const res = await fetch(url);
   const data = await res.json();
