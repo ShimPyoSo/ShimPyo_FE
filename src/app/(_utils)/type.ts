@@ -85,3 +85,9 @@ export type IReview = {
   contents: string;
   images: string[];
 };
+
+export type IWeeklyWeather = {
+  weather: string;
+  minTemp: number;
+  maxTemp: number;
+};

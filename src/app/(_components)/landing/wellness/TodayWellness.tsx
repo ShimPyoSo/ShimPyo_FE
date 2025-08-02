@@ -39,7 +39,7 @@ export default function TodayWellness() {
   };
 
   return (
-    <section className="mt-[70px] pr-[16px]">
+    <section className="my-[70px] pr-[16px]">
       <h3 className="font-[kkubulim] text-gn1 text-xl">오늘 웰니스 지수</h3>
       <div className="mt-[2px] flex items-center gap-[4px]">
         <Image src={gps} alt="위치" width={16} height={16} />
