@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import MapRender from '../../spot/MapRender';
 import call from '/public/images/icons/spot/call.svg';
+import dynamic from 'next/dynamic';
 import home from '/public/images/icons/spot/home.svg';
 import location from '/public/images/icons/spot/location.svg';
 import reservation from '/public/images/icons/spot/reservation.svg';
 import time from '/public/images/icons/spot/time.svg';
+
+const MapRender = dynamic(() => import('../../spot/MapRender'), {
+  ssr: false,
+});
 
 export default function SpotInfo() {
   const latitude = 37.5665;

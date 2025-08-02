@@ -31,7 +31,6 @@ export function useFetchWeeklyWeather() {
             });
 
             const items = response.data;
-            console.log(items);
             setWeather(items);
           } catch {
             alert('날씨 정보를 불러오지 못했습니다.');

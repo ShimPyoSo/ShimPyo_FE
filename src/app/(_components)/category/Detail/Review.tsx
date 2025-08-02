@@ -24,7 +24,7 @@ export default function Review() {
     return Array.isArray(data) ? data : [];
   };
 
-  const { data: reviews = [], isLoading } = useQuery({
+  const { data: reviews = [], isLoading } = useQuery<IReview[]>({
     queryKey: ['reviews', id],
     queryFn: fetchReviews,
     refetchOnWindowFocus: false,
@@ -52,6 +52,7 @@ export default function Review() {
                 <NoReview />
               </div>
             ) : (
+              Array.isArray(reviews) &&
               reviews.map((review) => <ReviewItem setIsOpen={setIsOpen} review={review} key={review.reviewId} />)
             )}
           </ul>

@@ -21,16 +21,18 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=8&touristId=${id}${reviewIdParam}`
     );
-
-    return res.data;
+    return Array.isArray(res.data) ? res.data : [];
   };
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ['reviews', id],
+    queryKey: ['allReviews', id],
     queryFn: fetchReviews,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
-      if (!Array.isArray(lastPage) || lastPage.length < 8) {
+      if (!lastPage || !Array.isArray(lastPage)) {
+        return undefined;
+      }
+      if (lastPage.length < 8) {
         return undefined;
       }
       const lastReview = lastPage[lastPage.length - 1];
