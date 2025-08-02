@@ -1,4 +1,5 @@
 import FilterItems from './FilterItem';
+import { target } from '@/app/(_utils)/constants';
 
 interface TargetFilterProps {
   selectedIndices: number[];
@@ -10,7 +11,7 @@ export default function TargetList({ selectedIndices, setSelectedIndices }: Targ
     <div>
       <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">성별</p>
       <ul className="mt-[6px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
-        {['아침', '낮', '저녁', '밤', '새벽'].map((area, index) => {
+        {['여성', '남성'].map((area, index) => {
           const isSelected = selectedIndices.includes(index);
           return (
             <FilterItems
@@ -25,7 +26,7 @@ export default function TargetList({ selectedIndices, setSelectedIndices }: Targ
       </ul>
       <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">연령대</p>
       <ul className="mt-[6px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
-        {['아침', '낮', '저녁', '밤', '새벽'].map((area, index) => {
+        {target.map((area, index) => {
           const isSelected = selectedIndices.includes(index);
           return (
             <FilterItems

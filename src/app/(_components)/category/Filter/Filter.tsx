@@ -11,7 +11,6 @@ export default function Filter() {
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null); // 최초 클릭된 필터
   const [filter, setFilter] = useState<IFilter>({
     region: [],
-    type: [],
     reservation: [],
     service: [],
     target: [],

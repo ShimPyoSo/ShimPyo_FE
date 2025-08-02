@@ -4,7 +4,6 @@ import ReservationFilter from './ReservationFilter';
 import ServiceFilter from './ServiceFilter';
 import TargetFilter from './TargetFilter';
 import TimeFilter from './TimeFilter';
-import TypeFilter from './TypeFilter';
 
 interface FilterContentProps {
   selectedFilter: string | null;
@@ -15,7 +14,6 @@ export default function FilterContent({ selectedFilter, setFilter }: FilterConte
   return (
     <div className="pb-[40px]">
       <AreaFilter selectedFilter={selectedFilter} filterKey="지역" setFilter={setFilter} />
-      <TypeFilter selectedFilter={selectedFilter} filterKey="여행지 유형" setFilter={setFilter} />
       <ReservationFilter selectedFilter={selectedFilter} filterKey="예약" setFilter={setFilter} />
       <TimeFilter selectedFilter={selectedFilter} filterKey="주 운영 시간" setFilter={setFilter} />
       <ServiceFilter selectedFilter={selectedFilter} filterKey="제공 서비스" setFilter={setFilter} />

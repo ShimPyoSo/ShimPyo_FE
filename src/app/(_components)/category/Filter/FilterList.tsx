@@ -14,7 +14,6 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter }: Fil
 
   const filterItems: { label: string; key: keyof IFilter }[] = [
     { label: '지역', key: 'region' },
-    { label: '여행지 유형', key: 'type' },
     { label: '예약', key: 'reservation' },
     { label: '주 운영 시간', key: 'time' },
     { label: '제공 서비스', key: 'service' },
