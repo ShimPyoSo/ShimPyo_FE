@@ -2,13 +2,17 @@ import Image from 'next/image';
 import KakaoButton from '../KakaoButton';
 import Link from 'next/link';
 import illustration from '/public/images/icons/illustration/signup.svg';
+import logo from '/public/images/icons/logo.svg';
 
 export default function SignUpComponent() {
   return (
     <div className="h-full bg-w1 flex flex-col justify-between px-[18px] pt-[70px] pb-[50px]">
       <h1>
-        <p className="text-sm text-g1">회원가입</p>
-        <div className="mt-[12px] text-2xl font-semibold">
+        <Link href={'/'}>
+          <Image src={logo} alt="쉼표" width={33} height={33} />
+        </Link>
+
+        <div className="mt-[18px] text-2xl font-semibold">
           가장 <span className="font-[kkubulim] text-gn1 font-normal">편한 방법</span>으로
           <br />
           <span className="font-[kkubulim] text-gn1 font-normal">가입</span>해 보세요
