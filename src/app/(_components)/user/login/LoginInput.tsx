@@ -17,16 +17,16 @@ export default function LoginInput({ register, isLoginFailed }: LoginInputProps)
   return (
     <>
       <input
-        className={`w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-          isLoginFailed ? 'border-r' : 'border-w4'
+        className={`w-full mt-[12px] mb-[8px] p-[16px] bg-w3 rounded-lg border outline-none text-black placeholder:text-g3 ${
+          isLoginFailed ? 'border-r' : 'border-w4 focus:border-gn1'
         }`}
         placeholder="아이디를 입력해 주세요"
         {...register('username', { required: '아이디는 필수입니다.' })}
       />
       <div className="relative">
         <input
-          className={`w-full p-[16px] bg-w3 rounded-lg border outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-            isLoginFailed ? 'border-r' : 'border-w4'
+          className={`w-full p-[16px] bg-w3 rounded-lg border outline-none text-black placeholder:text-g3 ${
+            isLoginFailed ? 'border-r' : 'border-w4 focus:border-gn1'
           }`}
           type={passwordOpen ? 'text' : 'password'}
           placeholder="비밀번호를 입력해 주세요"
