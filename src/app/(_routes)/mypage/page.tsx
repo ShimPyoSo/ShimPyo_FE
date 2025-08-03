@@ -25,7 +25,12 @@ export default function Mypage() {
           </li>
           <li className="border-b border-w6">
             <Link href="/mypage/like" className="block py-[18px] w-full">
-              찜한 목록
+              찜한 여행지
+            </Link>
+          </li>
+          <li className="border-b border-w6">
+            <Link href="/mypage/review" className="block py-[18px] w-full">
+              내가 쓴 후기
             </Link>
           </li>
           <li className="border-b border-w6">

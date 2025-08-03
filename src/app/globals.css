@@ -49,7 +49,7 @@
   /* Red / Yellow / Blue */
   --color-r: #ed9092;
   --color-y: #fee500; /* 카카오 노랑 */
-  --color-b: #658eff;
+  --color-bl: #658eff;
 }
 
 input:-webkit-autofill,

@@ -18,7 +18,9 @@ export const title: { [key: string]: string } = {
   '/find/password': '비밀번호 찾기',
   '/mypage': '마이페이지',
   '/mypage/profile': '계정 관리',
-  '/mypage/like': '찜한 목록',
+  '/mypage/like': '찜한 여행지',
+  '/mypage/review': '내가 쓴 후기',
+  '/mypage/like/course': '맞춤 쉼표 코스',
   '/search': '여행지 찾기',
 };
 

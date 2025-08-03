@@ -42,7 +42,7 @@ export default function WellnessItem({ date, day, weather }: WellnessItemProps) 
           />
           <div className="ml-[8px] flex items-center">
             <span className="flex items-center">
-              최소<p className="text-b font-semibold">&nbsp;{weather.minTemp}°</p>
+              최소<p className="text-bl font-semibold">&nbsp;{weather.minTemp}°</p>
             </span>
             <span className="mx-[4px] text-w6">|</span>
             <span className="flex items-center">
