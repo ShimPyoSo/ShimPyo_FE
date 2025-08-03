@@ -1,3 +1,9 @@
+export interface IError {
+  message?: string;
+  httpStatusCode?: number;
+  name?: string;
+}
+
 export interface ILogin {
   username: string;
   password: string;

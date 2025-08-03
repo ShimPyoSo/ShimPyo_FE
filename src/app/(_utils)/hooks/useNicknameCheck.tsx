@@ -1,6 +1,7 @@
+import axios, { AxiosError } from 'axios';
 import { useRef, useState } from 'react';
 
-import axios from 'axios';
+import { IError } from '../type';
 
 export function useNicknameCheck() {
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
@@ -21,8 +22,11 @@ export function useNicknameCheck() {
         });
         setIsAvailable(true);
       } catch (error) {
-        console.log(error);
-        setIsAvailable(false);
+        const err = error as AxiosError<IError>;
+        if (err.response?.data?.name === 'NICKNAME_DUPLICATED') {
+          setIsAvailable(false);
+        }
+        console.log(err.response?.data?.message);
       }
     }, 500);
   };

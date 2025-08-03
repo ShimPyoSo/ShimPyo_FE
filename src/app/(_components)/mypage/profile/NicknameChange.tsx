@@ -19,8 +19,8 @@ export default function NicknameChange() {
     try {
       await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data);
       updateNickname(nickname);
-    } catch (error) {
-      console.log(error); // error 처리 컴포넌트 구현 후 수정
+    } catch {
+      // error 처리 컴포넌트 구현 후 수정
     }
   };
 
