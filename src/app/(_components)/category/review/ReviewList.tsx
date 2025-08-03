@@ -54,7 +54,7 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
       ) : allReviews.length > 0 ? (
         <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
           {allReviews.map((review: IReview) => (
-            <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} />
+            <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} type="detail" />
           ))}
           {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
           <div ref={observerRef} className="h-10" />

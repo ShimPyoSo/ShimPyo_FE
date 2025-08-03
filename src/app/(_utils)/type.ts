@@ -78,7 +78,7 @@ export type ISpot = {
 
 export type IReview = {
   reviewId: number;
-  nickname: string;
+  nickname?: string;
   createdAt: string;
   contents: string;
   images: string[];

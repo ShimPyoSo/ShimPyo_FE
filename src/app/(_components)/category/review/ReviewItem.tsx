@@ -8,9 +8,18 @@ import ImageList from './ImageList';
 interface ReviewItemProps {
   review: IReview;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  type: 'mypage' | 'detail';
+  setSelectedReviewId?: React.Dispatch<React.SetStateAction<number>>;
+  setIsConfirmOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ReviewItem({ review, setIsOpen }: ReviewItemProps) {
+export default function ReviewItem({
+  review,
+  setIsOpen,
+  type,
+  setSelectedReviewId,
+  setIsConfirmOpen,
+}: ReviewItemProps) {
   const [isMore, setIsMore] = useState(false);
   const [isClamped, setIsClamped] = useState(false);
   const contentRef = useRef<HTMLParagraphElement>(null);
@@ -27,12 +36,27 @@ export default function ReviewItem({ review, setIsOpen }: ReviewItemProps) {
     }
   }, []);
 
+  const handleDeleteClick = () => {
+    setIsConfirmOpen?.(true);
+    setSelectedReviewId?.(review.reviewId);
+  };
+
   return (
     <li className="p-[12px] bg-[#fbfbfb] border-w4 rounded-xl tracking-[-2%]">
-      <div className="flex items-center justify-between mb-[8px]">
-        <p className="font-semibold text-sm text-b1">{review.nickname}</p>
-        <p className="text-xs text-g1">{review.createdAt}</p>
-      </div>
+      {type === 'detail' ? (
+        <div className="flex items-center justify-between mb-[8px]">
+          <p className="font-semibold text-sm text-b1">{review.nickname}</p>
+          <p className="text-xs text-g1">{review.createdAt}</p>
+        </div>
+      ) : (
+        <div className="flex items-center justify-between mb-[8px]">
+          <p className="text-xs text-g1">{review.createdAt}</p>
+          <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
+            삭제하기
+          </button>
+        </div>
+      )}
+
       <p ref={contentRef} className={`text-xs text-b3 leading-[1.6] ${isMore ? '' : 'line-clamp-4'}`}>
         {review.contents}
       </p>
