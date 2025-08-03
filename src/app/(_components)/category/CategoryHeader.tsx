@@ -10,7 +10,7 @@ import prev from '/public/images/category/categoryArrow.svg';
 
 export default function CategoryHeader() {
   const searchParams = useSearchParams();
-  const type = searchParams.get('type') ?? 'default';
+  const type = searchParams.get('type') ?? '';
 
   const router = useRouter();
   const item = categoryList.find((el) => el.href === (type ?? ''));
