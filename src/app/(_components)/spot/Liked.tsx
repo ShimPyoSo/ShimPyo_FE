@@ -27,7 +27,7 @@ export default function Liked({ liked, id }: LikedProps) {
     mutationFn: async () => {
       if (!isLoggedIn) return;
       const res = await axios.patch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/likes`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/tourist`,
         { id },
         {
           withCredentials: true,
