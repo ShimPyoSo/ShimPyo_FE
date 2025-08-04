@@ -4,9 +4,11 @@ import ImageItem from './ImageItem';
 interface ImageInputProps {
   images: string[];
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  setIsImageError: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsImageCountError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ImageInput({ images, setImages }: ImageInputProps) {
+export default function ImageInput({ images, setImages, setIsImageError, setIsImageCountError }: ImageInputProps) {
   return (
     <section className="mt-[60px] tracking-[-2%]">
       <span className="text-gn1 text-sm flex items-baseline">
@@ -16,7 +18,12 @@ export default function ImageInput({ images, setImages }: ImageInputProps) {
 
       <ul className="mt-[16px] grid grid-cols-3 gap-y-[12px] gap-x-[12px]">
         <li>
-          <ImageInputButton images={images} setImages={setImages} />
+          <ImageInputButton
+            images={images}
+            setImages={setImages}
+            setIsImageError={setIsImageError}
+            setIsImageCountError={setIsImageCountError}
+          />
         </li>
 
         {images.map((id) => (

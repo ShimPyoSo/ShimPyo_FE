@@ -22,7 +22,8 @@
     "react-kakao-maps-sdk": "^1.2.0",
     "react-loading-skeleton": "^3.5.0",
     "react-select": "^5.10.1",
-    "tailwind-scrollbar-hide": "^4.0.0"
+    "tailwind-scrollbar-hide": "^4.0.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
