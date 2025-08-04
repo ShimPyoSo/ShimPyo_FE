@@ -17,11 +17,17 @@ export default function KakaoButton() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSuccess = async (data: any) => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/social/login`, {
-        accessToken: data.response.access_token,
-      });
-      login(response.data);
-      router.push(decodeURIComponent(params.get('redirect') ?? '/'));
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/social/login`,
+        {
+          accessToken: data.response.access_token,
+        },
+        { withCredentials: true }
+      );
+      login({ userId: response.data.userId, nickname: response.data.nickname });
+      if (response.data.type === 'signup') {
+        router.push('/signup/additional');
+      } else router.push(decodeURIComponent(params.get('redirect') ?? '/'));
     } catch (error: unknown) {
       handleFailure(error);
     }

@@ -10,16 +10,17 @@ import SignUpModal from './SignUpModal';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function SignUpForm() {
   const { register, handleSubmit, watch, control } = useForm<ISignUp>({ mode: 'onChange' });
+  const router = useRouter();
 
   const [isVerified, setIsVerified] = useState(false);
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [customDomain, setCustomDomain] = useState('');
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
-  const [isFinishOpen, setIsFinishOpen] = useState(false);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +37,7 @@ export default function SignUpForm() {
         username: data.username,
         password: data.password,
       });
-      setIsFinishOpen(true);
+      router.push('/signup/additional');
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
     }
@@ -70,12 +71,7 @@ export default function SignUpForm() {
 
         <SignUpButton isIdChecked={isIdChecked} isVerified={isVerified} />
       </form>
-      <SignUpModal
-        isFinishOpen={isFinishOpen}
-        setIsFinishOpen={setIsFinishOpen}
-        isEmailOpen={isEmailOpen}
-        setIsEmailOpen={setIsEmailOpen}
-      />
+      <SignUpModal isEmailOpen={isEmailOpen} setIsEmailOpen={setIsEmailOpen} />
       {isLoading && <Loader />}
     </>
   );

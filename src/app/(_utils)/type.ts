@@ -26,6 +26,11 @@ export interface ISignUp extends IPassword {
   authCode: string;
 }
 
+export interface IAdditional {
+  gender: 'female' | 'male';
+  birthYear: number;
+}
+
 export interface IFind {
   username?: string;
   email: string;
