@@ -15,7 +15,14 @@ export default function AdditionalForm() {
 
   const onSubmit = async (data: IAdditional) => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/info`, data, { withCredentials: true });
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/info`,
+        {
+          gender: data.gender,
+          birthYear: Number(data.birthYear),
+        },
+        { withCredentials: true }
+      );
       router.push('/');
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
