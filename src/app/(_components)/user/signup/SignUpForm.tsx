@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function SignUpForm() {
-  const { register, handleSubmit, watch, control } = useForm<ISignUp>({ mode: 'onChange' });
+  const { register, handleSubmit, watch, trigger, control } = useForm<ISignUp>({ mode: 'onBlur' });
   const router = useRouter();
 
   const [isVerified, setIsVerified] = useState(false);
@@ -54,7 +54,7 @@ export default function SignUpForm() {
           isIdChecked={isIdChecked}
           setIsIdChecked={setIsIdChecked}
         />
-        <PasswordInput register={register} watch={watch} control={control} />
+        <PasswordInput register={register} watch={watch} control={control} trigger={trigger} />
         <EmailAuth
           register={register}
           setIsVerified={setIsVerified}

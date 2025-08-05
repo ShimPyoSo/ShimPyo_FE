@@ -1,15 +1,17 @@
 'use client';
 
+import { IError, IWithdraw } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
 import { useForm, useFormState } from 'react-hook-form';
 
 import CheckBox from '../../UI/Checkbox';
-import { IWithdraw } from '@/app/(_utils)/type';
 import PasswordCheck from '../../user/PasswordCheck';
-import axios from 'axios';
 import { useState } from 'react';
 
 export default function WithdrawForm() {
-  const { register, watch, handleSubmit, control } = useForm<IWithdraw>();
+  const { register, watch, handleSubmit, control } = useForm<IWithdraw>({
+    mode: 'onBlur',
+  });
   const { isValid } = useFormState({ control });
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
@@ -21,7 +23,13 @@ export default function WithdrawForm() {
         data: { password: data.password },
         withCredentials: true,
       });
-    } catch {
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
+        setIsFailed(true);
+      }
+      console.log(err.response?.data?.message);
+
       setIsFailed(true);
     }
   };

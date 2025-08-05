@@ -12,7 +12,7 @@ const SelectStyles = (hasError: boolean): StylesConfig<DomainOption, false> => {
       ...base,
       backgroundColor: '#fafafa',
       borderRadius: '0.5rem',
-      borderColor: state.isFocused ? '#80a281' : hasError ? '#ed9092' : '#f0f0f0',
+      borderColor: hasError ? '#ed9092' : state.isFocused ? '#80a281' : '#f0f0f0',
       padding: '12px 6px',
       boxShadow: 'none',
       minHeight: '48px',
@@ -22,7 +22,7 @@ const SelectStyles = (hasError: boolean): StylesConfig<DomainOption, false> => {
       color: '#000000',
       outline: 'none',
       '&:hover': {
-        borderColor: state.isFocused ? '#80a281' : hasError ? '#ed9092' : '#f0f0f0',
+        borderColor: hasError ? '#ed9092' : '#80a281',
       },
     }),
     menu: (base) => ({

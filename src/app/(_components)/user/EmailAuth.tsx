@@ -1,13 +1,13 @@
 'use client';
 
 import { FieldValues, Path } from 'react-hook-form';
-import { IDomain, IFind, ISignUp } from '@/app/(_utils)/type';
+import { IDomain, IError, IFind, ISignUp } from '@/app/(_utils)/type';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
 import AuthCodeInput from './AuthCodeInput';
 import EmailAuthInput from './EmailAuthInput';
-import axios from 'axios';
 import { useTimer } from '@/app/(_utils)/hooks/useTimer';
 
 interface EmailAuthInputProps<T extends FieldValues> {
@@ -59,8 +59,12 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/email`, { email: fullEmail, type: type });
       setIsAuthStart(true);
       setIsOpen(true);
-    } catch {
-      setIsEmailError(true);
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'EMAIL_DUPLICATION') {
+        setIsEmailError(true);
+      }
+      console.log(err.response?.data?.message);
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +91,9 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       >
         인증하기
       </button>
-      <p className="mt-[4px] text-xs text-b3">이메일 입력 후 인증을 진행해 주세요</p>
+      <p className={`mt-[4px] text-xs ${isEmailError ? 'text-r' : 'text-b3'}`}>
+        {isEmailError ? '가입되지 않은 이메일이예요' : '이메일 입력 후 인증을 진행해 주세요'}
+      </p>
 
       <AuthCodeInput
         isAuthStart={isAuthStart}

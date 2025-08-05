@@ -62,8 +62,8 @@ export default function IdInput<T extends ISignUp | IFind>({
           </small>
         )}
         <input
-          className={`w-full mt-[12px] p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-            errors.username ? 'border-r' : 'border-w4'
+          className={`w-full mt-[12px] p-[16px] bg-w3 rounded-lg border text-base outline-none text-black placeholder:text-g3 ${
+            errors.username ? 'border-r' : 'border-w4 focus:border-gn1'
           }`}
           placeholder="아이디를 입력해 주세요"
           {...register('username' as Path<T>, {

@@ -13,11 +13,12 @@ export default function ProfileMenu() {
 
   return (
     <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
-      <li onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}>
+      <li>
         <div
           className={`py-[18px] flex justify-between items-center ${
             activeMenu === 'profile' ? '' : 'border-b border-w6'
           }`}
+          onClick={() => setActiveMenu(activeMenu === 'profile' ? null : 'profile')}
         >
           <p>프로필 관리</p>
           <Image
@@ -30,11 +31,12 @@ export default function ProfileMenu() {
         </div>
         {activeMenu === 'profile' && <NicknameChange />}
       </li>
-      <li onClick={() => setActiveMenu(activeMenu === 'password' ? null : 'password')}>
+      <li>
         <div
           className={`py-[18px] flex justify-between items-center ${
             activeMenu === 'password' ? '' : 'border-b border-w6'
           }`}
+          onClick={() => setActiveMenu(activeMenu === 'password' ? null : 'password')}
         >
           <p>비밀번호 관리</p>
           <Image
@@ -49,11 +51,12 @@ export default function ProfileMenu() {
         {activeMenu === 'password' && <PasswordChange />}
       </li>
       <LogoutButton />
-      <li onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}>
+      <li>
         <div
           className={`py-[18px] flex justify-between items-center ${
             activeMenu === 'withdraw' ? '' : 'border-b border-w6'
           }`}
+          onClick={() => setActiveMenu(activeMenu === 'withdraw' ? null : 'withdraw')}
         >
           <p>회원탈퇴</p>
           <Image

@@ -8,7 +8,7 @@ import { useAtom } from 'jotai';
 import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 
 export default function NicknameChange() {
-  const { register, handleSubmit, watch, control } = useForm<{ nickname: string }>({ mode: 'onChange' });
+  const { register, handleSubmit, watch, control } = useForm<{ nickname: string }>({ mode: 'onBlur' });
   const { errors } = useFormState({ control });
   const nickname = watch('nickname');
   const [, updateNickname] = useAtom(updateNicknameAtom);

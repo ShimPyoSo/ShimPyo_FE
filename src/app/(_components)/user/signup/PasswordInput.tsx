@@ -1,18 +1,19 @@
 'use client';
 
-import { Control, UseFormRegister, UseFormWatch, useFormState } from 'react-hook-form';
+import { Control, UseFormRegister, UseFormTrigger, UseFormWatch, useFormState } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 import { ISignUp } from '@/app/(_utils)/type';
 import PasswordCheck from '../PasswordCheck';
-import { useState } from 'react';
 
 interface PasswordInputProps {
   register: UseFormRegister<ISignUp>;
   watch: UseFormWatch<ISignUp>;
   control: Control<ISignUp>;
+  trigger: UseFormTrigger<ISignUp>;
 }
 
-export default function PasswordInput({ register, watch, control }: PasswordInputProps) {
+export default function PasswordInput({ register, watch, control, trigger }: PasswordInputProps) {
   const { errors } = useFormState({ control });
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [passwordConfirmOpen, setPasswordConfirmOpen] = useState(false);
@@ -21,6 +22,11 @@ export default function PasswordInput({ register, watch, control }: PasswordInpu
   const [isPasswordConfirmFocused, setIsPasswordConfirmFocused] = useState(false);
 
   const password = watch('password');
+  const passwordConfirm = watch('passwordConfirm');
+
+  useEffect(() => {
+    if (password && passwordConfirm && !isPasswordConfirmFocused) trigger('passwordConfirm'); // 비밀번호 수정 시 확인 값 재검증
+  }, [password, passwordConfirm, isPasswordConfirmFocused, trigger]);
 
   return (
     <>
@@ -33,8 +39,8 @@ export default function PasswordInput({ register, watch, control }: PasswordInpu
         </small>
         <div className="relative">
           <input
-            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-              errors.password ? 'border-r' : 'border-w4'
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none text-black placeholder:text-g3 ${
+              errors.password ? 'border-r' : 'border-w4 focus:border-gn1'
             }`}
             type={passwordOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"
@@ -46,7 +52,10 @@ export default function PasswordInput({ register, watch, control }: PasswordInpu
               },
             })}
             onFocus={() => setIsPasswordFocused(true)}
-            onBlur={() => setIsPasswordFocused(false)}
+            onBlur={() => {
+              setIsPasswordFocused(false);
+              trigger('password');
+            }}
           />
           <PasswordCheck
             isFocused={isPasswordFocused}
@@ -66,8 +75,8 @@ export default function PasswordInput({ register, watch, control }: PasswordInpu
         </small>
         <div className="relative">
           <input
-            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none focus:border-gn1 text-black placeholder:text-g3 ${
-              errors.passwordConfirm ? 'border-r' : 'border-w4'
+            className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none text-black placeholder:text-g3 ${
+              errors.passwordConfirm ? 'border-r' : 'border-w4  focus:border-gn1'
             }`}
             type={passwordConfirmOpen ? 'text' : 'password'}
             placeholder="비밀번호를 입력해 주세요"

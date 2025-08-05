@@ -1,12 +1,12 @@
 'use client';
 
 import { IFind, IFindResult } from '@/app/(_utils)/type';
+import { useForm, useFormState } from 'react-hook-form';
 
 import EmailAuth from '../EmailAuth';
 import IdInput from '../IdInput';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
-import { useForm } from 'react-hook-form';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
@@ -19,7 +19,8 @@ interface FindFormProps {
 
 export default function FindForm({ setResult, setIsFinded, setIsEmailOpen, setIsLoading }: FindFormProps) {
   const { type } = useParams();
-  const { register, handleSubmit, watch, control } = useForm<IFind>();
+  const { register, handleSubmit, watch, control } = useForm<IFind>({ mode: 'onBlur' });
+  const { isValid } = useFormState({ control });
   const [isVerified, setIsVerified] = useState(false);
   const [customDomain, setCustomDomain] = useState('');
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
@@ -68,7 +69,12 @@ export default function FindForm({ setResult, setIsFinded, setIsEmailOpen, setIs
         />
       </section>
 
-      <button className="w-full bg-gn1 py-[16px] border border-gn5 text-white font-semibold rounded-lg mb-[40px]">
+      <button
+        className={`w-full py-[16px] border font-semibold rounded-lg mb-[40px] ${
+          isValid ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
+        }`}
+        disabled={!isValid}
+      >
         {type === 'id' ? '아이디 찾기' : '비밀번호 재설정 하기'}
       </button>
     </form>
