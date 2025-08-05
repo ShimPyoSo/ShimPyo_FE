@@ -100,3 +100,10 @@ export type IWeeklyWeather = {
   minTemp: number;
   maxTemp: number;
 };
+
+export type IWeather = {
+  rainfall: null | number;
+  temperature: null | number;
+  weather: null | string;
+  humidity: null | number;
+};

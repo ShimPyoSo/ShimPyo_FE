@@ -1,19 +1,13 @@
-'use client';
-
-import { ILocation } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import bad from '/public/images/icons/wellness/dustBad.svg';
 import good from '/public/images/icons/wellness/dustGood.svg';
 import mid from '/public/images/icons/wellness/dustMid.svg';
-import { useFetchDust } from '@/app/(_utils)/hooks/useFetchDust';
 
-interface WellnessFactorProps {
-  location: ILocation | null;
+interface FineDustProps {
+  dust: number | null;
 }
 
-export default function FineDust({ location }: WellnessFactorProps) {
-  const { dust } = useFetchDust(location);
-
+export default function FineDust({ dust }: FineDustProps) {
   return (
     <li className="flex flex-col items-center text-xs">
       <div className="w-[48px] h-[48px] rounded-md border border-gray-300 bg-white mb-[3px] flex justify-center items-center">

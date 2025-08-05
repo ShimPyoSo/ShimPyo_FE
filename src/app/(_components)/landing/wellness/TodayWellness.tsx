@@ -8,7 +8,6 @@ import WellnessFactor from './WellnessFactor';
 import { getAddressFromCoords } from '@/app/(_utils)/hooks/useGetLocation';
 import gps from '/public/images/icons/gps.svg';
 import useKakaoAddress from '@/app/(_utils)/hooks/useKakaoAddress';
-import wellness from '/public/images/icons/wellness/wellness.svg';
 
 export default function TodayWellness() {
   const [location, setLocation] = useState<ILocation | null>(null);
@@ -49,10 +48,6 @@ export default function TodayWellness() {
         <p className="text-sm text-g1">
           {location?.region_1depth_name} {location?.region_2depth_name} {location?.region_3depth_name}
         </p>
-      </div>
-
-      <div className="mt-[40px]">
-        <Image src={wellness} alt="wellness" width={344} height={150} />
       </div>
       <WellnessFactor location={location} />
     </section>

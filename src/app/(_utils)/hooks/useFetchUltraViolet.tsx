@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export function useFetchUltraViolet() {
-  const [ultraviolet, setUltraviolet] = useState(0);
+  const [ultraviolet, setUltraviolet] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchDust = async () => {

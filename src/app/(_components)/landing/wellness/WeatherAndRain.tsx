@@ -1,17 +1,19 @@
 'use client';
 
 import Discomfort from './Discomfort';
+import { IWeather } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import cloudy from '/public/images/icons/wellness/weatherCloudy.svg';
 import precipitation from '/public/images/icons/wellness/precipitation.svg';
 import rain from '/public/images/icons/wellness/weatherRain.svg';
 import snow from '/public/images/icons/wellness/weatherSnow.svg';
 import sunny from '/public/images/icons/wellness/weatherSunny.svg';
-import { useFetchWeather } from '@/app/(_utils)/hooks/useFetchWeather';
 
-export default function WeatherAndRain() {
-  const { weather } = useFetchWeather();
+interface WeatherAndRainProps {
+  weather: IWeather;
+}
 
+export default function WeatherAndRain({ weather }: WeatherAndRainProps) {
   return (
     <>
       <li className="flex flex-col items-center text-xs">

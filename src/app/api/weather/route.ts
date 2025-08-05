@@ -60,7 +60,7 @@ export async function GET(req: Request) {
   const sky = items.find((i: WeatherItem) => i.category === 'SKY')?.obsrValue || null;
   const humidity = items.find((i: WeatherItem) => i.category === 'REH')?.obsrValue || null;
 
-  const weather = pty !== null ? getWeatherDescription(pty, sky) : '정보 없음';
+  const weather = pty !== null ? getWeatherDescription(pty, sky) : '알 수 없음';
 
   const result = {
     temperature: temperature !== null ? Number(temperature) : null,
