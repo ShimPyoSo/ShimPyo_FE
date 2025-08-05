@@ -7,7 +7,7 @@ interface SignUpButtonProps {
 
 export default function SignUpButton({ isVerified, isIdChecked }: SignUpButtonProps) {
   return (
-    <div className="py-[12px] absolute bottom-0 left-0 w-full z-10 bg-w1 flex flex-col items-center">
+    <div className="mt-[30px] py-[20px] w-full bg-w1 flex flex-col items-center">
       <button
         type="submit"
         className={`w-full py-[16px] rounded-lg border font-semibold ${
