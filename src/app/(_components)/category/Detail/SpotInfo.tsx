@@ -1,3 +1,4 @@
+import { ISpot } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import Link from 'next/link';
 import call from '/public/images/icons/spot/call.svg';
@@ -11,10 +12,7 @@ const MapRender = dynamic(() => import('../../spot/MapRender'), {
   ssr: false,
 });
 
-export default function SpotInfo() {
-  const latitude = 37.5665;
-  const longitude = 126.978;
-
+export default function SpotInfo({ spot }: { spot: ISpot }) {
   return (
     <ul className="mt-[16px] px-[16px]">
       <li className="py-[12px] border-b border-g4">
@@ -22,15 +20,17 @@ export default function SpotInfo() {
           <Image src={location} alt="장소" width={14} height={14} />
           <p className="text-b3 text-sm tracking-[-2%]">장소</p>
         </div>
-        <p className="mt-[5px] mb-[12px] text-xs text-g1 tracking-[-2%]">대구 중구 교동1길 16 3층 우측호수</p>
-        <MapRender latitude={latitude} longitude={longitude} />
+        <p className="mt-[5px] mb-[12px] text-xs text-g1 tracking-[-2%]">{spot.address || '정보 없음'}</p>
+        {spot.latitude !== undefined && spot.longitude !== undefined && (
+          <MapRender latitude={spot.latitude} longitude={spot.longitude} />
+        )}
       </li>
       <li className="py-[12px] border-b border-g4">
         <div className="flex items-center gap-[4px]">
           <Image src={time} alt="운영시간" width={14} height={14} />
           <p className="text-b3 text-sm tracking-[-2%]">운영시간</p>
         </div>
-        <p className="mt-[5px] text-xs text-g1 tracking-[-2%]">매일 9:00 - 20:00</p>
+        <p className="mt-[5px] text-xs text-g1 tracking-[-2%]">{spot.operationTime}</p>
       </li>
       <li className="py-[12px] border-b border-g4">
         <div className="flex items-center gap-[4px]">
@@ -38,7 +38,7 @@ export default function SpotInfo() {
           <p className="text-b3 text-sm tracking-[-2%]">문의</p>
         </div>
         <Link href={`tel:05312345678`} className="mt-[5px] text-xs text-g1 tracking-[-2%]">
-          053-1234-5678
+          {spot.tel}
         </Link>
       </li>
       <li className="py-[12px] border-b border-g4">

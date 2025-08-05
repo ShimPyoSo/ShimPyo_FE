@@ -85,6 +85,11 @@ export type ISpot = {
   isLiked?: boolean;
   operationTime?: string;
   address?: string;
+  tel?: string | null;
+  longitude?: number;
+  latitude?: number;
+  homepage?: string;
+  reservation?: string;
 };
 
 export type IReview = {
