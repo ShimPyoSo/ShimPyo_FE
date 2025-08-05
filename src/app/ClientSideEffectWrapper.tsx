@@ -1,18 +1,22 @@
 'use client';
 
+import { IError, IMember } from './(_utils)/type';
+import axios, { AxiosError } from 'axios';
 import { hydratedAtom, isHydratedAtom, isLoggedInAtom, loginAtom } from './(_store)/auth';
 import { useAtom, useAtomValue } from 'jotai';
+import { useEffect, useState } from 'react';
 
-import { IMember } from './(_utils)/type';
-import axios from 'axios';
-import { useEffect } from 'react';
+import Alert from './(_components)/UI/Alert';
 import { useNavigationHistory } from './(_utils)/hooks/useNavigationHistory';
+import { useRouter } from 'next/navigation';
 
 export default function ClientSideEffectWrapper() {
   const [, setHydrated] = useAtom(hydratedAtom);
   const isHydrated = useAtomValue(isHydratedAtom);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
   const [, login] = useAtom(loginAtom);
+  const [isSessionExpired, setIsSessionExpired] = useState(false);
+  const router = useRouter();
   useNavigationHistory(); // 이전 페이지 관리
 
   useEffect(() => {
@@ -31,7 +35,12 @@ export default function ClientSideEffectWrapper() {
           );
           login(response.data);
         } catch (error) {
-          console.log(error); // 추후 error 처리 수정
+          const err = error as AxiosError<IError>;
+          if (err.response?.data?.name === 'INVALID_REFRESH_TOKEN') {
+            localStorage.removeItem('isRememberMe');
+            setIsSessionExpired(true);
+          }
+          console.log(err.response?.data?.message);
         }
       };
 
@@ -39,5 +48,19 @@ export default function ClientSideEffectWrapper() {
     }
   }, [isHydrated, isLoggedIn, login]);
 
-  return null;
+  return (
+    <>
+      {isSessionExpired && (
+        <Alert
+          title="로그인 만료"
+          description={'세션이 만료되어 로그아웃되었습니다.\n로그인 페이지로 이동합니다.'}
+          confirmText="확인"
+          setIsOpen={setIsSessionExpired}
+          onConfirm={() => {
+            router.push('/login');
+          }}
+        />
+      )}
+    </>
+  );
 }
