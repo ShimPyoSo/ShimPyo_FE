@@ -1,17 +1,19 @@
 'use client';
 
+import { IAdditional, IError } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
 import { useForm, useFormState } from 'react-hook-form';
 
 import BirthYearInput from './BirthYearInput';
 import GenderInput from './GenderInput';
-import { IAdditional } from '@/app/(_utils)/type';
-import axios from 'axios';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useRouter } from 'next/navigation';
 
 export default function AdditionalForm() {
   const { register, handleSubmit, watch, control } = useForm<IAdditional>({ mode: 'onChange' });
   const { isValid } = useFormState({ control });
   const router = useRouter();
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const onSubmit = async (data: IAdditional) => {
     try {
@@ -25,7 +27,24 @@ export default function AdditionalForm() {
       );
       router.push('/');
     } catch (error) {
-      console.log(error); // error 처리 컴포넌트 구현 후 수정
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/info`,
+            {
+              gender: data.gender,
+              birthYear: Number(data.birthYear),
+            },
+            { withCredentials: true }
+          );
+          router.push('/');
+        } catch {
+          // reissue 후 에러처리
+        }
+      }
+      console.log(err.response?.data?.message);
     }
   };
 

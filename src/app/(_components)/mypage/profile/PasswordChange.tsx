@@ -4,7 +4,9 @@ import { IError, IPasswordChange } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
 import { useForm, useFormState } from 'react-hook-form';
 
+import PasswordDescription from './PasswordDescription';
 import PasswordInput from './PasswordInput';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useLogout } from '@/app/(_utils)/hooks/useLogout';
 import { useState } from 'react';
 
@@ -12,8 +14,9 @@ export default function PasswordChange() {
   const { register, handleSubmit, watch, trigger, control } = useForm<IPasswordChange>({
     mode: 'onBlur',
   });
-  const { errors, isValid } = useFormState({ control });
+  const { isValid } = useFormState({ control });
   const { handleLogout } = useLogout();
+  const { handleAccessExpired } = useHandleTokenExpired();
   const [isPasswordError, setIsPasswordError] = useState(false);
 
   const onSubmit = async (data: IPasswordChange) => {
@@ -32,6 +35,22 @@ export default function PasswordChange() {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
         setIsPasswordError(true);
+      } else if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.put(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/password`,
+            {
+              nowPassword: data.nowPassword,
+              newPassword: data.password,
+              checkNewPassword: data.passwordConfirm,
+            },
+            { withCredentials: true }
+          );
+          handleLogout();
+        } catch {
+          // reissue 이후 에러처리
+        }
       }
       console.log(err.response?.data?.message);
     }
@@ -41,23 +60,7 @@ export default function PasswordChange() {
     <section className="bg-w3 px-[20px] py-[16px]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">비밀번호 변경</h3>
-        <p
-          className={
-            errors.password?.message === '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.' ||
-            errors.passwordConfirm?.message === '비밀번호가 일치하지 않습니다.' ||
-            errors.password?.message === '기존 비밀번호로 변경할 수 없습니다.'
-              ? 'text-r'
-              : `text-g1`
-          }
-        >
-          {errors.password?.message === '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
-            ? '비밀번호를 양식에 맞춰 다시 설정해 주세요'
-            : errors.passwordConfirm?.message === '비밀번호가 일치하지 않습니다.'
-            ? '비밀번호가 일치하지 않아요'
-            : errors.password?.message === '기존 비밀번호로 변경할 수 없습니다.'
-            ? '기존 비밀번호와 다른 비밀번호를 입력해 주세요.'
-            : '8글자 이상의 영문, 특수문자, 숫자 조합으로 설정해요'}
-        </p>
+        <PasswordDescription control={control} />
         <PasswordInput
           register={register}
           watch={watch}

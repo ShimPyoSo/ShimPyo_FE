@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 interface ModalProps {
   title: string;
   description: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: (value: boolean) => void;
   children: React.ReactNode;
   type: 'alert' | 'confirm';
 }

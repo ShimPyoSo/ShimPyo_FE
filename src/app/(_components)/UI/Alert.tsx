@@ -4,7 +4,7 @@ interface ConfirmProps {
   title: string;
   description: string;
   confirmText: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: (value: boolean) => void;
   onConfirm: () => void;
 }
 

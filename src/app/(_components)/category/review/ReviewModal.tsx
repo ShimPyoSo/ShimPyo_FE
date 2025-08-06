@@ -1,6 +1,9 @@
+import axios, { AxiosError } from 'axios';
+
 import Alert from '@/app/(_components)/UI/Alert';
 import Confirm from '@/app/(_components)/UI/Confirm';
-import axios from 'axios';
+import { IError } from '@/app/(_utils)/type';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
@@ -31,6 +34,7 @@ export default function ReviewModal({
 }: ReviewModalProps) {
   const { id } = useParams();
   const router = useRouter();
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const handleUplodaReview = async () => {
     try {
@@ -45,7 +49,25 @@ export default function ReviewModal({
       );
       setIsAlertOpen(true);
     } catch (error) {
-      console.log(error); // 리뷰 등록 실패 시 오류 추후 구현
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews`,
+            {
+              id,
+              images: images.length === 0 ? null : images,
+              contents,
+            },
+            { withCredentials: true }
+          );
+          setIsAlertOpen(true);
+        } catch {
+          // reissue 이후 에러처리
+        }
+      }
+      console.log(err.response?.data?.message);
     }
   };
 

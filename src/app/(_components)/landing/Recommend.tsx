@@ -1,22 +1,42 @@
 'use client';
 
+import { IError, ISpot } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
+
 import Carousel from './Carousel';
-import { ISpot } from '@/app/(_utils)/type';
 import SpotItem from './SpotItem';
 import SpotSkeleton from './SpotSkeleton';
-import axios from 'axios';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import { useAtomValue } from 'jotai';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useQuery } from '@tanstack/react-query';
 
 export default function Recommend() {
   const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const fetchSpots = async (): Promise<ISpot[]> => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/main/recommends`, {
-      withCredentials: isLoggedIn,
-    });
-    return res.data;
+    try {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/main/recommends`, {
+        withCredentials: isLoggedIn,
+      });
+      return res.data;
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/main/likes`, {
+            withCredentials: true,
+          });
+          return res.data;
+        } catch {
+          return [];
+        }
+      }
+      console.log(err.response?.data?.message);
+      return [];
+    }
   };
 
   const { data: spots = [], isLoading } = useQuery({

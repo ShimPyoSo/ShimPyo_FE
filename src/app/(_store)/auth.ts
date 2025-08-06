@@ -42,3 +42,11 @@ export const hydratedAtom = atom(
     set(isHydratedAtom, true);
   }
 );
+
+export const isSessionExpiredAtom = atom(false);
+export const sessionExpiredAtom = atom(
+  (get) => get(isSessionExpiredAtom),
+  (_get, set, newValue: boolean) => {
+    set(isSessionExpiredAtom, newValue);
+  }
+);

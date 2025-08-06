@@ -6,6 +6,7 @@ import { useForm, useFormState } from 'react-hook-form';
 
 import CheckBox from '../../UI/Checkbox';
 import PasswordCheck from '../../user/PasswordCheck';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useState } from 'react';
 
 export default function WithdrawForm() {
@@ -13,6 +14,7 @@ export default function WithdrawForm() {
     mode: 'onBlur',
   });
   const { isValid } = useFormState({ control });
+  const { handleAccessExpired } = useHandleTokenExpired();
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
@@ -27,6 +29,16 @@ export default function WithdrawForm() {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
         setIsFailed(true);
+      } else if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth`, {
+            data: { password: data.password },
+            withCredentials: true,
+          });
+        } catch {
+          // reissue 이후 에러처리
+        }
       }
       console.log(err.response?.data?.message);
 
