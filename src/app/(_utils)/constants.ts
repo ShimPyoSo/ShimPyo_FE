@@ -23,6 +23,7 @@ export const title: { [key: string]: string } = {
   '/mypage/review': '내가 쓴 후기',
   '/mypage/like/course': '맞춤 쉼표 코스',
   '/search': '여행지 찾기',
+  '/mypage/like/recent': '최근 본 여행지',
 };
 
 export const notRendering = [
