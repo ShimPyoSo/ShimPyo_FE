@@ -61,7 +61,7 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
         </ul>
       ) : (
         <div className="flex flex-col justify-center items-center h-[calc(100vh-120px)]">
-          <NoReview />
+          <NoReview main="가장 먼저 후기를 남겨보세요!" description="아직 방문객 후기가 없어요" />
         </div>
       )}
     </>

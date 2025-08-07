@@ -5,7 +5,6 @@ import { IReview } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import ImageModal from '../../image/ImageModal';
 import Link from 'next/link';
-import NoReview from '../NoReview';
 import ReviewItem from './ReviewItem';
 import ReviewSkeleton from './ReviewSkeleton';
 import arrow from '/public/images/icons/arrow.svg';
@@ -41,20 +40,18 @@ export default function Review() {
               <Image className="rotate-90" src={arrow} alt="전체보기" width={16} height={16} />
             </Link>
           </div>
-          <small className="text-g1">쉼표 유저들의 생생한 방문 후기를 들어보세요</small>
+          <small className="text-g1">
+            {isLoading || reviews.length > 0
+              ? '쉼표 유저들의 생생한 방문 후기를 들어보세요'
+              : '아직 방문객 후기가 없어요, 가장 먼저 등록해 보세요!'}
+          </small>
         </div>
         <Carousel>
           <ul className="mt-[16px] px-[16px] flex gap-[12px] flex-nowrap w-max">
-            {isLoading ? (
-              Array.from({ length: 4 }).map((_, i) => <ReviewSkeleton key={i} />)
-            ) : reviews.length === 0 ? (
-              <div className="mt-[12px] w-[350px] flex flex-col justify-center items-center">
-                <NoReview />
-              </div>
-            ) : (
-              Array.isArray(reviews) &&
-              reviews.map((review) => <ReviewItem setIsOpen={setIsOpen} review={review} key={review.reviewId} />)
-            )}
+            {isLoading
+              ? Array.from({ length: 4 }).map((_, i) => <ReviewSkeleton key={i} />)
+              : reviews.length > 0 &&
+                reviews.map((review) => <ReviewItem setIsOpen={setIsOpen} review={review} key={review.reviewId} />)}
           </ul>
         </Carousel>
       </section>
