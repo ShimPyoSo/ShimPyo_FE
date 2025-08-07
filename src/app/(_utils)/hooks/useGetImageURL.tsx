@@ -25,12 +25,16 @@ export function useGetImageURL({ setIsImageError }: UseGetImageURLProps) {
       const imageName = uuidv4();
 
       try {
-        const postResponse = await axios.post<{ uploadUrl: string }>(`${process.env.NEXT_PUBLIC_BASE_URL}/image`, {
-          fileName: imageName,
-          fileSize: image.size,
-        });
+        const response = await axios.post<{ uploadUrl: string }>(
+          `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/image`,
+          {
+            fileName: imageName,
+            fileSize: image.size,
+          },
+          { withCredentials: true }
+        );
 
-        const uploadUrl = postResponse.data.uploadUrl;
+        const uploadUrl = response.data.uploadUrl;
 
         await axios.put(uploadUrl, image, {
           headers: {
@@ -38,7 +42,7 @@ export function useGetImageURL({ setIsImageError }: UseGetImageURLProps) {
           },
         });
 
-        return `https://${process.env.NEXT_PUBLIC_IMAGE_BUCKET}.s3.amazonaws.com/${imageName}`;
+        return `https://shimpyo.s3.amazonaws.com/${imageName}`;
       } catch {
         setIsImageError(true);
       }
