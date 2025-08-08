@@ -21,7 +21,7 @@ export default function TabBar() {
   if (!rendering.includes(pathname) && !pathname.startsWith('/search')) return null;
 
   return (
-    <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px]">
+    <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px] z-[100]">
       <ul className="flex justify-between items-center text-sm text-b3 pt-[20px] pb-[20px]">
         <TabItem href="/" icon={home} activeIcon={homeActive} label="홈" active={pathname === '/'} />
         <TabItem

@@ -1,3 +1,9 @@
+import Result from '@/app/(_components)/test/Result.';
+
 export default function TestResults() {
-  return <div className="bg-w1 pl-[16px] pb-[70px]"></div>;
+  return (
+    <div className="bg-w1">
+      <Result />
+    </div>
+  );
 }
