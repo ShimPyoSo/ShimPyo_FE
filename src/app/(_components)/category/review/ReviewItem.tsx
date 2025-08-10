@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { IReview } from '@/app/(_utils)/type';
 import ImageList from './ImageList';
+import { useAtomValue } from 'jotai';
+import { userAtom } from '@/app/(_store)/auth';
 
 interface ReviewItemProps {
   review: IReview;
@@ -22,6 +24,7 @@ export default function ReviewItem({
 }: ReviewItemProps) {
   const [isMore, setIsMore] = useState(false);
   const [isClamped, setIsClamped] = useState(false);
+  const user = useAtomValue(userAtom);
   const contentRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
@@ -43,19 +46,17 @@ export default function ReviewItem({
 
   return (
     <li className="p-[12px] bg-[#fbfbfb] border-w4 rounded-xl tracking-[-2%]">
-      {type === 'detail' ? (
-        <div className="flex items-center justify-between mb-[8px]">
-          <p className="font-semibold text-sm text-b1">{review.nickname}</p>
+      <div className="flex items-center justify-between mb-[8px]">
+        {type === 'detail' && <p className="font-semibold text-sm text-b1">{review.nickname}</p>}
+        <div className="flex items-center gap-[6px]">
           <p className="text-xs text-g1">{review.createdAt}</p>
+          {true && (
+            <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
+              삭제하기
+            </button>
+          )}
         </div>
-      ) : (
-        <div className="flex items-center justify-between mb-[8px]">
-          <p className="text-xs text-g1">{review.createdAt}</p>
-          <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
-            삭제하기
-          </button>
-        </div>
-      )}
+      </div>
 
       <p ref={contentRef} className={`text-xs text-b3 leading-[1.6] ${isMore ? '' : 'line-clamp-4'}`}>
         {review.contents}
