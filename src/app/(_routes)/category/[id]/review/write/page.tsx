@@ -1,5 +1,6 @@
 'use client';
 
+import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewForm from '@/app/(_components)/category/review/ReviewForm';
 import ReviewModal from '@/app/(_components)/category/review/ReviewModal';
 import { useState } from 'react';
@@ -13,7 +14,7 @@ export default function ReviewWrite() {
   const [contents, setContents] = useState<string>('');
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="min-h-full bg-w1 px-[16px]">
         <ReviewForm
           setIsOpen={setIsConfirmOpen}
@@ -37,6 +38,6 @@ export default function ReviewWrite() {
         images={images}
         contents={contents}
       />
-    </>
+    </ProtectedRoute>
   );
 }

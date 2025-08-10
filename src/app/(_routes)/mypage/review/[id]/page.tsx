@@ -2,6 +2,7 @@
 
 import Confirm from '@/app/(_components)/UI/Confirm';
 import ImageModal from '@/app/(_components)/image/ImageModal';
+import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewList from '@/app/(_components)/mypage/review/ReviewList';
 import SpotInfo from '@/app/(_components)/mypage/review/SpotInfo';
 import { useState } from 'react';
@@ -17,7 +18,7 @@ export default function Review() {
   };
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="min-h-full bg-w1 px-[16px]">
         <SpotInfo />
         <ReviewList
@@ -37,6 +38,6 @@ export default function Review() {
         />
       )}
       {isOpen && <ImageModal setIsOpen={setIsOpen} />}
-    </>
+    </ProtectedRoute>
   );
 }
