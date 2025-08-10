@@ -50,7 +50,7 @@ export default function ReviewItem({
         {type === 'detail' && <p className="font-semibold text-sm text-b1">{review.nickname}</p>}
         <div className="flex items-center gap-[6px]">
           <p className="text-xs text-g1">{review.createdAt}</p>
-          {true && (
+          {review.nickname === user?.nickname && (
             <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
               삭제하기
             </button>
