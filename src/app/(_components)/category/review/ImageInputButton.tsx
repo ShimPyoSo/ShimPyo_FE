@@ -1,9 +1,10 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
+
 import Image from 'next/image';
 import camera from '/public/images/icons/camera.svg';
 import { useGetImageURL } from '@/app/(_utils)/hooks/useGetImageURL';
-import { useRef } from 'react';
 
 interface ImageInputProps {
   images: string[];
@@ -47,6 +48,10 @@ export default function ImageInputButton({
 
     e.target.value = '';
   };
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
   return (
     <>
