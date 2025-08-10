@@ -3,14 +3,6 @@
 import { NextResponse } from 'next/server';
 import { dfs_xy_conv } from '@/app/(_utils)/convertGrid';
 import { getBaseDateAndTime } from '@/app/(_utils)/getBaseDateAndTime';
-import getTmFc from '@/app/(_utils)/getTmFc';
-
-const simplifyWeather = (desc: string): '맑음' | '흐림' | '비' | '눈' => {
-  if (desc.includes('비')) return '비';
-  if (desc.includes('눈')) return '눈';
-  if (desc.includes('흐림') || desc.includes('구름')) return '흐림';
-  return '맑음';
-};
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -22,9 +14,9 @@ export async function GET(req: Request) {
   const base = getBaseDateAndTime();
 
   // 1~3일차 단기예보 조회
-  let url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${base.baseDate}&base_time=${base.baseTime}&nx=${nx}&ny=${ny}`;
-  let res = await fetch(url);
-  let data = await res.json();
+  const url = `https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${process.env.WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=1000&dataType=JSON&base_date=${base.baseDate}&base_time=${base.baseTime}&nx=${nx}&ny=${ny}`;
+  const res = await fetch(url);
+  const data = await res.json();
 
   const items = data.response.body.items.item;
   const dates: string[] = [];
@@ -70,40 +62,6 @@ export async function GET(req: Request) {
 
     weatherList.push({
       weather: desc,
-      minTemp,
-      maxTemp,
-    });
-  }
-
-  // 4~7일차 중기예보 (육상날씨) 조회
-  const tmfc = getTmFc();
-  url = `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=${process.env.WEEKLY_WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=10&dataType=JSON&regId=11B00000&tmFc=${tmfc}`;
-  res = await fetch(url);
-  data = await res.json();
-  const midItem = data.response.body.items.item[0];
-
-  // 4~7일차 중기예보 (온도) 조회
-  url = `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?serviceKey=${process.env.WEEKLY_WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=10&dataType=JSON&regId=11B10101&tmFc=${tmfc}`;
-  res = await fetch(url);
-  data = await res.json();
-
-  const tempItem = data.response.body.items.item[0];
-
-  for (let day = 4; day <= 7; day++) {
-    const wfAm = midItem[`wf${day}Am`] ?? '';
-    const wfPm = midItem[`wf${day}Pm`] ?? '';
-
-    const combined = wfAm === wfPm ? wfAm : wfPm;
-    const simplifiedWeather = simplifyWeather(combined);
-
-    const minTempKey = `taMin${day}`;
-    const maxTempKey = `taMax${day}`;
-
-    const minTemp = tempItem[minTempKey] !== undefined ? Number(tempItem[minTempKey]) : NaN;
-    const maxTemp = tempItem[maxTempKey] !== undefined ? Number(tempItem[maxTempKey]) : NaN;
-
-    weatherList.push({
-      weather: simplifiedWeather,
       minTemp,
       maxTemp,
     });
