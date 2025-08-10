@@ -8,7 +8,9 @@ import Review from '@/app/(_components)/category/Detail/Review';
 import SpotInfo from '@/app/(_components)/category/Detail/SpotInfo';
 import Wellness from '@/app/(_components)/category/Detail/Wellness';
 import axios from 'axios';
+import { isLoggedInAtom } from '@/app/(_store)/auth';
 import share from '/public/images/icons/share.svg';
+import { useAtomValue } from 'jotai';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useRecentSpots } from '@/app/(_utils)/hooks/useRecentSpots';
@@ -17,10 +19,13 @@ import { useState } from 'react';
 export default function SpotDetail() {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
   useRecentSpots();
 
   const fetchSpotInfo = async (): Promise<ISpot> => {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/detail?id=${id}`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/detail?id=${id}`, {
+      withCredentials: isLoggedIn,
+    });
     return res.data;
   };
 
