@@ -26,8 +26,8 @@ export default function ImageInput({ images, setImages, setIsImageError, setIsIm
           />
         </li>
 
-        {images.map((id) => (
-          <ImageItem key={id} />
+        {images.map((img, id) => (
+          <ImageItem key={id} img={img} />
         ))}
       </ul>
     </section>
