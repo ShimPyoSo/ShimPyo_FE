@@ -11,12 +11,12 @@ import {
   sessionExpiredAtom,
 } from './(_store)/auth';
 import { useAtom, useAtomValue } from 'jotai';
+import { usePathname, useRouter } from 'next/navigation';
 
 import Alert from './(_components)/UI/Alert';
 import { useEffect } from 'react';
 import { useHandleTokenExpired } from './(_utils)/hooks/useHandleTokenExpired';
 import { useNavigationHistory } from './(_utils)/hooks/useNavigationHistory';
-import { useRouter } from 'next/navigation';
 
 export default function ClientSideEffectWrapper() {
   const [, setHydrated] = useAtom(hydratedAtom);
@@ -28,11 +28,16 @@ export default function ClientSideEffectWrapper() {
   const { handleRefreshExpired } = useHandleTokenExpired();
 
   const router = useRouter();
+  const pathname = usePathname();
   useNavigationHistory(); // 이전 페이지 관리
 
   useEffect(() => {
     setHydrated();
   }, [setHydrated]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const isRememberMe = localStorage.getItem('isRememberMe') === 'true';
