@@ -109,6 +109,14 @@ export type IReviewSpot = {
   counts: number;
 };
 
+export type IReviewResponse = {
+  reviews: IReview[];
+  touristId: number;
+  title: string;
+  region: string;
+  address: string;
+};
+
 export type IWeeklyWeather = {
   weather: string;
   minTemp: number;

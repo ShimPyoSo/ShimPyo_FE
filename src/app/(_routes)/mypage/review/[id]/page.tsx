@@ -1,16 +1,45 @@
 'use client';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
+import { IReview } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
 import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewList from '@/app/(_components)/mypage/review/ReviewList';
 import SpotInfo from '@/app/(_components)/mypage/review/SpotInfo';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+
+interface ReviewResponse {
+  reviews: IReview[];
+  touristId: number;
+  title: string;
+  region: string;
+  address: string;
+}
 
 export default function Review() {
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number>(0); // 삭제 클릭된 리뷰 아이디
+
+  const { id } = useParams();
+  const fetchReviews = async (): Promise<ReviewResponse> => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return res.data;
+  };
+
+  const { data, isLoading } = useQuery<ReviewResponse>({
+    queryKey: ['spotReviews', id],
+    queryFn: fetchReviews,
+    refetchOnWindowFocus: false,
+  });
 
   const handleDeleteReview = () => {
     // 삭제 API 추가되면 수정 예정
@@ -20,7 +49,7 @@ export default function Review() {
   return (
     <ProtectedRoute>
       <div className="h-full bg-w1 px-[16px]">
-        <SpotInfo />
+        {data && <SpotInfo info={data} />}
         <div className="mt-[18px] flex justify-end">
           <button
             className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-sm tracking-[-2%] font-semibold"
@@ -31,6 +60,8 @@ export default function Review() {
         </div>
 
         <ReviewList
+          isLoading={isLoading}
+          reviews={data?.reviews}
           setIsConfirmOpen={setIsConfirmOpen}
           setIsOpen={setIsOpen}
           setSelectedReviewId={setSelectedReviewId}
