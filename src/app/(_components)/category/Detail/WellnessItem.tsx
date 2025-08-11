@@ -6,6 +6,8 @@ export default function WellnessItem() {
   const weekData = getWeeklyDate();
   const { weather } = useFetchWeeklyWeather();
 
+  console.log(weather);
+
   return (
     <ul>
       {weekData.map(({ date, day }, idx) => (
