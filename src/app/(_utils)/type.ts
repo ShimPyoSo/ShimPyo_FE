@@ -119,8 +119,9 @@ export type IReviewResponse = {
 
 export type IWeeklyWeather = {
   weather: string;
-  minTemp: number;
-  maxTemp: number;
+  date: string;
+  time: number;
+  temp: number;
 };
 
 export type IWeather = {

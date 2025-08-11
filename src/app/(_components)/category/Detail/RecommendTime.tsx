@@ -36,7 +36,7 @@ export default function RecommendTime({ weather }: WellnessItemProps) {
             height={20}
           />
           <span className="ml-[6px] text-xs text-b3 flex">
-            맑음<p className="font-semibold">&nbsp;{weather.maxTemp}°</p>
+            맑음<p className="font-semibold">&nbsp;{weather.temp}°</p>
           </span>
         </div>
         <span className="mx-[6px] text-w6">|</span>

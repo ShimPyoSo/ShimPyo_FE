@@ -1,12 +1,9 @@
+import { IWeeklyWeather } from '@/app/(_utils)/type';
 import RecommendTime from './RecommendTime';
 import getWeeklyDate from '@/app/(_utils)/getWeeklyDate';
-import { useFetchWeeklyWeather } from '@/app/(_utils)/hooks/useFetchWeeklyWeather';
 
-export default function WellnessItem() {
+export default function WellnessItem({ weather }: { weather: IWeeklyWeather[] }) {
   const weekData = getWeeklyDate();
-  const { weather } = useFetchWeeklyWeather();
-
-  console.log(weather);
 
   return (
     <ul>
@@ -17,9 +14,9 @@ export default function WellnessItem() {
             <p className="text-g1">{date}</p>
           </div>
           <ul className="flex flex-col gap-[8px]">
-            <RecommendTime weather={weather[idx + 1]} />
-            <RecommendTime weather={weather[idx + 1]} />
-            <RecommendTime weather={weather[idx + 1]} />
+            <RecommendTime weather={weather[idx]} />
+            <RecommendTime weather={weather[idx]} />
+            <RecommendTime weather={weather[idx]} />
           </ul>
         </li>
       ))}
