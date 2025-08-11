@@ -19,8 +19,17 @@ export default function Review() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-full bg-w1 px-[16px]">
+      <div className="h-full bg-w1 px-[16px]">
         <SpotInfo />
+        <div className="mt-[18px] flex justify-end">
+          <button
+            className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-sm tracking-[-2%] font-semibold"
+            onClick={() => setIsOpen(true)}
+          >
+            전체 삭제하기
+          </button>
+        </div>
+
         <ReviewList
           setIsConfirmOpen={setIsConfirmOpen}
           setIsOpen={setIsOpen}

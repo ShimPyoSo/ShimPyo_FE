@@ -1,5 +1,10 @@
 import { IReview } from '@/app/(_utils)/type';
+import NoReview from '../../category/NoReview';
 import ReviewItem from '@/app/(_components)/category/review/ReviewItem';
+import ReviewSkeleton from '../../category/review/ReviewSkeleton';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 
 interface ReviewListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,30 +13,43 @@ interface ReviewListProps {
 }
 
 export default function ReviewList({ setIsOpen, setIsConfirmOpen, setSelectedReviewId }: ReviewListProps) {
-  const review: IReview = {
-    reviewId: 1,
-    createdAt: '2025.08.01',
-    contents:
-      '텍스트를 입력해 주세요.우선 사진과 똑같이 잘 꾸며져있고 가격 대비 만족도가 너무 좋았어요! 사진과 같이 예쁜 소품들과 빔프로젝터가 있어서 분위기 내기에도 좋았고, 제가 정말 기계치인데 빔프로젝터 연결 방법도 정말 어렵지 않아서 최애 영화 한 편 즐겁게 감상했습니다. 새로 오픈한 숙소...',
-    images: [],
+  const { id } = useParams();
+  const fetchReviews = async (): Promise<IReview[]> => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return res.data;
   };
 
+  const { data: reviews = [], isLoading } = useQuery<IReview[]>({
+    queryKey: ['spotReviews', id],
+    queryFn: fetchReviews,
+    refetchOnWindowFocus: false,
+  });
+
   return (
-    <ul className="flex flex-col gap-[12px] my-[30px]">
-      <ReviewItem
-        review={review}
-        setIsOpen={setIsOpen}
-        type="mypage"
-        setSelectedReviewId={setSelectedReviewId}
-        setIsConfirmOpen={setIsConfirmOpen}
-      />
-      <ReviewItem
-        review={review}
-        setIsOpen={setIsOpen}
-        type="mypage"
-        setSelectedReviewId={setSelectedReviewId}
-        setIsConfirmOpen={setIsConfirmOpen}
-      />
+    <ul className="h-[calc(100%-100px)] flex flex-col gap-[12px] my-[16px]">
+      {isLoading ? (
+        Array.from({ length: 3 }).map((_, i) => <ReviewSkeleton key={i} />)
+      ) : reviews.length > 0 ? (
+        reviews.map((review, idx) => (
+          <ReviewItem
+            review={review}
+            setIsOpen={setIsOpen}
+            type="mypage"
+            setSelectedReviewId={setSelectedReviewId}
+            setIsConfirmOpen={setIsConfirmOpen}
+            key={idx}
+          />
+        ))
+      ) : (
+        <div className="h-full flex flex-col justify-center items-center">
+          <NoReview main="첫 번째 여행 이야기를 남겨주세요!" description="아직 작성하신 후기가 없어요" />
+        </div>
+      )}
     </ul>
   );
 }

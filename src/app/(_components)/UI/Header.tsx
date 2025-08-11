@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <header className="w-full h-[56px] sticky top-0 bg-w1 flex justify-center items-center relative">
       {pathname === '/search' || (
-        <button className="absolute left-[16px] top-[16px]" onClick={handleMoveToPrev}>
+        <button className="absolute left-[16px] top-[16px] cursor-pointer" onClick={handleMoveToPrev}>
           <Image src={prev} alt="이전 페이지" width={23} height={23} />
         </button>
       )}

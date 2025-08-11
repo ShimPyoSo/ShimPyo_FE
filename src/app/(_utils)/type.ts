@@ -100,6 +100,15 @@ export type IReview = {
   images: string[];
 };
 
+export type IReviewSpot = {
+  touristId: number;
+  region: string;
+  images: string;
+  title: string;
+  address: string;
+  counts: number;
+};
+
 export type IWeeklyWeather = {
   weather: string;
   minTemp: number;
