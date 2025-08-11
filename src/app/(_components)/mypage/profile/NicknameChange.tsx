@@ -1,10 +1,12 @@
 'use client';
 
+import axios, { AxiosError } from 'axios';
 import { useForm, useFormState } from 'react-hook-form';
 
-import axios from 'axios';
+import { IError } from '@/app/(_utils)/type';
 import { updateNicknameAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 
 export default function NicknameChange() {
@@ -13,14 +15,29 @@ export default function NicknameChange() {
   const nickname = watch('nickname');
   const [, updateNickname] = useAtom(updateNicknameAtom);
   const { isAvailable, checkDuplicate } = useNicknameCheck();
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const onSubmit = async (data: { nickname: string }) => {
     if (nickname.length < 2 && nickname.length > 8) return; // 닉네임 길이 오류 수 처리 추후 수정
     try {
-      await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data);
+      await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data, {
+        withCredentials: true,
+      });
       updateNickname(nickname);
-    } catch {
-      // error 처리 컴포넌트 구현 후 수정
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/nickname`, data, {
+            withCredentials: true,
+          });
+          updateNickname(nickname);
+        } catch {
+          // 오류 시 처리
+        }
+      }
+      console.log(err.response?.data?.message);
     }
   };
 

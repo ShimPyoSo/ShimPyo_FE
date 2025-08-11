@@ -21,6 +21,7 @@ export default function Answer({ currentIndex, selected, setSelected }: AnswerPr
           ? questions[currentIndex].answers.map((text, idx) => (
               <AnswerItem
                 key={idx}
+                currentIndex={currentIndex}
                 selected={selected}
                 setSelected={setSelected}
                 text={text}

@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import checked from '/public/images/test/checked.svg';
+import { questions } from '@/app/(_utils)/constants';
 
 interface AnswerItemProps {
   selected: number;
+  currentIndex: number;
   setSelected: React.Dispatch<React.SetStateAction<number>>;
   text: string;
   description: string;
   idx: number;
 }
 
-export default function AnswerItem({ selected, setSelected, text, description, idx }: AnswerItemProps) {
+export default function AnswerItem({ currentIndex, selected, setSelected, text, description, idx }: AnswerItemProps) {
   return (
     <li>
       <input
@@ -31,7 +33,9 @@ export default function AnswerItem({ selected, setSelected, text, description, i
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-[12px]">
-            <div className="w-[62px] h-[58px] bg-w1 rounded-md text-3xl flex items-center justify-center">😴</div>
+            <div className="w-[62px] h-[58px] bg-w1 rounded-md text-3xl flex items-center justify-center">
+              {questions[currentIndex].icons[idx]}
+            </div>
             <div className="tracking-[-2%]">
               <p className={`font-semibold text-sm ${selected === idx ? 'text-gn1' : 'text-b3'}`}>{text}</p>
               <small className="mt-[8px] text-g1 text-xs">{description}</small>
