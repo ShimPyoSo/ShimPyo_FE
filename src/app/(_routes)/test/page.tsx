@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import StartButton from '@/app/(_components)/test/StartButton';
 import illu from '/public/images/icons/illustration/test.svg';
 
 export default function Test() {
@@ -10,20 +10,7 @@ export default function Test() {
         <p className="mt-[5px] font-[kkubulim] text-3xl text-gn1">&ldquo; 쉼표 유형 테스트 &rdquo;</p>
       </h2>
       <Image className="mx-auto mt-[40px]" src={illu} alt="쉼표 유형 테스트" width={220} height={240} />
-      <div className="mt-[80px] flex items-center gap-[12px]">
-        <Link
-          className="grow-1 bg-gn1 border border-gn5 text-white rounded-md py-[14px] tracking-[-1.3%] font-semibold text-center"
-          href={'/test/question'}
-        >
-          시작하기
-        </Link>
-        <Link
-          className="grow-1 bg-w3 border border-w4 text-b3 rounded-md py-[14px] tracking-[-1.3%] font-semibold text-center"
-          href={'/test/question'}
-        >
-          이어하기
-        </Link>
-      </div>
+      <StartButton />
     </div>
   );
 }

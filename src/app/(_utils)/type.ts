@@ -131,7 +131,7 @@ export type IWeather = {
 };
 
 export interface IOptional {
-  duration: number | null;
+  duration: string | null;
   region: string | null;
   meal: number | null;
 }
@@ -148,7 +148,7 @@ export type IQuestion = {
 
 export type IResultType =
   | '비우는 쉼표'
-  | '땀 흘리는 쉼표'
+  | '땀흘리는 쉼표'
   | '숨쉬는 쉼표'
   | '어울리는 쉼표'
   | '채우는 쉼표'
