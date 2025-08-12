@@ -1,14 +1,48 @@
 'use client';
 
+import axios, { AxiosError } from 'axios';
+
+import Confirm from '@/app/(_components)/UI/Confirm';
+import { IError } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
 import Link from 'next/link';
 import ReviewList from '@/app/(_components)/category/review/ReviewList';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [selectedReviewId, setSelectedReviewId] = useState<number>(0); // 삭제 클릭된 리뷰 아이디
+  const [shouldRefetch, setShouldRefetch] = useState(false);
+  const { handleAccessExpired } = useHandleTokenExpired();
+
+  const handleDeleteReview = async () => {
+    try {
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review?touristId=${id}&reviewId=${selectedReviewId}`,
+        { withCredentials: true }
+      );
+      setShouldRefetch(true);
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.delete(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review?touristId=${id}&reviewId=${selectedReviewId}`,
+            { withCredentials: true }
+          );
+          setShouldRefetch(true);
+        } catch {
+          // reissue 이후 에러처리
+        }
+      }
+      console.log(err.response?.data?.message);
+    }
+  };
 
   return (
     <>
@@ -27,9 +61,24 @@ export default function Review() {
           </Link>
         </div>
 
-        <ReviewList setIsOpen={setIsOpen} />
+        <ReviewList
+          setIsOpen={setIsDeleteOpen}
+          setSelectedReviewId={setSelectedReviewId}
+          shouldRefetch={shouldRefetch}
+          setShouldRefetch={setShouldRefetch}
+        />
       </div>
       {isOpen && <ImageModal setIsOpen={setIsOpen} />}
+      {isDeleteOpen && (
+        <Confirm
+          title={'후기 삭제'}
+          description={'후기를 삭제하면 복구할 수 없어요.\n정말로 삭제할까요?'}
+          confirmText={'삭제하기'}
+          cancelText={'취소하기'}
+          setIsOpen={setIsDeleteOpen}
+          onConfirm={handleDeleteReview}
+        />
+      )}
     </>
   );
 }

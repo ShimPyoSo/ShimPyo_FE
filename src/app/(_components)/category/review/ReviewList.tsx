@@ -5,15 +5,24 @@ import NoReview from '../NoReview';
 import ReviewItem from './ReviewItem';
 import ReviewSkeleton from './ReviewSkeleton';
 import axios from 'axios';
+import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
 import { useParams } from 'next/navigation';
 
 interface ReviewListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedReviewId: React.Dispatch<React.SetStateAction<number>>;
+  shouldRefetch: boolean;
+  setShouldRefetch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ReviewList({ setIsOpen }: ReviewListProps) {
+export default function ReviewList({
+  setIsOpen,
+  setSelectedReviewId,
+  shouldRefetch,
+  setShouldRefetch,
+}: ReviewListProps) {
   const { id } = useParams();
 
   const fetchReviews = async ({ pageParam = 0 }) => {
@@ -24,7 +33,7 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
     return Array.isArray(res.data) ? res.data : [];
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, refetch } = useInfiniteQuery({
     queryKey: ['allReviews', id],
     queryFn: fetchReviews,
     initialPageParam: 0,
@@ -40,6 +49,14 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
     },
   });
 
+  useEffect(() => {
+    if (shouldRefetch) {
+      refetch().finally(() => {
+        setShouldRefetch(false);
+      });
+    }
+  }, [shouldRefetch, refetch, setShouldRefetch]);
+
   const allReviews = data?.pages.flatMap((page) => page) ?? [];
   const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
@@ -54,7 +71,13 @@ export default function ReviewList({ setIsOpen }: ReviewListProps) {
       ) : allReviews.length > 0 ? (
         <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
           {allReviews.map((review: IReview) => (
-            <ReviewItem key={review.reviewId} review={review} setIsOpen={setIsOpen} type="detail" />
+            <ReviewItem
+              key={review.reviewId}
+              review={review}
+              setIsOpen={setIsOpen}
+              type="detail"
+              setSelectedReviewId={setSelectedReviewId}
+            />
           ))}
           {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
           <div ref={observerRef} className="h-10" />

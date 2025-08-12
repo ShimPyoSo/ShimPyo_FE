@@ -11,7 +11,7 @@ interface ReviewItemProps {
   review: IReview;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   type: 'mypage' | 'detail';
-  setSelectedReviewId?: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedReviewId: React.Dispatch<React.SetStateAction<number>>;
   setIsConfirmOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -41,7 +41,7 @@ export default function ReviewItem({
 
   const handleDeleteClick = () => {
     setIsConfirmOpen?.(true);
-    setSelectedReviewId?.(review.reviewId);
+    setSelectedReviewId(review.reviewId);
   };
 
   return (

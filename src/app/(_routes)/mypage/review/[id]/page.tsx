@@ -1,31 +1,26 @@
 'use client';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
-import { IReview } from '@/app/(_utils)/type';
+import { IReviewResponse } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
 import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewList from '@/app/(_components)/mypage/review/ReviewList';
 import SpotInfo from '@/app/(_components)/mypage/review/SpotInfo';
 import axios from 'axios';
+import { useDeleteReview } from '@/app/(_utils)/hooks/useDeleteReview';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-interface ReviewResponse {
-  reviews: IReview[];
-  touristId: number;
-  title: string;
-  region: string;
-  address: string;
-}
-
 export default function Review() {
+  const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number>(0); // 삭제 클릭된 리뷰 아이디
+  const [isAllDelete, setIsAllDelete] = useState(false);
+  const { handleDeleteReview } = useDeleteReview();
 
-  const { id } = useParams();
-  const fetchReviews = async (): Promise<ReviewResponse> => {
+  const fetchReviews = async (): Promise<IReviewResponse> => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
       {
@@ -35,15 +30,14 @@ export default function Review() {
     return res.data;
   };
 
-  const { data, isLoading } = useQuery<ReviewResponse>({
+  const { data, isLoading, refetch } = useQuery<IReviewResponse>({
     queryKey: ['spotReviews', id],
     queryFn: fetchReviews,
     refetchOnWindowFocus: false,
   });
 
-  const handleDeleteReview = () => {
-    // 삭제 API 추가되면 수정 예정
-    console.log(selectedReviewId);
+  const handleDelete = () => {
+    handleDeleteReview(isAllDelete, Number(id), selectedReviewId, refetch);
   };
 
   return (
@@ -53,7 +47,10 @@ export default function Review() {
         <div className="mt-[18px] flex justify-end">
           <button
             className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-sm tracking-[-2%] font-semibold"
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+              setIsAllDelete(true);
+            }}
           >
             전체 삭제하기
           </button>
@@ -74,7 +71,7 @@ export default function Review() {
           confirmText={'삭제하기'}
           cancelText={'취소하기'}
           setIsOpen={setIsConfirmOpen}
-          onConfirm={handleDeleteReview}
+          onConfirm={handleDelete}
         />
       )}
       {isOpen && <ImageModal setIsOpen={setIsOpen} />}
