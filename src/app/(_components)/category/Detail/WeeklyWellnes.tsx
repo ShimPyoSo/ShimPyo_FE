@@ -1,26 +1,37 @@
-import TodayWeather from './TodayWeather';
+import DataSource from './DataSource';
+import Image from 'next/image';
 import WellnessItem from './WellnessItem';
+import getWeeklyDate from '@/app/(_utils)/getWeeklyDate';
+import illu from '/public/images/icons/illustration/wellness.svg';
+import { useFetchConcentration } from '@/app/(_utils)/hooks/useFetchConcentration';
 import { useFetchWeeklyWeather } from '@/app/(_utils)/hooks/useFetchWeeklyWeather';
 
 export default function WeeklyWellness() {
+  const weekData = getWeeklyDate();
   const { weather } = useFetchWeeklyWeather();
+  const { concentration } = useFetchConcentration();
 
   return (
-    <section className="mb-[32px]">
-      <div className="mt-[32px] w-full h-[208px] p-[10px] bg-white rounded-xl border border-w4">
-        <p className="tracking-[-2%] font-semibold text-b1 text-sm">오늘의 웰니스 지수</p>
+    <section>
+      <div className="relative mb-[30px]">
+        <Image src={illu} alt="이번주 웰니스" width={350} height={130} className="relative z-10" />
+        <div className="absolute flex items-center bottom-[-30px] w-full bg-gn10 px-[12px] py-[12px] rounded-lg z-0">
+          <WellnessItem
+            date={weekData[0].date}
+            day={weekData[0].day}
+            weather={weather[0]}
+            concentration={concentration[0]}
+          />
+        </div>
       </div>
-      <TodayWeather weather={weather.slice(0, 24)} />
-      <WellnessItem weather={weather.slice(24)} />
-      <span className="mt-[8px] flex items-center text-xs text-g1 tracking-[-2%]">
-        <p className="text-b3">한국관광공사</p>에서 제공하는 정보예요.
-      </span>
-      <span className="mt-[20px] flex items-center tracking-[-2%] text-xs text-b3">
-        ⏳<p className="font-semibold">조금만 기다려 주세요!</p>&nbsp;곧 이후의 웰니스 지수를 전해드릴게요.
-      </span>
-      <p className="text-xs text-g1 tracking-[-2%]">
-        제공 기관의 데이터에 따라, 최대 3일치의 집중률 예측 추이를 제공합니다.
-      </p>
+      <ul>
+        {weekData.slice(1).map(({ date, day }, idx) => (
+          <li key={date} className="flex items-center border-b border-w6 px-[12px] py-[12px]">
+            <WellnessItem date={date} day={day} weather={weather[idx + 1]} concentration={concentration[idx + 1]} />
+          </li>
+        ))}
+      </ul>
+      <DataSource />
     </section>
   );
 }
