@@ -11,8 +11,11 @@ export default function LikeMenu() {
 
   return (
     <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
-      <li className="w-full py-[18px]" onClick={() => setIsActive(!isActive)}>
-        <div className={`flex justify-between items-center ${isActive ? '' : 'border-b border-w6'}`}>
+      <li className="w-full py-[18px]">
+        <div
+          className={`flex justify-between items-center ${isActive ? '' : 'border-b border-w6'}`}
+          onClick={() => setIsActive(!isActive)}
+        >
           <p>카테고리별 여행지</p>
           <Image
             className={`transition-transform duration-300 ${isActive ? '' : 'rotate-180'}`}

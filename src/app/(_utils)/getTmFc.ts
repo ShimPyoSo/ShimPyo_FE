@@ -1,15 +1,26 @@
 export default function getTmFc() {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const date = String(now.getDate()).padStart(2, '0');
+  const year = now.getFullYear().toString();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+  const day = now.getDate().toString().padStart(2, '0');
   const hour = now.getHours();
 
-  let timePart = '0600';
-  if (hour >= 19) {
-    timePart = '1800';
+  let baseDate: string;
+  let baseTime: string;
+
+  if (hour < 18) {
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    baseDate = `${yesterday.getFullYear()}${(yesterday.getMonth() + 1).toString().padStart(2, '0')}${yesterday
+      .getDate()
+      .toString()
+      .padStart(2, '0')}`;
+    baseTime = '1800';
+  } else {
+    baseDate = `${year}${month}${day}`;
+    baseTime = '0600';
   }
 
-  const tmFc = `${year}${month}${date}${timePart}`;
-  return tmFc;
+  return `${baseDate}${baseTime}`;
 }

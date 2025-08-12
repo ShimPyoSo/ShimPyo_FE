@@ -11,12 +11,12 @@ import { useSearchParams } from 'next/navigation';
 
 export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   const searchParams = useSearchParams();
-  const category = searchParams.get('type') ?? 'all';
+  const category = searchParams.get('type') ?? '';
 
   const fetchReviews = async ({ pageParam = 0 }) => {
     const likesIdParam = pageParam !== 0 ? `&likesId=${pageParam}` : '';
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?category=${category}${likesIdParam}`,
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes??category=${category}${likesIdParam}`,
       { withCredentials: true }
     );
     return Array.isArray(res.data) ? res.data : [];
@@ -36,6 +36,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
       const lastReview = lastPage[lastPage.length - 1];
       return lastReview.likesId;
     },
+    refetchOnWindowFocus: false,
   });
 
   const allSpots = data?.pages.flatMap((page) => page) ?? [];
