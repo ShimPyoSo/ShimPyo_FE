@@ -129,3 +129,27 @@ export type IWeather = {
   weather: null | string;
   humidity: null | number;
 };
+
+export type IQuestion = {
+  question: string;
+  answers: {
+    text: string;
+    scores: { [key: string]: number };
+  }[];
+  descriptions: string[];
+  icons: string[];
+};
+
+export type IResultType =
+  | '비우는 쉼표'
+  | '땀 흘리는 쉼표'
+  | '숨쉬는 쉼표'
+  | '어울리는 쉼표'
+  | '채우는 쉼표'
+  | '피어나는 쉼표'
+  | '이완하는 쉼표'
+  | '이것저것 쉼표';
+
+export type IResultScore = {
+  [key in IResultType]?: number;
+};

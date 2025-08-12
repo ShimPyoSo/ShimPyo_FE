@@ -18,13 +18,13 @@ export default function Answer({ currentIndex, selected, setSelected }: AnswerPr
       </p>
       <ul className="mt-[30px] space-y-[12px] mb-[20px]">
         {currentIndex < 7
-          ? questions[currentIndex].answers.map((text, idx) => (
+          ? questions[currentIndex].answers.map((answer, idx) => (
               <AnswerItem
                 key={idx}
                 currentIndex={currentIndex}
                 selected={selected}
                 setSelected={setSelected}
-                text={text}
+                answer={answer}
                 description={questions[currentIndex].descriptions[idx]}
                 idx={idx}
               />

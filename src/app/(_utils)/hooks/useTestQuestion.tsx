@@ -1,21 +1,28 @@
 'use client';
 
-import axios, { AxiosError } from 'axios';
+import { optionals, questions } from '@/app/(_utils)/constants';
 import { useEffect, useRef, useState } from 'react';
 
-import { IError } from '../type';
-import { optionals } from '@/app/(_utils)/constants';
-import { useHandleTokenExpired } from './useHandleTokenExpired';
+import { IResultScore } from '../type';
+import { getWellnessType } from '../getWellnessType';
 import { useRouter } from 'next/navigation';
 
 export default function useQuestion() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [answered, setAnswered] = useState<{ [key: number]: number }>({});
-  const [optional, setOptional] = useState<string[]>([]);
   const [selected, setSelected] = useState(-1);
-  const router = useRouter();
-  const { handleAccessExpired } = useHandleTokenExpired();
+  const [optional, setOptional] = useState<string[]>([]);
+  const [answered, setAnswered] = useState<IResultScore>({
+    '비우는 쉼표': 0,
+    '땀 흘리는 쉼표': 0,
+    '숨쉬는 쉼표': 0,
+    '어울리는 쉼표': 0,
+    '채우는 쉼표': 0,
+    '피어나는 쉼표': 0,
+    '이완하는 쉼표': 0,
+    '이것저것 쉼표': 0,
+  });
 
+  const router = useRouter();
   const answeredRef = useRef(answered);
   const optionalRef = useRef(optional);
 
@@ -31,10 +38,16 @@ export default function useQuestion() {
     if (selected === -1) return;
 
     if (currentIndex < 7) {
-      setAnswered((prev) => ({
-        ...prev,
-        [currentIndex + 1]: selected + 1,
-      }));
+      const selectedScores = questions[currentIndex].answers[selected].scores;
+
+      setAnswered((prev) => {
+        const updatedScores = { ...prev };
+        for (const [type, score] of Object.entries(selectedScores)) {
+          (updatedScores as Record<string, number>)[type] =
+            ((updatedScores as Record<string, number>)[type] || 0) + score;
+        }
+        return updatedScores;
+      });
     } else {
       setOptional((prev) => [...prev, optionals[currentIndex - 7].answers[selected]]);
     }
@@ -45,35 +58,11 @@ export default function useQuestion() {
 
   useEffect(() => {
     if (currentIndex === 10) {
-      const fetchResult = async () => {
-        try {
-          const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/survey/type`,
-            answeredRef.current,
-            { withCredentials: true }
-          );
-          router.push(`/test/result/${encodeURI(response.data.typename)}`);
-        } catch (error) {
-          const err = error as AxiosError<IError>;
-          if (err.response?.data?.name === 'INVALID_TOKEN') {
-            handleAccessExpired('INVALID_TOKEN');
-            try {
-              const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/survey/type`,
-                answeredRef.current,
-                { withCredentials: true }
-              );
-              router.push(`/test/result/${encodeURI(response.data.typename)}`);
-            } catch {
-              // 오류 시 처리
-            }
-          }
-          console.log(err.response?.data?.message);
-        }
-      };
-      fetchResult();
+      console.log(answeredRef.current);
+      const result = getWellnessType(answeredRef.current);
+      router.push(`/test/result/${encodeURI(result)}`);
     }
-  }, [currentIndex, router, handleAccessExpired]);
+  }, [answered, currentIndex, router]);
 
   return {
     currentIndex,

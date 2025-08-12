@@ -6,12 +6,17 @@ interface AnswerItemProps {
   selected: number;
   currentIndex: number;
   setSelected: React.Dispatch<React.SetStateAction<number>>;
-  text: string;
+  answer: {
+    scores: {
+      [key: string]: number;
+    };
+    text: string;
+  };
   description: string;
   idx: number;
 }
 
-export default function AnswerItem({ currentIndex, selected, setSelected, text, description, idx }: AnswerItemProps) {
+export default function AnswerItem({ currentIndex, selected, setSelected, answer, description, idx }: AnswerItemProps) {
   return (
     <li>
       <input
@@ -37,7 +42,7 @@ export default function AnswerItem({ currentIndex, selected, setSelected, text, 
               {questions[currentIndex].icons[idx]}
             </div>
             <div className="tracking-[-2%]">
-              <p className={`font-semibold text-sm ${selected === idx ? 'text-gn1' : 'text-b3'}`}>{text}</p>
+              <p className={`font-semibold text-sm ${selected === idx ? 'text-gn1' : 'text-b3'}`}>{answer.text}</p>
               <small className="mt-[8px] text-g1 text-xs">{description}</small>
             </div>
           </div>
