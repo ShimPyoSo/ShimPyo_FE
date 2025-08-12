@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 export default function Category() {
   return (
     <Suspense>
-      <CategoryComponent />
+      <CategoryComponent type="list" />
     </Suspense>
   );
 }

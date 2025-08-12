@@ -6,7 +6,7 @@ export default function LikedSpotList() {
   return (
     <Suspense>
       <ProtectedRoute>
-        <CategoryComponent />
+        <CategoryComponent type="like" />
       </ProtectedRoute>
     </Suspense>
   );

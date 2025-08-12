@@ -130,6 +130,12 @@ export type IWeather = {
   humidity: null | number;
 };
 
+export interface IOptional {
+  duration: number | null;
+  region: string | null;
+  meal: number | null;
+}
+
 export type IQuestion = {
   question: string;
   answers: {

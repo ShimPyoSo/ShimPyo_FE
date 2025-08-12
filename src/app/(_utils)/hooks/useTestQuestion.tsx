@@ -5,12 +5,14 @@ import { useEffect, useRef, useState } from 'react';
 
 import { IResultScore } from '../type';
 import { getWellnessType } from '../getWellnessType';
+import { setOptionalAtom } from '@/app/(_store)/test';
+import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 
 export default function useQuestion() {
+  const [, setOptional] = useAtom(setOptionalAtom);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState(-1);
-  const [optional, setOptional] = useState<string[]>([]);
   const [answered, setAnswered] = useState<IResultScore>({
     '비우는 쉼표': 0,
     '땀 흘리는 쉼표': 0,
@@ -24,15 +26,10 @@ export default function useQuestion() {
 
   const router = useRouter();
   const answeredRef = useRef(answered);
-  const optionalRef = useRef(optional);
 
   useEffect(() => {
     answeredRef.current = answered;
   }, [answered]);
-
-  useEffect(() => {
-    optionalRef.current = optional;
-  }, [optional]);
 
   const handleNext = () => {
     if (selected === -1) return;
@@ -49,7 +46,13 @@ export default function useQuestion() {
         return updatedScores;
       });
     } else {
-      setOptional((prev) => [...prev, optionals[currentIndex - 7].answers[selected]]);
+      if (currentIndex === 7) {
+        setOptional({ region: optionals[7].answers[selected] });
+      } else if (currentIndex === 8) {
+        setOptional({ duration: selected });
+      } else if (currentIndex === 9) {
+        setOptional({ meal: selected });
+      }
     }
 
     setSelected(-1);
@@ -58,7 +61,6 @@ export default function useQuestion() {
 
   useEffect(() => {
     if (currentIndex === 10) {
-      console.log(answeredRef.current);
       const result = getWellnessType(answeredRef.current);
       router.push(`/test/result/${encodeURI(result)}`);
     }
