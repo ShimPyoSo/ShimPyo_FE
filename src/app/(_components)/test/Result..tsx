@@ -28,14 +28,14 @@ export default function Result({ setIsResult }: ResultProps) {
   if (!currentItem) return null;
 
   return (
-    <section>
+    <section className="flex flex-col items-center">
       <h2 className="mt-[22px] text-center">
         <small className="text-sm text-g1 tracking-[-2%]">{currentItem.description}</small>
-        <p className="text-3xl text-[#78B3ED] font-[kkubulim]">{currentItem.name}</p>
+        <p className="mt-[5px] text-3xl text-[#78B3ED] font-[kkubulim]">{currentItem.name}</p>
       </h2>
       <Image className="mt-[34px]" src={currentItem.image} alt={currentItem.name} width={375} height={420} />
       <button
-        className="block mx-[18px] mt-[70px] text-white bg-gn1 text-center py-[16px] rounded-lg"
+        className="mt-[70px] text-white bg-gn1 text-center py-[16px] px-[97px] rounded-lg"
         onClick={() => setIsResult(true)}
       >
         맞춤 쉼표 코스 확인하기

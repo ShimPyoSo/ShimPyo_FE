@@ -2,13 +2,9 @@
 
 import DayItem from './DayItem';
 import Image from 'next/image';
+import Map from './Map';
 import Share from '../UI/Share';
-import dynamic from 'next/dynamic';
 import trash from '/public/images/icons/course/trash.svg';
-
-const MapRender = dynamic(() => import('../spot/MapRender'), {
-  ssr: false,
-});
 
 interface CourseListProps {
   isEditable: boolean;
@@ -35,8 +31,7 @@ export default function CourseList({ isEditable, setIsOpen }: CourseListProps) {
           )}
         </div>
       </div>
-      {/* 날짜 체크박스 추가 */}
-      <MapRender latitude={latitude} longitude={longitude} />
+      <Map latitude={latitude} longitude={longitude} day={2} />
       <ul className="pb-[72px]">
         <DayItem day="1일" isEditable={isEditable} />
         <DayItem day="2일" isEditable={isEditable} />
