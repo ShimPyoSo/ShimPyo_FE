@@ -1,6 +1,7 @@
 'use client';
 
 import Answer from './Answer';
+import Loader from '../UI/Loader';
 import Progress from './Progress';
 import useQuestion from '@/app/(_utils)/hooks/useTestQuestion';
 
@@ -9,7 +10,7 @@ export default function Question() {
 
   return (
     <div className="grow-1 relative">
-      {currentIndex < 10 && (
+      {currentIndex < 10 ? (
         <>
           <Progress num={currentIndex} />
           <Answer currentIndex={currentIndex} selected={selected} setSelected={setSelected} />
@@ -21,6 +22,8 @@ export default function Question() {
             {currentIndex < 9 ? '다음으로' : '나의 쉼표 유형 확인하기'}
           </button>
         </>
+      ) : (
+        <Loader />
       )}
     </div>
   );
