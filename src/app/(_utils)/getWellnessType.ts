@@ -3,7 +3,7 @@ import { IResultScore } from './type';
 export function getWellnessType(scores: IResultScore): string {
   const types: (keyof IResultScore)[] = [
     '비우는 쉼표',
-    '땀 흘리는 쉼표',
+    '땀흘리는 쉼표',
     '어울리는 쉼표',
     '채우는 쉼표',
     '피어나는 쉼표',
