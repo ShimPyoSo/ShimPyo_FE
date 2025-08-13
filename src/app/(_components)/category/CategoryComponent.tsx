@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import Filter from './Filter/Filter';
 import SpotListItem from './SpotListItem';
@@ -12,11 +14,14 @@ import { useSearchParams } from 'next/navigation';
 export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   const searchParams = useSearchParams();
   const category = searchParams.get('type') ?? '';
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
 
   const fetchReviews = async ({ pageParam = 0 }) => {
     const likesIdParam = pageParam !== 0 ? `&likesId=${pageParam}` : '';
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes??category=${category}${likesIdParam}`,
+      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes?category=${category}${likesIdParam}`,
       { withCredentials: true }
     );
     return Array.isArray(res.data) ? res.data : [];
@@ -41,6 +46,8 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
 
   const allSpots = data?.pages.flatMap((page) => page) ?? [];
   const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+
+  if (!mounted) return null;
 
   return (
     <>

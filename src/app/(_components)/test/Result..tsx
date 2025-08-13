@@ -1,7 +1,11 @@
 'use client';
 
+import { resetAllAtom, setCurrentIndexAtom } from '@/app/(_store)/test';
+
 import Image from 'next/image';
 import { testImages } from '@/app/(_utils)/constants';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 interface ResultProps {
@@ -10,6 +14,14 @@ interface ResultProps {
 
 export default function Result({ setIsResult }: ResultProps) {
   const { type } = useParams();
+  const [, resetAll] = useAtom(resetAllAtom);
+  const [, setCurrentIndex] = useAtom(setCurrentIndexAtom);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+    resetAll();
+  }, [resetAll, setCurrentIndex]);
+
   if (!type) return null;
   const decodedType = decodeURI((Array.isArray(type) ? type[0] : type) as string);
   const currentItem = testImages.find((item) => item.name === decodedType);

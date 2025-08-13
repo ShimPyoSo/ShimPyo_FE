@@ -1,10 +1,28 @@
 'use client';
 
+import Alert from '@/app/(_components)/UI/Alert';
+import RecommendCourse from '@/app/(_components)/test/RecommendCourse';
 import Result from '@/app/(_components)/test/Result.';
 import { useState } from 'react';
 
 export default function TestResults() {
   const [isResult, setIsResult] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  return <div className="bg-w1">{isResult ? <></> : <Result setIsResult={setIsResult} />}</div>;
+  return (
+    <>
+      <div className="bg-w1">
+        {isResult ? <RecommendCourse setIsOpen={setIsOpen} /> : <Result setIsResult={setIsResult} />}
+      </div>
+      {isOpen && (
+        <Alert
+          title="링크 복사"
+          description={'여행지 링크가 복사되었습니다.\n친구에게 공유해 보세요.'}
+          confirmText="확인"
+          setIsOpen={setIsOpen}
+          onConfirm={() => setIsOpen(false)}
+        />
+      )}
+    </>
+  );
 }

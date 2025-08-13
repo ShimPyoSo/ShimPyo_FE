@@ -22,7 +22,6 @@ export default function useQuestion() {
   const [, setAnswered] = useAtom(addScoreAtom);
   const [, resetAll] = useAtom(resetAllAtom);
   const [, setCurrentIndex] = useAtom(setCurrentIndexAtom);
-  const [result, setResult] = useState<string | null>(null);
   const [selected, setSelected] = useState(-1);
 
   const router = useRouter();
@@ -35,9 +34,9 @@ export default function useQuestion() {
       setAnswered(selectedScores);
     } else {
       if (currentIndex === 7 && selected !== 6) {
-        setOptional({ region: optionals[7].answers[selected] });
+        setOptional({ region: optionals[0].answers[selected] });
       } else if (currentIndex === 8 && selected !== 4) {
-        setOptional({ duration: optionals[8].answers[selected] });
+        setOptional({ duration: optionals[1].answers[selected] });
       } else if (currentIndex === 9 && selected !== 3) {
         setOptional({ meal: selected });
       }
@@ -49,17 +48,10 @@ export default function useQuestion() {
 
   useEffect(() => {
     if (currentIndex === 10) {
-      setResult(getWellnessType(answered));
-    }
-  }, [answered, currentIndex, router, setCurrentIndex, resetAll]);
-
-  useEffect(() => {
-    if (result !== null) {
-      setCurrentIndex(0);
-      resetAll();
+      const result = getWellnessType(answered);
       router.push(`/test/result/${encodeURI(result)}`);
     }
-  }, [result, setCurrentIndex, resetAll, router]);
+  }, [answered, currentIndex, router, setCurrentIndex, resetAll]);
 
   return {
     currentIndex,
