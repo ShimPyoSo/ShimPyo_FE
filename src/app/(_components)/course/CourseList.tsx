@@ -1,6 +1,7 @@
 'use client';
 
 import DayItem from './DayItem';
+import { ILatLng } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import Map from './Map';
 import Share from '../UI/Share';
@@ -12,8 +13,18 @@ interface CourseListProps {
 }
 
 export default function CourseList({ isEditable, setIsOpen }: CourseListProps) {
-  const latitude = 37.5665;
-  const longitude = 126.978;
+  const tempPositionsGroup: ILatLng[][] = [
+    [
+      { latitude: 37.5665, longitude: 126.978 }, // 서울 시청
+      { latitude: 37.5651, longitude: 126.98955 }, // 종각역
+      { latitude: 37.57, longitude: 126.9768 }, // 경복궁
+    ],
+    [
+      { latitude: 35.1796, longitude: 129.0756 }, // 부산
+      { latitude: 35.1601, longitude: 129.0726 }, // 해운대
+      { latitude: 35.1478, longitude: 129.0481 }, // 광안리
+    ],
+  ];
 
   return (
     <>
@@ -31,7 +42,7 @@ export default function CourseList({ isEditable, setIsOpen }: CourseListProps) {
           )}
         </div>
       </div>
-      <Map latitude={latitude} longitude={longitude} day={2} />
+      <Map positions={tempPositionsGroup} day={2} />
       <ul className="pb-[72px]">
         <DayItem day="1일" isEditable={isEditable} />
         <DayItem day="2일" isEditable={isEditable} />

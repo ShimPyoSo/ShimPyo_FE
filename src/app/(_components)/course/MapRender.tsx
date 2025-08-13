@@ -1,14 +1,15 @@
 'use client';
 
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
 import { useEffect, useState } from 'react';
 
+import { ILatLng } from '@/app/(_utils)/type';
+
 interface MapRenderProps {
-  latitude: number;
-  longitude: number;
+  positions: ILatLng[];
 }
 
-export default function MapRender({ latitude, longitude }: MapRenderProps) {
+export default function MapRender({ positions }: MapRenderProps) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -33,13 +34,24 @@ export default function MapRender({ latitude, longitude }: MapRenderProps) {
 
   if (!isReady) return null;
 
+  const path = positions.map((pos) => ({
+    lat: pos.latitude ?? 37.5665,
+    lng: pos.longitude ?? 126.978,
+  }));
+
   return (
     <Map
-      center={{ lat: latitude, lng: longitude }}
+      center={path[0] ?? { lat: 37.5665, lng: 126.978 }}
       style={{ width: '100%', height: '206px', borderRadius: '5px', marginTop: '12px' }}
-      level={3}
+      level={9}
     >
-      <MapMarker position={{ lat: latitude, lng: longitude }} />
+      {path.map((pos, idx) => (
+        <MapMarker key={idx} position={pos} />
+      ))}
+
+      {path.length > 1 && (
+        <Polyline path={path} strokeWeight={4} strokeColor={'#80a281'} strokeOpacity={1} strokeStyle={'solid'} />
+      )}
     </Map>
   );
 }

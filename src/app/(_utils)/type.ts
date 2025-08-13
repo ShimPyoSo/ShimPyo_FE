@@ -76,7 +76,12 @@ export type IFilter = {
   time?: Time[];
 };
 
-export type ISpot = {
+export type ILatLng = {
+  latitude?: number;
+  longitude?: number;
+};
+
+export interface ISpot extends ILatLng {
   id: number;
   region: string;
   images: string;
@@ -86,11 +91,9 @@ export type ISpot = {
   operationTime?: string;
   address?: string;
   tel?: string | null;
-  longitude?: number;
-  latitude?: number;
   homepage?: string;
   reservation?: string;
-};
+}
 
 export type IReview = {
   reviewId: number;
