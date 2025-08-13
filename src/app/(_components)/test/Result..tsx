@@ -7,7 +7,6 @@ import { useAtom, useAtomValue } from 'jotai';
 
 import Image from 'next/image';
 import { testImages } from '@/app/(_utils)/constants';
-import { useEffect } from 'react';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 
@@ -21,11 +20,6 @@ export default function Result({ setCourse }: ResultProps) {
   const [, setCurrentIndex] = useAtom(setCurrentIndexAtom);
   const optional = useAtomValue(optionalAtom);
   const { handleAccessExpired } = useHandleTokenExpired();
-
-  useEffect(() => {
-    setCurrentIndex(0);
-    resetAll();
-  }, [resetAll, setCurrentIndex]);
 
   if (!type) return null;
   const decodedType = decodeURI((Array.isArray(type) ? type[0] : type) as string);
@@ -43,6 +37,8 @@ export default function Result({ setCourse }: ResultProps) {
         { withCredentials: true }
       );
       setCourse(res.data);
+      setCurrentIndex(0);
+      resetAll();
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN') {
@@ -57,6 +53,8 @@ export default function Result({ setCourse }: ResultProps) {
             { withCredentials: true }
           );
           setCourse(res.data);
+          setCurrentIndex(0);
+          resetAll();
         } catch {
           // reissue 이후 오류 처리
         }
