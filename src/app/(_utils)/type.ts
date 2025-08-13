@@ -81,6 +81,13 @@ export type ILatLng = {
   longitude?: number;
 };
 
+export interface IOperationTime {
+  dayoff: string | null;
+  openTime: string;
+  closeTime: string;
+  breakTime: string | null;
+}
+
 export interface ISpot extends ILatLng {
   id: number;
   region: string;
@@ -93,6 +100,27 @@ export interface ISpot extends ILatLng {
   tel?: string | null;
   homepage?: string;
   reservation?: string;
+}
+
+export interface ICourseList extends ILatLng {
+  touristId: number;
+  title: string;
+  type: string;
+  images: string;
+  address: string;
+  operationTime: IOperationTime;
+}
+
+export interface IDay {
+  date: string;
+  list: ICourseList[];
+}
+
+export interface ICourse {
+  courseId: number;
+  title: string;
+  typename: IResultType;
+  days: IDay[];
 }
 
 export type IReview = {

@@ -1,18 +1,19 @@
 'use client';
 
 import Alert from '@/app/(_components)/UI/Alert';
+import { ICourse } from '@/app/(_utils)/type';
 import RecommendCourse from '@/app/(_components)/test/RecommendCourse';
 import Result from '@/app/(_components)/test/Result.';
 import { useState } from 'react';
 
 export default function TestResults() {
-  const [isResult, setIsResult] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [course, setCourse] = useState<ICourse | null>(null);
 
   return (
     <>
       <div className="bg-w1">
-        {isResult ? <RecommendCourse setIsOpen={setIsOpen} /> : <Result setIsResult={setIsResult} />}
+        {course ? <RecommendCourse setIsOpen={setIsOpen} course={course} /> : <Result setCourse={setCourse} />}
       </div>
       {isOpen && (
         <Alert

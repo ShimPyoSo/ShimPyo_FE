@@ -1,4 +1,5 @@
 import CategoryIconItem from '../course/CategoryIconItem';
+import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import SpotItem from '../course/SpotItem';
 import comma from '/public/images/icons/course/comma.svg';
@@ -7,9 +8,10 @@ import fullComma from '/public/images/icons/course/fullComma.svg';
 interface DayItemProps {
   isEditable: boolean;
   day: string;
+  course: ICourseList[];
 }
 
-export default function DayItem({ isEditable, day }: DayItemProps) {
+export default function DayItem({ isEditable, day, course }: DayItemProps) {
   const dayNumber = parseInt(day, 10);
 
   return (
@@ -31,14 +33,14 @@ export default function DayItem({ isEditable, day }: DayItemProps) {
       </div>
       <div className="pt-[28px] pb-[40px] border-b border-[#E2E2E2] flex items-start gap-[8px]">
         <ul>
-          <CategoryIconItem />
-          <CategoryIconItem />
-          <CategoryIconItem isLast={true} />
+          {course.map((spot, index) => (
+            <CategoryIconItem key={spot.touristId} isLast={index === course.length - 1} />
+          ))}
         </ul>
         <ul className="flex flex-col gap-[18px]">
-          <SpotItem isEditable={isEditable} />
-          <SpotItem isEditable={isEditable} />
-          <SpotItem isEditable={isEditable} />
+          {course.map((spot) => (
+            <SpotItem key={spot.touristId} isEditable={isEditable} />
+          ))}
         </ul>
       </div>
     </li>
