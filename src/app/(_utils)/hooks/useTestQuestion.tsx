@@ -38,7 +38,7 @@ export default function useQuestion() {
       } else if (currentIndex === 8 && selected !== 4) {
         setOptional({ duration: optionals[1].answers[selected] });
       } else if (currentIndex === 9 && selected !== 3) {
-        setOptional({ meal: selected });
+        setOptional({ meal: selected + 1 });
       }
     }
 
