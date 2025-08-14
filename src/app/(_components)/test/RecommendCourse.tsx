@@ -1,5 +1,8 @@
+import { ICourse, IError } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
+
 import CourseList from '../course/CourseList';
-import { ICourse } from '@/app/(_utils)/type';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 
 interface RecommendCourseProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,10 +10,46 @@ interface RecommendCourseProps {
 }
 
 export default function RecommendCourse({ setIsOpen, course }: RecommendCourseProps) {
+  const { handleAccessExpired } = useHandleTokenExpired();
+
+  const handleLikeCourse = async () => {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/survey`,
+        {
+          courseId: course.courseId,
+        },
+        { withCredentials: true }
+      );
+      // 성공 후 처리 추후 구현
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.post(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/survey`,
+            {
+              courseId: course.courseId,
+            },
+            { withCredentials: true }
+          );
+          // 성공 후 처리 추후 구현
+        } catch {
+          // reissue 이후 오류 처리
+        }
+      }
+      console.log(err.response?.data?.message);
+    }
+  };
+
   return (
     <section className="px-[16px] relative">
       <CourseList isEditable={false} setIsOpen={setIsOpen} course={course} />
-      <button className="fixed bottom-[16px] w-[342px] py-[16px] border rounded-lg font-semibold tracking-[-1.3%] bg-gn1 text-white border-gn5 outline-none">
+      <button
+        className="fixed bottom-[16px] w-[342px] py-[16px] border rounded-lg font-semibold tracking-[-1.3%] bg-gn1 text-white border-gn5 outline-none"
+        onClick={handleLikeCourse}
+      >
         코스 찜하기
       </button>
     </section>
