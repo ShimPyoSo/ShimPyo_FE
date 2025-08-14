@@ -151,24 +151,34 @@ export type ILatLng = {
 };
 
 export interface IOperationTime {
-  dayoff: string | null;
+  dayoff: string[] | null;
   openTime: string;
   closeTime: string;
   breakTime: string | null;
 }
 
+export interface IFacilities {
+  parking: boolean;
+  accessible: boolean;
+  tourDesk: boolean;
+  pet: boolean;
+  child: boolean;
+  wifi: boolean;
+}
+
 export interface ISpot extends ILatLng {
   id: number;
   region: string;
-  images: string;
+  images: string | string[];
   category: string[];
   title: string;
   isLiked?: boolean;
-  operationTime?: string;
+  operationTime?: IOperationTime;
   address?: string;
   tel?: string | null;
   homepage?: string;
   reservation?: string;
+  facilities?: IFacilities;
 }
 
 export interface ICourseList extends ILatLng {

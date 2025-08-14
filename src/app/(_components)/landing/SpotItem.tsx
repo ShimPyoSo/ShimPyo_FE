@@ -11,7 +11,7 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
           {spot.images && (
             <Image
               className="w-[102px] h-[102px] rounded-lg bg-white object-cover"
-              src={spot.images}
+              src={spot.images as string}
               alt={spot.title}
               fill
             />
