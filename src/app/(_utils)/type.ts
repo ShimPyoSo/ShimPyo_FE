@@ -62,18 +62,87 @@ export interface ILocation {
   region_3depth_name: string;
 }
 
-export type Region = '강원' | '서울';
-export type Reservation = '가능' | '불가능';
-export type Service = '주차' | '반려동물';
-export type Target = '20대' | '여성';
-export type Time = '낮' | '밤';
+export const REGIONS = [
+  { label: '서울', value: 'seoul' },
+  { label: '부산', value: 'busan' },
+  { label: '대구', value: 'daegu' },
+  { label: '인천', value: 'incheon' },
+  { label: '광주', value: 'gwangju' },
+  { label: '대전', value: 'daejeon' },
+  { label: '울산', value: 'ulsan' },
+  { label: '세종', value: 'sejong' },
+  { label: '경기', value: 'gyeonggi' },
+  { label: '충북', value: 'chungbuk' },
+  { label: '충남', value: 'chungnam' },
+  { label: '전북', value: 'jeonbuk' },
+  { label: '전남', value: 'jeonnam' },
+  { label: '경북', value: 'gyeongbuk' },
+  { label: '경남', value: 'gyeongnam' },
+  { label: '강원', value: 'gangwon' },
+  { label: '제주', value: 'jeju' },
+] as const;
+
+export type IRegionLabel = (typeof REGIONS)[number]['label'];
+export type IRegionValue = (typeof REGIONS)[number]['value'];
+
+export const RESERVATION_STATUS = [
+  { label: '예약 가능', value: true },
+  { label: '예약 불가능', value: false },
+] as const;
+
+export type IReservationLabel = (typeof RESERVATION_STATUS)[number]['label'];
+export type IReservationValue = (typeof RESERVATION_STATUS)[number]['value'];
+
+export const FACILITIES = [
+  { label: '주차 가능', value: 'parking' },
+  { label: '장애인 편의', value: 'accessible' },
+  { label: '관광/안내 데스크', value: 'tourDesk' },
+  { label: '반려동물 동반', value: 'pet' },
+  { label: '유아 동반', value: 'child' },
+  { label: '무료 Wi-Fi', value: 'wifi' },
+] as const;
+
+export type IFacilityLabel = (typeof FACILITIES)[number]['label'];
+export type IFacilityValue = (typeof FACILITIES)[number]['value'];
+
+export const AGE_GROUPS = [
+  { label: '20대 초반', value: '20Early' },
+  { label: '20대 중반', value: '20Mid' },
+  { label: '20대 후반', value: '20Late' },
+  { label: '30대 초반', value: '30Early' },
+  { label: '30대 중반', value: '30Mid' },
+  { label: '30대 후반', value: '30Late' },
+  { label: '40대', value: '40' },
+  { label: '50대', value: '50' },
+  { label: '60대 이상', value: '60' },
+] as const;
+
+export type IAgeGroupLabel = (typeof AGE_GROUPS)[number]['label'];
+export type IAgeGroupValue = (typeof AGE_GROUPS)[number]['value'];
+
+export const GENDERS = [
+  { label: '여성', value: 'female' },
+  { label: '남성', value: 'male' },
+] as const;
+
+export type IGenderLabel = (typeof GENDERS)[number]['label'];
+export type IGenderValue = (typeof GENDERS)[number]['value'];
+
+export const SORT_BY = [
+  { label: '인기순', key: 'popular' },
+  { label: '찜많은순', key: 'liked' },
+  { label: '후기순', key: 'review' },
+] as const;
+
+export type ISortLabel = (typeof SORT_BY)[number]['label'];
+export type ISortValue = (typeof SORT_BY)[number]['key'];
 
 export type IFilter = {
-  region?: Region[];
-  reservation?: Reservation[];
-  service?: Service[];
-  target?: Target[];
-  time?: Time[];
+  region: IRegionValue[];
+  reservation: IReservationValue[];
+  facilities: IFacilityValue[];
+  target: [IGenderValue[], IAgeGroupValue[]];
+  visitTime: string;
 };
 
 export type ILatLng = {

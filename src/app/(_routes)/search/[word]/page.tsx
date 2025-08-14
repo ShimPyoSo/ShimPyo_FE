@@ -3,12 +3,20 @@
 import { useEffect, useState } from 'react';
 
 import Filter from '@/app/(_components)/category/Filter/Filter';
+import { IFilter } from '@/app/(_utils)/type';
 import NoResult from '@/app/(_components)/search/NoResult';
 import SearchInput from '@/app/(_components)/search/SearchInput';
 import SpotListItem from '@/app/(_components)/category/SpotListItem';
 
 export default function SearchResult() {
   const [isActive, setIsActive] = useState(true);
+  const [filter, setFilter] = useState<IFilter>({
+    region: [],
+    reservation: [],
+    facilities: [],
+    target: [[], []],
+    visitTime: '',
+  }); // 선택한 필터 옵션
 
   useEffect(() => {
     const isStoreActive = localStorage.getItem('shimpyo_history');
@@ -21,7 +29,7 @@ export default function SearchResult() {
         <SearchInput isActive={isActive} />
       </div>
 
-      {true && <Filter />}
+      {true && <Filter filter={filter} setFilter={setFilter} />}
       {true ? (
         <ul className="px-[16px] pb-[20px] flex-1 overflow-y-auto">
           <SpotListItem type="spot" />

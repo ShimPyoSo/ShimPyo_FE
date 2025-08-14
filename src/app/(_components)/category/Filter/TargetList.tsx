@@ -1,43 +1,47 @@
+import { AGE_GROUPS, GENDERS, IFilter } from '@/app/(_utils)/type';
+
 import FilterItems from './FilterItem';
-import { target } from '@/app/(_utils)/constants';
 
 interface TargetFilterProps {
-  selectedIndices: number[];
-  setSelectedIndices: React.Dispatch<React.SetStateAction<number[]>>;
+  filter: IFilter;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
+  filterItem: { label: string; key: keyof IFilter };
 }
 
-export default function TargetList({ selectedIndices, setSelectedIndices }: TargetFilterProps) {
+export default function TargetList({ filter, setFilter, filterItem }: TargetFilterProps) {
   return (
     <div>
       <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">성별</p>
-      <ul className="mt-[6px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
-        {['여성', '남성'].map((area, index) => {
-          const isSelected = selectedIndices.includes(index);
-          return (
-            <FilterItems
-              isSelected={isSelected}
-              index={index}
-              name={area}
-              key={index}
-              setSelectedIndices={setSelectedIndices}
-            />
-          );
-        })}
+      <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
+        {filterItem.key === 'target' &&
+          GENDERS.map((area, idx) => {
+            const isSelected = filter.target[0].includes(area.value);
+            return (
+              <FilterItems
+                isSelected={isSelected}
+                name={area.label}
+                key={idx}
+                setFilter={setFilter}
+                filterItem={filterItem}
+              />
+            );
+          })}
       </ul>
       <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">연령대</p>
-      <ul className="mt-[6px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
-        {target.map((area, index) => {
-          const isSelected = selectedIndices.includes(index);
-          return (
-            <FilterItems
-              isSelected={isSelected}
-              index={index}
-              name={area}
-              key={index}
-              setSelectedIndices={setSelectedIndices}
-            />
-          );
-        })}
+      <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
+        {filterItem.key === 'target' &&
+          AGE_GROUPS.map((area, idx) => {
+            const isSelected = filter.target[1].includes(area.value);
+            return (
+              <FilterItems
+                isSelected={isSelected}
+                name={area.label}
+                key={idx}
+                setFilter={setFilter}
+                filterItem={filterItem}
+              />
+            );
+          })}
       </ul>
     </div>
   );

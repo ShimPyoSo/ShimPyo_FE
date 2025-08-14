@@ -4,32 +4,39 @@ interface FilterListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedFilter: React.Dispatch<React.SetStateAction<string | null>>;
   filter: IFilter;
+  filterItem: { label: string; key: keyof IFilter }[];
 }
 
-export default function FilterList({ setIsOpen, setSelectedFilter, filter }: FilterListProps) {
+export default function FilterList({ setIsOpen, setSelectedFilter, filter, filterItem }: FilterListProps) {
   const handleClick = (filterType: string) => {
     setIsOpen(true);
     setSelectedFilter(filterType);
   };
 
-  const filterItems: { label: string; key: keyof IFilter }[] = [
-    { label: '지역', key: 'region' },
-    { label: '예약', key: 'reservation' },
-    { label: '주 운영 시간', key: 'time' },
-    { label: '제공 서비스', key: 'service' },
-    { label: '성별과 연령대', key: 'target' },
-  ];
+  const isFilterSelected = (key: keyof IFilter) => {
+    switch (key) {
+      case 'region':
+      case 'reservation':
+      case 'facilities':
+        return filter[key]?.length > 0;
+      case 'target':
+        return filter.target[0]?.length > 0 || filter.target[1]?.length > 0;
+      case 'visitTime':
+        return filter.visitTime !== '';
+      default:
+        return false;
+    }
+  };
 
   return (
-    <ul className="px-[16px] pt-[24px] pb-[20px] flex items-center justify-between flex-wrap gap-2">
-      {filterItems.map(({ label, key }) => {
-        const isSelected = filter[key] && filter[key]!.length > 0;
+    <ul className="px-[16px] pt-[24px] pb-[20px] flex items-center flex-wrap gap-2">
+      {filterItem.map(({ label, key }) => {
+        const selected = isFilterSelected(key);
         return (
           <li
             key={label}
-            className={`py-[6px] px-[16px] rounded-[100px] text-b3 text-sm tracking-[-2%] cursor-pointer border ${
-              isSelected ? 'bg-gn1 border-gn1' : 'bg-gn4 border-gn2 text-gn1'
-            }`}
+            className={`py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-2%] cursor-pointer border
+              ${selected ? 'bg-gn4 border-gn2 text-gn1 font-semibold' : 'bg-w4 border-w6 text-b3'}`}
             onClick={() => handleClick(label)}
           >
             {label}

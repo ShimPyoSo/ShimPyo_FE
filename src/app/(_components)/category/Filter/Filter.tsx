@@ -6,16 +6,22 @@ import FilterList from './FilterList';
 import { IFilter } from '@/app/(_utils)/type';
 import { useState } from 'react';
 
-export default function Filter() {
+interface FilterProps {
+  filter: IFilter;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
+}
+
+export default function Filter({ filter, setFilter }: FilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null); // 최초 클릭된 필터
-  const [filter, setFilter] = useState<IFilter>({
-    region: [],
-    reservation: [],
-    service: [],
-    target: [],
-    time: [],
-  }); // 선택한 필터 옵션
+
+  const filterItems: { label: string; key: keyof IFilter }[] = [
+    { label: '여행 지역', key: 'region' },
+    { label: '예약 가능 여부', key: 'reservation' },
+    { label: '운영 시간', key: 'visitTime' },
+    { label: '제공 서비스', key: 'facilities' },
+    { label: '성별과 연령대', key: 'target' },
+  ];
 
   const handleClose = () => {
     setIsOpen(false);
@@ -24,9 +30,14 @@ export default function Filter() {
 
   return (
     <>
-      <FilterList setIsOpen={setIsOpen} setSelectedFilter={setSelectedFilter} filter={filter} />
+      <FilterList
+        setIsOpen={setIsOpen}
+        setSelectedFilter={setSelectedFilter}
+        filter={filter}
+        filterItem={filterItems}
+      />
       <FilterBottomSheet isOpen={isOpen} onClose={handleClose}>
-        <FilterContent selectedFilter={selectedFilter} setFilter={setFilter} />
+        <FilterContent selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItems} />
       </FilterBottomSheet>
     </>
   );

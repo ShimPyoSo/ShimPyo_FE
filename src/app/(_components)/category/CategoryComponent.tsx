@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import Filter from './Filter/Filter';
+import { IFilter } from '@/app/(_utils)/type';
+import { SORT_BY } from '@/app/(_utils)/type';
+import Sort from './Sort';
 import SpotListItem from './SpotListItem';
 import SpotSkeleton from './SpotSkeleton';
 import axios from 'axios';
@@ -15,6 +18,14 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   const searchParams = useSearchParams();
   const category = searchParams.get('type') ?? '';
   const [mounted, setMounted] = useState(false);
+  const [filter, setFilter] = useState<IFilter>({
+    region: [],
+    reservation: [],
+    facilities: [],
+    target: [[], []],
+    visitTime: '',
+  }); // 선택한 필터 옵션
+  const [selectedOption, setSelectedOption] = useState<(typeof SORT_BY)[number]>(SORT_BY[0]);
 
   useEffect(() => setMounted(true), []);
 
@@ -53,7 +64,12 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
     <>
       <div className="bg-w1">
         <CategoryHeader />
-        {type === 'list' && <Filter />}
+        {type === 'list' && (
+          <>
+            <Filter filter={filter} setFilter={setFilter} />
+            <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+          </>
+        )}
         {isLoading ? (
           <ul className="px-[16px] pb-[20px] flex-1 overflow-y-auto">
             {Array.from({ length: 5 }).map((_, i) => (
