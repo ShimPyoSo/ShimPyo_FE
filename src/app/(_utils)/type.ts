@@ -85,18 +85,10 @@ export const REGIONS = [
 export type IRegionLabel = (typeof REGIONS)[number]['label'];
 export type IRegionValue = (typeof REGIONS)[number]['value'];
 
-export const RESERVATION_STATUS = [
-  { label: '예약 가능', value: true },
-  { label: '예약 불가능', value: false },
-] as const;
-
-export type IReservationLabel = (typeof RESERVATION_STATUS)[number]['label'];
-export type IReservationValue = (typeof RESERVATION_STATUS)[number]['value'];
-
 export const FACILITIES = [
+  { label: '예약 가능', value: 'reservation' },
   { label: '주차 가능', value: 'parking' },
   { label: '장애인 편의', value: 'accessible' },
-  { label: '관광/안내 데스크', value: 'tourDesk' },
   { label: '반려동물 동반', value: 'pet' },
   { label: '유아 동반', value: 'child' },
   { label: '무료 Wi-Fi', value: 'wifi' },
@@ -139,7 +131,6 @@ export type ISortValue = (typeof SORT_BY)[number]['key'];
 
 export type IFilter = {
   region: IRegionValue[];
-  reservation: IReservationValue[];
   facilities: IFacilityValue[];
   target: [IGenderValue[], IAgeGroupValue[]];
   visitTime: string;
@@ -160,7 +151,7 @@ export interface IOperationTime {
 export interface IFacilities {
   parking: boolean;
   accessible: boolean;
-  tourDesk: boolean;
+  reservation: boolean;
   pet: boolean;
   child: boolean;
   wifi: boolean;

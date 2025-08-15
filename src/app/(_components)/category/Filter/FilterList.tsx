@@ -1,4 +1,5 @@
 import { IFilter } from '@/app/(_utils)/type';
+import { getDisplayLabel } from '@/app/(_utils)/getDisplayLabel';
 
 interface FilterListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +17,6 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter, filte
   const isFilterSelected = (key: keyof IFilter) => {
     switch (key) {
       case 'region':
-      case 'reservation':
       case 'facilities':
         return filter[key]?.length > 0;
       case 'target':
@@ -32,14 +32,15 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter, filte
     <ul className="px-[16px] pt-[24px] pb-[20px] flex items-center flex-wrap gap-2">
       {filterItem.map(({ label, key }) => {
         const selected = isFilterSelected(key);
+        const displayLabel = selected ? getDisplayLabel(filter, label, key) : label;
         return (
           <li
             key={label}
             className={`py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-2%] cursor-pointer border
-              ${selected ? 'bg-gn4 border-gn2 text-gn1 font-semibold' : 'bg-w4 border-w6 text-b3'}`}
+              ${selected ? 'bg-gn4 border-gn2 text-gn1 font-semibold' : 'bg-[#FBFBFB] border-w6 text-b3'}`}
             onClick={() => handleClick(label)}
           >
-            {label}
+            {displayLabel}
           </li>
         );
       })}

@@ -6,9 +6,7 @@ import {
   IFacilityValue,
   IGenderValue,
   IRegionValue,
-  IReservationValue,
   REGIONS,
-  RESERVATION_STATUS,
 } from '@/app/(_utils)/type';
 
 import { IFilter } from '@/app/(_utils)/type';
@@ -25,14 +23,11 @@ export default function FilterItems({ isSelected, name, setFilter, filterItem }:
     setFilter((prev) => {
       const key = filterItem.key;
 
-      let value: IRegionValue | IReservationValue | IFacilityValue | IGenderValue | IAgeGroupValue | string | undefined;
+      let value: IRegionValue | IFacilityValue | IGenderValue | IAgeGroupValue | string | undefined;
 
       switch (key) {
         case 'region':
           value = REGIONS.find((r) => r.label === name)?.value;
-          break;
-        case 'reservation':
-          value = RESERVATION_STATUS.find((r) => r.label === name)?.value;
           break;
         case 'facilities':
           value = FACILITIES.find((f) => f.label === name)?.value;
@@ -80,14 +75,6 @@ export default function FilterItems({ isSelected, name, setFilter, filterItem }:
           ? current.filter((v) => v !== (value as IRegionValue))
           : [...current, value as IRegionValue];
         return { ...prev, region: newArray };
-      }
-
-      if (key === 'reservation') {
-        const current = prev.reservation;
-        const newArray = current.includes(value as IReservationValue)
-          ? current.filter((v) => v !== (value as IReservationValue))
-          : [...current, value as IReservationValue];
-        return { ...prev, reservation: newArray };
       }
 
       if (key === 'facilities') {

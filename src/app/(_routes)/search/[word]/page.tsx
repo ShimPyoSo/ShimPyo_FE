@@ -12,7 +12,6 @@ export default function SearchResult() {
   const [isActive, setIsActive] = useState(true);
   const [filter, setFilter] = useState<IFilter>({
     region: [],
-    reservation: [],
     facilities: [],
     target: [[], []],
     visitTime: '',

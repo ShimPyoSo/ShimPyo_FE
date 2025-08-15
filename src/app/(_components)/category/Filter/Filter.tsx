@@ -17,7 +17,6 @@ export default function Filter({ filter, setFilter }: FilterProps) {
 
   const filterItems: { label: string; key: keyof IFilter }[] = [
     { label: '여행 지역', key: 'region' },
-    { label: '예약 가능 여부', key: 'reservation' },
     { label: '운영 시간', key: 'visitTime' },
     { label: '제공 서비스', key: 'facilities' },
     { label: '성별과 연령대', key: 'target' },

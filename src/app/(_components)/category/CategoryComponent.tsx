@@ -20,7 +20,6 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   const [mounted, setMounted] = useState(false);
   const [filter, setFilter] = useState<IFilter>({
     region: [],
-    reservation: [],
     facilities: [],
     target: [[], []],
     visitTime: '',

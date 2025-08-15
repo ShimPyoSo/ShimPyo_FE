@@ -1,6 +1,5 @@
 import AreaFilter from './AreaFilter';
 import { IFilter } from '@/app/(_utils)/type';
-import ReservationFilter from './ReservationFilter';
 import ServiceFilter from './ServiceFilter';
 import TargetFilter from './TargetFilter';
 
@@ -15,14 +14,8 @@ export default function FilterContent({ selectedFilter, filter, setFilter, filte
   return (
     <div className="pb-[40px]">
       <AreaFilter selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItem[0]} />
-      <ReservationFilter
-        selectedFilter={selectedFilter}
-        filter={filter}
-        setFilter={setFilter}
-        filterItem={filterItem[1]}
-      />
-      <ServiceFilter selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItem[3]} />
-      <TargetFilter selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItem[4]} />
+      <ServiceFilter selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItem[2]} />
+      <TargetFilter selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItem[3]} />
     </div>
   );
 }
