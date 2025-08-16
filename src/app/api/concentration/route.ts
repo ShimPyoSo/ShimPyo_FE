@@ -30,8 +30,6 @@ export async function GET(req: Request) {
   const res = await fetch(url);
   const data = await res.json();
 
-  console.log(data);
-
   const items = data.response?.body?.items?.item;
   if (!items) return Response.json(null);
 

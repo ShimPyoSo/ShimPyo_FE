@@ -10,7 +10,11 @@ import gps from '/public/images/icons/gps.svg';
 import useKakaoAddress from '@/app/(_utils)/hooks/useKakaoAddress';
 
 export default function TodayWellness() {
-  const [location, setLocation] = useState<ILocation | null>(null);
+  const [location, setLocation] = useState<ILocation>({
+    region_1depth_name: '서울특별시',
+    region_2depth_name: '중구',
+    region_3depth_name: '태평로1가',
+  });
 
   const fetchAddress = useCallback(async () => {
     try {
