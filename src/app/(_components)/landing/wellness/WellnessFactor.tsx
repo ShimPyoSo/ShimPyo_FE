@@ -19,7 +19,7 @@ interface WellnessFactorProps {
 export default function WellnessFactor({ location }: WellnessFactorProps) {
   const { weather } = useFetchWeather();
   const { dust } = useFetchDust(location);
-  const { ultraviolet } = useFetchUltraViolet();
+  const { ultraviolet } = useFetchUltraViolet(location);
   const [score, setScore] = useState(100);
 
   useEffect(() => {
