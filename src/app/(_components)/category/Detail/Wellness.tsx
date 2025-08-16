@@ -15,6 +15,7 @@ export default function Wellness({ spot }: { spot: ISpot }) {
         latitude={spot.latitude as number}
         longitude={spot.longitude as number}
         address={spot.address as string}
+        name={spot.title}
       />
     </section>
   );

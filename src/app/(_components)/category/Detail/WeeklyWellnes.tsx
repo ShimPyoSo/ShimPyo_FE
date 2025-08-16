@@ -10,12 +10,13 @@ interface WeeklyWellnessProps {
   latitude: number;
   longitude: number;
   address: string;
+  name: string;
 }
 
-export default function WeeklyWellness({ longitude, latitude, address }: WeeklyWellnessProps) {
+export default function WeeklyWellness({ longitude, latitude, address, name }: WeeklyWellnessProps) {
   const weekData = getWeeklyDate();
   const { weather } = useFetchWeeklyWeather({ longitude, latitude, address });
-  const { concentration } = useFetchConcentration();
+  const { concentration } = useFetchConcentration({ address, name });
 
   return (
     <section>
