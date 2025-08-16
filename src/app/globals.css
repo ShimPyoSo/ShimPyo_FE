@@ -59,6 +59,20 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #fafafa inset !important;
 }
 
+input[type='range'] {
+  @apply absolute w-full bg-transparent appearance-none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  @apply appearance-none w-4 h-4 rounded-full bg-[#80a281] cursor-pointer;
+  pointer-events: auto;
+}
+
+input[type='range']::-moz-range-thumb {
+  @apply w-4 h-4 rounded-full bg-[#80a281] cursor-pointer;
+  pointer-events: auto;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

@@ -3,6 +3,7 @@ import axios, { AxiosError } from 'axios';
 
 import CourseList from '../course/CourseList';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
+import { useRouter } from 'next/navigation';
 
 interface RecommendCourseProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,7 @@ interface RecommendCourseProps {
 
 export default function RecommendCourse({ setIsOpen, course }: RecommendCourseProps) {
   const { handleAccessExpired } = useHandleTokenExpired();
+  const router = useRouter();
 
   const handleLikeCourse = async () => {
     try {
@@ -21,7 +23,7 @@ export default function RecommendCourse({ setIsOpen, course }: RecommendCoursePr
         },
         { withCredentials: true }
       );
-      // 성공 후 처리 추후 구현
+      router.push('/mypage/like/course');
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN') {
@@ -34,7 +36,7 @@ export default function RecommendCourse({ setIsOpen, course }: RecommendCoursePr
             },
             { withCredentials: true }
           );
-          // 성공 후 처리 추후 구현
+          router.push('/mypage/like/course');
         } catch {
           // reissue 이후 오류 처리
         }
