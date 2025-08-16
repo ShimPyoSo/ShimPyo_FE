@@ -46,7 +46,6 @@ export default function FilterItems({ isSelected, name, setFilter, filterItem }:
 
       if (!value) return prev as IFilter;
 
-      // target 처리
       if (key === 'target') {
         const [genderArr, ageArr] = prev.target;
 

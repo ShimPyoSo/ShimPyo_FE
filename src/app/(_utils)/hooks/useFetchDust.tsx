@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { ILocation } from '../type';
+import { REGION_MAP } from '../constants';
 import axios from 'axios';
 
 export function useFetchDust(location: ILocation | null) {
@@ -13,7 +14,7 @@ export function useFetchDust(location: ILocation | null) {
       try {
         const response = await axios.get('/api/dust', {
           params: {
-            location: location?.region_1depth_name,
+            location: REGION_MAP[location?.region_1depth_name ?? ''] || '전국',
           },
         });
 
