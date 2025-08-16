@@ -41,6 +41,7 @@ export default function RangeSlider({ filter, setFilter }: RangeSliderProps) {
     <div className="w-full mt-[16px] mx-auto">
       <div className="flex justify-between mb-[4px] text-xs text-g3 tracking-[-2%]">
         <span>09:00</span>
+        <span>12:00</span>
         <span>24:00~</span>
       </div>
       <Range
@@ -66,9 +67,9 @@ export default function RangeSlider({ filter, setFilter }: RangeSliderProps) {
         )}
         renderThumb={({ props, index }) => (
           <div {...props} key={uuidv4()} className="relative flex flex-col items-center outline-none">
-            <div className="h-[13px] w-[13px] bg-gn1 rounded-full shadow-md outline-none" />
+            <div className="h-[13px] w-[13px] bg-gn1 rounded-full shadow-md outline-none" key={uuidv4()} />
             {!(index === 0 && values[index] === MIN) && !(index === 1 && values[index] === MAX) && (
-              <div className="absolute -top-8 flex flex-col items-center">
+              <div className="absolute -top-8 flex flex-col items-center" key={uuidv4()}>
                 <div className="p-[3px] text-xs font-semibold bg-gn1 text-white rounded-md">
                   {`${values[index]}:00`}
                 </div>
