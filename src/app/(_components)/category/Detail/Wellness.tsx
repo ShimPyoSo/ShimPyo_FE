@@ -11,7 +11,11 @@ export default function Wellness({ spot }: { spot: ISpot }) {
         <Image src={gps} alt="위치" width={16} height={16} />
         <p className="text-sm text-g1">{spot.address}</p>
       </div>
-      <WeeklyWellness />
+      <WeeklyWellness
+        latitude={spot.latitude as number}
+        longitude={spot.longitude as number}
+        address={spot.address as string}
+      />
     </section>
   );
 }

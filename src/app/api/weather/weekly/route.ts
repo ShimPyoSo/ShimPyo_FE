@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import { dfs_xy_conv } from '@/app/(_utils)/convertGrid';
 import { getBaseDateAndTime } from '@/app/(_utils)/getBaseDateAndTime';
 import getTmFc from '@/app/(_utils)/getTmFc';
+import weatherAreaNo from '@/data/weatherAreaNo.json';
 
 const simplifyWeather = (desc: string): '맑음' | '흐림' | '비' | '눈' => {
   if (desc.includes('비')) return '비';
@@ -12,10 +13,36 @@ const simplifyWeather = (desc: string): '맑음' | '흐림' | '비' | '눈' => {
   return '맑음';
 };
 
+function normalize(name: string) {
+  return name.replace(/\s/g, '');
+}
+
+function extractRegion(address: string) {
+  const parts = address.trim().split(/\s+/);
+  return parts.slice(0, 2).join(' '); // 1~2단계만
+}
+
+function findAreaCode(address: string) {
+  const regionStr = normalize(extractRegion(address));
+  let bestMatch = '';
+  let maxLength = 0;
+
+  for (const item of weatherAreaNo) {
+    const itemRegion = normalize(item.지역);
+    if (regionStr.includes(itemRegion) && itemRegion.length > maxLength) {
+      bestMatch = item.구역코드;
+      maxLength = itemRegion.length;
+    }
+  }
+
+  return bestMatch || '11B10101';
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const lat = parseFloat(searchParams.get('lat') || '');
   const lon = parseFloat(searchParams.get('lon') || '');
+  const address = searchParams.get('address') || '';
 
   const now = new Date();
   const { x: nx, y: ny } = dfs_xy_conv(lat, lon);
@@ -75,9 +102,11 @@ export async function GET(req: Request) {
     });
   }
 
+  const regId = findAreaCode(address);
+
   // 4~7일차 중기예보 (육상날씨) 조회
   const tmfc = getTmFc();
-  url = `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=${process.env.WEEKLY_WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=10&dataType=JSON&regId=11B00000&tmFc=${tmfc}`;
+  url = `https://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst?serviceKey=${process.env.WEEKLY_WEATHER_SERVICE_KEY}&pageNo=1&numOfRows=10&dataType=JSON&regId=${regId}&tmFc=${tmfc}`;
   res = await fetch(url);
   data = await res.json();
   const midItem = data.response.body.items.item[0];
@@ -88,8 +117,11 @@ export async function GET(req: Request) {
   data = await res.json();
 
   const tempItem = data.response.body.items.item[0];
+  const isBefore18 = now.getHours() < 18;
+  const startDay = isBefore18 ? 5 : 4;
+  const endDay = isBefore18 ? 8 : 7;
 
-  for (let day = 4; day <= 7; day++) {
+  for (let day = startDay; day <= endDay; day++) {
     const wfAm = midItem[`wf${day}Am`] ?? '';
     const wfPm = midItem[`wf${day}Pm`] ?? '';
 

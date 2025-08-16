@@ -6,9 +6,15 @@ import illu from '/public/images/icons/illustration/wellness.svg';
 import { useFetchConcentration } from '@/app/(_utils)/hooks/useFetchConcentration';
 import { useFetchWeeklyWeather } from '@/app/(_utils)/hooks/useFetchWeeklyWeather';
 
-export default function WeeklyWellness() {
+interface WeeklyWellnessProps {
+  latitude: number;
+  longitude: number;
+  address: string;
+}
+
+export default function WeeklyWellness({ longitude, latitude, address }: WeeklyWellnessProps) {
   const weekData = getWeeklyDate();
-  const { weather } = useFetchWeeklyWeather();
+  const { weather } = useFetchWeeklyWeather({ longitude, latitude, address });
   const { concentration } = useFetchConcentration();
 
   return (
