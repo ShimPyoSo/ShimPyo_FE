@@ -41,7 +41,7 @@ export default function RangeSlider({ filter, setFilter }: RangeSliderProps) {
     <div className="w-full mt-[16px] mx-auto">
       <div className="flex justify-between mb-[4px] text-xs text-g3 tracking-[-2%]">
         <span>09:00</span>
-        <span>12:00</span>
+        <span>16:00</span>
         <span>24:00~</span>
       </div>
       <Range
