@@ -1,15 +1,25 @@
 'use client';
 
-import { Map, MapMarker, Polyline } from 'react-kakao-maps-sdk';
+import { CustomOverlayMap, Map, Polyline } from 'react-kakao-maps-sdk';
 import { useEffect, useState } from 'react';
 
 import { ILatLng } from '@/app/(_utils)/type';
+import Marker from './Marker';
 
 interface MapRenderProps {
   positions: ILatLng[];
+  titles: string[];
+  day: number;
 }
 
-export default function MapRender({ positions }: MapRenderProps) {
+const DAY_COLORS: Record<number, string> = {
+  0: '#67A3C8',
+  1: '#EF82AB',
+  2: '#E7CF85',
+  3: '#AEAB40',
+};
+
+export default function MapRender({ positions, titles, day }: MapRenderProps) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -46,11 +56,13 @@ export default function MapRender({ positions }: MapRenderProps) {
       level={9}
     >
       {path.map((pos, idx) => (
-        <MapMarker key={idx} position={pos} />
+        <CustomOverlayMap key={idx} position={pos} yAnchor={1}>
+          <Marker name={titles[idx]} day={day} />
+        </CustomOverlayMap>
       ))}
 
       {path.length > 1 && (
-        <Polyline path={path} strokeWeight={4} strokeColor={'#80a281'} strokeOpacity={1} strokeStyle={'solid'} />
+        <Polyline path={path} strokeWeight={4} strokeColor={DAY_COLORS[day]} strokeOpacity={1} strokeStyle={'solid'} />
       )}
     </Map>
   );

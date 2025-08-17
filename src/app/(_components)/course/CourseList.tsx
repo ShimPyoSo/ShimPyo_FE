@@ -27,6 +27,8 @@ export default function CourseList({ isEditable, setIsOpen, course }: CourseList
     }))
   );
 
+  const titlesGroup: string[][] = course.days.map((day) => day.list.map((spot) => spot.title));
+
   return (
     <>
       <div className="mt-[30px] mb-[24px] flex items-end justify-between">
@@ -50,7 +52,7 @@ export default function CourseList({ isEditable, setIsOpen, course }: CourseList
           )}
         </div>
       </div>
-      <Map positions={positionsGroup} day={course.days.length} />
+      <Map positions={positionsGroup} titles={titlesGroup} day={course.days.length} />
       <ul className="pb-[72px]">
         {course.days.map((day, index) => (
           <DayItem key={index} day={day.date} course={day.list} isEditable={isEditable} />
