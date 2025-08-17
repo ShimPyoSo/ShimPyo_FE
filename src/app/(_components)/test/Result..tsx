@@ -67,7 +67,14 @@ export default function Result({ setCourse }: ResultProps) {
     <section className="flex flex-col items-center">
       <h2 className="mt-[22px] text-center">
         <small className="text-sm text-g1 tracking-[-2%]">{currentItem.description}</small>
-        <p className="mt-[5px] text-3xl text-[#78B3ED] font-[kkubulim]">{currentItem.name}</p>
+        <p
+          className="mt-[5px] text-3xl font-[kkubulim]"
+          style={{
+            color: currentItem.color,
+          }}
+        >
+          {currentItem.name}
+        </p>
       </h2>
       <Image className="mt-[34px]" src={currentItem.image} alt={currentItem.name} width={375} height={420} />
       <button

@@ -1,4 +1,4 @@
-import CategoryIconItem from '../course/CategoryIconItem';
+import CategoryTimeItem from './CategoryTimeItem';
 import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import SpotItem from '../course/SpotItem';
@@ -34,7 +34,7 @@ export default function DayItem({ isEditable, day, course }: DayItemProps) {
       <div className="pt-[28px] pb-[40px] border-b border-[#E2E2E2] flex items-start gap-[8px]">
         <ul>
           {course.map((spot, index) => (
-            <CategoryIconItem key={spot.touristId} isLast={index === course.length - 1} />
+            <CategoryTimeItem key={spot.touristId} isLast={index === course.length - 1} />
           ))}
         </ul>
         <ul className="flex flex-col gap-[18px]">

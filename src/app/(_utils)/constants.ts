@@ -116,14 +116,39 @@ export const categoryList = [
 ];
 
 export const testImages = [
-  { name: '비우는 쉼표', image: rest, description: '아무것도 하지 않고 멍 때리는 쉼이 필요한' },
-  { name: '땀흘리는 쉼표', image: move, description: '몸을 역동적으로 움직이는 쉼이 필요한' },
-  { name: '어울리는 쉼표', image: friendly, description: '사람들 사이에서 에너지를 얻는 쉼이 필요한' },
-  { name: '채우는 쉼표', image: full, description: '건강한 요리를 먹고 심신을 디톡스 하는 쉼이 필요한' },
-  { name: '피어나는 쉼표', image: grow, description: '나를 아름답게 가꾸며 감성을 회복하는 쉼이 필요한' },
-  { name: '숨쉬는 쉼표', image: breathe, description: '자연 속에서 호흡하며 몸을 재정비 하는 쉼이 필요한' },
-  { name: '이완하는 쉼표', image: relaxing, description: '심신의 피로를 스파, 찜질, 마사지로 푸는 쉼이 필요한' },
-  { name: '이것저것 쉼표', image: variety, description: '다양한 유형의 쉼이 동시에 필요한' },
+  { name: '비우는 쉼표', image: rest, description: '아무것도 하지 않고 멍 때리는 쉼이 필요한', color: '#78B3ED' },
+  { name: '땀흘리는 쉼표', image: move, description: '몸을 역동적으로 움직이는 쉼이 필요한', color: '#FF7878' },
+  {
+    name: '어울리는 쉼표',
+    image: friendly,
+    description: '사람들 사이에서 에너지를 얻는 쉼이 필요한',
+    color: '#FFAB36',
+  },
+  {
+    name: '채우는 쉼표',
+    image: full,
+    description: '건강한 요리를 먹고 심신을 디톡스 하는 쉼이 필요한',
+    color: '#BBD193',
+  },
+  {
+    name: '피어나는 쉼표',
+    image: grow,
+    description: '나를 아름답게 가꾸며 감성을 회복하는 쉼이 필요한',
+    color: '#FF688D',
+  },
+  {
+    name: '숨쉬는 쉼표',
+    image: breathe,
+    description: '자연 속에서 호흡하며 몸을 재정비 하는 쉼이 필요한',
+    color: '#A28F80',
+  },
+  {
+    name: '이완하는 쉼표',
+    image: relaxing,
+    description: '심신의 피로를 스파, 찜질, 마사지로 푸는 쉼이 필요한',
+    color: '#AA7CFF',
+  },
+  { name: '이것저것 쉼표', image: variety, description: '다양한 유형의 쉼이 동시에 필요한', color: '#87BABA' },
 ];
 
 export const questions: IQuestion[] = [
