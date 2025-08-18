@@ -1,5 +1,9 @@
 'use client';
 
+import { isLoggedInAtom, loginAtom } from '@/app/(_store)/auth';
+import { useAtom, useAtomValue } from 'jotai';
+import { useEffect, useState } from 'react';
+
 import EmailAuth from '../EmailAuth';
 import { ISignUp } from '@/app/(_utils)/type';
 import IdInput from '../IdInput';
@@ -11,7 +15,6 @@ import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function SignUpForm() {
   const { register, handleSubmit, watch, trigger, control } = useForm<ISignUp>({ mode: 'onBlur' });
@@ -23,6 +26,14 @@ export default function SignUpForm() {
   const [selectedDomain, setSelectedDomain] = useState(domainOptions[0]);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [, login] = useAtom(loginAtom);
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/signup/additional');
+    }
+  }, [isLoggedIn, router]);
 
   const onSubmit = async (data: ISignUp) => {
     if (!isVerified) {
@@ -32,12 +43,16 @@ export default function SignUpForm() {
     try {
       const fullEmail = `${data.email}@${selectedDomain.value === 'custom' ? customDomain : selectedDomain.value}`;
 
-      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/signup`, {
-        email: fullEmail,
-        username: data.username,
-        password: data.password,
-      });
-      router.push('/signup/additional');
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth/signup`,
+        {
+          email: fullEmail,
+          username: data.username,
+          password: data.password,
+        },
+        { withCredentials: true }
+      );
+      login(response.data);
     } catch (error) {
       console.log(error); // error 처리 컴포넌트 구현 후 수정
     }
