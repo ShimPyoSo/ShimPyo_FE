@@ -12,6 +12,25 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: '/images/icons/logo.svg', type: 'image/svg+xml' }],
   },
+  openGraph: {
+    title: '쉼표',
+    description: '당신을 위한 쉼, 웰니스 여행의 시작',
+    url: 'https://www.shimpyo.co.kr/',
+    images: [
+      {
+        url: '/images/openGraph.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '쉼표',
+    description: '당신을 위한 쉼, 웰니스 여행의 시작',
+    images: ['/images/openGraph.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
