@@ -47,7 +47,7 @@ export default function SpotDetail() {
           </div>
           <div className="flex items-center gap-[4px]">
             <Liked liked={data?.isLiked as boolean} id={Number(id)} />
-            <Share setIsOpen={setIsOpen} />
+            <Share setIsOpen={setIsOpen} type="spot" />
           </div>
         </div>
 

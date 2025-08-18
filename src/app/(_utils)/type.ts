@@ -190,6 +190,7 @@ export interface ICourse {
   courseId: number;
   title: string;
   typename: IResultType;
+  token: string;
   days: IDay[];
 }
 

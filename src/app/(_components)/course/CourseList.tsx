@@ -44,7 +44,7 @@ export default function CourseList({ isEditable, setIsOpen, course }: CourseList
           <p className="font-semibold text-lg text-b1">{course.title}</p>
         </h2>
         <div className="flex gap-[6px] items-center">
-          <Share setIsOpen={setIsOpen} />
+          <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
           {isEditable && (
             <button>
               <Image src={trash} alt="삭제" width={24} height={24} />

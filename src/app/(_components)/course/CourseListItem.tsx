@@ -35,7 +35,7 @@ export default function CourseListItem({ setIsOpen }: CourseListItemProps) {
         </div>
 
         <div className="flex items-center gap-[6px]">
-          <Share setIsOpen={setIsOpen} />
+          <Share setIsOpen={setIsOpen} type="course" courseId={1} token="dsdfsdawd" />
           <button>
             <Image src={trash} alt="코스 삭제" width={24} height={24} />
           </button>
