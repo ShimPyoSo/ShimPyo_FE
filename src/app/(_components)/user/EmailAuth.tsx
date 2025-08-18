@@ -92,9 +92,12 @@ export default function EmailAuth<T extends ISignUp | IFind>({
         인증하기
       </button>
       <p className={`mt-[4px] text-xs ${isEmailError ? 'text-r' : 'text-b3'}`}>
-        {isEmailError ? '가입되지 않은 이메일이예요' : '이메일 입력 후 인증을 진행해 주세요'}
+        {isEmailError && type === 'register'
+          ? '이미 가입된 이메일이에요'
+          : isEmailError && type === 'find'
+          ? '가입되지 않은 이메일이에요'
+          : '이메일 입력 후 인증을 진행해 주세요'}
       </p>
-
       <AuthCodeInput
         isAuthStart={isAuthStart}
         register={register}
