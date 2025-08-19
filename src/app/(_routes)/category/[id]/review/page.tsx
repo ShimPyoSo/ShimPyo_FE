@@ -13,10 +13,11 @@ import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
-  const [isOpen, setIsOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number>(0); // 삭제 클릭된 리뷰 아이디
   const [shouldRefetch, setShouldRefetch] = useState(false);
+  const [reviewImg, setReviewImg] = useState<string[] | null>(null);
+  const [selectedNumber, setSelectedNumber] = useState(0);
   const { handleAccessExpired } = useHandleTokenExpired();
 
   const handleDeleteReview = async () => {
@@ -62,13 +63,15 @@ export default function Review() {
         </div>
 
         <ReviewList
+          setReviewImg={setReviewImg}
+          setSelectedNumber={setSelectedNumber}
           setIsOpen={setIsDeleteOpen}
           setSelectedReviewId={setSelectedReviewId}
           shouldRefetch={shouldRefetch}
           setShouldRefetch={setShouldRefetch}
         />
       </div>
-      {isOpen && <ImageModal setIsOpen={setIsOpen} />}
+      {reviewImg && <ImageModal reviewImg={reviewImg} setReviewImg={setReviewImg} selectedNumber={selectedNumber} />}
       {isDeleteOpen && (
         <Confirm
           title={'후기 삭제'}

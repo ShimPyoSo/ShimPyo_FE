@@ -15,6 +15,8 @@ interface ReviewListProps {
   setSelectedReviewId: React.Dispatch<React.SetStateAction<number>>;
   shouldRefetch: boolean;
   setShouldRefetch: React.Dispatch<React.SetStateAction<boolean>>;
+  setReviewImg: React.Dispatch<React.SetStateAction<string[] | null>>;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ReviewList({
@@ -22,6 +24,8 @@ export default function ReviewList({
   setSelectedReviewId,
   shouldRefetch,
   setShouldRefetch,
+  setReviewImg,
+  setSelectedNumber,
 }: ReviewListProps) {
   const { id } = useParams();
 
@@ -74,9 +78,11 @@ export default function ReviewList({
             <ReviewItem
               key={review.reviewId}
               review={review}
-              setIsOpen={setIsOpen}
+              setIsConfirmOpen={setIsOpen}
               type="detail"
               setSelectedReviewId={setSelectedReviewId}
+              setReviewImg={setReviewImg}
+              setSelectedNumber={setSelectedNumber}
             />
           ))}
           {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}

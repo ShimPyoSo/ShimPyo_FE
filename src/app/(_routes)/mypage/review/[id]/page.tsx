@@ -14,10 +14,11 @@ import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
-  const [isOpen, setIsOpen] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState<number>(0); // 삭제 클릭된 리뷰 아이디
   const [isAllDelete, setIsAllDelete] = useState(false);
+  const [reviewImg, setReviewImg] = useState<string[] | null>(null);
+  const [selectedNumber, setSelectedNumber] = useState(0);
   const { handleDeleteReview } = useDeleteReview();
 
   const fetchReviews = async (): Promise<IReviewResponse> => {
@@ -48,7 +49,7 @@ export default function Review() {
           <button
             className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-sm tracking-[-2%] font-semibold"
             onClick={() => {
-              setIsOpen(true);
+              setIsConfirmOpen(true);
               setIsAllDelete(true);
             }}
           >
@@ -60,8 +61,9 @@ export default function Review() {
           isLoading={isLoading}
           reviews={data?.reviews}
           setIsConfirmOpen={setIsConfirmOpen}
-          setIsOpen={setIsOpen}
           setSelectedReviewId={setSelectedReviewId}
+          setReviewImg={setReviewImg}
+          setSelectedNumber={setSelectedNumber}
         />
       </div>
       {isConfirmOpen && (
@@ -74,7 +76,7 @@ export default function Review() {
           onConfirm={handleDelete}
         />
       )}
-      {isOpen && <ImageModal setIsOpen={setIsOpen} />}
+      {reviewImg && <ImageModal reviewImg={reviewImg} setReviewImg={setReviewImg} selectedNumber={selectedNumber} />}
     </ProtectedRoute>
   );
 }

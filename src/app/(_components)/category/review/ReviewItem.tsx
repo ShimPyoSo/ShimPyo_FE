@@ -9,18 +9,20 @@ import { userAtom } from '@/app/(_store)/auth';
 
 interface ReviewItemProps {
   review: IReview;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   type: 'mypage' | 'detail';
   setSelectedReviewId: React.Dispatch<React.SetStateAction<number>>;
-  setIsConfirmOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsConfirmOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setReviewImg: React.Dispatch<React.SetStateAction<string[] | null>>;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ReviewItem({
   review,
-  setIsOpen,
   type,
   setSelectedReviewId,
   setIsConfirmOpen,
+  setReviewImg,
+  setSelectedNumber,
 }: ReviewItemProps) {
   const [isMore, setIsMore] = useState(false);
   const [isClamped, setIsClamped] = useState(false);
@@ -66,7 +68,9 @@ export default function ReviewItem({
           {isMore ? '접기' : '더보기'}
         </button>
       )}
-      {review.images.length > 0 && <ImageList images={review.images} setIsOpen={setIsOpen} />}
+      {review.images.length > 0 && (
+        <ImageList images={review.images} setReviewImg={setReviewImg} setSelectedNumber={setSelectedNumber} />
+      )}
     </li>
   );
 }

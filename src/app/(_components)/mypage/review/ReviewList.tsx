@@ -6,17 +6,19 @@ import ReviewSkeleton from '../../category/review/ReviewSkeleton';
 interface ReviewListProps {
   isLoading: boolean;
   reviews: IReview[] | undefined;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectedReviewId: React.Dispatch<React.SetStateAction<number>>;
   setIsConfirmOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setReviewImg: React.Dispatch<React.SetStateAction<string[] | null>>;
+  setSelectedNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function ReviewList({
   isLoading,
   reviews,
-  setIsOpen,
   setIsConfirmOpen,
   setSelectedReviewId,
+  setReviewImg,
+  setSelectedNumber,
 }: ReviewListProps) {
   return (
     <ul className="h-[calc(100%-100px)] flex flex-col gap-[12px] my-[16px]">
@@ -26,10 +28,11 @@ export default function ReviewList({
         reviews.map((review, idx) => (
           <ReviewItem
             review={review}
-            setIsOpen={setIsOpen}
             type="mypage"
             setSelectedReviewId={setSelectedReviewId}
             setIsConfirmOpen={setIsConfirmOpen}
+            setReviewImg={setReviewImg}
+            setSelectedNumber={setSelectedNumber}
             key={idx}
           />
         ))

@@ -15,7 +15,8 @@ import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
-  const [isOpen, setIsOpen] = useState(false);
+  const [reviewImg, setReviewImg] = useState<string[] | null>(null);
+  const [selectedNumber, setSelectedNumber] = useState(0);
 
   const fetchReviews = async (): Promise<IReview[]> => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=4&touristId=${id}`);
@@ -51,11 +52,18 @@ export default function Review() {
             {isLoading
               ? Array.from({ length: 4 }).map((_, i) => <ReviewSkeleton key={i} />)
               : reviews.length > 0 &&
-                reviews.map((review) => <ReviewItem setIsOpen={setIsOpen} review={review} key={review.reviewId} />)}
+                reviews.map((review) => (
+                  <ReviewItem
+                    setReviewImg={setReviewImg}
+                    setSelectedNumber={setSelectedNumber}
+                    review={review}
+                    key={review.reviewId}
+                  />
+                ))}
           </ul>
         </Carousel>
       </section>
-      {isOpen && <ImageModal setIsOpen={setIsOpen} />}
+      {reviewImg && <ImageModal reviewImg={reviewImg} setReviewImg={setReviewImg} selectedNumber={selectedNumber} />}
     </>
   );
 }
