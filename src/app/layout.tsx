@@ -1,5 +1,6 @@
 import './globals.css';
 
+import BackgroundSection from './(_components)/UI/BackgroundSection';
 import ClientSideEffectWrapper from './ClientSideEffectWrapper';
 import Header from './(_components)/UI/Header';
 import type { Metadata } from 'next';
@@ -38,8 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <body className="w-full h-full bg-white">
-        <div className="relative flex justify-center items-center min-h-screen">
-          <div className="w-[375px] h-screen overflow-hidden relative z-10 flex justify-center items-center">
+        <div className="flex justify-center items-center min-h-screen gap-[40px]">
+          <div className="md:ml-[360px] w-[375px] h-screen overflow-hidden flex flex-col relative z-10">
             <div className="bg-white h-full w-full flex flex-col relative">
               <Providers>
                 <ClientSideEffectWrapper />
@@ -49,13 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Providers>
             </div>
           </div>
-
-          <div className="absolute top-0 right-[140px] bottom-0 p-4 z-0 flex justify-center items-center">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-md">
-              <h2 className="text-xl font-bold text-center">Main 문구 들어갈 위치</h2>
-              <p className="text-center">description 위치</p>
-            </div>
-          </div>
+          <BackgroundSection />
         </div>
       </body>
     </html>
