@@ -2,6 +2,7 @@
 
 import Alert from '@/app/(_components)/UI/Alert';
 import { ICourse } from '@/app/(_utils)/type';
+import ProtectedRoute from '@/app/ProtectedRoute';
 import RecommendCourse from '@/app/(_components)/test/RecommendCourse';
 import Result from '@/app/(_components)/test/Result.';
 import { useState } from 'react';
@@ -11,7 +12,7 @@ export default function TestResults() {
   const [course, setCourse] = useState<ICourse | null>(null);
 
   return (
-    <>
+    <ProtectedRoute>
       <div className="bg-w1">
         {course ? <RecommendCourse setIsOpen={setIsOpen} course={course} /> : <Result setCourse={setCourse} />}
       </div>
@@ -24,6 +25,6 @@ export default function TestResults() {
           onConfirm={() => setIsOpen(false)}
         />
       )}
-    </>
+    </ProtectedRoute>
   );
 }
