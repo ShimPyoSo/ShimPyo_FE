@@ -21,10 +21,12 @@ export default function AutoComplete({ isActive, query }: SearchInputProps) {
 
     const timer = setTimeout(async () => {
       try {
-        const res = await axios.get(`/autocomplete?word=${encodeURIComponent(query)}`);
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/search/autocomplete?word=${encodeURIComponent(query)}`
+        );
         setSuggestions(res.data.suggestions || []);
-      } catch (err) {
-        console.error(err);
+      } catch {
+        // 에러 추후 추가
         setSuggestions([]);
       }
     }, 300);

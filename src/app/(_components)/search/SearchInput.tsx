@@ -1,19 +1,29 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+
 import AutoComplete from './AutoComplete';
 import Image from 'next/image';
 import search from '/public/images/icons/search.svg';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
-interface SearchInputProps {
-  isActive: boolean;
-}
+export default function SearchInput() {
+  const { word } = useParams();
 
-export default function SearchInput({ isActive }: SearchInputProps) {
   const [query, setQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    const isStoreActive = localStorage.getItem('shimpyo_history');
+    if (isStoreActive === 'false') setIsActive(false);
+  }, []);
+
   const router = useRouter();
+
+  useEffect(() => {
+    if (word) setQuery(decodeURIComponent(word as string));
+  }, [word]);
 
   const handleSearch = () => {
     const trimmed = query.trim();

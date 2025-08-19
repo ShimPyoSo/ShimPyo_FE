@@ -6,13 +6,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import deleteX from '/public/images/icons/delete.svg';
 
-interface SearchHistoryProps {
-  isActive: boolean;
-  setIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function SearchHistory({ isActive, setIsActive }: SearchHistoryProps) {
+export default function SearchHistory() {
   const [history, setHistory] = useState<string[]>([]);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    const isStoreActive = localStorage.getItem('shimpyo_history');
+    if (isStoreActive === 'false') setIsActive(false);
+  }, []);
 
   useEffect(() => {
     const stored = localStorage.getItem('shimpyo_keywords');
