@@ -90,6 +90,14 @@ select {
   appearance: none; /* 화살표 없애기 */
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 @font-face {
   font-family: 'Pretendard';
   font-weight: 900;

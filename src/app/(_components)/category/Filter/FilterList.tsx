@@ -29,14 +29,19 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter, filte
   };
 
   return (
-    <ul className="px-[16px] pt-[24px] pb-[20px] flex items-center flex-wrap gap-2">
+    <ul
+      className="
+      px-[16px] pt-[24px] pb-[20px] flex flex-nowrap gap-2 
+      overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing
+    "
+    >
       {filterItem.map(({ label, key }) => {
         const selected = isFilterSelected(key);
         const displayLabel = selected ? getDisplayLabel(filter, label, key) : label;
         return (
           <li
             key={label}
-            className={`py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-2%] cursor-pointer border
+            className={`flex-shrink-0 py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-2%] cursor-pointer border
               ${selected ? 'bg-gn4 border-gn2 text-gn1 font-semibold' : 'bg-[#FBFBFB] border-w6 text-b3'}`}
             onClick={() => handleClick(label)}
           >

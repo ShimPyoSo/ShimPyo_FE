@@ -10,6 +10,8 @@ import Sort from './Sort';
 import SpotListItem from './SpotListItem';
 import SpotSkeleton from './SpotSkeleton';
 import axios from 'axios';
+import { isLoggedInAtom } from '@/app/(_store)/auth';
+import { useAtomValue } from 'jotai';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
 import { useSearchParams } from 'next/navigation';
@@ -25,21 +27,55 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
     visitTime: '',
   }); // 선택한 필터 옵션
   const [selectedOption, setSelectedOption] = useState<(typeof SORT_BY)[number]>(SORT_BY[0]);
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
 
   useEffect(() => setMounted(true), []);
 
-  const fetchReviews = async ({ pageParam = 0 }) => {
-    const likesIdParam = pageParam !== 0 ? `&likesId=${pageParam}` : '';
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes?category=${category}${likesIdParam}`,
-      { withCredentials: true }
-    );
+  const fetchSpots = async ({ pageParam = 0 }) => {
+    let url = '';
+    let config = {};
+
+    if (type === 'like') {
+      const likesIdParam = pageParam !== 0 ? `&likesId=${pageParam}` : '';
+      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes?category=${category}${likesIdParam}`;
+      config = { withCredentials: true };
+    } else if (type === 'list') {
+      const params: Record<string, string> = {
+        category,
+      };
+
+      if (filter.region.length > 0) {
+        params.region = filter.region.join('|');
+      }
+      if (filter.facilities.length > 0) {
+        params.requiredService = filter.facilities.join('|');
+      }
+      if (filter.visitTime) {
+        params.visitTime = filter.visitTime;
+      }
+      if (filter.target[0].length > 0) {
+        params.gender = filter.target[0].join('|');
+      }
+      if (filter.target[1].length > 0) {
+        params.ageGroup = filter.target[1].join('|');
+      }
+      if (pageParam !== 0) {
+        params.lastId = String(pageParam);
+      }
+
+      const queryString = new URLSearchParams(params).toString();
+      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/category?${queryString}`;
+
+      config = isLoggedIn ? { withCredentials: true } : {};
+    }
+
+    const res = await axios.get(url, config);
     return Array.isArray(res.data) ? res.data : [];
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ['likedSpots'],
-    queryFn: fetchReviews,
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading, refetch } = useInfiniteQuery({
+    queryKey: ['spots', type, category, selectedOption],
+    queryFn: fetchSpots,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (!lastPage || !Array.isArray(lastPage)) {
@@ -48,8 +84,8 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
       if (lastPage.length < 8) {
         return undefined;
       }
-      const lastReview = lastPage[lastPage.length - 1];
-      return lastReview.likesId;
+      const lastItem = lastPage[lastPage.length - 1];
+      return type === 'like' ? lastItem.likesId : lastItem.id;
     },
     refetchOnWindowFocus: false,
   });
@@ -65,7 +101,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
         <CategoryHeader />
         {type === 'list' && (
           <>
-            <Filter filter={filter} setFilter={setFilter} />
+            <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
             <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
           </>
         )}

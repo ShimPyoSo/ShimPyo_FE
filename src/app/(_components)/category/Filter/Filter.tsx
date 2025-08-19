@@ -9,9 +9,10 @@ import { useState } from 'react';
 interface FilterProps {
   filter: IFilter;
   setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
+  refetch?: () => void;
 }
 
-export default function Filter({ filter, setFilter }: FilterProps) {
+export default function Filter({ filter, setFilter, refetch }: FilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState<string | null>(null); // 최초 클릭된 필터
 
@@ -25,6 +26,7 @@ export default function Filter({ filter, setFilter }: FilterProps) {
   const handleClose = () => {
     setIsOpen(false);
     setSelectedFilter(null);
+    refetch?.();
   };
 
   return (

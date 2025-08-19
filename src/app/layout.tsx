@@ -7,6 +7,7 @@ import Providers from './Providers';
 import TabBar from './(_components)/UI/TabBar';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.shimpyo.co.kr/'),
   title: '쉼표',
   description: '당신을 위한 쉼, 웰니스 여행의 시작',
   icons: {
