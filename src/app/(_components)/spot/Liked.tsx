@@ -76,7 +76,6 @@ export default function Liked({ liked, id }: LikedProps) {
         alt="쉼표"
         width={24}
         height={24}
-        onClick={() => setIsLiked(!isLiked)}
         aria-hidden={!isLoggedIn}
       />
     </button>

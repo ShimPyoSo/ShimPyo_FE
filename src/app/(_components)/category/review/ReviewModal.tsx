@@ -76,7 +76,7 @@ export default function ReviewModal({
       {isConfirmOpen && (
         <Confirm
           title={'후기 등록'}
-          description={'후기를 등록하면 수정 및 삭제할 수 없어요\n정말로 후기를 등록할까요?'}
+          description={'후기를 등록하면 수정할 수 없어요\n정말로 후기를 등록할까요?'}
           confirmText={'등록하기'}
           cancelText={'돌아가기'}
           setIsOpen={setIsConfirmOpen}
