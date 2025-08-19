@@ -56,7 +56,7 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
 
   return (
     <div className="w-full px-[16px] flex justify-end">
-      <div className="relative w-[70px]">
+      <div className="relative w-[78px]">
         <Select
           value={selectedOption}
           onChange={handleChange}

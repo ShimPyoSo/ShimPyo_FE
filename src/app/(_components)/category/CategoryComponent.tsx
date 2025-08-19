@@ -96,30 +96,23 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   if (!mounted) return null;
 
   return (
-    <>
-      <div className="bg-w1">
-        <CategoryHeader />
+    <div className="bg-w1 relative min-h-screen">
+      <CategoryHeader />
+      <section className="sticky top-[56px] bg-w1 z-10 min-h-[calc(100vh-318px)]">
         {type === 'list' && (
           <>
             <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
             <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
           </>
         )}
-        {isLoading ? (
-          <ul className="px-[16px] pb-[20px] flex-1 overflow-y-auto">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <SpotSkeleton key={i} type="spot" />
-            ))}
-          </ul>
-        ) : (
-          <ul className="px-[16px] pb-[20px] flex-1 overflow-y-auto">
-            {allSpots.map((spot) => (
-              <SpotListItem key={spot.likesId} type="spot" />
-            ))}
-            <div ref={observerRef} className="h-10" />
-          </ul>
-        )}
-      </div>
-    </>
+
+        <ul className="px-[16px] pb-[20px] flex-1">
+          {isLoading
+            ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
+            : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" />)}
+          <div ref={observerRef} className="h-10" />
+        </ul>
+      </section>
+    </div>
   );
 }

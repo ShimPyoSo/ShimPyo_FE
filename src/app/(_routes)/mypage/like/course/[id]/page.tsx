@@ -4,11 +4,13 @@ import Alert from '@/app/(_components)/UI/Alert';
 import { ICourse } from '@/app/(_utils)/type';
 import LikeCourseList from '@/app/(_components)/course/LikeCourseList';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const tempCourse: ICourse = {
   courseId: 1,
   title: '전남 템플스테이 체험',
   typename: '비우는 쉼표',
+  token: uuidv4(),
   days: [
     {
       date: '1일',
