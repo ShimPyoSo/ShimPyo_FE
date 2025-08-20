@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, PanInfo, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
@@ -33,6 +35,13 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
     }
   };
 
+  const handleDrag = () => {
+    const el = sheetRef.current;
+    if (!el) return false;
+
+    return el.scrollTop <= 0;
+  };
+
   if (!isMounted) return null;
 
   return createPortal(
@@ -46,20 +55,30 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
+
           <motion.div
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full overflow-y-auto scrollbar-hide px-[16px] pb-[16px]"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-white rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full px-[16px] pb-[16px] overflow-y-auto scrollbar-hide"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             drag="y"
             dragConstraints={{ top: 0, bottom: 0 }}
+            dragElastic={0.2}
             onDragEnd={handleDragEnd}
+            dragListener={false}
+            onPointerDownCapture={(e) => {
+              if (handleDrag()) {
+                e.currentTarget.setAttribute('data-dragging', 'true');
+              } else {
+                e.currentTarget.removeAttribute('data-dragging');
+              }
+            }}
             ref={sheetRef}
           >
             <FocusLock>
-              <div className="py-[16px] sticky top-0 z-10 bg-w1 py-2">
-                <div className="h-1 w-10 bg-g2 rounded-full mx-auto" />
+              <div className="py-[16px] sticky top-0 z-10 bg-white">
+                <div className="h-1 w-10 bg-gray-300 rounded-full mx-auto" />
               </div>
               {children}
             </FocusLock>
