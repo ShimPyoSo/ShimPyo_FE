@@ -37,11 +37,13 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
 
     if (type === 'like') {
       const likesIdParam = pageParam !== 0 ? `&likesId=${pageParam}` : '';
-      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes?category=${category}${likesIdParam}`;
+      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/likes?category=${
+        category === '' ? 'all' : category
+      }${likesIdParam}`;
       config = { withCredentials: true };
     } else if (type === 'list') {
       const params: Record<string, string> = {
-        category,
+        category: category || 'all',
       };
 
       if (filter.region.length > 0) {
