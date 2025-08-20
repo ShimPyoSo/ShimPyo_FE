@@ -1,5 +1,6 @@
 'use client';
 
+import Loader from '@/app/(_components)/UI/Loader';
 import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewForm from '@/app/(_components)/category/review/ReviewForm';
 import ReviewModal from '@/app/(_components)/category/review/ReviewModal';
@@ -7,6 +8,7 @@ import { useState } from 'react';
 
 export default function ReviewWrite() {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isImageError, setIsImageError] = useState(false);
   const [isImageCountError, setIsImageCountError] = useState(false);
@@ -24,6 +26,7 @@ export default function ReviewWrite() {
           setContents={setContents}
           setIsImageError={setIsImageError}
           setIsImageCountError={setIsImageCountError}
+          setIsLoading={setIsLoading}
         />
       </div>
       <ReviewModal
@@ -38,6 +41,7 @@ export default function ReviewWrite() {
         images={images}
         contents={contents}
       />
+      {isLoading && <Loader />}
     </ProtectedRoute>
   );
 }

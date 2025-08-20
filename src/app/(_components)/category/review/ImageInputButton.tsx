@@ -10,6 +10,7 @@ interface ImageInputProps {
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   setIsImageError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsImageCountError: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ImageInputButton({
@@ -17,6 +18,7 @@ export default function ImageInputButton({
   setImages,
   setIsImageError,
   setIsImageCountError,
+  setIsLoading,
 }: ImageInputProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { getImageURL } = useGetImageURL({ setIsImageError });
@@ -39,6 +41,8 @@ export default function ImageInputButton({
       return;
     }
 
+    setIsLoading(true);
+
     const fileArray = Array.from(files);
 
     const results = await Promise.all(fileArray.map((file) => getImageURL(file)));
@@ -46,6 +50,7 @@ export default function ImageInputButton({
     setImages((prev) => [...prev, ...validUrls]);
 
     e.target.value = '';
+    setIsLoading(false);
   };
 
   return (

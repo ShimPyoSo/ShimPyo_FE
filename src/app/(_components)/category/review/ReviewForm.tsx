@@ -9,6 +9,7 @@ interface RevieFormProps {
   setContents: React.Dispatch<React.SetStateAction<string>>;
   setIsImageError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsImageCountError: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function ReviewForm({
@@ -19,6 +20,7 @@ export default function ReviewForm({
   setContents,
   setIsImageError,
   setIsImageCountError,
+  setIsLoading,
 }: RevieFormProps) {
   return (
     <>
@@ -28,6 +30,7 @@ export default function ReviewForm({
         setImages={setImages}
         setIsImageError={setIsImageError}
         setIsImageCountError={setIsImageCountError}
+        setIsLoading={setIsLoading}
       />
       <button
         className="mt-[60px] mb-[40px] w-full py-[16px] bg-gn1 border border-gn5 rounded-lg text-white tracking-[-1.3%]"

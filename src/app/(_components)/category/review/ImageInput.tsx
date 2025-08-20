@@ -6,9 +6,16 @@ interface ImageInputProps {
   setImages: React.Dispatch<React.SetStateAction<string[]>>;
   setIsImageError: React.Dispatch<React.SetStateAction<boolean>>;
   setIsImageCountError: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ImageInput({ images, setImages, setIsImageError, setIsImageCountError }: ImageInputProps) {
+export default function ImageInput({
+  images,
+  setImages,
+  setIsImageError,
+  setIsImageCountError,
+  setIsLoading,
+}: ImageInputProps) {
   return (
     <section className="mt-[60px] tracking-[-2%]">
       <span className="text-gn1 text-sm flex items-baseline">
@@ -23,6 +30,7 @@ export default function ImageInput({ images, setImages, setIsImageError, setIsIm
             setImages={setImages}
             setIsImageError={setIsImageError}
             setIsImageCountError={setIsImageCountError}
+            setIsLoading={setIsLoading}
           />
         </li>
 
