@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body className="w-full h-full bg-white">
         <div className="flex justify-center items-center min-h-screen gap-[40px]">
-          <div className="md:ml-[360px] w-[375px] h-screen overflow-hidden flex flex-col relative z-10">
+          <div className="md:ml-[380px] w-[375px] h-screen overflow-hidden flex flex-col relative z-10">
             <div className="bg-white h-full w-full flex flex-col relative">
               <Providers>
                 <ClientSideEffectWrapper />
