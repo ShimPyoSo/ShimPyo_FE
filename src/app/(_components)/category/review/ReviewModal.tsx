@@ -6,6 +6,7 @@ import { IError } from '@/app/(_utils)/type';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface ReviewModalProps {
   isConfirmOpen: boolean;
@@ -32,11 +33,17 @@ export default function ReviewModal({
   images,
   contents,
 }: ReviewModalProps) {
+  const [isContentLength, setIsContentLength] = useState(false);
   const { id } = useParams();
   const router = useRouter();
   const { handleAccessExpired } = useHandleTokenExpired();
 
   const handleUplodaReview = async () => {
+    if (contents.length < 5) {
+      setIsContentLength(true);
+      return;
+    }
+
     try {
       await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews`,
@@ -108,6 +115,15 @@ export default function ReviewModal({
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => setIsImageCountError(false)}
+        />
+      )}
+      {isContentLength && (
+        <Alert
+          title={'후기 등록 실패'}
+          description={'후기는 최소 5자 이상, 최대 500자 미만으로 작성 가능합니다.'}
+          confirmText={'확인'}
+          setIsOpen={setIsAlertOpen}
+          onConfirm={() => setIsContentLength(false)}
         />
       )}
     </>
