@@ -109,7 +109,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
         <ul className="px-[16px] pb-[20px] flex-1">
           {isLoading
             ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
-            : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" />)}
+            : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)}
           <div ref={observerRef} className="h-10" />
         </ul>
       </section>

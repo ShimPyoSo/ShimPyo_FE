@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 const STORAGE_KEY = 'visitedSpots';
-const MAX_SPOTS = 30;
+const MAX_SPOTS = 50;
 
 export function useRecentSpots() {
   const { id } = useParams();

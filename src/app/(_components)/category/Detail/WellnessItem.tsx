@@ -4,6 +4,7 @@ import bad from '/public/images/icons/wellness/bustleBad.svg';
 import cloudy from '/public/images/icons/wellness/weatherCloudy.svg';
 import good from '/public/images/icons/wellness/bustleGood.svg';
 import mid from '/public/images/icons/wellness/bustleMid.svg';
+import no from '/public/images/icons/wellness/bustleNo.svg';
 import rain from '/public/images/icons/wellness/weatherRain.svg';
 import snow from '/public/images/icons/wellness/weatherSnow.svg';
 import sunny from '/public/images/icons/wellness/weatherSunny.svg';
@@ -16,9 +17,6 @@ interface WellnessItemProps {
 }
 
 export default function WellnessItem({ date, day, weather, concentration }: WellnessItemProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const unusedImages = [bad, mid, rain, snow, sunny];
-
   return (
     <>
       <div className="text-xs tracking-[-2%]">
@@ -52,9 +50,20 @@ export default function WellnessItem({ date, day, weather, concentration }: Well
           </div>
         </div>
         <div className="px-[8px] py-[8px] flex items-center justify-between bg-white rounded-lg text-xs text-b3">
-          <Image src={concentration < 40 ? good : concentration < 70 ? mid : bad} alt="집중률" width={20} height={20} />
+          <Image
+            src={concentration === -1 ? no : concentration < 40 ? good : concentration < 70 ? mid : bad}
+            alt="집중률"
+            width={20}
+            height={20}
+          />
           <span className="flex ml-[4px] text-xs text-b3">
-            집중률&nbsp;<p className="font-semibold">{concentration.toFixed(1)}%</p>
+            {concentration >= 0 ? (
+              <span>
+                집중률&nbsp;<p className="font-semibold">{concentration.toFixed(1)}%</p>
+              </span>
+            ) : (
+              <p className="text-g3">정보 알 수 없음</p>
+            )}
           </span>
         </div>
       </div>

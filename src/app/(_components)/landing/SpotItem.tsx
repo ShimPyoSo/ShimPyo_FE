@@ -29,7 +29,7 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
               e.stopPropagation();
             }}
           >
-            <Liked liked={spot.isLiked || false} id={spot.id} />
+            <Liked liked={spot.isLiked || false} id={spot.id as number} />
           </div>
         </div>
         <p className="mt-[8px] font-semibold text-xs text-b3 tracking-[-2%] line-clamp-2">{spot.title}</p>

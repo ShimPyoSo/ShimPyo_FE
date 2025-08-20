@@ -4,6 +4,7 @@ import Filter from '@/app/(_components)/category/Filter/Filter';
 import { IFilter } from '@/app/(_utils)/type';
 import NoResult from '@/app/(_components)/search/NoResult';
 import SpotListItem from '@/app/(_components)/category/SpotListItem';
+import SpotSkeleton from '../category/SpotSkeleton';
 import axios from 'axios';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import { useAtomValue } from 'jotai';
@@ -68,7 +69,7 @@ export default function SearchResultList() {
       {isLoading && allResults.length === 0 ? (
         <ul className="px-[16px] pb-[20px] flex-1">
           {Array.from({ length: 5 }).map((_, i) => (
-            <SpotListItem key={i} type="spot" />
+            <SpotSkeleton key={i} type="spot" />
           ))}
         </ul>
       ) : allResults.length === 0 ? (
@@ -76,7 +77,7 @@ export default function SearchResultList() {
       ) : (
         <ul className="px-[16px] pb-[20px] flex-1">
           {allResults.map((spot) => (
-            <SpotListItem key={spot.id} type="spot" />
+            <SpotListItem key={spot.id} type="spot" spot={spot} />
           ))}
           <div ref={observerRef} className="h-10" />
         </ul>

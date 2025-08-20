@@ -1,9 +1,8 @@
 'use client';
 
+import { IError, ISpot } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
 
-import { IError } from '@/app/(_utils)/type';
-import { IReviewSpot } from '@/app/(_utils)/type';
 import NoReview from '../../category/NoReview';
 import SpotListItem from '@/app/(_components)/category/SpotListItem';
 import SpotSkeleton from '../../category/SpotSkeleton';
@@ -13,7 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 export default function ReviewSpotList() {
   const { handleAccessExpired } = useHandleTokenExpired();
 
-  const fetchReviews = async (): Promise<IReviewSpot[]> => {
+  const fetchReviews = async (): Promise<ISpot[]> => {
     try {
       const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review`, {
         withCredentials: true,
@@ -37,7 +36,7 @@ export default function ReviewSpotList() {
     }
   };
 
-  const { data: spots = [], isLoading } = useQuery<IReviewSpot[]>({
+  const { data: spots = [], isLoading } = useQuery<ISpot[]>({
     queryKey: ['reviewSpot'],
     queryFn: fetchReviews,
     refetchOnWindowFocus: false,
@@ -48,7 +47,7 @@ export default function ReviewSpotList() {
       {isLoading ? (
         Array.from({ length: 8 }).map((_, i) => <SpotSkeleton key={i} type="review" />)
       ) : spots.length > 0 ? (
-        spots.map((spot, idx) => <SpotListItem type="review" key={idx} />)
+        spots.map((spot, idx) => <SpotListItem type="review" key={idx} spot={spot} />)
       ) : (
         <div className="h-full flex flex-col justify-center items-center">
           <NoReview main="첫 번째 여행 이야기를 남겨주세요!" description="아직 작성하신 후기가 없어요" />

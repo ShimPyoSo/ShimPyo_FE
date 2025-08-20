@@ -158,7 +158,8 @@ export interface IFacilities {
 }
 
 export interface ISpot extends ILatLng {
-  id: number;
+  id?: number;
+  touristId?: number;
   region: string;
   images: string | string[];
   category: string[];
@@ -170,6 +171,7 @@ export interface ISpot extends ILatLng {
   homepage?: string;
   reservation?: string;
   facilities?: IFacilities;
+  counts?: number;
 }
 
 export interface ICourseList extends ILatLng {
@@ -200,15 +202,6 @@ export type IReview = {
   createdAt: string;
   contents: string;
   images: string[];
-};
-
-export type IReviewSpot = {
-  touristId: number;
-  region: string;
-  images: string;
-  title: string;
-  address: string;
-  counts: number;
 };
 
 export type IReviewResponse = {
