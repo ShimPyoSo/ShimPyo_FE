@@ -69,7 +69,7 @@ export default function Liked({ liked, id }: LikedProps) {
   });
 
   return (
-    <button onClick={() => mutation.mutate()}>
+    <button className="flex items-center justify-center" onClick={() => mutation.mutate()}>
       <Image
         className={`cursor-pointer ${isLoggedIn ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         src={isLiked ? like : noLike}

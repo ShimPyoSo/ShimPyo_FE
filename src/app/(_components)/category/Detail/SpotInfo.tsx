@@ -37,15 +37,23 @@ export default function SpotInfo({ spot }: { spot: ISpot }) {
       </SpotInfoItem>
 
       <SpotInfoItem icon={home} label="장소안내">
-        <Link href="/" target="_blank" rel="noopener noreferrer" className="underline">
-          공식 사이트 확인하기
-        </Link>
+        {spot.homepage ? (
+          <Link href={spot.homepage} target="_blank" rel="noopener noreferrer" className="underline">
+            공식 사이트 확인하기
+          </Link>
+        ) : (
+          <p className="underline">공식 사이트 미제공</p>
+        )}
       </SpotInfoItem>
 
       <SpotInfoItem icon={reservation} label="예약">
-        <Link href="/" target="_blank" rel="noopener noreferrer" className="underline">
-          예약 사이트 확인하기
-        </Link>
+        {spot.reservation ? (
+          <Link href={spot.reservation} target="_blank" rel="noopener noreferrer" className="underline">
+            예약 사이트 확인하기
+          </Link>
+        ) : (
+          <p className="underline">예약 사이트 미제공</p>
+        )}
       </SpotInfoItem>
     </ul>
   );
