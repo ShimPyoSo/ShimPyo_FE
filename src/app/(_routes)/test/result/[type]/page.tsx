@@ -5,11 +5,23 @@ import { ICourse } from '@/app/(_utils)/type';
 import ProtectedRoute from '@/app/ProtectedRoute';
 import RecommendCourse from '@/app/(_components)/test/RecommendCourse';
 import Result from '@/app/(_components)/test/Result.';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 import { useState } from 'react';
 
 export default function TestResults() {
   const [isOpen, setIsOpen] = useState(false);
   const [course, setCourse] = useState<ICourse | null>(null);
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    if (course) {
+      setTitle('맞춤 쉼표 코스');
+    } else {
+      setTitle('쉼표 유형 테스트');
+    }
+  }, [setTitle, course]);
 
   return (
     <ProtectedRoute>

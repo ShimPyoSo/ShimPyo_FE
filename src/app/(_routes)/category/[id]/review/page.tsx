@@ -1,15 +1,17 @@
 'use client';
 
 import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
 import { IError } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
 import Link from 'next/link';
 import ReviewList from '@/app/(_components)/category/review/ReviewList';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
@@ -19,6 +21,11 @@ export default function Review() {
   const [reviewImg, setReviewImg] = useState<string[] | null>(null);
   const [selectedNumber, setSelectedNumber] = useState(0);
   const { handleAccessExpired } = useHandleTokenExpired();
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    setTitle('후기');
+  }, [setTitle]);
 
   const handleDeleteReview = async () => {
     try {

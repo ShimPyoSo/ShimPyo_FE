@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Confirm from '@/app/(_components)/UI/Confirm';
 import { IReviewResponse } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
@@ -7,10 +9,11 @@ import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewList from '@/app/(_components)/mypage/review/ReviewList';
 import SpotInfo from '@/app/(_components)/mypage/review/SpotInfo';
 import axios from 'axios';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
 import { useDeleteReview } from '@/app/(_utils)/hooks/useDeleteReview';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
@@ -20,6 +23,11 @@ export default function Review() {
   const [reviewImg, setReviewImg] = useState<string[] | null>(null);
   const [selectedNumber, setSelectedNumber] = useState(0);
   const { handleDeleteReview } = useDeleteReview();
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    setTitle('내가 쓴 후기');
+  }, [setTitle]);
 
   const fetchReviews = async (): Promise<IReviewResponse> => {
     const res = await axios.get(

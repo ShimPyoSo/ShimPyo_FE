@@ -7,11 +7,14 @@ import HeaderButton from './HeaderButton';
 import Image from 'next/image';
 import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
 import goToMain from '/public/images/icons/goToMain.svg';
+import { headerTitleAtom } from '@/app/(_store)/title';
 import prev from '/public/images/icons/prevButton.svg';
+import { useAtomValue } from 'jotai';
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
+  const headerTitle = useAtomValue(headerTitleAtom);
 
   const handleMoveToPrev = () => {
     const previousPath = getPrevPathname();
@@ -32,7 +35,7 @@ export default function Header() {
           <Image src={goToMain} alt="메인으로" width={23} height={23} onClick={() => router.push('/')} />
         </button>
       )}
-      <h1 className="font-semibold">{title[pathname] || '헤더'}</h1>
+      <h1 className="font-semibold">{title[pathname] || headerTitle}</h1>
       <HeaderButton />
     </header>
   );

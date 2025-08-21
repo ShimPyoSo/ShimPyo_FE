@@ -1,9 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Alert from '@/app/(_components)/UI/Alert';
 import { ICourse } from '@/app/(_utils)/type';
 import LikeCourseList from '@/app/(_components)/course/LikeCourseList';
-import { useState } from 'react';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
 import { v4 as uuidv4 } from 'uuid';
 
 const tempCourse: ICourse = {
@@ -72,6 +75,11 @@ const tempCourse: ICourse = {
 
 export default function LikedCourse() {
   const [isOpen, setIsOpen] = useState(false);
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    setTitle('맞춤 쉼표 코스');
+  }, [setTitle]);
 
   return (
     <>

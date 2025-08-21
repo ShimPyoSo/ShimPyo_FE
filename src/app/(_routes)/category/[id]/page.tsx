@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Alert from '@/app/(_components)/UI/Alert';
 import { ISpot } from '@/app/(_utils)/type';
 import Liked from '@/app/(_components)/spot/Liked';
@@ -9,15 +11,17 @@ import SpotInfo from '@/app/(_components)/category/Detail/SpotInfo';
 import Wellness from '@/app/(_components)/category/Detail/Wellness';
 import axios from 'axios';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
 import { useAtomValue } from 'jotai';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useRecentSpots } from '@/app/(_utils)/hooks/useRecentSpots';
-import { useState } from 'react';
 
 export default function SpotDetail() {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
+  const [, setTitle] = useAtom(setTitleAtom);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
   useRecentSpots();
 
@@ -33,6 +37,12 @@ export default function SpotDetail() {
     queryFn: fetchSpotInfo,
     refetchOnWindowFocus: false,
   });
+
+  useEffect(() => {
+    if (data?.title) {
+      setTitle(data.title);
+    }
+  }, [data?.title, setTitle]);
 
   return (
     <>
