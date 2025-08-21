@@ -1,5 +1,6 @@
 import { IOptional, IResultScore } from '../(_utils)/type';
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
+import { decryptData, encryptData } from '../(_utils)/crypto';
 
 import { atom } from 'jotai';
 
@@ -28,7 +29,27 @@ export const answeredAtom = atomWithStorage<IResultScore>(
     '이완하는 쉼표': 0,
     '이것저것 쉼표': 0,
   },
-  createJSONStorage(() => localStorage)
+  createJSONStorage(() => ({
+    getItem: (key: string) => {
+      const cipher = localStorage.getItem(key);
+      if (!cipher) return null;
+      try {
+        const decrypted = decryptData(cipher);
+        return JSON.stringify(decrypted);
+      } catch {
+        console.warn('Failed to decrypt answeredAtom');
+        return null;
+      }
+    },
+    setItem: (key: string, value: string) => {
+      const data: IResultScore = JSON.parse(value);
+      const cipher = encryptData(data);
+      localStorage.setItem(key, cipher);
+    },
+    removeItem: (key: string) => {
+      localStorage.removeItem(key);
+    },
+  }))
 );
 
 export const resetAllAtom = atom(null, (_get, set) => {

@@ -11,6 +11,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.83.0",
     "axios": "^1.10.0",
+    "crypto-js": "^4.2.0",
     "framer-motion": "^12.23.6",
     "jotai": "^2.12.5",
     "next": "15.3.4",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
