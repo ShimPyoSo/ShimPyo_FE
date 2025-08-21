@@ -8,7 +8,11 @@ import Withdraw from './Withdraw';
 import arrow from '/public/images/icons/arrow.svg';
 import { useState } from 'react';
 
-export default function ProfileMenu() {
+interface ProfileMenuProps {
+  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function ProfileMenu({ setIsAlertOpen }: ProfileMenuProps) {
   const [activeMenu, setActiveMenu] = useState<null | 'profile' | 'password' | 'withdraw'>(null);
 
   return (
@@ -48,7 +52,7 @@ export default function ProfileMenu() {
           />
         </div>
 
-        {activeMenu === 'password' && <PasswordChange />}
+        {activeMenu === 'password' && <PasswordChange setIsAlertOpen={setIsAlertOpen} />}
       </li>
       <LogoutButton />
       <li>

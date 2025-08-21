@@ -7,15 +7,18 @@ import { useForm, useFormState } from 'react-hook-form';
 import PasswordDescription from './PasswordDescription';
 import PasswordInput from './PasswordInput';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
-import { useLogout } from '@/app/(_utils)/hooks/useLogout';
 import { useState } from 'react';
 
-export default function PasswordChange() {
+interface PasswordChangeProps {
+  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function PasswordChange({ setIsAlertOpen }: PasswordChangeProps) {
   const { register, handleSubmit, watch, trigger, control } = useForm<IPasswordChange>({
     mode: 'onBlur',
   });
   const { isValid } = useFormState({ control });
-  const { handleLogout } = useLogout();
+
   const { handleAccessExpired } = useHandleTokenExpired();
   const [isPasswordError, setIsPasswordError] = useState(false);
 
@@ -30,7 +33,7 @@ export default function PasswordChange() {
         },
         { withCredentials: true }
       );
-      handleLogout();
+      setIsAlertOpen(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
@@ -47,7 +50,7 @@ export default function PasswordChange() {
             },
             { withCredentials: true }
           );
-          handleLogout();
+          setIsAlertOpen(true);
         } catch {
           // reissue 이후 에러처리
         }

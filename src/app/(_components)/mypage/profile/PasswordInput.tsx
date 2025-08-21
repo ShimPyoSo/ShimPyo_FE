@@ -50,7 +50,7 @@ export default function PasswordInput({ register, watch, trigger, control, isPas
       <div className="relative">
         <input
           className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
-            isPasswordError || errors.nowPassword ? 'border-r' : 'border-w4'
+            isPasswordError || errors.nowPassword ? 'border-r' : 'border-w4 focus:border-gn1'
           }`}
           type={nowPasswordOpen ? 'text' : 'password'}
           placeholder="현재 비밀번호를 입력해 주세요"
@@ -74,7 +74,7 @@ export default function PasswordInput({ register, watch, trigger, control, isPas
       <div className="relative">
         <input
           className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
-            errors.password ? 'border-r' : 'border-w4'
+            errors.password ? 'border-r' : 'border-w4 focus:border-gn1'
           }`}
           type={passwordOpen ? 'text' : 'password'}
           placeholder="새로운 비밀번호를 입력해 주세요"
@@ -98,7 +98,7 @@ export default function PasswordInput({ register, watch, trigger, control, isPas
       <div className="relative">
         <input
           className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
-            errors.passwordConfirm ? 'border-r' : 'border-w4'
+            errors.passwordConfirm ? 'border-r' : 'border-w4 focus:border-gn1'
           }`}
           type={passwordConfirmOpen ? 'text' : 'password'}
           placeholder="새로운 비밀번호를 다시 입력해 주세요"
