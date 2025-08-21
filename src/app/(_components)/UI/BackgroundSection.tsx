@@ -5,7 +5,7 @@ import background from '/public/images/backgroundImg.jpg';
 export default function BackgroundSection() {
   return (
     <>
-      <div className="w-[340px] h-[410px] relative mb-[130px] rounded-xl hidden md:block">
+      <div className="w-[340px] h-[410px] relative mb-[130px] rounded-xl hidden xl:block">
         <Image
           className="rounded-xl object-cover object-[22%_50%]"
           src={background}

@@ -16,7 +16,7 @@ export default function SearchInput() {
 
   useEffect(() => {
     const isStoreActive = localStorage.getItem('shimpyo_history');
-    if (isStoreActive === 'false') setIsActive(false);
+    setIsActive(isStoreActive !== 'false');
   }, []);
 
   const router = useRouter();
