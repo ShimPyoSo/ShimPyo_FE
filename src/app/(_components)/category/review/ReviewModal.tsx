@@ -5,6 +5,7 @@ import Confirm from '@/app/(_components)/UI/Confirm';
 import { IError } from '@/app/(_utils)/type';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
+import { useRemovePath } from '@/app/(_utils)/hooks/useRemovePath';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -37,6 +38,7 @@ export default function ReviewModal({
   const { id } = useParams();
   const router = useRouter();
   const { handleAccessExpired } = useHandleTokenExpired();
+  const { removeReviewWrite } = useRemovePath();
 
   const handleUplodaReview = async () => {
     if (contents.length < 5) {
@@ -54,6 +56,7 @@ export default function ReviewModal({
         },
         { withCredentials: true }
       );
+      removeReviewWrite(`/category/${id}/review/write`);
       setIsAlertOpen(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
@@ -69,6 +72,7 @@ export default function ReviewModal({
             },
             { withCredentials: true }
           );
+          removeReviewWrite(`/category/${id}/review/write`);
           setIsAlertOpen(true);
         } catch {
           // reissue 이후 에러처리

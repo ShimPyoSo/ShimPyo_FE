@@ -68,7 +68,7 @@ export default function ReviewItem({
           {isMore ? '접기' : '더보기'}
         </button>
       )}
-      {review.images.length > 0 && (
+      {review.images && review.images.length > 0 && (
         <ImageList images={review.images} setReviewImg={setReviewImg} setSelectedNumber={setSelectedNumber} />
       )}
     </li>

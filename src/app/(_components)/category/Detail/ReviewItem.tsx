@@ -19,11 +19,15 @@ export default function ReviewItem({ review, setReviewImg, setSelectedNumber }: 
         <p className="text-sm text-b1 font-semibold">{review.nickname}</p>
         <p className="text-xs text-g1">{review.createdAt}</p>
       </div>
-      <p className={`min-h-[50px] text-xs text-b3 ${review.images.length > 0 ? 'line-clamp-3' : 'line-clamp-7'}`}>
+      <p
+        className={`min-h-[50px] text-xs text-b3 ${
+          review.images && review.images.length > 0 ? 'line-clamp-3' : 'line-clamp-7'
+        }`}
+      >
         {review.contents}
       </p>
 
-      {review.images.length > 0 && (
+      {review.images && review.images.length > 0 && (
         <ul className="mt-[16px] flex items-center gap-[8px]">
           {review.images.slice(0, 4).map((img: string, index: number) => (
             <li
