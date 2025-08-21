@@ -2,22 +2,23 @@
 
 import { IError, IWithdraw } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
-import { useForm, useFormState } from 'react-hook-form';
 
 import CheckBox from '../../UI/Checkbox';
 import PasswordCheck from '../../user/PasswordCheck';
+import { useForm } from 'react-hook-form';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useState } from 'react';
 
 export default function WithdrawForm() {
-  const { register, watch, handleSubmit, control } = useForm<IWithdraw>({
+  const { register, watch, handleSubmit } = useForm<IWithdraw>({
     mode: 'onBlur',
   });
-  const { isValid } = useFormState({ control });
   const { handleAccessExpired } = useHandleTokenExpired();
   const [passwordOpen, setPasswordOpen] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
+  const values = watch();
+  const canSubmit = !!values.password && !!values.isConfirmed;
 
   const onSubmit = async (data: IWithdraw) => {
     try {
@@ -72,7 +73,7 @@ export default function WithdrawForm() {
 
       <button
         className={`mt-[16px] border px-[12px] py-[8px] rounded-md ${
-          isValid ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'
+          canSubmit ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'
         }`}
       >
         탈퇴하기
