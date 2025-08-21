@@ -61,7 +61,7 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       setIsOpen(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
-      if (err.response?.data?.name === 'EMAIL_DUPLICATION') {
+      if (err.response?.data?.name === 'EMAIL_DUPLICATION' || err.response?.data?.name === 'EMAIL_NOT_FOUNDED') {
         setIsEmailError(true);
       }
       console.log(err.response?.data?.message);
