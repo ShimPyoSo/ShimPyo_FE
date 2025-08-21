@@ -33,8 +33,16 @@ export function useFetchWeather() {
             alert('날씨 정보를 불러오지 못했습니다.');
           }
         },
-        () => {
-          alert('위치 정보를 가져올 수 없습니다.');
+        async () => {
+          const response = await axios.get('/api/weather', {
+            params: {
+              lat: 37.5665,
+              lon: 126.978,
+            },
+          });
+
+          const items = response.data;
+          setWeather(items);
         }
       );
     };
