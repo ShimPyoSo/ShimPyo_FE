@@ -25,7 +25,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
     facilities: [],
     target: [[], []],
     visitTime: '',
-  }); // 선택한 필터 옵션
+  });
   const [selectedOption, setSelectedOption] = useState<(typeof SORT_BY)[number]>(SORT_BY[0]);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
 
@@ -42,32 +42,18 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
       }${likesIdParam}`;
       config = { withCredentials: true };
     } else if (type === 'list') {
-      const params: Record<string, string> = {
-        category: category || 'all',
-      };
+      const params: Record<string, string> = { category: category || 'all' };
 
-      if (filter.region.length > 0) {
-        params.region = filter.region.join('|');
-      }
-      if (filter.facilities.length > 0) {
-        params.requiredService = filter.facilities.join('|');
-      }
-      if (filter.visitTime) {
-        params.visitTime = filter.visitTime;
-      }
-      if (filter.target[0].length > 0) {
-        params.gender = filter.target[0].join('|');
-      }
-      if (filter.target[1].length > 0) {
-        params.ageGroup = filter.target[1].join('|');
-      }
-      if (pageParam !== 0) {
-        params.lastId = String(pageParam);
-      }
+      if (filter.region.length > 0) params.region = filter.region.join('|');
+      if (filter.facilities.length > 0) params.requiredService = filter.facilities.join('|');
+      if (filter.visitTime) params.visitTime = filter.visitTime;
+      if (filter.target[0].length > 0) params.gender = filter.target[0].join('|');
+      if (filter.target[1].length > 0) params.ageGroup = filter.target[1].join('|');
+      params.sortBy = selectedOption.key;
+      if (pageParam !== 0) params.lastId = String(pageParam);
 
       const queryString = new URLSearchParams(params).toString();
-      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/category?${queryString}`;
-
+      url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/category?${queryString}`;
       config = isLoggedIn ? { withCredentials: true } : {};
     }
 
@@ -80,12 +66,8 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
     queryFn: fetchSpots,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
-      if (!lastPage || !Array.isArray(lastPage)) {
-        return undefined;
-      }
-      if (lastPage.length < 8) {
-        return undefined;
-      }
+      if (!lastPage || !Array.isArray(lastPage)) return undefined;
+      if (lastPage.length < 8) return undefined;
       const lastItem = lastPage[lastPage.length - 1];
       return type === 'like' ? lastItem.likesId : lastItem.id;
     },
@@ -100,20 +82,26 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   return (
     <div className="bg-w1 relative min-h-screen">
       <CategoryHeader />
-      <section className="sticky top-[56px] bg-w1 z-10 min-h-[calc(100vh-318px)]">
+      <section className="bg-w1 z-10 min-h-[calc(100vh-318px)]">
         {type === 'list' && (
-          <>
+          <div className="sticky top-[56px] bg-w1 z-20">
             <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
             <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
-          </>
+          </div>
         )}
 
-        <ul className="px-[16px] pb-[20px] flex-1">
-          {isLoading
-            ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
-            : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)}
-          <div ref={observerRef} className="h-10" />
-        </ul>
+        <div
+          className={`sticky bg-w1 z-10 max-h-[calc(100vh-56px)] overflow-auto scrollbar-hide ${
+            type === 'list' ? 'top-[156px]' : 'top-[56px]'
+          }`}
+        >
+          <ul className="px-[16px] pb-[20px]">
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
+              : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)}
+            <div ref={observerRef} className="h-10" />
+          </ul>
+        </div>
       </section>
     </div>
   );

@@ -51,12 +51,12 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
         <div>
           <div className="flex items-center gap-[4px]">
             <Image src={location} alt="위치" width={14} height={14} />
-            <p className="text-xs text-g1">{spot.address}</p>
+            <p className="text-xs text-g1 truncate">{spot.address}</p>
           </div>
           {type === 'spot' ? (
             <div className="flex items-center gap-[4px]">
               <Image src={time} alt="영업시간" width={14} height={14} />
-              <p className="text-xs text-g1">{`${spot.operationTime?.openTime} - ${spot.operationTime?.closeTime}`}</p>
+              <p className="text-xs text-g1 truncate">{`${spot.operationTime?.openTime} - ${spot.operationTime?.closeTime}`}</p>
             </div>
           ) : (
             <div className="flex items-center gap-[4px]">
