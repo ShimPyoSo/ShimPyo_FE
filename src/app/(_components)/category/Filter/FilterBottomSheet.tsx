@@ -35,11 +35,9 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
     }
   };
 
-  const handleDrag = () => {
-    const el = sheetRef.current;
-    if (!el) return false;
-
-    return el.scrollTop <= 0;
+  const canDrag = () => {
+    if (!sheetRef.current) return false;
+    return sheetRef.current.scrollTop === 0;
   };
 
   if (!isMounted) return null;
@@ -65,19 +63,12 @@ export default function FilterBottomSheet({ isOpen, onClose, children }: BottomS
             drag="y"
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={0.2}
+            dragListener={canDrag()}
             onDragEnd={handleDragEnd}
-            dragListener={false}
-            onPointerDownCapture={(e) => {
-              if (handleDrag()) {
-                e.currentTarget.setAttribute('data-dragging', 'true');
-              } else {
-                e.currentTarget.removeAttribute('data-dragging');
-              }
-            }}
             ref={sheetRef}
           >
             <FocusLock>
-              <div className="py-[16px] sticky top-0 z-10 bg-white">
+              <div className="py-[16px] sticky top-0 z-10 bg-white" onClick={() => onClose()}>
                 <div className="h-1 w-10 bg-gray-300 rounded-full mx-auto" />
               </div>
               {children}
