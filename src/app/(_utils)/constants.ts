@@ -6,8 +6,6 @@ import beautyIllu from '/public/images/category/beauty.svg';
 import breathe from '/public/images/test/breathe.svg';
 import food from '/public/images/icons/category/food.svg';
 import foodIllu from '/public/images/category/food.svg';
-import friendly from '/public/images/test/friendly.svg';
-import full from '/public/images/test/full.svg';
 import grow from '/public/images/test/grow.svg';
 import meditation from '/public/images/icons/category/meditation.svg';
 import meditationIllu from '/public/images/category/meditation.svg';
@@ -119,18 +117,6 @@ export const testImages = [
   { name: '비우는 쉼표', image: rest, description: '아무것도 하지 않고 멍 때리는 쉼이 필요한', color: '#78B3ED' },
   { name: '땀흘리는 쉼표', image: move, description: '몸을 역동적으로 움직이는 쉼이 필요한', color: '#FF7878' },
   {
-    name: '어울리는 쉼표',
-    image: friendly,
-    description: '사람들 사이에서 에너지를 얻는 쉼이 필요한',
-    color: '#FFAB36',
-  },
-  {
-    name: '채우는 쉼표',
-    image: full,
-    description: '건강한 요리를 먹고 심신을 디톡스 하는 쉼이 필요한',
-    color: '#BBD193',
-  },
-  {
     name: '피어나는 쉼표',
     image: grow,
     description: '나를 아름답게 가꾸며 감성을 회복하는 쉼이 필요한',
@@ -156,8 +142,8 @@ export const questions: IQuestion[] = [
     question: `바쁜 한 주의 끝,\n오늘 밤 가장 하고 싶은 일은 무엇인가요?`,
     answers: [
       { text: '일찍 잠들기', scores: { '비우는 쉼표': 2, '이완하는 쉼표': 1 } },
-      { text: '운동하기', scores: { '땀흘리는 쉼표': 2, '숨쉬는 쉼표': 1, '피어나는 쉼표': 1 } },
-      { text: '밤 산책하기', scores: { '숨쉬는 쉼표': 2, '피어나는 쉼표': 2 } },
+      { text: '운동하기', scores: { '땀흘리는 쉼표': 3 } },
+      { text: '밤 산책하기', scores: { '숨쉬는 쉼표': 2, '피어나는 쉼표': 1 } },
       { text: '뒹굴거리기', scores: { '비우는 쉼표': 1, '이완하는 쉼표': 2 } },
     ],
     descriptions: [
@@ -171,9 +157,9 @@ export const questions: IQuestion[] = [
   {
     question: `꿈꾸던 웰니스 여행을 시작하는 아침,\n첫 계획은 무엇인가요?`,
     answers: [
-      { text: '자연의 상쾌함 느끼기', scores: { '숨쉬는 쉼표': 2, '비우는 쉼표': 1, '이완하는 쉼표': 1 } },
-      { text: '몸과 마음 깨우기', scores: { '땀흘리는 쉼표': 2, '채우는 쉼표': 2 } },
-      { text: '느긋한 시간 보내기', scores: { '비우는 쉼표': 2, '피어나는 쉼표': 2 } },
+      { text: '자연의 상쾌함 느끼기', scores: { '숨쉬는 쉼표': 3 } },
+      { text: '몸과 마음 깨우기', scores: { '땀흘리는 쉼표': 3 } },
+      { text: '느긋한 시간 보내기', scores: { '비우는 쉼표': 2, '피어나는 쉼표': 1 } },
       { text: '나의 모습 가꾸기', scores: { '피어나는 쉼표': 3, '이완하는 쉼표': 1 } },
     ],
     descriptions: [
@@ -187,10 +173,10 @@ export const questions: IQuestion[] = [
   {
     question: `산뜻한 아침을 지나 도착한 장소,\n깊은 평온이 느껴지는 이곳은 어떤 모습인가요?`,
     answers: [
-      { text: '숲 속의 아늑한 오두막', scores: { '숨쉬는 쉼표': 3, '비우는 쉼표': 1, '피어나는 쉼표': 1 } },
+      { text: '숲 속의 아늑한 오두막', scores: { '숨쉬는 쉼표': 3 } },
       { text: '향 냄새가 풍기는 한옥 사찰', scores: { '비우는 쉼표': 2, '이완하는 쉼표': 2 } },
-      { text: '도심의 트렌디한 카페', scores: { '어울리는 쉼표': 3, '채우는 쉼표': 1 } },
-      { text: '활력이 넘치는 체험 센터', scores: { '땀흘리는 쉼표': 3, '숨쉬는 쉼표': 1 } },
+      { text: '도심의 트렌디한 카페', scores: { '피어나는 쉼표': 3 } },
+      { text: '활력이 넘치는 체험 센터', scores: { '땀흘리는 쉼표': 3 } },
     ],
     descriptions: [
       '맑은 공기와 푸른 생기가 가득한 공간',
@@ -204,8 +190,8 @@ export const questions: IQuestion[] = [
     question: `여러 웰니스 장소를 여행하는 당신,\n가장 나다운 나를 발견한 순간은 언제인가요?`,
     answers: [
       { text: '고요히 사색하는 순간', scores: { '비우는 쉼표': 2, '이완하는 쉼표': 2 } },
-      { text: '건강한 요리를 맛보는 순간', scores: { '채우는 쉼표': 3, '피어나는 쉼표': 1 } },
-      { text: '함께하는 행복을 느끼는 순간', scores: { '어울리는 쉼표': 3, '채우는 쉼표': 1 } },
+      { text: '건강한 요리를 맛보는 순간', scores: { '피어나는 쉼표': 2 } },
+      { text: '함께하는 행복을 느끼는 순간', scores: { '피어나는 쉼표': 1, '숨쉬는 쉼표': 1 } },
       { text: '새로운 경험에 몰입하는 순간', scores: { '땀흘리는 쉼표': 2, '숨쉬는 쉼표': 2 } },
     ],
     descriptions: [
@@ -219,9 +205,9 @@ export const questions: IQuestion[] = [
   {
     question: `여러 웰니스 장소를 여행하는 당신,\n가장 의외의 나를 발견한 순간은 언제인가요?`,
     answers: [
-      { text: '자유로운 마음을 느낀 순간', scores: { '땀흘리는 쉼표': 3, '채우는 쉼표': 1 } },
+      { text: '자유로운 마음을 느낀 순간', scores: { '땀흘리는 쉼표': 3 } },
       { text: '여유로운 시간을 즐기는 순간', scores: { '비우는 쉼표': 2, '이완하는 쉼표': 2 } },
-      { text: '유연하게 생각하는 순간', scores: { '어울리는 쉼표': 3 } },
+      { text: '유연하게 생각하는 순간', scores: { '피어나는 쉼표': 2 } },
       { text: '활기찬 하루를 보낸 순간', scores: { '이완하는 쉼표': 3 } },
     ],
     descriptions: [
@@ -236,7 +222,7 @@ export const questions: IQuestion[] = [
     question: `여행이 끝나가는 순간,\n나만을 위한 마지막 시간은 어떤 모습일까요?`,
     answers: [
       { text: '잠으로 체력 회복하기', scores: { '비우는 쉼표': 3, '이완하는 쉼표': 1 } },
-      { text: '여행의 순간을 기록하기', scores: { '땀흘리는 쉼표': 2, '어울리는 쉼표': 1, '채우는 쉼표': 1 } },
+      { text: '여행의 순간을 기록하기', scores: { '땀흘리는 쉼표': 2 } },
       { text: '몸과 마음 정돈하기', scores: { '숨쉬는 쉼표': 3 } },
       { text: '지친 피부 가꾸기', scores: { '피어나는 쉼표': 3 } },
     ],
@@ -252,9 +238,9 @@ export const questions: IQuestion[] = [
     question: `웰니스 여행을 마치고 일상으로 돌아온 당신,\n다음 여행은 누구와 함께 떠나고 싶나요?`,
     answers: [
       { text: '혼자 떠나기', scores: { '비우는 쉼표': 2, '이완하는 쉼표': 2 } },
-      { text: '새로운 사람 만나기', scores: { '어울리는 쉼표': 3 } },
-      { text: '소중한 친구와 떠나기', scores: { '땀흘리는 쉼표': 3, '채우는 쉼표': 1 } },
-      { text: '사랑하는 가족과 떠나기', scores: { '채우는 쉼표': 3 } },
+      { text: '새로운 사람 만나기', scores: { '피어나는 쉼표': 2 } },
+      { text: '소중한 친구와 떠나기', scores: { '땀흘리는 쉼표': 3 } },
+      { text: '사랑하는 가족과 떠나기', scores: { '숨쉬는 쉼표': 2 } },
     ],
     descriptions: [
       '내게만 집중하는 고요한 여행을 떠나고 싶어',

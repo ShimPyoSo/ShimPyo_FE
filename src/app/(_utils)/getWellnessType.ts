@@ -4,8 +4,6 @@ export function getWellnessType(scores: IResultScore): string {
   const types: (keyof IResultScore)[] = [
     '비우는 쉼표',
     '땀흘리는 쉼표',
-    '어울리는 쉼표',
-    '채우는 쉼표',
     '피어나는 쉼표',
     '숨쉬는 쉼표',
     '이완하는 쉼표',
@@ -17,7 +15,7 @@ export function getWellnessType(scores: IResultScore): string {
 
   const highCount = types.filter((t) => (scores[t] ?? 0) >= average * 0.8).length;
 
-  if (highCount >= 6) {
+  if (highCount >= 4) {
     return '이것저것 쉼표';
   }
 

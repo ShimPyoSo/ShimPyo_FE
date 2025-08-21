@@ -9,7 +9,11 @@ import { useForm } from 'react-hook-form';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useState } from 'react';
 
-export default function WithdrawForm() {
+interface WithdrawFormProps {
+  setIsWithdrawAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function WithdrawForm({ setIsWithdrawAlert }: WithdrawFormProps) {
   const { register, watch, handleSubmit } = useForm<IWithdraw>({
     mode: 'onBlur',
   });
@@ -26,6 +30,7 @@ export default function WithdrawForm() {
         data: { password: data.password },
         withCredentials: true,
       });
+      setIsWithdrawAlert(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
@@ -37,6 +42,7 @@ export default function WithdrawForm() {
             data: { password: data.password },
             withCredentials: true,
           });
+          setIsWithdrawAlert(true);
         } catch {
           // reissue 이후 에러처리
         }

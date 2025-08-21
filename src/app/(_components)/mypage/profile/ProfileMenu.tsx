@@ -9,10 +9,11 @@ import arrow from '/public/images/icons/arrow.svg';
 import { useState } from 'react';
 
 interface ProfileMenuProps {
-  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsWithdrawAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ProfileMenu({ setIsAlertOpen }: ProfileMenuProps) {
+export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert }: ProfileMenuProps) {
   const [activeMenu, setActiveMenu] = useState<null | 'profile' | 'password' | 'withdraw'>(null);
 
   return (
@@ -52,7 +53,7 @@ export default function ProfileMenu({ setIsAlertOpen }: ProfileMenuProps) {
           />
         </div>
 
-        {activeMenu === 'password' && <PasswordChange setIsAlertOpen={setIsAlertOpen} />}
+        {activeMenu === 'password' && <PasswordChange setIsPasswordAlert={setIsPasswordAlert} />}
       </li>
       <LogoutButton />
       <li>
@@ -71,7 +72,7 @@ export default function ProfileMenu({ setIsAlertOpen }: ProfileMenuProps) {
             height={24}
           />
         </div>
-        {activeMenu === 'withdraw' && <Withdraw />}
+        {activeMenu === 'withdraw' && <Withdraw setIsWithdrawAlert={setIsWithdrawAlert} />}
       </li>
     </ul>
   );

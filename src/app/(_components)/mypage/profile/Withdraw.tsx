@@ -1,6 +1,10 @@
 import WithdrawForm from './WithdrawForm';
 
-export default function Withdraw() {
+interface WithdrawProps {
+  setIsWithdrawAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Withdraw({ setIsWithdrawAlert }: WithdrawProps) {
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
       <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">회원 탈퇴</h3>
@@ -21,7 +25,7 @@ export default function Withdraw() {
         <br />
         <br />위 내용을 충분히 숙지하였으며, 이에 동의하고 회원 탈퇴를 진행합니다.
       </div>
-      <WithdrawForm />
+      <WithdrawForm setIsWithdrawAlert={setIsWithdrawAlert} />
     </section>
   );
 }

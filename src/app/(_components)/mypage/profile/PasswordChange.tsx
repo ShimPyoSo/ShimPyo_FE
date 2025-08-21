@@ -10,10 +10,10 @@ import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpire
 import { useState } from 'react';
 
 interface PasswordChangeProps {
-  setIsAlertOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PasswordChange({ setIsAlertOpen }: PasswordChangeProps) {
+export default function PasswordChange({ setIsPasswordAlert }: PasswordChangeProps) {
   const { register, handleSubmit, watch, trigger, control } = useForm<IPasswordChange>({
     mode: 'onBlur',
   });
@@ -33,7 +33,7 @@ export default function PasswordChange({ setIsAlertOpen }: PasswordChangeProps) 
         },
         { withCredentials: true }
       );
-      setIsAlertOpen(true);
+      setIsPasswordAlert(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
@@ -50,7 +50,7 @@ export default function PasswordChange({ setIsAlertOpen }: PasswordChangeProps) 
             },
             { withCredentials: true }
           );
-          setIsAlertOpen(true);
+          setIsPasswordAlert(true);
         } catch {
           // reissue 이후 에러처리
         }
