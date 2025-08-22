@@ -17,6 +17,11 @@ export default function Header() {
   const headerTitle = useAtomValue(headerTitleAtom);
 
   const handleMoveToPrev = () => {
+    if (pathname === '/signup/additional') {
+      router.push('/');
+      return;
+    }
+
     const previousPath = getPrevPathname();
     router.push(previousPath);
   };
