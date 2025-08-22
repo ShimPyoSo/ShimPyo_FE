@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import Filter from './Filter/Filter';
 import { IFilter } from '@/app/(_utils)/type';
+import NoLiked from './NoLiked';
+import NoResult from '../search/NoResult';
 import { SORT_BY } from '@/app/(_utils)/type';
 import Sort from './Sort';
 import SpotListItem from './SpotListItem';
@@ -86,7 +88,9 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
         {type === 'list' && (
           <div className="sticky top-[56px] bg-w1 z-20">
             <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
-            <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+            {(isLoading || allSpots.length > 0) && (
+              <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+            )}
           </div>
         )}
 
@@ -96,9 +100,15 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           }`}
         >
           <ul className="px-[16px] pb-[20px]">
-            {isLoading
-              ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
-              : allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)}
+            {isLoading ? (
+              Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
+            ) : allSpots.length > 0 ? (
+              allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)
+            ) : type === 'like' ? (
+              <NoLiked />
+            ) : (
+              <NoResult type="category" />
+            )}
             <div ref={observerRef} className="h-10" />
           </ul>
         </div>

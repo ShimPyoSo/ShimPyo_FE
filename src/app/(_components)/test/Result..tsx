@@ -76,9 +76,9 @@ export default function Result({ setCourse }: ResultProps) {
           {currentItem.name}
         </p>
       </h2>
-      <Image className="mt-[14px]" src={currentItem.image} alt={currentItem.name} width={375} height={420} />
+      <Image className="mt-[12px]" src={currentItem.image} alt={currentItem.name} width={375} height={420} />
       <button
-        className="mt-[26px] text-white bg-gn1 text-center py-[16px] px-[97px] rounded-lg"
+        className="mt-[18px] text-white bg-gn1 text-center py-[16px] px-[97px] rounded-lg"
         onClick={handleFetchCourse}
       >
         맞춤 쉼표 코스 확인하기

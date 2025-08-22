@@ -73,7 +73,7 @@ export default function SearchResultList() {
           ))}
         </ul>
       ) : allResults.length === 0 ? (
-        <NoResult />
+        <NoResult type="search" />
       ) : (
         <ul className="px-[16px] pb-[20px] flex-1">
           {allResults.map((spot) => (
