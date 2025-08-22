@@ -53,13 +53,15 @@ export default function SearchHistory() {
       </p>
       <ul className="mt-[16px] text-b3">
         {history.map((word) => (
-          <li key={word} className="px-[10px] py-[12px] flex items-center justify-between border-b border-w5">
-            <Link href={`/search/${encodeURIComponent(word)}`}>{word}</Link>
+          <li key={word} className="px-[10px] py-[11px] flex items-center justify-between border-b border-w5">
+            <Link className="text-xs text-b3" href={`/search/${encodeURIComponent(word)}`}>
+              {word}
+            </Link>
             <Image
               src={deleteX}
               alt="삭제"
-              width={24}
-              height={24}
+              width={20}
+              height={20}
               role="button"
               onClick={() => handleWordDelete(word)}
             />
