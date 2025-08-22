@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import border from '/public/images/test/border.png';
 import checked from '/public/images/test/checked.svg';
 import { questions } from '@/app/(_utils)/constants';
 
@@ -31,11 +32,13 @@ export default function AnswerItem({ currentIndex, selected, setSelected, answer
       <div
         onClick={() => setSelected(idx)}
         className={`
-                cursor-pointer rounded-xl border p-[15px]
-                ${selected === idx ? 'bg-gn4 border-gn1' : 'bg-w3 border-w4'}
-                transition-colors
+                relative cursor-pointer rounded-xl p-[15px]
+                ${selected === idx ? 'bg-gn4' : 'bg-w3 border border-w4'}
               `}
       >
+        {selected === idx && (
+          <Image src={border} alt="border" fill className="absolute inset-0 rounded-xl pointer-events-none" />
+        )}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-[12px]">
             <div className="w-[62px] h-[58px] bg-w1 rounded-md text-3xl flex items-center justify-center">
