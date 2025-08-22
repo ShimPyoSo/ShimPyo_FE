@@ -231,16 +231,6 @@ export interface IOptional {
   meal: number | null;
 }
 
-export type IQuestion = {
-  question: string;
-  answers: {
-    text: string;
-    scores: { [key: string]: number };
-  }[];
-  descriptions: string[];
-  icons: string[];
-};
-
 export type IResultType =
   | '비우는 쉼표'
   | '땀흘리는 쉼표'
@@ -249,6 +239,19 @@ export type IResultType =
   | '이완하는 쉼표'
   | '이것저것 쉼표';
 
-export type IResultScore = {
-  [key in IResultType]?: number;
+export type IResultScore = { [key in IResultType]?: number };
+
+export type IQuestion = {
+  question: string;
+  answers: {
+    text: string;
+    scores: IResultScore;
+  }[];
+  descriptions: string[];
+  icons: string[];
+};
+
+export type IScore = {
+  index: number;
+  scores: IResultScore;
 };

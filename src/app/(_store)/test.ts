@@ -1,11 +1,11 @@
-import { IOptional, IResultScore } from '../(_utils)/type';
+import { IOptional, IResultScore, IScore } from '../(_utils)/type';
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 import { decryptData, encryptData } from '../(_utils)/crypto';
 
 import { atom } from 'jotai';
 
 export const optionalAtom = atomWithStorage<IOptional>(
-  'testOptional', // localStorage key
+  'testOptional',
   {
     duration: null,
     region: null,
@@ -19,16 +19,9 @@ export const setOptionalAtom = atom(null, (get, set, update: Partial<IOptional>)
   set(optionalAtom, { ...prev, ...update });
 });
 
-export const answeredAtom = atomWithStorage<IResultScore>(
+export const answeredAtom = atomWithStorage<Partial<IResultScore>[]>(
   'testAnswered',
-  {
-    '비우는 쉼표': 0,
-    '땀흘리는 쉼표': 0,
-    '숨쉬는 쉼표': 0,
-    '피어나는 쉼표': 0,
-    '이완하는 쉼표': 0,
-    '이것저것 쉼표': 0,
-  },
+  Array.from({ length: 7 }),
   createJSONStorage(() => ({
     getItem: (key: string) => {
       const cipher = localStorage.getItem(key);
@@ -42,7 +35,7 @@ export const answeredAtom = atomWithStorage<IResultScore>(
       }
     },
     setItem: (key: string, value: string) => {
-      const data: IResultScore = JSON.parse(value);
+      const data: Partial<IResultScore>[] = JSON.parse(value);
       const cipher = encryptData(data);
       localStorage.setItem(key, cipher);
     },
@@ -59,24 +52,14 @@ export const resetAllAtom = atom(null, (_get, set) => {
     meal: null,
   });
 
-  set(answeredAtom, {
-    '비우는 쉼표': 0,
-    '땀흘리는 쉼표': 0,
-    '숨쉬는 쉼표': 0,
-    '피어나는 쉼표': 0,
-    '이완하는 쉼표': 0,
-    '이것저것 쉼표': 0,
-  });
+  set(answeredAtom, Array.from({ length: 7 }));
 });
 
-export const addScoreAtom = atom(null, (get, set, update: Partial<IResultScore>) => {
+export const addScoreAtom = atom(null, (get, set, update: IScore) => {
   const prev = get(answeredAtom);
-  const newScores = { ...prev };
+  const newScores = [...prev];
 
-  for (const [type, score] of Object.entries(update)) {
-    const key = type as keyof IResultScore;
-    newScores[key] = (newScores[key] || 0) + (score ?? 0);
-  }
+  newScores[update.index] = update.scores;
 
   set(answeredAtom, newScores);
 });

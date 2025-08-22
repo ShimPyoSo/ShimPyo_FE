@@ -29,9 +29,12 @@ export default function useQuestion() {
   const handleNext = () => {
     if (selected === -1) return;
 
+    console.log(answered);
+
     if (currentIndex < 7) {
       const selectedScores = questions[currentIndex].answers[selected].scores;
-      setAnswered(selectedScores);
+      console.log(currentIndex, selectedScores);
+      setAnswered({ index: currentIndex, scores: selectedScores });
     } else {
       if (currentIndex === 7 && selected !== 6) {
         setOptional({ region: optionals[0].answers[selected] });
@@ -46,6 +49,12 @@ export default function useQuestion() {
     setCurrentIndex(currentIndex + 1);
   };
 
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    } else router.push('/test');
+  };
+
   useEffect(() => {
     if (currentIndex === 10) {
       const result = getWellnessType(answered);
@@ -58,5 +67,6 @@ export default function useQuestion() {
     selected,
     setSelected,
     handleNext,
+    handlePrev,
   };
 }

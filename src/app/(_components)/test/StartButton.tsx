@@ -19,18 +19,18 @@ export default function StartButton() {
 
   return (
     <div className="mt-[80px] flex items-center gap-[12px]">
-      <button
-        onClick={handleStart}
-        className="grow bg-gn1 border border-gn5 text-white rounded-md py-[14px] tracking-[-1.3%] font-semibold text-center"
-      >
-        시작하기
-      </button>
       <Link
         className="grow-1 bg-w3 border border-w4 text-b3 rounded-md py-[14px] tracking-[-1.3%] font-semibold text-center"
         href={'/test/question'}
       >
         이어하기
       </Link>
+      <button
+        onClick={handleStart}
+        className="grow bg-gn1 border border-gn5 text-white rounded-md py-[14px] tracking-[-1.3%] font-semibold text-center"
+      >
+        시작하기
+      </button>
     </div>
   );
 }
