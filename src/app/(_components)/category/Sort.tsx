@@ -27,6 +27,10 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
       letterSpacing: '-0.02em',
       fontWeight: '600',
     }),
+    valueContainer: (base) => ({
+      ...base,
+      padding: 0,
+    }),
     singleValue: (base) => ({
       ...base,
       fontSize: '12px',
@@ -36,6 +40,7 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
     indicatorsContainer: (base) => ({
       ...base,
       padding: 0,
+      marginLeft: 0,
     }),
     menu: (base) => ({
       ...base,
@@ -43,20 +48,32 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
       border: '1px solid #eff0f2',
       borderRadius: '6px',
       boxShadow: '0px 3px 8px 0px rgba(0, 0, 0, 0.1)',
+      overflow: 'hidden',
     }),
-    option: (base, state) => ({
-      ...base,
-      fontSize: '12px',
-      color: '#3c3c3c',
-      letterSpacing: '-0.02em',
-      backgroundColor: state.isFocused ? '#f5f5f5' : '#ffffff',
-      cursor: 'pointer',
-    }),
+    option: (base, state) => {
+      type Option = (typeof SORT_BY)[number];
+
+      const options = state.options as readonly Option[];
+      const lastKey = options[options.length - 1]?.key;
+      const isLast = state.data.key === lastKey;
+
+      return {
+        ...base,
+        fontSize: '12px',
+        color: '#3c3c3c',
+        letterSpacing: '-0.02em',
+        backgroundColor: state.isFocused ? '#f5f5f5' : '#ffffff',
+        cursor: 'pointer',
+        padding: '3.5px 2.5px',
+        textAlign: 'center',
+        borderBottom: isLast ? 'none' : '1px solid #eff0f2',
+      };
+    },
   };
 
   return (
     <div className="w-full px-[16px] flex justify-end">
-      <div className="relative w-[78px]">
+      <div className="relative">
         <Select
           value={selectedOption}
           onChange={handleChange}

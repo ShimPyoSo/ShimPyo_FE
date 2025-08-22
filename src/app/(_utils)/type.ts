@@ -122,7 +122,7 @@ export type IGenderValue = (typeof GENDERS)[number]['value'];
 
 export const SORT_BY = [
   { label: '인기순', key: 'popular' },
-  { label: '찜많은순', key: 'liked' },
+  { label: '찜 많은순', key: 'liked' },
   { label: '후기순', key: 'review' },
 ] as const;
 
