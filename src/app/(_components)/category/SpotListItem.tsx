@@ -37,7 +37,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
           <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-xs text-gn7 font-semibold bg-white">
             {spot.region}
           </div>
-          {isLoggedIn && type === 'spot' && <Liked liked={isLiked} id={spot.id as number} />}
+          {isLoggedIn && type === 'spot' && <Liked liked={isLiked} id={spot.id as number} type="list" />}
         </div>
         <div className="grow-1">
           <Link

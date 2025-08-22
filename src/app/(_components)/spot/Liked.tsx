@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import like from '/public/images/icons/like.svg';
 import noLike from '/public/images/icons/no-like.svg';
+import spotLike from '/public/images/icons/spot/like.svg';
+import spotNoLike from '/public/images/icons/spot/no-like.svg';
 import { useAtomValue } from 'jotai';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useMutation } from '@tanstack/react-query';
@@ -15,9 +17,10 @@ import { useMutation } from '@tanstack/react-query';
 interface LikedProps {
   liked: boolean;
   id: number;
+  type: 'detail' | 'list';
 }
 
-export default function Liked({ liked, id }: LikedProps) {
+export default function Liked({ liked, id, type }: LikedProps) {
   const [isLiked, setIsLiked] = useState(false);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
   const { handleAccessExpired } = useHandleTokenExpired();
@@ -68,12 +71,19 @@ export default function Liked({ liked, id }: LikedProps) {
     },
   });
 
+  const iconSrc = (() => {
+    if (type === 'list') {
+      return isLiked ? like : noLike;
+    }
+    return isLiked ? spotLike : spotNoLike;
+  })();
+
   return (
     <button className="flex items-center justify-center" onClick={() => mutation.mutate()}>
       <Image
         className={`cursor-pointer ${isLoggedIn ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        src={isLiked ? like : noLike}
-        alt="쉼표"
+        src={iconSrc}
+        alt="찜"
         width={24}
         height={24}
         aria-hidden={!isLoggedIn}

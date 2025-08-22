@@ -56,7 +56,7 @@ export default function SpotDetail() {
             <p className="text-b1 text-lg font-semibold">{data?.title}</p>
           </div>
           <div className="flex items-center gap-[4px]">
-            <Liked liked={data?.isLiked as boolean} id={Number(id)} />
+            <Liked liked={data?.isLiked as boolean} id={Number(id)} type="detail" />
             <Share setIsOpen={setIsOpen} type="spot" />
           </div>
         </div>

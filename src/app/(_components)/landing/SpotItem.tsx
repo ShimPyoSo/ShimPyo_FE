@@ -22,14 +22,14 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
         </div>
 
         <div className="mt-[20px] flex justify-between items-center">
-          <p className="text-xs text-g3 tracking-[-2%]">{spot.category.join(', ')}</p>
+          <p className="max-w-[74px] text-xs text-g3 tracking-[-2%] truncate">{spot.category.join(', ')}</p>
           <div
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
             }}
           >
-            <Liked liked={spot.isLiked || false} id={spot.id as number} />
+            <Liked liked={spot.isLiked || false} id={spot.id as number} type="list" />
           </div>
         </div>
         <p className="mt-[8px] font-semibold text-xs text-b3 tracking-[-2%] line-clamp-2">{spot.title}</p>
