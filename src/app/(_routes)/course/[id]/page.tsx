@@ -1,3 +1,5 @@
+'use client';
+
 import { Suspense, useState } from 'react';
 
 import Alert from '@/app/(_components)/UI/Alert';
