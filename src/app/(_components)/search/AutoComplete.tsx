@@ -24,7 +24,7 @@ export default function AutoComplete({ isActive, query }: SearchInputProps) {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/search/autocomplete?word=${encodeURIComponent(query)}`
         );
-        setSuggestions(res.data.suggestions || []);
+        setSuggestions(res.data || []);
       } catch {
         // 에러 추후 추가
         setSuggestions([]);
