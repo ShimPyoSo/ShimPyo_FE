@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import LogoutButton from './LogoutButton';
 import NicknameChange from './NicknameChange';
 import PasswordChange from './PasswordChange';
 import Withdraw from './Withdraw';
@@ -55,7 +54,6 @@ export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert }: 
 
         {activeMenu === 'password' && <PasswordChange setIsPasswordAlert={setIsPasswordAlert} />}
       </li>
-      <LogoutButton />
       <li>
         <div
           className={`py-[18px] flex justify-between items-center ${
