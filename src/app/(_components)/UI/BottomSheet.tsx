@@ -55,7 +55,7 @@ export default function BottomSheet({ isOpen, onClose, children }: BottomSheetPr
           />
 
           <motion.div
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-white rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full px-[16px] pb-[16px] overflow-y-auto scrollbar-hide"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full px-[16px] pb-[16px] overflow-y-auto scrollbar-hide"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -68,7 +68,7 @@ export default function BottomSheet({ isOpen, onClose, children }: BottomSheetPr
             ref={sheetRef}
           >
             <FocusLock>
-              <div className="py-[16px] sticky top-0 z-10 bg-white" onClick={() => onClose()}>
+              <div className="py-[16px] sticky top-0 z-10 bg-w1" onClick={() => onClose()}>
                 <div className="h-1 w-10 bg-gray-300 rounded-full mx-auto" />
               </div>
               {children}

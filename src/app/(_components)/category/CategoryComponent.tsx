@@ -90,7 +90,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           <div className="sticky top-[56px] bg-w1 z-20">
             <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
             {(isLoading || allSpots.length > 0) && (
-              <div className="px-[16px] flex items-center justify-between">
+              <div className="px-[16px] mb-[6px] flex items-center justify-between">
                 <span className="flex items-center text-xs text-g1 tracking-[-2%]">
                   ⓘ&nbsp;
                   <Link className="text-b3" href={'https://knto.or.kr/index'} rel="noopener noreferrer" target="_blank">
@@ -109,11 +109,11 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
             type === 'list' ? 'top-[156px]' : 'top-[56px]'
           }`}
         >
-          <ul className="px-[16px] pb-[20px]">
+          <ul className="px-[16px] pb-[60px]">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
             ) : allSpots.length > 0 ? (
-              allSpots.map((spot) => <SpotListItem key={spot.likesId || spot.id} type="spot" spot={spot} />)
+              allSpots.map((spot, idx) => <SpotListItem key={idx} type="spot" spot={spot} />)
             ) : type === 'like' ? (
               <NoLiked />
             ) : (

@@ -28,7 +28,7 @@ export default function TabBar() {
           href="/search"
           icon={search}
           activeIcon={searchActive}
-          label="검색"
+          label="여행지 찾기"
           active={pathname.startsWith('/search') || pathname.startsWith('/category')}
         />
         <TabItem
