@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import Filter from './Filter/Filter';
 import { IFilter } from '@/app/(_utils)/type';
+import Link from 'next/link';
 import NoLiked from './NoLiked';
 import NoResult from '../search/NoResult';
 import { SORT_BY } from '@/app/(_utils)/type';
@@ -89,7 +90,16 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           <div className="sticky top-[56px] bg-w1 z-20">
             <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
             {(isLoading || allSpots.length > 0) && (
-              <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+              <div className="px-[16px] flex items-center justify-between">
+                <span className="flex items-center text-xs text-g1 tracking-[-2%]">
+                  ⓘ&nbsp;
+                  <Link className="text-b3" href={'https://knto.or.kr/index'} rel="noopener noreferrer" target="_blank">
+                    한국관광공사
+                  </Link>
+                  에서 제공하는 정보예요.
+                </span>
+                <Sort selectedOption={selectedOption} setSelectedOption={setSelectedOption} />
+              </div>
             )}
           </div>
         )}

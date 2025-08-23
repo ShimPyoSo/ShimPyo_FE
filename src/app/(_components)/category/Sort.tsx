@@ -72,7 +72,7 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
   };
 
   return (
-    <div className="w-full px-[16px] flex justify-end">
+    <div className="flex justify-end">
       <div className="relative">
         <Select
           value={selectedOption}

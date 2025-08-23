@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 
 import { ILocation } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import Link from 'next/link';
 import WellnessFactor from './WellnessFactor';
 import { getAddressFromCoords } from '@/app/(_utils)/hooks/useGetLocation';
 import gps from '/public/images/icons/gps.svg';
@@ -54,6 +55,22 @@ export default function TodayWellness() {
         </p>
       </div>
       <WellnessFactor location={location} />
+      <span className="mt-[8px] flex items-center text-xs text-g1 tracking-[-2%]">
+        ⓘ&nbsp;
+        <Link
+          className="text-b3"
+          href={'https://www.weather.go.kr/w/index.do'}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          기상청
+        </Link>
+        ,&nbsp;
+        <Link className="text-b3" href={'https://www.keco.or.kr'} rel="noopener noreferrer" target="_blank">
+          한국환경공단
+        </Link>
+        에서 제공하는 정보예요.
+      </span>
     </section>
   );
 }
