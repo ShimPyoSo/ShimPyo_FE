@@ -115,7 +115,11 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
             ) : allSpots.length > 0 ? (
               allSpots.map((spot, idx) => <SpotListItem key={idx} type="spot" spot={spot} />)
             ) : type === 'like' ? (
-              <NoLiked />
+              <NoLiked
+                type="spot"
+                main={'지금 다양한 여행지를 탐색해 보세요!'}
+                description={'아직 찜한 여행지가 없어요'}
+              />
             ) : (
               <NoResult type="category" />
             )}

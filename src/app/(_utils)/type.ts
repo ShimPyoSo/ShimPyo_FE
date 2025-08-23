@@ -188,11 +188,15 @@ export interface IDay {
   list: ICourseList[];
 }
 
-export interface ICourse {
+export interface ICourseInfo {
   courseId: number;
   title: string;
   typename: IResultType;
   token: string;
+  thumbnail: string;
+}
+
+export interface ICourse extends Omit<ICourseInfo, 'thumbnail'> {
   days: IDay[];
 }
 

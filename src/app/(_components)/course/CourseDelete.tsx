@@ -11,9 +11,10 @@ import { useRouter } from 'next/navigation';
 interface CourseDeleteProps {
   courseId: number;
   type: 'list' | 'detail';
+  refetch?: () => void;
 }
 
-export default function CourseDelete({ courseId, type }: CourseDeleteProps) {
+export default function CourseDelete({ courseId, type, refetch }: CourseDeleteProps) {
   const { handleAccessExpired } = useHandleTokenExpired();
   const router = useRouter();
 
@@ -21,6 +22,7 @@ export default function CourseDelete({ courseId, type }: CourseDeleteProps) {
     try {
       await axios.delete(`/api/course?id=${courseId}`, { withCredentials: true });
       if (type === 'detail') router.push('/mypage/like/course');
+      else refetch?.();
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN') {
@@ -28,6 +30,7 @@ export default function CourseDelete({ courseId, type }: CourseDeleteProps) {
         try {
           await axios.delete(`/api/course?id=${courseId}`, { withCredentials: true });
           if (type === 'detail') router.push('/mypage/like/course');
+          else refetch?.();
         } catch {
           // reissue 이후 에러처리
         }

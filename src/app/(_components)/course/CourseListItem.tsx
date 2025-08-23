@@ -1,17 +1,19 @@
 'use client';
 
 import CourseDelete from './CourseDelete';
+import { ICourseInfo } from '@/app/(_utils)/type';
 import Link from 'next/link';
 import Share from '../UI/Share';
 import { testImages } from '@/app/(_utils)/constants';
 
 interface CourseListItemProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  item: ICourseInfo;
+  refetch?: () => void;
 }
 
-export default function CourseListItem({ setIsOpen }: CourseListItemProps) {
-  const shimpyo = '땀흘리는 쉼표'; // 임시 쉼표 유형
-  const currentItem = testImages.find((item) => item.name === shimpyo);
+export default function CourseListItem({ setIsOpen, item, refetch }: CourseListItemProps) {
+  const currentItem = testImages.find((i) => i.name === item.typename);
   if (!currentItem) return null;
 
   return (
@@ -26,16 +28,16 @@ export default function CourseListItem({ setIsOpen }: CourseListItemProps) {
               color: currentItem.color,
             }}
           >
-            {shimpyo}
+            {item.typename}
           </div>
-          <Link href={'/mypage/like/course/1'} className="mt-[4px] text-sm text-b3">
-            1박 2일 전남 템플스테이
+          <Link href={`/mypage/like/course/${item.courseId}`} className="mt-[4px] text-sm text-b3">
+            {item.title}
           </Link>
         </div>
 
         <div className="flex items-center gap-[6px]">
-          <Share setIsOpen={setIsOpen} type="course" courseId={1} token="dsdfsdawd" />
-          <CourseDelete courseId={123} type="list" />
+          <Share setIsOpen={setIsOpen} type="course" courseId={item.courseId} token={item.token} />
+          <CourseDelete courseId={item.courseId} type="list" refetch={refetch} />
         </div>
       </div>
     </li>
