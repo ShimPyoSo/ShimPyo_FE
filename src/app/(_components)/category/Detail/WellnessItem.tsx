@@ -58,8 +58,11 @@ export default function WellnessItem({ date, day, weather, concentration }: Well
           />
           <span className="flex ml-[4px] text-xs text-b3">
             {concentration >= 0 ? (
-              <span>
-                집중률&nbsp;<p className="font-semibold">{concentration.toFixed(1)}%</p>
+              <span className="flex items-center">
+                집중률&nbsp;
+                <p className="font-semibold">
+                  {Number.isInteger(concentration) ? concentration : concentration.toFixed(1)}%
+                </p>
               </span>
             ) : (
               <p className="text-g3">정보 알 수 없음</p>
