@@ -6,7 +6,7 @@ import homeActive from '/public/images/icons/tabbar/homeActive.svg';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import mypage from '/public/images/icons/tabbar/mypage.svg';
 import mypageActive from '/public/images/icons/tabbar/mypageActive.svg';
-import { rendering } from '@/app/(_utils)/constants';
+import { notRenderingTabBar } from '@/app/(_utils)/constants';
 import search from '/public/images/icons/tabbar/search.svg';
 import searchActive from '/public/images/icons/tabbar/searchActive.svg';
 import test from '/public/images/icons/tabbar/test.svg';
@@ -18,7 +18,7 @@ export default function TabBar() {
   const pathname = usePathname();
   const isLoggedIn = useAtomValue(isLoggedInAtom);
 
-  if (!rendering.includes(pathname) && !pathname.startsWith('/search')) return null;
+  if (notRenderingTabBar.includes(pathname)) return null;
 
   return (
     <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px] z-[100]">
@@ -29,7 +29,7 @@ export default function TabBar() {
           icon={search}
           activeIcon={searchActive}
           label="검색"
-          active={pathname.startsWith('/search')}
+          active={pathname.startsWith('/search') || pathname.startsWith('/category')}
         />
         <TabItem
           href="/test"
@@ -43,7 +43,7 @@ export default function TabBar() {
           icon={mypage}
           activeIcon={mypageActive}
           label={isLoggedIn ? '마이페이지' : '로그인'}
-          active={isLoggedIn ? pathname.startsWith('/mypage') : pathname.startsWith('/login')}
+          active={pathname.startsWith('/mypage')}
         />
       </ul>
     </nav>

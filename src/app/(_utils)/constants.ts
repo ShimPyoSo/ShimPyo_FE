@@ -52,7 +52,15 @@ export const notRendering = [
   '/mypage/like/spot/meditation',
 ];
 
-export const rendering = ['/mypage', '/test', '/search', '/'];
+export const notRenderingTabBar = [
+  '/signup',
+  '/signup/additional',
+  '/signup/email',
+  '/login',
+  '/find/password',
+  '/find/id',
+  '/test/question',
+];
 
 export const domainOptions = [
   { value: 'gmail.com', label: 'gmail.com' },
