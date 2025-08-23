@@ -29,11 +29,8 @@ export default function useQuestion() {
   const handleNext = () => {
     if (selected === -1) return;
 
-    console.log(answered);
-
     if (currentIndex < 7) {
       const selectedScores = questions[currentIndex].answers[selected].scores;
-      console.log(currentIndex, selectedScores);
       setAnswered({ index: currentIndex, scores: selectedScores });
     } else {
       if (currentIndex === 7 && selected !== 6) {

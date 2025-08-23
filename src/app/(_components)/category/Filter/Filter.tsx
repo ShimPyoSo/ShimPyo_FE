@@ -1,6 +1,6 @@
 'use client';
 
-import FilterBottomSheet from './FilterBottomSheet';
+import BottomSheet from '../../UI/BottomSheet';
 import FilterContent from './FilterContent';
 import FilterList from './FilterList';
 import { IFilter } from '@/app/(_utils)/type';
@@ -37,9 +37,9 @@ export default function Filter({ filter, setFilter, refetch }: FilterProps) {
         filter={filter}
         filterItem={filterItems}
       />
-      <FilterBottomSheet isOpen={isOpen} onClose={handleClose}>
+      <BottomSheet isOpen={isOpen} onClose={handleClose}>
         <FilterContent selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItems} />
-      </FilterBottomSheet>
+      </BottomSheet>
     </>
   );
 }

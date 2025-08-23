@@ -12,7 +12,7 @@ interface BottomSheetProps {
   children: React.ReactNode;
 }
 
-export default function FilterBottomSheet({ isOpen, onClose, children }: BottomSheetProps) {
+export default function BottomSheet({ isOpen, onClose, children }: BottomSheetProps) {
   const [isMounted, setIsMounted] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
 
