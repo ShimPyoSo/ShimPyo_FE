@@ -23,7 +23,7 @@ export default function WordItem({ isActive, searchWord }: WordItemProps) {
     <li className="w-full border-b border-[#EFF0F2]">
       <button
         className="w-full p-[16px] text-b1 text-sm cursor-pointer text-start"
-        onClick={() => handleSearch(searchWord)}
+        onMouseDown={() => handleSearch(searchWord)}
       >
         {searchWord}
       </button>
