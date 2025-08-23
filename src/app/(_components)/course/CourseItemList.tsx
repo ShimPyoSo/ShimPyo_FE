@@ -5,6 +5,7 @@ interface CourseItemListProps {
 }
 
 export default function CourseItemList({ setIsOpen }: CourseItemListProps) {
+  // 추후 fetch 코드 추가하면 삭제 이후 refetch 코드 넣어야 함!
   return (
     <ul className="mt-[12px]">
       <CourseListItem setIsOpen={setIsOpen} />

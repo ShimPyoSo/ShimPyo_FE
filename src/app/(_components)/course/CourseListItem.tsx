@@ -1,10 +1,9 @@
 'use client';
 
-import Image from 'next/image';
+import CourseDelete from './CourseDelete';
 import Link from 'next/link';
 import Share from '../UI/Share';
 import { testImages } from '@/app/(_utils)/constants';
-import trash from '/public/images/icons/course/trash.svg';
 
 interface CourseListItemProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,9 +35,7 @@ export default function CourseListItem({ setIsOpen }: CourseListItemProps) {
 
         <div className="flex items-center gap-[6px]">
           <Share setIsOpen={setIsOpen} type="course" courseId={1} token="dsdfsdawd" />
-          <button>
-            <Image src={trash} alt="코스 삭제" width={24} height={24} />
-          </button>
+          <CourseDelete courseId={123} type="list" />
         </div>
       </div>
     </li>

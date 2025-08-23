@@ -1,0 +1,44 @@
+'use client';
+
+import axios, { AxiosError } from 'axios';
+
+import { IError } from '@/app/(_utils)/type';
+import Image from 'next/image';
+import trash from '/public/images/icons/course/trash.svg';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
+import { useRouter } from 'next/navigation';
+
+interface CourseDeleteProps {
+  courseId: number;
+  type: 'list' | 'detail';
+}
+
+export default function CourseDelete({ courseId, type }: CourseDeleteProps) {
+  const { handleAccessExpired } = useHandleTokenExpired();
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/course?id=${courseId}`, { withCredentials: true });
+      if (type === 'detail') router.push('/mypage/like/course');
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          await axios.delete(`/api/course?id=${courseId}`, { withCredentials: true });
+          if (type === 'detail') router.push('/mypage/like/course');
+        } catch {
+          // reissue 이후 에러처리
+        }
+      }
+      console.log(err.response?.data?.message);
+    }
+  };
+
+  return (
+    <button onClick={handleDelete}>
+      <Image src={trash} alt="삭제" width={24} height={24} />
+    </button>
+  );
+}

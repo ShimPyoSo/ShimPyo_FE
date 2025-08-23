@@ -2,12 +2,12 @@
 
 import { ICourse, ILatLng } from '@/app/(_utils)/type';
 
+import CourseDelete from './CourseDelete';
 import DayItem from './DayItem';
-import Image from 'next/image';
 import Map from './Map';
 import Share from '../UI/Share';
 import { testImages } from '@/app/(_utils)/constants';
-import trash from '/public/images/icons/course/trash.svg';
+import { useParams } from 'next/navigation';
 
 interface CourseListProps {
   isEditable: boolean;
@@ -17,6 +17,7 @@ interface CourseListProps {
 }
 
 export default function CourseList({ isEditable, setIsOpen, course }: CourseListProps) {
+  const { id } = useParams();
   const currentItem = testImages.find((item) => item.name === course.typename);
   if (!currentItem) return null;
 
@@ -45,11 +46,7 @@ export default function CourseList({ isEditable, setIsOpen, course }: CourseList
         </h2>
         <div className="flex gap-[6px] items-center">
           <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
-          {isEditable && (
-            <button>
-              <Image src={trash} alt="삭제" width={24} height={24} />
-            </button>
-          )}
+          {isEditable && <CourseDelete courseId={Number(id as string)} type="detail" />}
         </div>
       </div>
       <Map positions={positionsGroup} titles={titlesGroup} day={course.days.length} />
