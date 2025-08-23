@@ -21,7 +21,7 @@ const tempCourse: ICourse = {
         {
           touristId: 101,
           title: '템플스테이 사찰 체험',
-          type: '비우는 쉼표',
+          time: '09:00',
           images: 'https://example.com/images/spot1.jpg',
           address: '전라남도 순천시 송광면',
           operationTime: {
@@ -36,7 +36,7 @@ const tempCourse: ICourse = {
         {
           touristId: 102,
           title: '전남 자연 힐링 산책',
-          type: '숨쉬는 쉼표',
+          time: '10:00',
           images: 'https://example.com/images/spot2.jpg',
           address: '전라남도 담양군 메타세쿼이아길',
           operationTime: {
@@ -56,7 +56,7 @@ const tempCourse: ICourse = {
         {
           touristId: 103,
           title: '전남 전통 사찰 음식 체험',
-          type: '채우는 쉼표',
+          time: '12:00',
           images: 'https://example.com/images/spot3.jpg',
           address: '전라남도 화순군 사찰 음식 체험관',
           operationTime: {
