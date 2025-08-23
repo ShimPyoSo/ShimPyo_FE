@@ -1,17 +1,18 @@
 'use client';
 
+import { IError, IReviewResponse } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
-import { IReviewResponse } from '@/app/(_utils)/type';
 import ImageModal from '@/app/(_components)/image/ImageModal';
 import ProtectedRoute from '@/app/ProtectedRoute';
 import ReviewList from '@/app/(_components)/mypage/review/ReviewList';
 import SpotInfo from '@/app/(_components)/mypage/review/SpotInfo';
-import axios from 'axios';
 import { setTitleAtom } from '@/app/(_store)/title';
 import { useAtom } from 'jotai';
 import { useDeleteReview } from '@/app/(_utils)/hooks/useDeleteReview';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,19 +25,37 @@ export default function Review() {
   const [selectedNumber, setSelectedNumber] = useState(0);
   const { handleDeleteReview } = useDeleteReview();
   const [, setTitle] = useAtom(setTitleAtom);
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   useEffect(() => {
     setTitle('내가 쓴 후기');
   }, [setTitle]);
 
   const fetchReviews = async (): Promise<IReviewResponse> => {
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
-      {
-        withCredentials: true,
+    try {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      return res.data;
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review-detail?touristId=${id}`,
+            {
+              withCredentials: true,
+            }
+          );
+          return res.data;
+        } catch {}
       }
-    );
-    return res.data;
+      throw err;
+    }
   };
 
   const { data, isLoading, refetch } = useQuery<IReviewResponse>({
