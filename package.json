@@ -16,6 +16,7 @@
     "jotai": "^2.12.5",
     "next": "15.3.4",
     "react": "^19.0.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^19.0.0",
     "react-focus-lock": "^2.13.6",
     "react-hook-form": "^7.59.0",
