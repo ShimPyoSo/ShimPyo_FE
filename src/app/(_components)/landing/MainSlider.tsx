@@ -1,4 +1,4 @@
-import Carousel from './Carousel';
+import Carousel from '../UI/MobileCarousel';
 
 export default function MainSlider() {
   return (

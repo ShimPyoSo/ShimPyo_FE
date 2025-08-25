@@ -2,7 +2,7 @@
 
 import { ReactNode, useRef, useState } from 'react';
 
-export default function Carousel({ children }: { children: ReactNode }) {
+export default function MobileCarousel({ children }: { children: ReactNode }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);

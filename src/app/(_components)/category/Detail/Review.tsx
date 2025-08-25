@@ -1,22 +1,26 @@
 'use client';
 
-import Carousel from '../../landing/Carousel';
+import { useRef, useState } from 'react';
+
+import Carousel from '../../UI/Carousel';
 import { IReview } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import ImageModal from '../../image/ImageModal';
 import Link from 'next/link';
 import ReviewItem from './ReviewItem';
 import ReviewSkeleton from './ReviewSkeleton';
+import WebCarouselArrow from '../../UI/WebCarouselArrow';
 import arrow from '/public/images/icons/arrow.svg';
 import axios from 'axios';
+import { isMobile } from 'react-device-detect';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 
 export default function Review() {
   const { id } = useParams();
   const [reviewImg, setReviewImg] = useState<string[] | null>(null);
   const [selectedNumber, setSelectedNumber] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const fetchReviews = async (): Promise<IReview[]> => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/tourlist/reviews?limit=4&touristId=${id}`);
@@ -41,13 +45,17 @@ export default function Review() {
               <Image className="rotate-90" src={arrow} alt="전체보기" width={16} height={16} />
             </Link>
           </div>
-          <small className="text-g1">
-            {isLoading || reviews.length > 0
-              ? '쉼표 유저들의 생생한 방문 후기를 들어보세요'
-              : '아직 방문객 후기가 없어요, 가장 먼저 등록해 보세요!'}
-          </small>
+          <div className="flex items-center justify-between">
+            <small className="text-g1">
+              {isLoading || reviews.length > 0
+                ? '쉼표 유저들의 생생한 방문 후기를 들어보세요'
+                : '아직 방문객 후기가 없어요, 가장 먼저 등록해 보세요!'}
+            </small>
+            {isMobile || <WebCarouselArrow scrollRef={scrollRef} scrollStep={290} />}
+          </div>
         </div>
-        <Carousel>
+
+        <Carousel ref={scrollRef}>
           <ul className="mt-[16px] px-[16px] flex gap-[12px] flex-nowrap w-max">
             {isLoading
               ? Array.from({ length: 4 }).map((_, i) => <ReviewSkeleton key={i} />)
