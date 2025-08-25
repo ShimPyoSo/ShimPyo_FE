@@ -33,15 +33,15 @@ export default function Map({ positions, titles, day }: MapProps) {
       <ul className="flex gap-[12px] justify-end">
         {Array.from({ length: day }, (_, i) => (
           <li key={i} className="flex items-center gap-[4px] font-[kkubulim] text-gn1 text-sm">
-            <input
-              id={`day-${i + 1}`}
-              type="radio"
-              name="day-select"
-              checked={selectedDay === i}
-              onChange={() => onSelectDay(i)}
-              className="peer hidden"
-            />
             <label htmlFor={`day-${i + 1}`} className="flex items-center gap-1 cursor-pointer select-none">
+              <input
+                id={`day-${i + 1}`}
+                type="radio"
+                name="day-select"
+                checked={selectedDay === i}
+                onChange={() => onSelectDay(i)}
+                className="peer hidden"
+              />
               <span
                 className="w-5 h-5 border border-w4 bg-w4 rounded-sm peer-checked:bg-gn4 peer-checked:border-gn1 relative flex-shrink-0"
                 aria-hidden="true"
