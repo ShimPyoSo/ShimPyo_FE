@@ -7,7 +7,7 @@ import { REGION_MAP } from '../constants';
 import axios from 'axios';
 
 export function useFetchDust(location: ILocation | null) {
-  const [dust, setDust] = useState(null);
+  const [dust, setDust] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchDust = async () => {
@@ -20,9 +20,7 @@ export function useFetchDust(location: ILocation | null) {
 
         const items = response.data;
         setDust(items);
-      } catch {
-        alert('날씨 정보를 불러오지 못했습니다.');
-      }
+      } catch {}
     };
 
     fetchDust();

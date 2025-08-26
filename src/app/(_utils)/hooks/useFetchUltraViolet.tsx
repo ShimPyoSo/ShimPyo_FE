@@ -21,9 +21,7 @@ export function useFetchUltraViolet(location: ILocation | null) {
 
         const items = response.data;
         setUltraviolet(items);
-      } catch {
-        alert('날씨 정보를 불러오지 못했습니다.');
-      }
+      } catch {}
     };
 
     fetchDust();
