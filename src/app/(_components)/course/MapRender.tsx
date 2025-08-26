@@ -53,7 +53,19 @@ export default function MapRender({ positions, titles, day }: MapRenderProps) {
     <Map
       center={path[0] ?? { lat: 37.5665, lng: 126.978 }}
       style={{ width: '100%', height: '206px', borderRadius: '5px', marginTop: '12px' }}
-      level={9}
+      level={path.length === 1 ? 4 : 9}
+      onCreate={(map) => {
+        if (path.length > 1) {
+          const bounds = new window.kakao.maps.LatLngBounds();
+
+          path.forEach((pos) => {
+            const latlng = new window.kakao.maps.LatLng(pos.lat, pos.lng) as unknown as kakao.maps.LatLng;
+            bounds.extend(latlng);
+          });
+
+          map.setBounds(bounds);
+        }
+      }}
     >
       {path.map((pos, idx) => (
         <CustomOverlayMap key={idx} position={pos} yAnchor={1}>

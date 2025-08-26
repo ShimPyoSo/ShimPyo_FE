@@ -29,9 +29,7 @@ export function useFetchWeather() {
 
             const items = response.data;
             setWeather(items);
-          } catch {
-            alert('날씨 정보를 불러오지 못했습니다.');
-          }
+          } catch {}
         },
         async () => {
           const response = await axios.get('/api/weather', {
