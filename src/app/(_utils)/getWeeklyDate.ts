@@ -1,7 +1,8 @@
 const dayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+const dayValues = ['일', '월', '화', '수', '목', '금', '토'];
 type DayLabel = '오늘' | '내일' | (typeof dayNames)[number];
 
-export default function getWeeklyDate(): { date: string; day: DayLabel }[] {
+export default function getWeeklyDate(): { date: string; day: DayLabel; value: string }[] {
   const today = new Date();
   return Array.from({ length: 7 }, (_, i) => {
     const date = new Date(today);
@@ -12,11 +13,13 @@ export default function getWeeklyDate(): { date: string; day: DayLabel }[] {
     const dateStr = `${month}.${dayNum}`;
 
     const dayOfWeek = dayNames[date.getDay()];
+    const dayValue = dayValues[date.getDay()];
     const dayLabel: DayLabel = i === 0 ? '오늘' : i === 1 ? '내일' : dayOfWeek;
 
     return {
       date: dateStr,
       day: dayLabel,
+      value: dayValue,
     };
   });
 }

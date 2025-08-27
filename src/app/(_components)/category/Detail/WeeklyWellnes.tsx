@@ -11,9 +11,10 @@ interface WeeklyWellnessProps {
   longitude: number;
   address: string;
   name: string;
+  dayOff: string[];
 }
 
-export default function WeeklyWellness({ longitude, latitude, address, name }: WeeklyWellnessProps) {
+export default function WeeklyWellness({ longitude, latitude, address, name, dayOff }: WeeklyWellnessProps) {
   const weekData = getWeeklyDate();
   const { weather } = useFetchWeeklyWeather({ longitude, latitude, address });
   const { concentration } = useFetchConcentration({ address, name });
@@ -24,6 +25,7 @@ export default function WeeklyWellness({ longitude, latitude, address, name }: W
         <Image src={illu} alt="이번주 웰니스" width={350} height={130} className="relative z-10" />
         <div className="absolute flex items-center bottom-[-30px] w-full bg-gn10 px-[12px] py-[12px] rounded-lg z-0">
           <WellnessItem
+            isDayOff={dayOff.includes(weekData[0].value)}
             date={weekData[0].date}
             day={weekData[0].day}
             weather={weather[0]}
@@ -34,7 +36,13 @@ export default function WeeklyWellness({ longitude, latitude, address, name }: W
       <ul>
         {weekData.slice(1).map(({ date, day }, idx) => (
           <li key={date} className="flex items-center border-b border-w6 px-[12px] py-[12px]">
-            <WellnessItem date={date} day={day} weather={weather[idx + 1]} concentration={concentration[idx + 1]} />
+            <WellnessItem
+              isDayOff={dayOff.includes(weekData[idx].value)}
+              date={date}
+              day={day}
+              weather={weather[idx + 1]}
+              concentration={concentration[idx + 1]}
+            />
           </li>
         ))}
       </ul>

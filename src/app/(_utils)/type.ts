@@ -142,7 +142,7 @@ export type ILatLng = {
 };
 
 export interface IOperationTime {
-  dayoff: string[] | null;
+  dayoff: string | null;
   openTime: string;
   closeTime: string;
   breakTime: string | null;

@@ -16,6 +16,7 @@ export default function Wellness({ spot }: { spot: ISpot }) {
         longitude={spot.longitude as number}
         address={spot.address as string}
         name={spot.title}
+        dayOff={spot.operationTime?.dayoff ? spot.operationTime.dayoff.split(',').map((d) => d.trim()) : []}
       />
     </section>
   );
