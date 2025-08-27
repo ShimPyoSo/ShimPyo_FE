@@ -162,7 +162,7 @@ export interface ISpot extends ILatLng {
   touristId?: number;
   region: string;
   images: string | string[];
-  category: string[];
+  category?: string[];
   title: string;
   isLiked?: boolean;
   operationTime?: IOperationTime;

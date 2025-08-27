@@ -33,6 +33,8 @@ export const title: { [key: string]: string } = {
   '/mypage/like/recent': '최근 본 여행지',
   '/test': '쉼표 유형 테스트',
   '/test/question': '쉼표 유형 테스트',
+  '/course/search': '쉼표 여행지 추가하기',
+  '/course/kakao': '쉼표 여행지 추가하기',
 };
 
 export const notRendering = [
@@ -60,6 +62,8 @@ export const notRenderingTabBar = [
   '/find/password',
   '/find/id',
   '/test/question',
+  '/course/search',
+  '/course/kakao',
 ];
 
 export const domainOptions = [

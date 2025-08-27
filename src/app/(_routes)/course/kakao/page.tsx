@@ -3,40 +3,38 @@
 import { ISpot } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import SpotRecommend from '@/app/(_components)/course/SpotRecommend';
+import axios from 'axios';
 import search from '/public/images/icons/search.svg';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-export default function SpotSearch() {
+export default function SpotSearchKaKao() {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState<ISpot[] | null>(null);
   const [selectedSpot, setSelectedSpot] = useState<ISpot | null>(null);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!query.trim()) return;
 
-    // 임시 데이터
-    setSearchResults([
-      {
-        touristId: 1,
-        region: '서울특별시',
-        images: '',
-        title: '서울타워',
-        address: '서울특별시 용산구 남산공원길 105',
-        latitude: 37.5511694,
-        longitude: 126.9882266,
-      },
-      {
-        touristId: 2,
-        region: '서울특별시',
-        images: '',
-        title: '광화문',
-        address: '서울특별시 종로구 세종대로 175',
-        latitude: 37.5759291,
-        longitude: 126.9768626,
-      },
-    ]);
+    try {
+      const response = await axios.get(`/api/search?query=${encodeURIComponent(query)}`);
 
-    setSelectedSpot(null); // 검색 후 선택 초기화
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const spots: ISpot[] = response.data.documents.map((item: any) => ({
+        touristId: -1,
+        region: item.category_name,
+        images: '',
+        title: item.place_name,
+        address: item.road_address_name || item.address_name,
+        latitude: parseFloat(item.y),
+        longitude: parseFloat(item.x),
+      }));
+
+      setSearchResults(spots);
+      setSelectedSpot(null);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -82,14 +80,20 @@ export default function SpotSearch() {
         {searchResults === null ? (
           <SpotRecommend />
         ) : (
-          <ul className="mt-[12px] flex flex-col gap-2">
+          <ul className="mt-[12px] mb-[60px] flex flex-col gap-2">
             {searchResults.map((spot) => (
               <li
-                key={spot.touristId}
+                key={uuidv4()}
                 className={`p-2 border rounded-md cursor-pointer ${
-                  selectedSpot?.touristId === spot.touristId ? 'border-gn1 bg-gn1/10' : 'border-w4'
+                  selectedSpot?.title === spot.title && selectedSpot?.address === spot.address
+                    ? 'border-gn1 bg-gn1/10'
+                    : 'border-w4'
                 }`}
-                onClick={() => setSelectedSpot(spot)}
+                onClick={() =>
+                  selectedSpot?.title === spot.title && selectedSpot?.address === spot.address
+                    ? setSelectedSpot(null)
+                    : setSelectedSpot(spot)
+                }
               >
                 <p className="font-semibold">{spot.title}</p>
                 <p className="text-xs text-g1">{spot.address}</p>
@@ -99,15 +103,17 @@ export default function SpotSearch() {
         )}
       </div>
 
-      <button
-        className={`w-full py-[16px] rounded-lg border font-semibold ${
-          selectedSpot ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
-        }`}
-        disabled={!selectedSpot}
-        onClick={handleAdd}
-      >
-        여행지 추가하기
-      </button>
+      <div className="fixed bottom-[20px] flex justify-center z-[999]">
+        <button
+          className={`w-[343px] py-[16px] border font-semibold rounded-lg ${
+            selectedSpot ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
+          }`}
+          disabled={!selectedSpot}
+          onClick={handleAdd}
+        >
+          여행지 추가하기
+        </button>
+      </div>
     </div>
   );
 }

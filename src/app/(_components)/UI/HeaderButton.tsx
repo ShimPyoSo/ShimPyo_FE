@@ -3,7 +3,9 @@
 import { resetAllAtom, setCurrentIndexAtom } from '@/app/(_store)/test';
 import { usePathname, useRouter } from 'next/navigation';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import cancel from '/public/images/icons/cancel.svg';
 import { useAtom } from 'jotai';
 
 export default function HeaderButton() {
@@ -45,6 +47,17 @@ export default function HeaderButton() {
         >
           다시하기
         </button>
+      )}
+      {pathname.startsWith('/course/') && (
+        <Image
+          className="absolute right-[16px] top-[18px] cursor-pointer"
+          src={cancel}
+          alt="닫기"
+          width={24}
+          height={24}
+          role="button"
+          onClick={() => window.close()}
+        />
       )}
     </>
   );

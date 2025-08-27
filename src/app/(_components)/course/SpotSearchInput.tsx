@@ -14,14 +14,14 @@ interface SpotSearchInputProps {
   watch: UseFormWatch<ICourseAddition>;
 }
 
-export default function SpotSearchInput({ register, setValue, watch }: SpotSearchInputProps) {
+export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProps) {
   const selectedCourse = watch('course');
 
   const openPopup = (type: 'search' | 'kakao') => {
     window.open(
       `${type === 'search' ? '/course/search' : '/course/kakao'}`,
       '쉼표 여행지 추가하기',
-      'width=500,height=600,scrollbars=yes'
+      'width=375,height=600,scrollbars=yes'
     );
 
     window.addEventListener('message', (e) => {
@@ -56,7 +56,7 @@ export default function SpotSearchInput({ register, setValue, watch }: SpotSearc
 
   return (
     <section className="mt-[24px]">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-[18px]">
         <p className="tracking-[1.3%] font-semibold text-b1">쉼표 여행지 추가하기</p>
         <button className="tracking-[-2%] text-gn5 font-semibold text-xs" onClick={() => openPopup('kakao')}>
           원하는 여행지를 못 찾았다면?
@@ -79,7 +79,7 @@ export default function SpotSearchInput({ register, setValue, watch }: SpotSearc
         />
       </div>
       {selectedCourse?.touristId === 0 ? (
-        <SpotRecommend register={register} />
+        <SpotRecommend />
       ) : (
         <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} />
       )}
