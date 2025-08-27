@@ -22,7 +22,7 @@ export default function TabBar() {
 
   return (
     <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px] z-[100]">
-      <ul className="flex justify-between items-center text-sm text-b3 pt-[20px] pb-[20px]">
+      <ul className="flex justify-between items-center text-sm text-b3 py-[16px]">
         <TabItem href="/" icon={home} activeIcon={homeActive} label="홈" active={pathname === '/'} />
         <TabItem
           href="/search"
