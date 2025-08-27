@@ -53,7 +53,11 @@ export default function Recommend() {
     <section className="mt-[70px]">
       <h3 className="font-[kkubulim] text-gn1 text-xl">여행지 추천</h3>
       <div className="flex items-center justify-between  mb-[16px]">
-        <p className="mt-[2px] text-sm text-g1">좋아하실 만한 여행지를 추천해 드려요</p>
+        <p className="mt-[2px] text-sm text-g1">
+          {isLoading || spots.length === 0
+            ? '지금 마음에 드는 여행지에 쉼표를 찍어 보세요'
+            : '좋아하실 만한 여행지를 추천해 드려요'}
+        </p>
         {isMobile || <WebCarouselArrow scrollRef={scrollRef} scrollStep={330} />}
       </div>
 

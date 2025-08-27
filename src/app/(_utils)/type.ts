@@ -180,7 +180,7 @@ export interface ICourseList extends ILatLng {
   time: string;
   images: string;
   address: string;
-  operationTime: IOperationTime;
+  operationTime?: IOperationTime;
 }
 
 export interface IDay {
@@ -198,6 +198,11 @@ export interface ICourseInfo {
 
 export interface ICourse extends Omit<ICourseInfo, 'thumbnail'> {
   days: IDay[];
+}
+
+export interface ICourseAddition {
+  date: string;
+  course: ICourseList;
 }
 
 export type IReview = {

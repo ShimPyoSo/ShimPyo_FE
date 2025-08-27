@@ -38,7 +38,7 @@ export default function Review() {
     <>
       <section>
         <div className="mt-[60px] px-[16px]">
-          <div className="flex justify-between">
+          <div className="flex items-center gap-[5px]">
             <p className="font-[kkubulim] text-lg text-gn1 tracking-[-2%]">방문객 후기</p>
             <Link href={`/category/${id}/review`} className="flex items-center gap-[2px] text-g3 text-xs">
               전체보기

@@ -1,23 +1,27 @@
 'use client';
 
-import AnotherSpot from './AnotherSpot';
+import { SubmitHandler, useForm } from 'react-hook-form';
+
 import CourseDate from './CourseDate';
-import SpotRecommend from './SpotRecommend';
+import { ICourseAddition } from '@/app/(_utils)/type';
 import SpotSearchInput from './SpotSearchInput';
-import { useState } from 'react';
 
 export default function CourseSpotContent() {
-  const [selectedDay, setSelectedDay] = useState<number>(0);
+  const { handleSubmit, register, setValue, watch } = useForm<ICourseAddition>();
+
+  const onSubmit: SubmitHandler<ICourseAddition> = (data) => {
+    console.log('form data:', data);
+  };
 
   return (
     <div className="pb-[40px]">
-      <SpotSearchInput />
-      <SpotRecommend />
-      <AnotherSpot />
-      <CourseDate selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
-      <section>
-        <p className="mt-[52px] tracking-[-2%] text-g1 text-xs">시간 선택</p>
-      </section>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <SpotSearchInput register={register} setValue={setValue} watch={watch} />
+        <CourseDate register={register} watch={watch} />
+        <section>
+          <p className="mt-[52px] tracking-[-2%] text-g1 text-xs">시간 선택</p>
+        </section>
+      </form>
     </div>
   );
 }
