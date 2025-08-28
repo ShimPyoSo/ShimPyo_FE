@@ -1,8 +1,11 @@
 'use client';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+
+import { IError } from '../type';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import { useAtomValue } from 'jotai';
+import { useHandleTokenExpired } from './useHandleTokenExpired';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 interface useFetchSearchWordParams {
@@ -18,6 +21,7 @@ interface useFetchSearchWordParams {
 
 export const useFetchSearchWord = ({ word, filter, enabled }: useFetchSearchWordParams) => {
   const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const fetchSearchResults = async ({ pageParam = 0 }) => {
     const params: Record<string, string> = {
@@ -36,9 +40,25 @@ export const useFetchSearchWord = ({ word, filter, enabled }: useFetchSearchWord
 
     const queryString = new URLSearchParams(params).toString();
     const url = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/search?${queryString}`;
+    const config = { withCredentials: isLoggedIn };
 
-    const res = await axios.get(url, { withCredentials: isLoggedIn });
-    return Array.isArray(res.data) ? res.data : [];
+    try {
+      const res = await axios.get(url, config);
+      return Array.isArray(res.data) ? res.data : [];
+    } catch (error) {
+      const err = error as AxiosError<IError>;
+      if (err.response?.data?.name === 'INVALID_TOKEN') {
+        handleAccessExpired('INVALID_TOKEN');
+        try {
+          const retryRes = await axios.get(url, config);
+          return Array.isArray(retryRes.data) ? retryRes.data : [];
+        } catch {
+          return [];
+        }
+      }
+      console.error(err.response?.data?.message || err.message);
+      return [];
+    }
   };
 
   const query = useInfiniteQuery({

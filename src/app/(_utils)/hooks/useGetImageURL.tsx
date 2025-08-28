@@ -1,5 +1,10 @@
-import axios from 'axios';
+'use client';
+
+import axios, { AxiosError } from 'axios';
+
+import { IError } from '../type';
 import { useCallback } from 'react';
+import { useHandleTokenExpired } from './useHandleTokenExpired';
 import { v4 as uuidv4 } from 'uuid';
 
 interface UseGetImageURLProps {
@@ -7,6 +12,8 @@ interface UseGetImageURLProps {
 }
 
 export function useGetImageURL({ setIsImageError }: UseGetImageURLProps) {
+  const { handleAccessExpired } = useHandleTokenExpired();
+
   const getImageURL = useCallback(
     async (image: File): Promise<string | undefined> => {
       const validMimeTypes = ['image/png', 'image/jpeg'];
@@ -43,11 +50,38 @@ export function useGetImageURL({ setIsImageError }: UseGetImageURLProps) {
         });
 
         return `https://shimpyo.s3.amazonaws.com/${imageName}`;
-      } catch {
+      } catch (error) {
+        const err = error as AxiosError<IError>;
+        if (err.response?.data?.name === 'INVALID_TOKEN') {
+          handleAccessExpired('INVALID_TOKEN');
+          try {
+            const response = await axios.post<{ uploadUrl: string }>(
+              `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/image`,
+              {
+                fileName: imageName,
+                fileSize: image.size,
+              },
+              { withCredentials: true }
+            );
+
+            const uploadUrl = response.data.uploadUrl;
+
+            await axios.put(uploadUrl, image, {
+              headers: {
+                'Content-Type': image.type,
+              },
+            });
+
+            return `https://shimpyo.s3.amazonaws.com/${imageName}`;
+          } catch {
+            // reissue 이후 에러처리
+          }
+        }
+        console.log(err.response?.data?.message);
         setIsImageError(true);
       }
     },
-    [setIsImageError]
+    [setIsImageError, handleAccessExpired]
   );
 
   return { getImageURL };
