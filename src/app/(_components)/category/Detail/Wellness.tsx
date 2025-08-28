@@ -3,7 +3,7 @@ import Image from 'next/image';
 import WeeklyWellness from './WeeklyWellnes';
 import gps from '/public/images/icons/gps.svg';
 
-export default function Wellness({ spot }: { spot: ISpot }) {
+export default function Wellness({ spot, type }: { spot: ISpot; type: 'course' | 'detail' }) {
   return (
     <section className="mt-[60px] px-[16px]">
       <p className="font-[kkubulim] text-lg text-gn1 tracking-[-2%]">이번주 웰니스 지수</p>
@@ -12,6 +12,7 @@ export default function Wellness({ spot }: { spot: ISpot }) {
         <p className="text-sm text-g1">{spot.address}</p>
       </div>
       <WeeklyWellness
+        type={type}
         latitude={spot.latitude as number}
         longitude={spot.longitude as number}
         address={spot.address as string}
