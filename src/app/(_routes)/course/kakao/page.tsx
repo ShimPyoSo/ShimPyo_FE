@@ -1,17 +1,18 @@
 'use client';
 
-import { ISpot } from '@/app/(_utils)/type';
+import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import SearchSpotItem from '@/app/(_components)/course/SearchSpotItem';
 import SpotRecommend from '@/app/(_components)/course/SpotRecommend';
 import axios from 'axios';
 import search from '/public/images/icons/search.svg';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function SpotSearchKaKao() {
   const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ISpot[] | null>(null);
-  const [selectedSpot, setSelectedSpot] = useState<ISpot | null>(null);
+  const [searchResults, setSearchResults] = useState<ICourseList[] | null>(null);
+  const [selectedSpot, setSelectedSpot] = useState<ICourseList | null>(null);
+  const [detailId, setDetailId] = useState(0);
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -20,16 +21,17 @@ export default function SpotSearchKaKao() {
       const response = await axios.get(`/api/search?query=${encodeURIComponent(query)}`);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const spots: ISpot[] = response.data.documents.map((item: any) => ({
-        touristId: -1,
-        region: item.category_name,
+      const spots: ICourseList[] = response.data.documents.map((item: any) => ({
+        touristId: item.id,
+        region: item.address_name.split(' ')[0],
         images: '',
         title: item.place_name,
         address: item.road_address_name || item.address_name,
+        tel: item.phone,
         latitude: parseFloat(item.y),
         longitude: parseFloat(item.x),
+        placeURL: item.place_url,
       }));
-
       setSearchResults(spots);
       setSelectedSpot(null);
     } catch (error) {
@@ -47,7 +49,12 @@ export default function SpotSearchKaKao() {
   const handleAdd = () => {
     if (!selectedSpot || !window.opener) return;
 
-    window.opener.postMessage(selectedSpot, window.location.origin);
+    const spotToSend = {
+      ...selectedSpot,
+      touristId: -1,
+    };
+
+    window.opener.postMessage(spotToSend, window.location.origin);
     window.close();
   };
 
@@ -72,32 +79,26 @@ export default function SpotSearchKaKao() {
             width={22}
             height={22}
             role="button"
+            onClick={handleSearch}
           />
         </div>
 
         <p className="mt-[23px] font-semibold text-b1 tracking-[-1.3%]">이런 여행지는 어때요?</p>
 
         {searchResults === null ? (
-          <SpotRecommend />
+          <SpotRecommend setDetailId={setDetailId} />
         ) : (
           <ul className="mt-[12px] mb-[60px] flex flex-col gap-2">
-            {searchResults.map((spot) => (
-              <li
-                key={uuidv4()}
-                className={`p-2 border rounded-md cursor-pointer ${
-                  selectedSpot?.title === spot.title && selectedSpot?.address === spot.address
-                    ? 'border-gn1 bg-gn1/10'
-                    : 'border-w4'
-                }`}
-                onClick={() =>
-                  selectedSpot?.title === spot.title && selectedSpot?.address === spot.address
-                    ? setSelectedSpot(null)
-                    : setSelectedSpot(spot)
-                }
-              >
-                <p className="font-semibold">{spot.title}</p>
-                <p className="text-xs text-g1">{spot.address}</p>
-              </li>
+            {searchResults.map((spot, idx) => (
+              <SearchSpotItem
+                spot={spot}
+                selectedSpot={selectedSpot}
+                setSelectedSpot={setSelectedSpot}
+                detailId={detailId}
+                setDetailId={setDetailId}
+                key={idx}
+                type="kakao"
+              />
             ))}
           </ul>
         )}

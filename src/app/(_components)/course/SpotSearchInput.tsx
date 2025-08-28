@@ -4,9 +4,11 @@ import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 import { ICourseAddition } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import SpotDetailComponent from '../category/Detail/SpotDetailComponent';
 import SpotItem from './SpotItem';
 import SpotRecommend from './SpotRecommend';
 import search from '/public/images/icons/search.svg';
+import { useState } from 'react';
 
 interface SpotSearchInputProps {
   register: UseFormRegister<ICourseAddition>;
@@ -16,6 +18,8 @@ interface SpotSearchInputProps {
 
 export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProps) {
   const selectedCourse = watch('course');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [detailId, setDetailId] = useState(0);
 
   const openPopup = (type: 'search' | 'kakao') => {
     window.open(
@@ -34,9 +38,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
         setValue('course.images', e.data.images);
         setValue('course.latitude', e.data.latitude);
         setValue('course.longitude', e.data.longitude);
-        if (e.data.operationTime) {
-          setValue('course.operationTime', e.data.operationTime);
-        }
+        setValue('course.tel', e.data.tel);
       }
     });
   };
@@ -47,10 +49,11 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       title: '',
       address: '',
       images: '',
-      time: '',
       latitude: undefined,
       longitude: undefined,
       operationTime: undefined,
+      tel: '',
+      placeURL: '',
     });
   };
 
@@ -76,12 +79,22 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
           width={22}
           height={22}
           role="button"
+          onClick={() => openPopup('search')}
         />
       </div>
+
       {selectedCourse?.touristId === 0 ? (
-        <SpotRecommend />
+        <SpotRecommend setDetailId={setDetailId} />
       ) : (
-        <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} />
+        <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} />
+      )}
+      {false && (
+        <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
+          <SpotDetailComponent id={1} type="course" />
+          <button className="sticky bottom-0 w-full py-[16px] rounded-lg border font-semibold bg-gn1 border-gn5 text-white z-[999]">
+            여행지 추가하기
+          </button>
+        </div>
       )}
     </section>
   );

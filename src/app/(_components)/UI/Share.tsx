@@ -2,7 +2,7 @@ import Image from 'next/image';
 import share from '/public/images/icons/share.svg';
 
 interface ShareProps {
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   type: 'course' | 'spot';
   courseId?: number;
   token?: string;
@@ -20,7 +20,7 @@ export default function Share({ setIsOpen, type, courseId, token }: ShareProps) 
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        setIsOpen(true);
+        setIsOpen?.(true);
       })
       .catch(() => {});
   };

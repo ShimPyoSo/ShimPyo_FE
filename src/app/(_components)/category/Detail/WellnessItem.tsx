@@ -15,9 +15,10 @@ interface WellnessItemProps {
   weather: IWeeklyWeather;
   concentration: number;
   isDayOff: boolean;
+  type: 'detail' | 'course';
 }
 
-export default function WellnessItem({ date, day, weather, concentration, isDayOff }: WellnessItemProps) {
+export default function WellnessItem({ date, day, weather, concentration, isDayOff, type }: WellnessItemProps) {
   return (
     <>
       <div className="text-xs tracking-[-2%]">
@@ -31,7 +32,7 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
           </p>
         </div>
       ) : (
-        <div className="ml-[24px] grow-1 flex items-center justify-between">
+        <div className={`${type === 'detail' ? 'ml-[24px]' : 'ml-[16px]'} grow-1 flex items-center justify-between`}>
           <div className="px-[8px] py-[8px] flex items-center justify-between bg-white rounded-lg text-xs text-b3">
             <Image
               src={
@@ -49,11 +50,13 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
             />
             <div className="ml-[8px] flex items-center">
               <span className="flex items-center">
-                최소<p className="text-bl font-semibold">&nbsp;{weather.minTemp}°</p>
+                {type === 'detail' && '최소'}
+                <p className="text-bl font-semibold">&nbsp;{weather.minTemp}°</p>
               </span>
               <span className="mx-[4px] text-w6">|</span>
               <span className="flex items-center">
-                최대 <p className="text-r font-semibold">&nbsp;{weather.maxTemp}°</p>
+                {type === 'detail' && '최대'}
+                <p className="text-r font-semibold">&nbsp;{weather.maxTemp}°</p>
               </span>
             </div>
           </div>

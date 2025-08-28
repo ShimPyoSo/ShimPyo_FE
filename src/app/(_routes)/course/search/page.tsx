@@ -1,15 +1,17 @@
 'use client';
 
-import { ISpot } from '@/app/(_utils)/type';
+import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import SearchSpotItem from '@/app/(_components)/course/SearchSpotItem';
 import SpotRecommend from '@/app/(_components)/course/SpotRecommend';
 import search from '/public/images/icons/search.svg';
 import { useState } from 'react';
 
 export default function SpotSearch() {
   const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ISpot[] | null>(null);
-  const [selectedSpot, setSelectedSpot] = useState<ISpot | null>(null);
+  const [searchResults, setSearchResults] = useState<ICourseList[] | null>(null);
+  const [selectedSpot, setSelectedSpot] = useState<ICourseList | null>(null);
+  const [detailId, setDetailId] = useState(0);
 
   const handleSearch = () => {
     if (!query.trim()) return;
@@ -18,19 +20,21 @@ export default function SpotSearch() {
     setSearchResults([
       {
         touristId: 1,
-        region: '서울특별시',
+        region: '서울',
         images: '',
         title: '서울타워',
         address: '서울특별시 용산구 남산공원길 105',
+        tel: '010-1234-5567',
         latitude: 37.5511694,
         longitude: 126.9882266,
       },
       {
         touristId: 2,
-        region: '서울특별시',
+        region: '서울',
         images: '',
         title: '광화문',
         address: '서울특별시 종로구 세종대로 175',
+        tel: '010-1234-5567',
         latitude: 37.5759291,
         longitude: 126.9768626,
       },
@@ -74,33 +78,33 @@ export default function SpotSearch() {
             width={22}
             height={22}
             role="button"
+            onClick={handleSearch}
           />
         </div>
 
         <p className="mt-[23px] font-semibold text-b1 tracking-[-1.3%]">이런 여행지는 어때요?</p>
 
         {searchResults === null ? (
-          <SpotRecommend />
+          <SpotRecommend setDetailId={setDetailId} />
         ) : (
           <ul className="mt-[12px] flex flex-col gap-2">
-            {searchResults.map((spot) => (
-              <li
-                key={spot.touristId}
-                className={`p-2 border rounded-md cursor-pointer ${
-                  selectedSpot?.touristId === spot.touristId ? 'border-gn1 bg-gn1/10' : 'border-w4'
-                }`}
-                onClick={() => setSelectedSpot(spot)}
-              >
-                <p className="font-semibold">{spot.title}</p>
-                <p className="text-xs text-g1">{spot.address}</p>
-              </li>
+            {searchResults.map((spot, idx) => (
+              <SearchSpotItem
+                spot={spot}
+                selectedSpot={selectedSpot}
+                setSelectedSpot={setSelectedSpot}
+                detailId={detailId}
+                setDetailId={setDetailId}
+                key={idx}
+                type="search"
+              />
             ))}
           </ul>
         )}
       </div>
 
       <button
-        className={`w-full py-[16px] rounded-lg border font-semibold ${
+        className={`w-full py-[16px] rounded-lg border font-semibold outline-none ${
           selectedSpot ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
         }`}
         disabled={!selectedSpot}

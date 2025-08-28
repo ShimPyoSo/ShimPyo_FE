@@ -34,12 +34,12 @@ export default function DayItem({ isEditable, day, course }: DayItemProps) {
       <div className="pt-[28px] pb-[40px] border-b border-[#E2E2E2] flex items-start gap-[8px]">
         <ul>
           {course.map((spot, index) => (
-            <CategoryTimeItem key={spot.touristId} isLast={index === course.length - 1} time={spot.time} />
+            <CategoryTimeItem key={spot.touristId} isLast={index === course.length - 1} time={spot.time as string} />
           ))}
         </ul>
         <ul className="flex flex-col gap-[18px]">
           {course.map((spot) => (
-            <SpotItem key={spot.touristId} isEditable={isEditable} isPreview={false} />
+            <SpotItem key={spot.touristId} isEditable={isEditable} isPreview={false} spot={spot} />
           ))}
         </ul>
       </div>

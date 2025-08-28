@@ -8,7 +8,11 @@ import { isMobile } from 'react-device-detect';
 import refetchIcon from '/public/images/icons/course/refetch.svg';
 import { useRef } from 'react';
 
-export default function SpotRecommend() {
+interface SpotRecommendProps {
+  setDetailId: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function SpotRecommend({}: SpotRecommendProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
