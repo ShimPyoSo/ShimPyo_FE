@@ -5,41 +5,33 @@ import Image from 'next/image';
 import SearchSpotItem from '@/app/(_components)/course/SearchSpotItem';
 import SpotRecommend from '@/app/(_components)/course/SpotRecommend';
 import search from '/public/images/icons/search.svg';
+import { useFetchSearchWord } from '@/app/(_utils)/hooks/useFetchSearchWord';
+import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
 import { useState } from 'react';
 
 export default function SpotSearch() {
   const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ICourseList[] | null>(null);
   const [selectedSpot, setSelectedSpot] = useState<ICourseList | null>(null);
   const [detailId, setDetailId] = useState(0);
 
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } = useFetchSearchWord({
+    word: query.trim(),
+    enabled: !!query.trim(),
+  });
+
+  const allResults =
+    data?.pages.flatMap((page) =>
+      page.map((item) => ({
+        ...item,
+        touristId: item.touristId ?? item.id,
+      }))
+    ) ?? [];
+
+  const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+
   const handleSearch = () => {
     if (!query.trim()) return;
-
-    // 임시 데이터
-    setSearchResults([
-      {
-        touristId: 1,
-        region: '서울',
-        images: '',
-        title: '서울타워',
-        address: '서울특별시 용산구 남산공원길 105',
-        tel: '010-1234-5567',
-        latitude: 37.5511694,
-        longitude: 126.9882266,
-      },
-      {
-        touristId: 2,
-        region: '서울',
-        images: '',
-        title: '광화문',
-        address: '서울특별시 종로구 세종대로 175',
-        tel: '010-1234-5567',
-        latitude: 37.5759291,
-        longitude: 126.9768626,
-      },
-    ]);
-
+    refetch();
     setSelectedSpot(null); // 검색 후 선택 초기화
   };
 
@@ -84,11 +76,11 @@ export default function SpotSearch() {
 
         <p className="mt-[23px] font-semibold text-b1 tracking-[-1.3%]">이런 여행지는 어때요?</p>
 
-        {searchResults === null ? (
+        {allResults.length === 0 && !isLoading ? (
           <SpotRecommend setDetailId={setDetailId} />
         ) : (
           <ul className="mt-[12px] flex flex-col gap-2">
-            {searchResults.map((spot, idx) => (
+            {allResults.map((spot, idx) => (
               <SearchSpotItem
                 spot={spot}
                 selectedSpot={selectedSpot}
@@ -99,12 +91,13 @@ export default function SpotSearch() {
                 type="search"
               />
             ))}
+            <div ref={observerRef} className="h-10" />
           </ul>
         )}
       </div>
 
       <button
-        className={`w-full py-[16px] rounded-lg border font-semibold outline-none ${
+        className={`fixed bottom-[20px] w-[343px] py-[16px] rounded-lg border font-semibold outline-none ${
           selectedSpot ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
         }`}
         disabled={!selectedSpot}

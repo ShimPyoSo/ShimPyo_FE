@@ -18,6 +18,7 @@ export default function CourseSpotContent() {
       date: '1일',
       course: {
         touristId: 0,
+        id: 0,
       },
     },
   });
