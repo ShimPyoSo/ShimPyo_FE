@@ -38,7 +38,7 @@ export default function AreaFilter({ selectedFilter, filter, setFilter, filterIt
           onClick={() => setIsExpanded(!isExpanded)}
         />
       </div>
-      <small className="text-g1 tracking-[-2%]">여행을 희망하는 지역을 모두 선택해 보세요</small>
+      <small className="text-g1 tracking-[-0.02em]">여행을 희망하는 지역을 모두 선택해 보세요</small>
       {isExpanded && (
         <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
           {filterItem.key === 'region' &&

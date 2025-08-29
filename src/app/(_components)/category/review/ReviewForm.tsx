@@ -33,7 +33,7 @@ export default function ReviewForm({
         setIsLoading={setIsLoading}
       />
       <button
-        className="mt-[60px] mb-[40px] w-full py-[16px] bg-gn1 border border-gn5 rounded-lg text-white tracking-[-1.3%]"
+        className="mt-[60px] mb-[40px] w-full py-[16px] bg-gn1 border border-gn5 rounded-lg text-white tracking-[-0.013em]"
         onClick={() => setIsOpen(true)}
       >
         등록하기

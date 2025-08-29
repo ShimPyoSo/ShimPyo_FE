@@ -37,7 +37,7 @@ export default function ServiceFilter({ selectedFilter, filterItem, filter, setF
           onClick={() => setIsExpanded(!isExpanded)}
         />
       </div>
-      <small className="text-g1 tracking-[-2%]">보다 편리한 여행을 위한 제공 서비스를 선택해 보세요</small>
+      <small className="text-g1 tracking-[-0.02em]">보다 편리한 여행을 위한 제공 서비스를 선택해 보세요</small>
       {isExpanded && (
         <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
           {filterItem.key === 'facilities' &&

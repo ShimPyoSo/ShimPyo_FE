@@ -1,12 +1,36 @@
 'use client';
 
-import { ReactNode, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 
-export default function MobileCarousel({ children }: { children: ReactNode }) {
+export default function MobileCarousel({ children, autoplay = false }: { children: ReactNode; autoplay?: boolean }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+
+  useEffect(() => {
+    if (!autoplay) return;
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const scrollStep = () => {
+      const containerWidth = 242;
+      let nextScrollLeft = el.scrollLeft + containerWidth;
+
+      if (nextScrollLeft >= el.scrollWidth - el.clientWidth) {
+        nextScrollLeft = 0;
+      }
+
+      el.scrollTo({
+        left: nextScrollLeft,
+        behavior: 'smooth',
+      });
+    };
+
+    const timer = setInterval(scrollStep, 2000);
+
+    return () => clearInterval(timer);
+  }, [autoplay]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     const el = scrollRef.current;

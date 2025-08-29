@@ -13,8 +13,8 @@ export default function UltraViolet({ ultraviolet }: UltraVioletProps) {
       <div className="w-[48px] h-[48px] rounded-md border border-gray-300 bg-white mb-[3px] flex justify-center items-center">
         <Image src={uv} alt="자외선" width={24} height={24} />
       </div>
-      <p className="mt-[12px] text-g1 tracking-[-2%]">자외선지수</p>
-      <p className="mt-[4px] text-b3 font-semibold tracking-[-2%]">
+      <p className="mt-[12px] text-g1 tracking-[-0.02em]">자외선지수</p>
+      <p className="mt-[4px] text-b3 font-semibold tracking-[-0.02em]">
         {ultraviolet === null
           ? '정보 없음'
           : ultraviolet <= 2

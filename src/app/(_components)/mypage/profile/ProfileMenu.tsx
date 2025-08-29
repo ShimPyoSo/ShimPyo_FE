@@ -16,7 +16,7 @@ export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert }: 
   const [activeMenu, setActiveMenu] = useState<null | 'profile' | 'password' | 'withdraw'>(null);
 
   return (
-    <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
+    <ul className="pt-[30px] text-xs text-b3 tracking-[-0.02em]">
       <li>
         <div
           className={`py-[18px] flex justify-between items-center ${

@@ -1,7 +1,7 @@
 export default function TermsOfService() {
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
-      <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">서비스 이용약관</h3>
+      <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">서비스 이용약관</h3>
       <div className="mt-[12px] w-full h-[128px] overflow-y-scroll rounded-lg border border-w4 bg-white p-[12px] ">
         [제1조 목적] 본 약관은 쉼표가 제공하는 관광지 정보 및 후기 공유 서비스(이하 ‘서비스’)의 이용과 관련하여 회사와
         회원 간의 권리, 의무 및 책임사항 등을 규정함을 목적으로 합니다.

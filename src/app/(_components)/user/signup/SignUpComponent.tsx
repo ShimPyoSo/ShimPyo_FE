@@ -22,13 +22,13 @@ export default function SignUpComponent() {
       <div className="flex flex-col items-center">
         <KakaoButton />
         <Link
-          className="mt-[8px] w-full rounded-lg py-[16px] bg-white border border-w4 text-b1 font-semibold tracking-[-1.3%] text-center"
+          className="mt-[8px] w-full rounded-lg py-[16px] bg-white border border-w4 text-b1 font-semibold tracking-[-0.013em] text-center"
           href={'/signup/email'}
           role="button"
         >
           이메일로 회원가입
         </Link>
-        <p className="my-[30px] text-xs text-g1 tracking-[-2%]">
+        <p className="my-[30px] text-xs text-g1 tracking-[-0.02em]">
           이미 계정이 있으신가요?{' '}
           <Link className="text-b1 underline" href={'/login'}>
             로그인

@@ -41,7 +41,7 @@ export default function FilterList({ setIsOpen, setSelectedFilter, filter, filte
         return (
           <li
             key={label}
-            className={`flex-shrink-0 py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-2%] cursor-pointer border
+            className={`flex-shrink-0 py-[6px] px-[16px] rounded-[100px] text-sm tracking-[-0.02em] cursor-pointer border
               ${selected ? 'bg-gn4 border-gn2 text-gn1 font-semibold' : 'bg-[#FBFBFB] border-w6 text-b3'}`}
             onClick={() => handleClick(label)}
           >

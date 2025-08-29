@@ -55,7 +55,7 @@ export default function Review() {
   return (
     <>
       <div className="min-h-full bg-w1 px-[16px]">
-        <div className="mt-[30px] flex items-start justify-between tracking-[-2%]">
+        <div className="mt-[30px] flex items-start justify-between tracking-[-0.02em]">
           <div>
             <p className="font-[kkubulim] text-lg text-gn1">방문객 후기</p>
             <small className="text-sm text-g1">다양한 방문 후기를 읽고 작성해 보세요</small>

@@ -11,7 +11,7 @@ interface TargetFilterProps {
 export default function TargetList({ filter, setFilter, filterItem }: TargetFilterProps) {
   return (
     <div>
-      <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">성별</p>
+      <p className="mt-[16px] text-g1 text-xs tracking-[-0.02em]">성별</p>
       <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
         {filterItem.key === 'target' &&
           GENDERS.map((area, idx) => {
@@ -27,7 +27,7 @@ export default function TargetList({ filter, setFilter, filterItem }: TargetFilt
             );
           })}
       </ul>
-      <p className="mt-[16px] text-g1 text-xs tracking-[-2%]">연령대</p>
+      <p className="mt-[16px] text-g1 text-xs tracking-[-0.02em]">연령대</p>
       <ul className="mt-[16px] flex gap-x-[4px] gap-y-[8px] flex-wrap">
         {filterItem.key === 'target' &&
           AGE_GROUPS.map((area, idx) => {

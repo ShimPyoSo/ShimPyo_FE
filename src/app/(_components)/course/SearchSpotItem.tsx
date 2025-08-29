@@ -60,7 +60,7 @@ export default function SearchSpotItem({
           </div>
           <div className="grow-1">
             <p
-              className="text-sm text-b3 font-semibold tracking-[-2%] line-clamp-2 cursor-pointer"
+              className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2 cursor-pointer"
               onClick={() => setDetailId(detailId === spot.touristId ? 0 : (spot.touristId as number))}
             >
               {spot.title}

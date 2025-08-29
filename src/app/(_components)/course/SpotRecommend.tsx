@@ -19,7 +19,7 @@ export default function SpotRecommend({}: SpotRecommendProps) {
     <section>
       <div className="mb-[8px] flex items-center justify-between">
         <div className="flex items-center">
-          <p className="tracking-[-2%] text-g1 text-xs">다른 여행지 추천 받기</p>
+          <p className="tracking-[-0.02em] text-g1 text-xs">다른 여행지 추천 받기</p>
           <Image src={refetchIcon} alt="다시 추천" width={20} height={20} />
         </div>
         {isMobile || <WebCarouselArrow scrollRef={scrollRef} scrollStep={330} />}

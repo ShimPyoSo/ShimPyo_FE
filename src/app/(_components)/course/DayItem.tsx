@@ -26,7 +26,7 @@ export default function DayItem({ isEditable, day, course }: DayItemProps) {
           </div>
         </div>
         {isEditable && (
-          <button className="py-[6px] px-[10px] rounded-md bg-w2 border border-w1 text-b3 text-xs tracking-[-2%]">
+          <button className="py-[6px] px-[10px] rounded-md bg-w2 border border-w1 text-b3 text-xs tracking-[-0.02em]">
             장소 추가하기
           </button>
         )}

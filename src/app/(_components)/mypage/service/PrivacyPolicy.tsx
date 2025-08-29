@@ -1,7 +1,7 @@
 export default function PrivacyPolicy() {
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
-      <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">개인정보 처리방침</h3>
+      <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">개인정보 처리방침</h3>
       <div className="mt-[12px] w-full h-[128px] overflow-y-scroll rounded-lg border border-w4 bg-white p-[12px] ">
         [1. 수집하는 개인정보 항목] - 회원 가입 시: 이메일, 닉네임, 비밀번호 - 서비스 이용 시: IP 주소, 접속 기록, 후기
         작성 내용 등

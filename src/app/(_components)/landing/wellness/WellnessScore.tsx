@@ -40,7 +40,7 @@ export default function WellnessScore({ score }: { score: number }) {
         <div className="w-[94px] h-[44px] rounded-[40px] bg-white">
           <div className="w-full text-gn12 font-semibold flex items-baseline justify-center pt-[4px]">
             <p className="font-[kkubulim] text-4xl">{score}</p>
-            <p className="ml-[4px] tracking-[-2%]">점</p>
+            <p className="ml-[4px] tracking-[-0.02em]">점</p>
           </div>
 
           <Image

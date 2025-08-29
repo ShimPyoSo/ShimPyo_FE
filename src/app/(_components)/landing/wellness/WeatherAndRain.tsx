@@ -33,8 +33,8 @@ export default function WeatherAndRain({ weather }: WeatherAndRainProps) {
             height={24}
           />
         </div>
-        <p className="mt-[12px] text-g1 tracking-[-2%]">날씨</p>
-        <p className="mt-[4px] text-b3 font-semibold tracking-[-2%]">
+        <p className="mt-[12px] text-g1 tracking-[-0.02em]">날씨</p>
+        <p className="mt-[4px] text-b3 font-semibold tracking-[-0.02em]">
           {weather.temperature ? `${weather.temperature}°` : '정보 없음'}
         </p>
       </li>
@@ -42,8 +42,8 @@ export default function WeatherAndRain({ weather }: WeatherAndRainProps) {
         <div className="w-[48px] h-[48px] rounded-md border border-gray-300 bg-white mb-[3px] flex justify-center items-center">
           <Image src={precipitation} alt="강수량" width={24} height={24} />
         </div>
-        <p className="mt-[12px] text-g1 tracking-[-2%]">강수량</p>
-        <p className="mt-[4px] text-b3 font-semibold tracking-[-2%]">
+        <p className="mt-[12px] text-g1 tracking-[-0.02em]">강수량</p>
+        <p className="mt-[4px] text-b3 font-semibold tracking-[-0.02em]">
           {weather.rainfall ? `${weather.rainfall}mm` : '정보 없음'}
         </p>
       </li>

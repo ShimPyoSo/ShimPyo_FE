@@ -34,7 +34,7 @@ export default function Modal({ title, description, setIsOpen, children, type }:
               <Image src={cancel} alt="닫기" width={24} height={24} />
             </button>
           )}
-          <p className="text-xs text-g1 tracking-[-2%] text-center">{title}</p>
+          <p className="text-xs text-g1 tracking-[-0.02em] text-center">{title}</p>
           <p className="mt-[6px] font-semibold text-b1 whitespace-pre-line text-center">{description}</p>
           {children}
         </motion.div>

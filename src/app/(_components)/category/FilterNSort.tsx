@@ -33,7 +33,7 @@ export default function FilterNSort({
           <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
           {(isLoading || spots.length > 0) && (
             <div className="px-[16px] mb-[6px] flex items-center justify-between">
-              <span className="flex items-center text-xs text-g1 tracking-[-2%]">
+              <span className="flex items-center text-xs text-g1 tracking-[-0.02em]">
                 ⓘ&nbsp;
                 <Link className="text-b3" href={'https://knto.or.kr/index'} rel="noopener noreferrer" target="_blank">
                   한국관광공사

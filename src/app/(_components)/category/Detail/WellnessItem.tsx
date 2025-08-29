@@ -21,13 +21,13 @@ interface WellnessItemProps {
 export default function WellnessItem({ date, day, weather, concentration, isDayOff, type }: WellnessItemProps) {
   return (
     <>
-      <div className="text-xs tracking-[-2%]">
+      <div className="text-xs tracking-[-0.02em]">
         <p className="text-b1">{day}</p>
         <p className="text-g1">{date}</p>
       </div>
       {isDayOff ? (
         <div className="grow flex items-center justify-end">
-          <p className={`font-semibold tracking-[-2%] text-xs ${day === '오늘' ? 'text-b1' : 'text-g3'}`}>
+          <p className={`font-semibold tracking-[-0.02em] text-xs ${day === '오늘' ? 'text-b1' : 'text-g3'}`}>
             해당 날짜는 관광지 휴무일이예요
           </p>
         </div>

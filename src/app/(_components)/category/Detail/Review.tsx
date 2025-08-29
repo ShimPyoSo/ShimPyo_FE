@@ -39,7 +39,7 @@ export default function Review({ type }: { type: 'detail' | 'course' }) {
       <section>
         <div className="mt-[60px] px-[16px]">
           <div className="flex items-center gap-[5px]">
-            <p className="font-[kkubulim] text-lg text-gn1 tracking-[-2%]">방문객 후기</p>
+            <p className="font-[kkubulim] text-lg text-gn1 tracking-[-0.02em]">방문객 후기</p>
             {type === 'detail' && (
               <Link href={`/category/${id}/review`} className="flex items-center gap-[2px] text-g3 text-xs">
                 전체보기

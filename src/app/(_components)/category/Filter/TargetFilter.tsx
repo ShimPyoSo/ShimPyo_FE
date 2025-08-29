@@ -37,7 +37,7 @@ export default function TargetFilter({ selectedFilter, filterItem, setFilter, fi
           onClick={() => setIsExpanded(!isExpanded)}
         />
       </div>
-      <small className="text-g1 tracking-[-2%]">나의 친구들이 자주 방문하는 여행지를 찾아보세요</small>
+      <small className="text-g1 tracking-[-0.02em]">나의 친구들이 자주 방문하는 여행지를 찾아보세요</small>
       {isExpanded && <TargetList setFilter={setFilter} filter={filter} filterItem={filterItem} />}
     </section>
   );

@@ -10,7 +10,7 @@ export default function ServiceMenu() {
   const [activeMenu, setActiveMenu] = useState<null | 'terms' | 'privacy'>(null);
 
   return (
-    <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
+    <ul className="pt-[30px] text-xs text-b3 tracking-[-0.02em]">
       <li onClick={() => setActiveMenu(activeMenu === 'terms' ? null : 'terms')}>
         <div
           className={`py-[18px] flex justify-between items-center ${

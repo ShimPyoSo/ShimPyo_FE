@@ -24,7 +24,7 @@ export default function OptionalAnswerItem({ selected, setSelected, text, idx }:
       <div
         onClick={() => setSelected(idx)}
         className={`
-                relative cursor-pointer rounded-xl p-[15px] flex items-center justify-between font-semibold text-b3 text-sm tracking-[-2%]
+                relative cursor-pointer rounded-xl p-[15px] flex items-center justify-between font-semibold text-b3 text-sm tracking-[-0.02em]
                 ${selected === idx ? 'bg-gn4' : 'bg-w3 border border-w4'}
               `}
       >

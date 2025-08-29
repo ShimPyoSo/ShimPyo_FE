@@ -41,7 +41,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
         </div>
         <div className="grow-1">
           <Link
-            className="text-sm text-b3 font-semibold tracking-[-2%] line-clamp-2 cursor-pointer"
+            className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2 cursor-pointer"
             href={`${type === 'spot' ? '/category' : '/mypage/review'}/${spot.id}`}
           >
             {spot.title}

@@ -43,7 +43,7 @@ export default function NicknameChange() {
 
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
-      <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">닉네임 변경</h3>
+      <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">닉네임 변경</h3>
       <p className={isAvailable === false ? 'text-r' : `text-g1`}>
         {isAvailable === false ? '이미 존재하는 닉네임이예요' : '원하는 닉네임으로 변경해 보세요'}
       </p>

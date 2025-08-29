@@ -4,6 +4,8 @@ import allIllu from '/public/images/category/all.svg';
 import beauty from '/public/images/icons/category/beauty.svg';
 import beautyIllu from '/public/images/category/beauty.svg';
 import breathe from '/public/images/test/breathe.svg';
+import camp from '/public/images/carousel/camp.jpg';
+import find from '/public/images/carousel/find.jpg';
 import food from '/public/images/icons/category/food.svg';
 import foodIllu from '/public/images/category/food.svg';
 import grow from '/public/images/test/grow.svg';
@@ -12,11 +14,15 @@ import meditationIllu from '/public/images/category/meditation.svg';
 import move from '/public/images/test/move.svg';
 import nature from '/public/images/icons/category/nature.svg';
 import natureIllu from '/public/images/category/nature.svg';
+import picnic from '/public/images/carousel/picnic.jpg';
 import relaxing from '/public/images/test/spa.svg';
 import rest from '/public/images/test/rest.svg';
 import spa from '/public/images/icons/category/spa.svg';
 import spaIllu from '/public/images/category/spa.svg';
+import temple from '/public/images/carousel/temple.jpg';
+import test from '/public/images/carousel/test.jpg';
 import variety from '/public/images/test/variety.svg';
+import wellness from '/public/images/carousel/wellness.jpg';
 
 export const title: { [key: string]: string } = {
   '/signup/email': '회원가입',
@@ -298,3 +304,54 @@ export const REGION_MAP: Record<string, string> = {
   제주특별자치도: '제주',
   세종특별자치시: '세종',
 };
+
+export const CAROUSEL = [
+  {
+    image: find,
+    title: '여행지 찾기',
+    first: '당신의 완벽한 힐링을 위해,',
+    second: '를 찾아 보세요.',
+    accent: '검증된 웰니스 여행지',
+    url: '/category',
+  },
+  {
+    image: test,
+    title: '쉼표 테스트',
+    first: '내게 필요한 휴식이 이거였어?',
+    second: '을 테스트로 알아 보세요.',
+    accent: '나의 휴식 유형',
+    url: '/test',
+  },
+  {
+    image: camp,
+    title: '',
+    first: '웰니스 숙소, 뻔한 호텔 대신',
+    second: '자연 속 럭셔리 캠핑장 어때요?',
+    accent: '',
+    url: 'https://www.allurekorea.com/2025/04/08/%ed%98%b8%ed%85%94-%eb%8c%80%ec%8b%a0-%ec%97%ac%ea%b8%b0-%ec%96%b4%eb%95%8c-%ec%9e%90%ec%97%b0-%ec%86%8d-%eb%9f%ad%ec%85%94%eb%a6%ac-%ec%ba%a0%ed%95%91%ec%9e%a5-5/',
+  },
+  {
+    image: picnic,
+    title: '',
+    first: '숨통 트이는 황금연휴,',
+    second: '상쾌한 공기 마시러 나들이 떠나 보세요.',
+    accent: '',
+    url: 'https://www.allurekorea.com/2025/04/28/%ec%97%b0%ed%9c%b4%ec%97%90-%ea%b0%80%ec%a1%b1-%eb%82%98%eb%93%a4%ec%9d%b4-%ea%b0%80%ea%b8%b0-%ec%a2%8b%ec%9d%80-%ea%b3%b3-4/',
+  },
+  {
+    image: wellness,
+    title: '',
+    first: '여행, 좋은데 피곤하셨죠?',
+    second: '여독을 풀어줄 웰니스 아이템을 소개해요.',
+    accent: '',
+    url: 'https://www.allurekorea.com/2024/07/10/travel-wellness/',
+  },
+  {
+    image: temple,
+    title: '',
+    first: '연예인도 방문한 유명 템플스테이,',
+    second: '몸과 마음을 가다듬으러 떠나 보세요.',
+    accent: '',
+    url: 'https://www.allurekorea.com/2024/05/23/%ec%97%b0%ec%98%88%ec%9d%b8%eb%8f%84-%eb%b0%a9%eb%ac%b8%ed%95%9c-%ed%85%9c%ed%94%8c-%ec%8a%a4%ed%85%8c-%ec%b6%94%ec%b2%9c-4/',
+  },
+];

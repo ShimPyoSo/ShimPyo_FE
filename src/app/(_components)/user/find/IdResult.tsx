@@ -5,7 +5,7 @@ export default function IdResult({ username, createdAt }: IFindResult) {
   return (
     <>
       <span className="mt-[36px]">
-        <p className="text-sm text-g1 tracking-[-2%]">이메일 인증 성공</p>
+        <p className="text-sm text-g1 tracking-[-0.02em]">이메일 인증 성공</p>
         <p className="mt-[12px] text-xl text-b1 font-semibold">
           인증한 이메일과 일치하는
           <br />
@@ -14,10 +14,10 @@ export default function IdResult({ username, createdAt }: IFindResult) {
       </span>
 
       <div className="w-[260px] h-[107px] bg-[url('/images/findIdBox.png')] bg-cover bg-center mx-auto flex flex-col justify-center px-[18px]">
-        <span className="flex gap-[9px] text-gn1 tracking-[-1.3%]">
+        <span className="flex gap-[9px] text-gn1 tracking-[-0.013em]">
           아이디 <p className="text-b1">{username}</p>
         </span>
-        <span className="flex gap-[9px] text-gn1 tracking-[-1.3%]">
+        <span className="flex gap-[9px] text-gn1 tracking-[-0.013em]">
           가입일 <p className="text-b1">{createdAt}</p>
         </span>
       </div>

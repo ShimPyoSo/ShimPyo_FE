@@ -10,7 +10,10 @@ export default function SpotInfo({ info }: { info: IReviewResponse }) {
         <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-sm text-gn7 font-semibold bg-white">
           {info.region}
         </div>
-        <Link className="text-lg text-b3 font-semibold tracking-[-2%] line-clamp-1 cursor-pointer" href={`/category/1`}>
+        <Link
+          className="text-lg text-b3 font-semibold tracking-[-0.02em] line-clamp-1 cursor-pointer"
+          href={`/category/1`}
+        >
           {info.title}
         </Link>
       </div>

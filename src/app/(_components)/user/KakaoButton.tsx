@@ -45,7 +45,7 @@ export default function KakaoButton() {
       onFail={handleFailure}
       render={({ onClick }) => (
         <button
-          className="flex gap-[8px] justify-center items-center w-full rounded-lg py-[16px] bg-y text-b1 font-semibold tracking-[-1.3%]"
+          className="flex gap-[8px] justify-center items-center w-full rounded-lg py-[16px] bg-y text-b1 font-semibold tracking-[-0.013em]"
           onClick={onClick}
         >
           <Image src={kakao} alt="카카오" width={20} height={20} />

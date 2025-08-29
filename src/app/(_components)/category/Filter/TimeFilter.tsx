@@ -37,7 +37,7 @@ export default function TimeFilter({ selectedFilter, filter, setFilter, filterIt
           onClick={() => setIsExpanded(!isExpanded)}
         />
       </div>
-      <small className="text-g1 tracking-[-2%]">나의 스케줄에 딱 맞는 여행지를 찾아보세요</small>
+      <small className="text-g1 tracking-[-0.02em]">나의 스케줄에 딱 맞는 여행지를 찾아보세요</small>
       {isExpanded && <RangeSlider filter={filter} setFilter={setFilter} />}
     </section>
   );

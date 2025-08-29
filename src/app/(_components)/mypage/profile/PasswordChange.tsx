@@ -62,7 +62,7 @@ export default function PasswordChange({ setIsPasswordAlert }: PasswordChangePro
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">비밀번호 변경</h3>
+        <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">비밀번호 변경</h3>
         <PasswordDescription control={control} />
         <PasswordInput
           register={register}

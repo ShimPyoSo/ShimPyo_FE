@@ -16,13 +16,13 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
               fill
             />
           )}
-          <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-2%]">
+          <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">
             {spot.region}
           </div>
         </div>
 
         <div className="mt-[20px] flex justify-between items-center">
-          <p className="max-w-[74px] text-xs text-g3 tracking-[-2%] truncate">{spot.category!.join(', ')}</p>
+          <p className="max-w-[74px] text-xs text-g3 tracking-[-0.02em] truncate">{spot.category!.join(', ')}</p>
           <div
             onClick={(e) => {
               e.preventDefault();
@@ -32,7 +32,7 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
             <Liked liked={spot.isLiked || false} id={spot.id as number} type="list" />
           </div>
         </div>
-        <p className="mt-[8px] font-semibold text-xs text-b3 tracking-[-2%] line-clamp-2">{spot.title}</p>
+        <p className="mt-[8px] font-semibold text-xs text-b3 tracking-[-0.02em] line-clamp-2">{spot.title}</p>
       </Link>
     </li>
   );

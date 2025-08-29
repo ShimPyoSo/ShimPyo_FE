@@ -52,7 +52,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
     <>
       {isAuthStart && (
         <>
-          <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
+          <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-0.02em]">
             인증 코드
             <input
               className={`w-full p-[16px] bg-w3 rounded-lg border text-base outline-none text-black placeholder:text-g3 ${
@@ -65,7 +65,7 @@ export default function AuthCodeInput<T extends ISignUp | IFind>({
             />
           </label>
           <button
-            className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-2%] ${
+            className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-0.02em] ${
               codeState === 'finished' ? 'border-gn7 bg-gn8 text-gn1' : 'bg-w2 text-b2 border-[#EDEDED]'
             }`}
             onClick={handleAuthCodeCheck}

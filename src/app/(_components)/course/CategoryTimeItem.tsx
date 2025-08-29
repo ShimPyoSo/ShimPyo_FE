@@ -12,7 +12,7 @@ export default function CategoryTimeItem({ isLast = false, time }: CategoryIconI
     <li className="flex flex-col items-center">
       <div className="relative">
         <Image src={svg} alt="시간" width={48} height={30} />
-        <span className="absolute top-[3px] left-1/2 transform -translate-x-1/2 text-sm font-semibold text-gn10 tracking-[-2%]">
+        <span className="absolute top-[3px] left-1/2 transform -translate-x-1/2 text-sm font-semibold text-gn10 tracking-[-0.02em]">
           {time}
         </span>
       </div>

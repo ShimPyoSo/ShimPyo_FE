@@ -13,7 +13,7 @@ interface GenderInputProps {
 export default function GenderInput({ register, control, watch }: GenderInputProps) {
   const { errors } = useFormState({ control });
   return (
-    <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
+    <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-0.02em]">
       성별
       <small className={`text-xs text-g1 mb-[12px] ${errors.gender ? 'text-r' : 'text-g2'}`}>
         {errors.gender?.message === '성별은 필수 입력입니다.' ? '성별을 선택해 주세요' : ''}

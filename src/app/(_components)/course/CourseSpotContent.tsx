@@ -35,9 +35,9 @@ export default function CourseSpotContent() {
         <SpotSearchInput register={register} setValue={setValue} watch={watch} />
         <CourseDate register={register} watch={watch} />
         <section>
-          <p className="mt-[52px] tracking-[-2%] text-g1 text-xs">시간 선택</p>
+          <p className="mt-[52px] tracking-[-0.02em] text-g1 text-xs">시간 선택</p>
           <input
-            className="mt-[12px] text-sm tracking-[-2%] text-b3 outline-none"
+            className="mt-[12px] text-sm tracking-[-0.02em] text-b3 outline-none"
             type="time"
             {...register('course.time', { required: '시간을 선택해주세요' })}
           />

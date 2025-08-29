@@ -24,7 +24,7 @@ export default function HeaderButton() {
     <>
       {pathname === '/signup/additional' && (
         <Link
-          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-2%] cursor-pointer"
+          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-0.02em] cursor-pointer"
           href={'/'}
           role="button"
         >
@@ -33,7 +33,7 @@ export default function HeaderButton() {
       )}
       {pathname === '/test/question' && (
         <Link
-          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-2%] cursor-pointer"
+          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-0.02em] cursor-pointer"
           href={'/'}
           role="button"
         >
@@ -42,7 +42,7 @@ export default function HeaderButton() {
       )}
       {pathname.startsWith('/test/result') && (
         <button
-          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-2%] cursor-pointer"
+          className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-0.02em] cursor-pointer"
           onClick={handleRestart}
         >
           다시하기

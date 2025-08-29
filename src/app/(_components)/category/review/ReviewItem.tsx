@@ -47,7 +47,7 @@ export default function ReviewItem({
   };
 
   return (
-    <li className="p-[12px] bg-[#fbfbfb] border-w4 rounded-xl tracking-[-2%]">
+    <li className="p-[12px] bg-[#fbfbfb] border-w4 rounded-xl tracking-[-0.02em]">
       <div className="flex items-center justify-between mb-[8px]">
         {type === 'detail' && <p className="font-semibold text-sm text-b1">{review.nickname}</p>}
         <div className="flex items-center gap-[6px]">

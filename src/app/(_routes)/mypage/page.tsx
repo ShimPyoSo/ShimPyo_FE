@@ -13,7 +13,7 @@ export default function Mypage() {
   return (
     <ProtectedRoute>
       <div className="min-h-full bg-w1 px-[16px]">
-        <ul className="text-xs text-b3 tracking-[-2%]">
+        <ul className="text-xs text-b3 tracking-[-0.02em]">
           <li className="py-[18px] flex items-center justify-between">
             <span className="flex items-center gap-[3px]">
               <p className="font-[kkubulim] text-gn1 text-lg">{user?.nickname || '닉네임'}</p>님

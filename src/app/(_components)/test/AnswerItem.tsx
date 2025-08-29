@@ -44,7 +44,7 @@ export default function AnswerItem({ currentIndex, selected, setSelected, answer
             <div className="w-[62px] h-[58px] bg-w1 rounded-md text-3xl flex items-center justify-center">
               {questions[currentIndex].icons[idx]}
             </div>
-            <div className="tracking-[-2%]">
+            <div className="tracking-[-0.02em]">
               <p className={`font-semibold text-sm ${selected === idx ? 'text-gn1' : 'text-b3'}`}>{answer.text}</p>
               <small className="mt-[8px] text-g1 text-xs">{description}</small>
             </div>

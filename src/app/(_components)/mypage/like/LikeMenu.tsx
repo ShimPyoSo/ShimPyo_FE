@@ -10,7 +10,7 @@ export default function LikeMenu() {
   const [isActive, setIsActive] = useState(true);
 
   return (
-    <ul className="pt-[30px] text-xs text-b3 tracking-[-2%]">
+    <ul className="pt-[30px] text-xs text-b3 tracking-[-0.02em]">
       <li className="w-full py-[18px]">
         <div
           className={`flex justify-between items-center ${isActive ? '' : 'border-b border-w6'}`}

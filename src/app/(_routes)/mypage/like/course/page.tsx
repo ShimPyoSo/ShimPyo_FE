@@ -14,7 +14,7 @@ export default function LikedCourseList() {
         <div className="bg-w1 px-[16px] py-[30px]">
           <h2 className="flex flex-col">
             <p className="font-semibold text-b1">내가 찜한 맞춤 쉼표 코스</p>
-            <small className="mt-[4px] tracking-[-2%] text-g1 text-xs">
+            <small className="mt-[4px] tracking-[-0.02em] text-g1 text-xs">
               내가 마음에 들어한 맞춤 쉼표 코스를 확인해 보세요.
             </small>
           </h2>

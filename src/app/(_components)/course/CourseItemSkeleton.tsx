@@ -10,7 +10,7 @@ export default function CourseItemSkeleton() {
       <Skeleton width={73} height={73} borderRadius={6} />
 
       <div className="ml-[12px] flex items-start justify-between grow">
-        <div className="flex flex-col font-semibold tracking-[-2%]">
+        <div className="flex flex-col font-semibold tracking-[-0.02em]">
           <Skeleton width={60} height={20} borderRadius={4} />
           <div className="mt-[4px]">
             <Skeleton width={150} height={18} />

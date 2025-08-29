@@ -27,7 +27,7 @@ export default function SpotSearchKaKao() {
           setQuery={setQuery}
         />
 
-        <p className="mt-[23px] font-semibold text-b1 tracking-[-1.3%]">이런 여행지는 어때요?</p>
+        <p className="mt-[23px] font-semibold text-b1 tracking-[-0.013em]">이런 여행지는 어때요?</p>
 
         {searchResults === null ? (
           <SpotRecommend setDetailId={setDetailId} />

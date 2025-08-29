@@ -14,7 +14,7 @@ export default function Question() {
         <>
           <Progress num={currentIndex} />
           <Answer currentIndex={currentIndex} selected={selected} setSelected={setSelected} />
-          <div className="w-[343px] fixed bottom-[16px] flex items-center gap-[12px] tracking-[-1.3%]">
+          <div className="w-[343px] fixed bottom-[16px] flex items-center gap-[12px] tracking-[-0.013em]">
             <button
               className="grow py-[16px] border rounded-lg font-semibold bg-[#FBFBFB] text-b1 border-w4 outline-none"
               onClick={handlePrev}

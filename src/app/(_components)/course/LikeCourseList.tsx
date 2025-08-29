@@ -28,7 +28,7 @@ export default function LikeCourseList({ course, setIsOpen }: LikedCourseProps) 
         <CourseList isEditable={true} course={currentCourse} setCourse={setCurrentCourse} setIsOpen={setIsOpen} />
       )}
       <button
-        className={`absolute bottom-0 left-0 mx-[16px] mb-[30px] py-[16px] px-[127px] bg-gn1 text-white font-semibold tracking-[-1.3%] rounded-lg border border-gn5
+        className={`absolute bottom-0 left-0 mx-[16px] mb-[30px] py-[16px] px-[127px] bg-gn1 text-white font-semibold tracking-[-0.013em] rounded-lg border border-gn5
     transition-all duration-300 ease-in-out
     ${isModified ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}
   `}

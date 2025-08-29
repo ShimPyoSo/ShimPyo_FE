@@ -32,8 +32,8 @@ export default function Discomfort({ temperature, humidity }: DiscomfortProps) {
           height={24}
         />
       </div>
-      <p className="mt-[12px] text-g1 tracking-[-2%]">불쾌지수</p>
-      <p className="mt-[4px] text-b3 font-semibold tracking-[-2%]">
+      <p className="mt-[12px] text-g1 tracking-[-0.02em]">불쾌지수</p>
+      <p className="mt-[4px] text-b3 font-semibold tracking-[-0.02em]">
         {index < 68 ? '좋음' : index < 75 ? '보통' : index < 80 ? '나쁨' : '매우나쁨'}
       </p>
     </li>

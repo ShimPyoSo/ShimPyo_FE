@@ -14,7 +14,7 @@ export default function ReviewItem({ review, setReviewImg, setSelectedNumber }: 
   };
 
   return (
-    <li className="w-[280px] h-[186px] p-[16px] rounded-lg border border-w4 bg-[#fbfbfb] tracking-[-2%]">
+    <li className="w-[280px] h-[186px] p-[16px] rounded-lg border border-w4 bg-[#fbfbfb] tracking-[-0.02em]">
       <div className="flex items-center justify-between mb-[8px]">
         <p className="text-sm text-b1 font-semibold">{review.nickname}</p>
         <p className="text-xs text-g1">{review.createdAt}</p>

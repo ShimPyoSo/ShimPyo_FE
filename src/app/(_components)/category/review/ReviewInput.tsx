@@ -5,7 +5,7 @@ interface ReviewInputProps {
 
 export default function ReviewInput({ contents, setContents }: ReviewInputProps) {
   return (
-    <section className="mt-[30px] tracking-[-2%]">
+    <section className="mt-[30px] tracking-[-0.02em]">
       <p className="font-[kkubulim] text-lg text-gn1">후기 내용</p>
       <small className="text-sm text-g1">해당 여행지에 방문한 솔직한 후기를 작성해 주세요</small>
       <div className="relative">
@@ -15,7 +15,7 @@ export default function ReviewInput({ contents, setContents }: ReviewInputProps)
           onChange={(e) => setContents(e.target.value)}
           placeholder="최소 5자의 후기 내용을 입력해 주세요"
         />
-        <span className="absolute bottom-[16px] right-[16px] flex items-center text-xs text-g3/80 tracking-[-2%]">
+        <span className="absolute bottom-[16px] right-[16px] flex items-center text-xs text-g3/80 tracking-[-0.02em]">
           <p className="text-g1/80">{contents.length}</p>/500
         </span>
       </div>

@@ -25,12 +25,12 @@ export default function SpotItem({ isEditable, isPreview, onDelete, spot }: Spot
       </div>
       <div className="ml-[7px] h-full grow flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <p className="font-semibold text-sm text-b1 tracking-[-2%]">{spot.title}</p>
+          <p className="font-semibold text-sm text-b1 tracking-[-0.02em]">{spot.title}</p>
           {isEditable ? (
             <SpotDropDown isOpen={isOpen} setIsOpen={setIsOpen} />
           ) : isPreview ? (
             <button
-              className="bg-w2 border border-w4 rounded-md px-[6px] py-[2px] text-xs text-b2 tracking-[-2%]"
+              className="bg-w2 border border-w4 rounded-md px-[6px] py-[2px] text-xs text-b2 tracking-[-0.02em]"
               onClick={onDelete}
             >
               삭제하기

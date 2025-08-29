@@ -7,7 +7,7 @@ interface WithdrawProps {
 export default function Withdraw({ setIsWithdrawAlert }: WithdrawProps) {
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
-      <h3 className="text-sm text-b1 font-semibold tracking-[-2%]">회원 탈퇴</h3>
+      <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">회원 탈퇴</h3>
       <div className="mt-[12px] w-full h-[128px] overflow-y-scroll rounded-lg border border-w4 bg-white p-[12px] ">
         <p className="font-semibold">[회원 탈퇴 시 처리 안내]</p> <br />
         회원 탈퇴를 신청하실 경우, 아래 내용을 반드시 확인해주시기 바랍니다.

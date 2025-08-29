@@ -17,7 +17,7 @@ export default function ImageInput({
   setIsLoading,
 }: ImageInputProps) {
   return (
-    <section className="mt-[60px] tracking-[-2%]">
+    <section className="mt-[60px] tracking-[-0.02em]">
       <span className="text-gn1 text-sm flex items-baseline">
         <p className="font-[kkubulim] text-lg">사진 업로드</p>(최대 8장)
       </span>

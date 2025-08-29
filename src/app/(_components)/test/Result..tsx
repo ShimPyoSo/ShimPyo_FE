@@ -66,7 +66,7 @@ export default function Result({ setCourse }: ResultProps) {
   return (
     <section className="flex flex-col items-center">
       <h2 className="mt-[22px] text-center">
-        <small className="text-sm text-g1 tracking-[-2%]">{currentItem.description}</small>
+        <small className="text-sm text-g1 tracking-[-0.02em]">{currentItem.description}</small>
         <p
           className="mt-[5px] text-3xl font-[kkubulim]"
           style={{

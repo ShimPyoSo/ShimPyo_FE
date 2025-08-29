@@ -55,7 +55,7 @@ export default function TodayWellness() {
         </p>
       </div>
       <WellnessFactor location={location} />
-      <span className="mt-[8px] flex items-center text-xs text-g1 tracking-[-2%]">
+      <span className="mt-[8px] flex items-center text-xs text-g1 tracking-[-0.02em]">
         ⓘ&nbsp;
         <Link
           className="text-b3"

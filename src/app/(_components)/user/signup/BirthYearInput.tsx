@@ -10,7 +10,7 @@ interface BirthYearInputProps {
 export default function BirthYearInput({ register, control }: BirthYearInputProps) {
   const { errors } = useFormState({ control });
   return (
-    <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">
+    <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-0.02em]">
       출생연도
       <small className={`text-xs text-g1 mb-[12px] ${errors.birthYear ? 'text-r' : 'text-g2'}`}>
         {errors.birthYear?.message === '유효한 출생연도를 입력해주세요.'

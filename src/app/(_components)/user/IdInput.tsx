@@ -52,7 +52,7 @@ export default function IdInput<T extends ISignUp | IFind>({
 
   return (
     <>
-      <label className={`flex flex-col text-sm text-b3 tracking-[-2%] ${type === 'find' ? 'mt-[30px]' : ''}`}>
+      <label className={`flex flex-col text-sm text-b3 tracking-[-0.02em] ${type === 'find' ? 'mt-[30px]' : ''}`}>
         아이디
         {type === 'signup' && (
           <small>
@@ -80,7 +80,7 @@ export default function IdInput<T extends ISignUp | IFind>({
       {type === 'signup' && (
         <>
           <button
-            className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-2%] ${
+            className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-0.02em] ${
               isIdChecked ? 'border-gn7 bg-gn8 text-gn1' : 'border-[#EDEDED] bg-w2 text-b2'
             }`}
             type="button"

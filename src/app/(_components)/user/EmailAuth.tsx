@@ -72,7 +72,7 @@ export default function EmailAuth<T extends ISignUp | IFind>({
 
   return (
     <>
-      <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-2%]">이메일 인증</label>
+      <label className="mt-[40px] flex flex-col text-sm text-b3 tracking-[-0.02em]">이메일 인증</label>
       <EmailAuthInput
         register={register}
         isEmailError={isEmailError}
@@ -83,7 +83,7 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       />
 
       <button
-        className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-2%] ${
+        className={`mt-[16px] px-[15px] py-[10px] rounded-md border text-sm font-semibold tracking-[-0.02em] ${
           isAuthStart ? 'border-gn7 bg-gn8 text-gn1' : 'border-[#EDEDED] bg-w2 text-b2'
         }`}
         type="button"

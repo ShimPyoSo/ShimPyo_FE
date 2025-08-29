@@ -6,7 +6,7 @@ export default function PasswordResult() {
   return (
     <>
       <span className="mt-[50px]">
-        <p className="text-sm text-g1 tracking-[-2%]">비밀번호 재설정</p>
+        <p className="text-sm text-g1 tracking-[-0.02em]">비밀번호 재설정</p>
         <p className="mt-[12px] text-xl text-b1 font-semibold">
           해당 이메일로
           <br />

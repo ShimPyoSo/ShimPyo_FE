@@ -55,7 +55,7 @@ export default function WithdrawForm({ setIsWithdrawAlert }: WithdrawFormProps) 
 
   return (
     <form className="mt-[32px]" onSubmit={handleSubmit(onSubmit)}>
-      <label className="text-sm text-b1 font-semibold tracking-[-2%]">비밀번호 확인</label>
+      <label className="text-sm text-b1 font-semibold tracking-[-0.02em]">비밀번호 확인</label>
       <div className="mt-[12px] relative">
         <input
           className={`w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
@@ -71,7 +71,7 @@ export default function WithdrawForm({ setIsWithdrawAlert }: WithdrawFormProps) 
         />
         <PasswordCheck isFocused={isPasswordFocused} isOpen={passwordOpen} setIsOpen={setPasswordOpen} marginTop={10} />
       </div>
-      {isFailed && <p className="mt-[8px] text-r text-xs tracking-[-2%]">비밀번호를 다시 입력해 주세요</p>}
+      {isFailed && <p className="mt-[8px] text-r text-xs tracking-[-0.02em]">비밀번호를 다시 입력해 주세요</p>}
       <label className="mt-[32px] flex items-center space-x-2 cursor-pointer">
         <CheckBox register={register} watch={watch} name={'isConfirmed'} required={true} />
         <span className="text-xs text-b3">모든 사항을 꼼꼼히 읽었으며 탈퇴에 동의해요</span>
