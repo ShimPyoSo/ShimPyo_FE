@@ -1,14 +1,39 @@
 'use client';
 
+import { ICourse } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import dropdown from '/public/images/icons/spot/dropdown.svg';
 
 interface SpotDropDownProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
+  idx: number;
+  day: string;
 }
 
-export default function SpotDropDown({ isOpen, setIsOpen }: SpotDropDownProps) {
+export default function SpotDropDown({ isOpen, setIsOpen, setCourse, idx, day }: SpotDropDownProps) {
+  const handleDelete = () => {
+    if (!setCourse) return;
+
+    setCourse((prev) => {
+      if (!prev) return null;
+
+      const updatedDays = prev.days.map((d) => {
+        if (d.date !== day) return d;
+
+        const updatedList = [...d.list];
+        updatedList.splice(idx, 1);
+
+        return { ...d, list: updatedList };
+      });
+
+      return { ...prev, days: updatedDays };
+    });
+
+    setIsOpen(false);
+  };
+
   return (
     <div className="relative">
       <button type="button" onClick={() => setIsOpen((prev) => !prev)} className="p-1">
@@ -29,12 +54,7 @@ export default function SpotDropDown({ isOpen, setIsOpen }: SpotDropDownProps) {
               </button>
             </li>
             <li className="py-[2px]">
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                }}
-                className="w-full"
-              >
+              <button onClick={handleDelete} className="w-full">
                 삭제
               </button>
             </li>

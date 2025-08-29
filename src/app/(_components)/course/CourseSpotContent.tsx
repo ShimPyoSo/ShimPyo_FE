@@ -1,12 +1,18 @@
 'use client';
 
+import { ICourse, ICourseAddition } from '@/app/(_utils)/type';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import CourseDate from './CourseDate';
-import { ICourseAddition } from '@/app/(_utils)/type';
 import SpotSearchInput from './SpotSearchInput';
 
-export default function CourseSpotContent() {
+interface CourseSpotContentProps {
+  course: ICourse;
+  setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
+  onClose: () => void;
+}
+
+export default function CourseSpotContent({ course, setCourse, onClose }: CourseSpotContentProps) {
   const {
     handleSubmit,
     register,
@@ -18,7 +24,6 @@ export default function CourseSpotContent() {
       date: '1일',
       course: {
         touristId: 0,
-        id: 0,
       },
     },
   });
@@ -26,7 +31,26 @@ export default function CourseSpotContent() {
   const selectedCourse = watch('course');
 
   const onSubmit: SubmitHandler<ICourseAddition> = (data) => {
-    console.log('form data:', data);
+    const updatedCourse: ICourse = { ...course };
+
+    const targetDay = updatedCourse.days.find((day) => day.date === data.date);
+
+    if (targetDay) {
+      targetDay.list.push(data.course);
+
+      targetDay.list.sort((a, b) => {
+        if (!a.time || !b.time) return 0;
+        return a.time.localeCompare(b.time);
+      });
+    } else {
+      updatedCourse.days.push({
+        date: data.date,
+        list: [data.course],
+      });
+    }
+
+    setCourse?.(updatedCourse);
+    onClose();
   };
 
   return (

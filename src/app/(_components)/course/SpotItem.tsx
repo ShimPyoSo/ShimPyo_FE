@@ -1,6 +1,7 @@
 'use client';
 
-import { ICourseList } from '@/app/(_utils)/type';
+import { ICourse, ICourseList } from '@/app/(_utils)/type';
+
 import Image from 'next/image';
 import SpotDropDown from './SpotDropDown';
 import location from '/public/images/icons/spot/location.svg';
@@ -13,9 +14,12 @@ interface SpotItemProps {
   isPreview: boolean;
   onDelete?: () => void;
   spot: ICourseList;
+  setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
+  idx?: number;
+  day?: string;
 }
 
-export default function SpotItem({ isEditable, isPreview, onDelete, spot }: SpotItemProps) {
+export default function SpotItem({ isEditable, isPreview, onDelete, spot, setCourse, idx, day }: SpotItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -27,7 +31,13 @@ export default function SpotItem({ isEditable, isPreview, onDelete, spot }: Spot
         <div className="flex items-center justify-between">
           <p className="font-semibold text-sm text-b1 tracking-[-0.02em]">{spot.title}</p>
           {isEditable ? (
-            <SpotDropDown isOpen={isOpen} setIsOpen={setIsOpen} />
+            <SpotDropDown
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              setCourse={setCourse}
+              idx={idx as number}
+              day={day as string}
+            />
           ) : isPreview ? (
             <button
               className="bg-w2 border border-w4 rounded-md px-[6px] py-[2px] text-xs text-b2 tracking-[-0.02em]"

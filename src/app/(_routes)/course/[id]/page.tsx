@@ -3,24 +3,14 @@
 import { Suspense, useState } from 'react';
 
 import Alert from '@/app/(_components)/UI/Alert';
-import BottomSheet from '@/app/(_components)/UI/BottomSheet';
-import CourseSpotContent from '@/app/(_components)/course/CourseSpotContent';
 import ShareCourse from '@/app/(_components)/course/ShareCourse';
 
 export default function CourseShare() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-
-  const handleClose = () => {
-    setIsBottomSheetOpen(false);
-  };
 
   return (
     <Suspense>
       <ShareCourse setIsOpen={setIsOpen} />
-      <BottomSheet isOpen={isBottomSheetOpen} onClose={handleClose}>
-        <CourseSpotContent />
-      </BottomSheet>
       {isOpen && (
         <Alert
           title="링크 복사"

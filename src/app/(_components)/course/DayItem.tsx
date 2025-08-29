@@ -1,5 +1,5 @@
 import CategoryTimeItem from './CategoryTimeItem';
-import { ICourseList } from '@/app/(_utils)/type';
+import { ICourse } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import SpotItem from '../course/SpotItem';
 import comma from '/public/images/icons/course/comma.svg';
@@ -8,11 +8,14 @@ import fullComma from '/public/images/icons/course/fullComma.svg';
 interface DayItemProps {
   isEditable: boolean;
   day: string;
-  course: ICourseList[];
+  course: ICourse;
+  setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
 }
 
-export default function DayItem({ isEditable, day, course }: DayItemProps) {
+export default function DayItem({ isEditable, day, course, setCourse }: DayItemProps) {
   const dayNumber = parseInt(day, 10);
+  const dayData = course.days.find((d) => d.date === day);
+  const list = dayData?.list ?? [];
 
   return (
     <li className="mt-[42px]">
@@ -25,21 +28,24 @@ export default function DayItem({ isEditable, day, course }: DayItemProps) {
             ))}
           </div>
         </div>
-        {isEditable && (
-          <button className="py-[6px] px-[10px] rounded-md bg-w2 border border-w1 text-b3 text-xs tracking-[-0.02em]">
-            장소 추가하기
-          </button>
-        )}
       </div>
       <div className="pt-[28px] pb-[40px] border-b border-[#E2E2E2] flex items-start gap-[8px]">
         <ul>
-          {course.map((spot, index) => (
-            <CategoryTimeItem key={spot.touristId} isLast={index === course.length - 1} time={spot.time as string} />
+          {list.map((spot, index) => (
+            <CategoryTimeItem key={spot.touristId} isLast={index === list.length - 1} time={spot.time as string} />
           ))}
         </ul>
         <ul className="flex flex-col gap-[18px]">
-          {course.map((spot) => (
-            <SpotItem key={spot.touristId} isEditable={isEditable} isPreview={false} spot={spot} />
+          {list.map((spot, idx) => (
+            <SpotItem
+              key={idx}
+              isEditable={isEditable}
+              isPreview={false}
+              spot={spot}
+              setCourse={setCourse}
+              idx={idx}
+              day={day}
+            />
           ))}
         </ul>
       </div>

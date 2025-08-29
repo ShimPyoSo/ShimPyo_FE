@@ -176,7 +176,6 @@ export interface ISpot extends ILatLng {
 
 export interface ICourseList extends ILatLng {
   touristId?: number;
-  id?: number;
   region?: string;
   title: string;
   time?: string;

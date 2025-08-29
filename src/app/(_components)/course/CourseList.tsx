@@ -2,6 +2,7 @@
 
 import { ICourse, ILatLng } from '@/app/(_utils)/type';
 
+import AddSpot from './AddSpot';
 import CourseDelete from './CourseDelete';
 import DayItem from './DayItem';
 import Map from './Map';
@@ -16,7 +17,7 @@ interface CourseListProps {
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
 }
 
-export default function CourseList({ isEditable, setIsOpen, course }: CourseListProps) {
+export default function CourseList({ isEditable, setIsOpen, course, setCourse }: CourseListProps) {
   const { id } = useParams();
   const currentItem = testImages.find((item) => item.name === course.typename);
   if (!currentItem) return null;
@@ -50,9 +51,10 @@ export default function CourseList({ isEditable, setIsOpen, course }: CourseList
         </div>
       </div>
       <Map positions={positionsGroup} titles={titlesGroup} day={course.days.length} />
+      {isEditable && <AddSpot setCourse={setCourse} course={course} />}
       <ul className="pb-[72px]">
         {course.days.map((day, index) => (
-          <DayItem key={index} day={day.date} course={day.list} isEditable={isEditable} />
+          <DayItem key={index} day={day.date} course={course} setCourse={setCourse} isEditable={isEditable} />
         ))}
       </ul>
     </>

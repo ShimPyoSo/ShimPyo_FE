@@ -32,8 +32,10 @@ export default function ShareCourse({ setIsOpen }: ShareCourseProps) {
   });
 
   return (
-    <div className="bg-w1 px-[16px] pb-[30px]">
-      {data && <CourseList isEditable={false} setIsOpen={setIsOpen} course={data} />}
-    </div>
+    <>
+      <div className="bg-w1 px-[16px] pb-[30px]">
+        {data && <CourseList isEditable={false} setIsOpen={setIsOpen} course={data} />}
+      </div>
+    </>
   );
 }
