@@ -1,10 +1,10 @@
 'use client';
 
-import AddSpotSearch from '@/app/(_components)/course/AddSpotSearch';
-import CourseAddButton from '@/app/(_components)/course/CourseAddButton';
+import AddSpotSearch from '@/app/(_components)/course/bottomSheet/AddSpotSearch';
+import CourseAddButton from '@/app/(_components)/course/bottomSheet/CourseAddButton';
 import { ICourseList } from '@/app/(_utils)/type';
-import SearchSpotItem from '@/app/(_components)/course/SearchSpotItem';
-import SpotRecommend from '@/app/(_components)/course/SpotRecommend';
+import SearchSpotItem from '@/app/(_components)/course/bottomSheet/SearchSpotItem';
+import SpotRecommend from '@/app/(_components)/course/bottomSheet/SpotRecommend';
 import { useFetchSearchWord } from '@/app/(_utils)/hooks/useFetchSearchWord';
 import useInfiniteScroll from '@/app/(_utils)/hooks/useInfiniteScroll';
 import { useState } from 'react';

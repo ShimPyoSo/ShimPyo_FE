@@ -1,9 +1,9 @@
 'use client';
 
-import Carousel from '../UI/Carousel';
+import Carousel from '../../UI/Carousel';
 import Image from 'next/image';
-import SpotSkeleton from '../landing/SpotSkeleton';
-import WebCarouselArrow from '../UI/WebCarouselArrow';
+import SpotSkeleton from '../../landing/SpotSkeleton';
+import WebCarouselArrow from '../../UI/WebCarouselArrow';
 import { isMobile } from 'react-device-detect';
 import refetchIcon from '/public/images/icons/course/refetch.svg';
 import { useRef } from 'react';

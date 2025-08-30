@@ -14,12 +14,22 @@ interface SpotItemProps {
   isPreview: boolean;
   onDelete?: () => void;
   spot: ICourseList;
+  course?: ICourse;
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
   idx?: number;
   day?: string;
 }
 
-export default function SpotItem({ isEditable, isPreview, onDelete, spot, setCourse, idx, day }: SpotItemProps) {
+export default function SpotItem({
+  isEditable,
+  isPreview,
+  onDelete,
+  spot,
+  course,
+  setCourse,
+  idx,
+  day,
+}: SpotItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -34,6 +44,7 @@ export default function SpotItem({ isEditable, isPreview, onDelete, spot, setCou
             <SpotDropDown
               isOpen={isOpen}
               setIsOpen={setIsOpen}
+              course={course}
               setCourse={setCourse}
               idx={idx as number}
               day={day as string}

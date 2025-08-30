@@ -2,7 +2,7 @@
 
 import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
-import SpotDetailComponent from '../category/Detail/SpotDetailComponent';
+import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import check from '/public/images/icons/check.svg';
 import location from '/public/images/icons/spot/location.svg';
 import spotDefault from '/public/images/icons/course/spotDefault.svg';

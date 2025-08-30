@@ -3,7 +3,7 @@
 import { ICourse, ILatLng } from '@/app/(_utils)/type';
 import { useEffect, useState } from 'react';
 
-import AddSpot from './AddSpot';
+import AddSpot from './bottomSheet/AddSpot';
 import CourseDelete from './CourseDelete';
 import CourseTitle from './CourseTitle';
 import DayItem from './DayItem';

@@ -1,6 +1,6 @@
 'use client';
 
-import BottomSheet from '../UI/BottomSheet';
+import BottomSheet from '../../UI/BottomSheet';
 import CourseSpotContent from './CourseSpotContent';
 import { ICourse } from '@/app/(_utils)/type';
 import { useState } from 'react';

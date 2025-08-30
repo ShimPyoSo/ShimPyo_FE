@@ -4,8 +4,8 @@ import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 import { ICourseAddition } from '@/app/(_utils)/type';
 import Image from 'next/image';
-import SpotDetailComponent from '../category/Detail/SpotDetailComponent';
-import SpotItem from './SpotItem';
+import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
+import SpotItem from '../SpotItem';
 import SpotRecommend from './SpotRecommend';
 import search from '/public/images/icons/search.svg';
 import { useState } from 'react';

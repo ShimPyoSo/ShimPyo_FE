@@ -42,6 +42,7 @@ export default function DayItem({ isEditable, day, course, setCourse }: DayItemP
               isEditable={isEditable}
               isPreview={false}
               spot={spot}
+              course={course}
               setCourse={setCourse}
               idx={idx}
               day={day}
