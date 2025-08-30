@@ -1,9 +1,11 @@
 'use client';
 
 import { ICourse, ILatLng } from '@/app/(_utils)/type';
+import { useEffect, useState } from 'react';
 
 import AddSpot from './AddSpot';
 import CourseDelete from './CourseDelete';
+import CourseTitle from './CourseTitle';
 import DayItem from './DayItem';
 import Map from './Map';
 import Share from '../UI/Share';
@@ -19,6 +21,12 @@ interface CourseListProps {
 
 export default function CourseList({ isEditable, setIsOpen, course, setCourse }: CourseListProps) {
   const { id } = useParams();
+  const [title, setTitle] = useState(course.title);
+
+  useEffect(() => {
+    if (course) setTitle(course.title);
+  }, [course]);
+
   const currentItem = testImages.find((item) => item.name === course.typename);
   if (!currentItem) return null;
 
@@ -43,7 +51,7 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
           >
             {course.typename}
           </p>
-          <p className="font-semibold text-lg text-b1">{course.title}</p>
+          <CourseTitle title={title} setTitle={setTitle} course={course} />
         </h2>
         <div className="flex gap-[6px] items-center">
           <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
