@@ -27,7 +27,7 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
     if (course) setTitle(course.title);
   }, [course]);
 
-  const currentItem = testImages.find((item) => item.name.replaceAll(' ', '') === course.typename);
+  const currentItem = testImages.find((item) => item.name === course.typename);
   if (!currentItem) return null;
 
   const positionsGroup: ILatLng[][] = course.days.map((day) =>
