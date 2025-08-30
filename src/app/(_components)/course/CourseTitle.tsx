@@ -13,9 +13,10 @@ interface CourseTitleProps {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   course: ICourse;
+  isEditable: boolean;
 }
 
-export default function CourseTitle({ title, setTitle, course }: CourseTitleProps) {
+export default function CourseTitle({ title, setTitle, course, isEditable }: CourseTitleProps) {
   const [titleModify, setTitleModify] = useState(false);
   const { handleAccessExpired } = useHandleTokenExpired();
 
@@ -62,15 +63,17 @@ export default function CourseTitle({ title, setTitle, course }: CourseTitleProp
       ) : (
         <p className="font-semibold text-lg text-b1 max-w-[240px] truncate">{title}</p>
       )}
-      <Image
-        className="cursor-pointer"
-        src={titleModify ? modifyActive : modify}
-        alt="수정"
-        width={24}
-        height={24}
-        onClick={() => setTitleModify((prev) => !prev)}
-        role="button"
-      />
+      {isEditable && (
+        <Image
+          className="cursor-pointer"
+          src={titleModify ? modifyActive : modify}
+          alt="수정"
+          width={24}
+          height={24}
+          onClick={() => setTitleModify((prev) => !prev)}
+          role="button"
+        />
+      )}
     </div>
   );
 }

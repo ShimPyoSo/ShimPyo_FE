@@ -39,7 +39,7 @@ export default function SpotItem({
       </div>
       <div className="ml-[7px] h-full grow flex flex-col justify-between">
         <div className="flex items-center justify-between">
-          <p className="font-semibold text-sm text-b1 tracking-[-0.02em]">{spot.title}</p>
+          <p className="max-w-[140px] font-semibold text-sm text-b1 tracking-[-0.02em] line-clamp-1">{spot.title}</p>
           {isEditable ? (
             <SpotDropDown
               isOpen={isOpen}
@@ -61,11 +61,11 @@ export default function SpotItem({
           )}
         </div>
         <div>
-          <div className="flex items-center gap-[4px]">
+          <div className="max-w-[140px] flex items-center gap-[4px]">
             <Image src={location} alt="위치" width={11} height={11} />
             <p className="text-xs text-g1 line-clamp-1">{spot.address}</p>
           </div>
-          <div className="flex items-center gap-[4px]">
+          <div className="max-w-[140px] flex items-center gap-[4px]">
             <Image src={tel} alt="전화번호" width={11} height={11} />
             <p className="text-xs text-g1 line-clamp-1">{spot.tel}</p>
           </div>

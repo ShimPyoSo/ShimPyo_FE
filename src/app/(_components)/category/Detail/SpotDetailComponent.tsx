@@ -3,6 +3,7 @@
 import { IError, ISpot } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
 
+import ImageCarousel from './ImageCarousel';
 import Liked from '@/app/(_components)/spot/Liked';
 import Review from '@/app/(_components)/category/Detail/Review';
 import Share from '@/app/(_components)/UI/Share';
@@ -67,7 +68,7 @@ export default function SpotDetailComponent({ id, type, setIsOpen }: SpotDetailC
   return (
     <>
       <div className="min-h-full bg-w1 pb-[40px]">
-        <div className="mt-[30px] h-[206px] mx-[16px] bg-white border border-w4 rounded-2xl"></div>
+        <ImageCarousel images={data?.images as string[] | undefined} />
         <div className="px-[16px] mt-[24px] flex items-center justify-between">
           <div className="flex gap-[6px] items-center">
             <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-sm text-gn7 font-semibold bg-white">

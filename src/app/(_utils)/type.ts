@@ -181,7 +181,6 @@ export interface ICourseList extends ILatLng {
   time?: string;
   images: string;
   address: string;
-  operationTime?: IOperationTime;
   tel: string;
   placeURL?: string;
 }

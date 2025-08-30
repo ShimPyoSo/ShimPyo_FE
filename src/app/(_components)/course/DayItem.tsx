@@ -10,15 +10,17 @@ interface DayItemProps {
   day: string;
   course: ICourse;
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
+  idx: number;
 }
 
-export default function DayItem({ isEditable, day, course, setCourse }: DayItemProps) {
+export default function DayItem({ isEditable, day, course, setCourse, idx }: DayItemProps) {
   const dayNumber = parseInt(day, 10);
   const dayData = course.days.find((d) => d.date === day);
   const list = dayData?.list ?? [];
+  console.log(list);
 
   return (
-    <li className="mt-[42px]">
+    <li className={`${idx !== 0 && 'mt-[42px]'}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-[3px]">
           <p className="font-[kkubulim] text-3xl text-gn1">{day}</p>
@@ -32,7 +34,7 @@ export default function DayItem({ isEditable, day, course, setCourse }: DayItemP
       <div className="pt-[28px] pb-[40px] border-b border-[#E2E2E2] flex items-start gap-[8px]">
         <ul>
           {list.map((spot, index) => (
-            <CategoryTimeItem key={spot.touristId} isLast={index === list.length - 1} time={spot.time as string} />
+            <CategoryTimeItem key={index} isLast={index === list.length - 1} time={spot.time as string} />
           ))}
         </ul>
         <ul className="flex flex-col gap-[18px]">

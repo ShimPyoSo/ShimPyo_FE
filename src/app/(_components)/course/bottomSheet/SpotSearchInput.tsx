@@ -51,7 +51,6 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       images: '',
       latitude: undefined,
       longitude: undefined,
-      operationTime: undefined,
       tel: '',
       placeURL: '',
     });

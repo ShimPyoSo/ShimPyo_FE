@@ -17,7 +17,7 @@ interface SpotDropDownProps {
 }
 
 export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx, day }: SpotDropDownProps) {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const handleDelete = () => {
     if (!setCourse) return;
@@ -48,7 +48,7 @@ export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx
         </button>
 
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-[47px] rounded-md bg-white shadow-lg z-50 shadow-[0px_3px_8px_0px_#0000001A]">
+          <div className="absolute top-[22px] right-0 mt-2 w-[47px] rounded-md bg-white shadow-lg z-50 shadow-[0px_3px_8px_0px_#0000001A]">
             <ul className="text-xs text-b1 text-center">
               <li className="py-[2px] border-b border-[#EFF0F2]">
                 <button

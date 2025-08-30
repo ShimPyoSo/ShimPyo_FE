@@ -27,7 +27,7 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
     if (course) setTitle(course.title);
   }, [course]);
 
-  const currentItem = testImages.find((item) => item.name === course.typename);
+  const currentItem = testImages.find((item) => item.name.replaceAll(' ', '') === course.typename);
   if (!currentItem) return null;
 
   const positionsGroup: ILatLng[][] = course.days.map((day) =>
@@ -51,7 +51,7 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
           >
             {course.typename}
           </p>
-          <CourseTitle title={title} setTitle={setTitle} course={course} />
+          <CourseTitle title={title} setTitle={setTitle} course={course} isEditable={isEditable} />
         </h2>
         <div className="flex gap-[6px] items-center">
           <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
@@ -60,9 +60,16 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
       </div>
       <Map positions={positionsGroup} titles={titlesGroup} day={course.days.length} />
       {isEditable && <AddSpot setCourse={setCourse} course={course} />}
-      <ul className="pb-[72px]">
+      <ul className={`${isEditable ? '' : 'mt-[42px]'} pb-[72px]`}>
         {course.days.map((day, index) => (
-          <DayItem key={index} day={day.date} course={course} setCourse={setCourse} isEditable={isEditable} />
+          <DayItem
+            key={index}
+            day={day.date}
+            course={course}
+            setCourse={setCourse}
+            isEditable={isEditable}
+            idx={index}
+          />
         ))}
       </ul>
     </>
