@@ -23,12 +23,12 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
         ))}
       </div>
 
-      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-[5px]">
         {images?.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
-            className={`w-3 h-3 rounded-full ${idx === currentIndex ? 'bg-gn1' : 'bg-g3'}`}
+            className={`w-[5px] h-[5px] rounded-full ${idx === currentIndex ? 'bg-gn1' : 'bg-g3'}`}
           />
         ))}
       </div>
