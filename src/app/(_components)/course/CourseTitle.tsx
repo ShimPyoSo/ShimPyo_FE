@@ -8,15 +8,18 @@ import Image from 'next/image';
 import modify from '/public/images/icons/course/modify.svg';
 import modifyActive from '/public/images/icons/course/modifyActive.svg';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
+import { useParams } from 'next/navigation';
 
 interface CourseTitleProps {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
+  setTitleLength: React.Dispatch<React.SetStateAction<boolean>>;
   course: ICourse;
   isEditable: boolean;
 }
 
-export default function CourseTitle({ title, setTitle, course, isEditable }: CourseTitleProps) {
+export default function CourseTitle({ title, setTitle, course, isEditable, setTitleLength }: CourseTitleProps) {
+  const { id } = useParams();
   const [titleModify, setTitleModify] = useState(false);
   const { handleAccessExpired } = useHandleTokenExpired();
 
@@ -25,10 +28,18 @@ export default function CourseTitle({ title, setTitle, course, isEditable }: Cou
   }, [course, setTitle]);
 
   const handleSaveTitle = async () => {
+    if (title.length < 2 || title.length > 15) {
+      setTitleLength(true);
+    }
+
     try {
-      await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/title`, {
-        withCredentials: true,
-      });
+      await axios.patch(
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/title`,
+        { courseId: id, title: title },
+        {
+          withCredentials: true,
+        }
+      );
       setTitleModify(false);
     } catch (error) {
       const err = error as AxiosError<IError>;

@@ -17,9 +17,10 @@ interface CourseListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   course: ICourse;
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
+  setTitleLength: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CourseList({ isEditable, setIsOpen, course, setCourse }: CourseListProps) {
+export default function CourseList({ isEditable, setIsOpen, course, setCourse, setTitleLength }: CourseListProps) {
   const { id } = useParams();
   const [title, setTitle] = useState(course.title);
 
@@ -51,7 +52,13 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse }:
           >
             {course.typename}
           </p>
-          <CourseTitle title={title} setTitle={setTitle} course={course} isEditable={isEditable} />
+          <CourseTitle
+            title={title}
+            setTitle={setTitle}
+            course={course}
+            isEditable={isEditable}
+            setTitleLength={setTitleLength}
+          />
         </h2>
         <div className="flex gap-[6px] items-center">
           <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />

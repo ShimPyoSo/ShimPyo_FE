@@ -9,6 +9,7 @@ import { useAtom } from 'jotai';
 
 export default function LikedCourse() {
   const [isOpen, setIsOpen] = useState(false);
+  const [titleLength, setTitleLength] = useState(false);
   const [, setTitle] = useAtom(setTitleAtom);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function LikedCourse() {
   return (
     <>
       <div className="bg-w1 px-[16px] pb-[70px]">
-        <LikeCourseList setIsOpen={setIsOpen} />
+        <LikeCourseList setIsOpen={setIsOpen} setTitleLength={setTitleLength} />
       </div>
       {isOpen && (
         <Alert
@@ -27,6 +28,15 @@ export default function LikedCourse() {
           confirmText="확인"
           setIsOpen={setIsOpen}
           onConfirm={() => setIsOpen(false)}
+        />
+      )}
+      {titleLength && (
+        <Alert
+          title="코스 이름 오류"
+          description={'코스 이름이 너무 짧습니다.\n2자에서 15자까지 입력해주세요.'}
+          confirmText="확인"
+          setIsOpen={setTitleLength}
+          onConfirm={() => setTitleLength(false)}
         />
       )}
     </>

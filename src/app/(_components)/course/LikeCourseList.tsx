@@ -12,9 +12,10 @@ import { useState } from 'react';
 
 interface LikedCourseProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setTitleLength: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function LikeCourseList({ setIsOpen }: LikedCourseProps) {
+export default function LikeCourseList({ setIsOpen, setTitleLength }: LikedCourseProps) {
   const { id } = useParams();
   const [currentCourse, setCurrentCourse] = useState<ICourse | null>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
@@ -55,7 +56,13 @@ export default function LikeCourseList({ setIsOpen }: LikedCourseProps) {
   return (
     <>
       {currentCourse && (
-        <CourseList isEditable={true} course={currentCourse} setCourse={setCurrentCourse} setIsOpen={setIsOpen} />
+        <CourseList
+          isEditable={true}
+          course={currentCourse}
+          setCourse={setCurrentCourse}
+          setIsOpen={setIsOpen}
+          setTitleLength={setTitleLength}
+        />
       )}
       <CourseModifyButton isModified={isModified} currentCourse={currentCourse as ICourse} />
     </>
