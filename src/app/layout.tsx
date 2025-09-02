@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Providers>
                 <ClientSideEffectWrapper />
                 <Header />
-                <div className="flex-1 overflow-auto scrollbar-hide bg-w1">{children}</div>
+                <div className="flex-1 overflow-auto scrollbar-hide bg-w1 pb-[100px]">{children}</div>
                 <TabBar />
               </Providers>
             </div>
