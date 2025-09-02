@@ -34,7 +34,7 @@ export default function HeaderButton() {
       {pathname === '/test/question' && (
         <Link
           className="absolute right-[16px] top-[18px] text-g1 text-xs tracking-[-0.02em] cursor-pointer"
-          href={'/'}
+          href={'/test'}
           role="button"
         >
           중단하기
