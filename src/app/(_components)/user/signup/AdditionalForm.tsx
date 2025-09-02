@@ -10,7 +10,7 @@ import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpire
 import { useRouter } from 'next/navigation';
 
 export default function AdditionalForm() {
-  const { register, handleSubmit, watch, control } = useForm<IAdditional>({ mode: 'onChange' });
+  const { register, handleSubmit, watch, control } = useForm<IAdditional>({ mode: 'onBlur' });
   const { isValid } = useFormState({ control });
   const router = useRouter();
   const { handleAccessExpired } = useHandleTokenExpired();
