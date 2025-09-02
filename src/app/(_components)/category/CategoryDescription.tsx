@@ -1,9 +1,12 @@
 import { categoryList } from '@/app/(_utils)/constants';
-import { useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export default function CategoryDescription() {
-  const { type } = useParams();
+  const searchParams = useSearchParams();
+  const type = searchParams.get('type');
   const item = categoryList.find((el) => el.href === (type ?? ''));
+  console.log(type);
+  console.log(item);
   if (!item) return null;
 
   return (
