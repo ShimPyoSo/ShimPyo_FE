@@ -17,7 +17,7 @@ interface CourseListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   course: ICourse;
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
-  setTitleLength: React.Dispatch<React.SetStateAction<boolean>>;
+  setTitleLength?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function CourseList({ isEditable, setIsOpen, course, setCourse, setTitleLength }: CourseListProps) {

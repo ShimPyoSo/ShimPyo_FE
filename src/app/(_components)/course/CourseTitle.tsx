@@ -13,7 +13,7 @@ import { useParams } from 'next/navigation';
 interface CourseTitleProps {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setTitleLength: React.Dispatch<React.SetStateAction<boolean>>;
+  setTitleLength?: React.Dispatch<React.SetStateAction<boolean>>;
   course: ICourse;
   isEditable: boolean;
 }
@@ -29,7 +29,7 @@ export default function CourseTitle({ title, setTitle, course, isEditable, setTi
 
   const handleSaveTitle = async () => {
     if (title.length < 2 || title.length > 15) {
-      setTitleLength(true);
+      setTitleLength?.(true);
     }
 
     try {

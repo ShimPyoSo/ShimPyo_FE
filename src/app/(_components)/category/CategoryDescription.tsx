@@ -5,8 +5,6 @@ export default function CategoryDescription() {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const item = categoryList.find((el) => el.href === (type ?? ''));
-  console.log(type);
-  console.log(item);
   if (!item) return null;
 
   return (
