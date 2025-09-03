@@ -20,7 +20,9 @@ export default function CourseDelete({ courseId, type, refetch }: CourseDeletePr
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/course?id=${courseId}`, { withCredentials: true });
+      await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api/course?id=${courseId}`, {
+        withCredentials: true,
+      });
       if (type === 'detail') router.push('/mypage/like/course');
       else refetch?.();
     } catch (error) {
