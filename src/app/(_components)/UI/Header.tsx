@@ -29,14 +29,11 @@ export default function Header() {
 
   return (
     <header className="w-full h-[56px] sticky top-0 bg-w1 flex justify-center items-center relative">
-      {pathname === '/search' ||
-        pathname === '/test' ||
-        pathname.startsWith('/test/result') ||
-        pathname.startsWith('/course/') || (
-          <button className="absolute left-[16px] top-[16px] cursor-pointer" onClick={handleMoveToPrev}>
-            <Image src={prev} alt="이전 페이지" width={23} height={23} />
-          </button>
-        )}
+      {pathname === '/search' || pathname.startsWith('/test') || pathname.startsWith('/course/') || (
+        <button className="absolute left-[16px] top-[16px] cursor-pointer" onClick={handleMoveToPrev}>
+          <Image src={prev} alt="이전 페이지" width={23} height={23} />
+        </button>
+      )}
       <h1 className="font-semibold">{title[pathname] || headerTitle}</h1>
       <HeaderButton />
     </header>
