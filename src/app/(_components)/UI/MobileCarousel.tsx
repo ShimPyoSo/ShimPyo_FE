@@ -7,6 +7,7 @@ export default function MobileCarousel({ children, autoplay = false }: { childre
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const itemWidth = 353;
 
   useEffect(() => {
     if (!autoplay) return;
@@ -14,21 +15,20 @@ export default function MobileCarousel({ children, autoplay = false }: { childre
     if (!el) return;
 
     const scrollStep = () => {
-      const containerWidth = 242;
-      let nextScrollLeft = el.scrollLeft + containerWidth;
+      const currentIndex = Math.round(el.scrollLeft / itemWidth);
+      let nextIndex = currentIndex + 1;
 
-      if (nextScrollLeft >= el.scrollWidth - el.clientWidth) {
-        nextScrollLeft = 0;
+      if (nextIndex * itemWidth >= el.scrollWidth - el.clientWidth) {
+        nextIndex = 0;
       }
 
       el.scrollTo({
-        left: nextScrollLeft,
+        left: nextIndex * itemWidth,
         behavior: 'smooth',
       });
     };
 
-    const timer = setInterval(scrollStep, 2000);
-
+    const timer = setInterval(scrollStep, 5000);
     return () => clearInterval(timer);
   }, [autoplay]);
 
@@ -49,7 +49,17 @@ export default function MobileCarousel({ children, autoplay = false }: { childre
   };
 
   const handleMouseUpOrLeave = () => {
+    if (!isDragging) return;
     setIsDragging(false);
+
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const nearestIndex = Math.round(el.scrollLeft / itemWidth);
+    el.scrollTo({
+      left: nearestIndex * itemWidth,
+      behavior: 'smooth',
+    });
   };
 
   return (
