@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import HeaderButton from './HeaderButton';
 import Image from 'next/image';
 import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
-import goToMain from '/public/images/icons/goToMain.svg';
 import { headerTitleAtom } from '@/app/(_store)/title';
 import prev from '/public/images/icons/prevButton.svg';
 import { useAtomValue } from 'jotai';
@@ -38,11 +37,6 @@ export default function Header() {
             <Image src={prev} alt="이전 페이지" width={23} height={23} />
           </button>
         )}
-      {pathname.startsWith('/test/result') && (
-        <button className="absolute left-[16px] top-[16px] cursor-pointer">
-          <Image src={goToMain} alt="메인으로" width={23} height={23} onClick={() => router.push('/')} />
-        </button>
-      )}
       <h1 className="font-semibold">{title[pathname] || headerTitle}</h1>
       <HeaderButton />
     </header>
