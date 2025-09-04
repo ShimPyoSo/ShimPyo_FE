@@ -26,6 +26,8 @@ export default function SearchHistory() {
     setIsActive(!isActive);
     if (isActive) {
       localStorage.setItem('shimpyo_history', 'false');
+      localStorage.removeItem('shimpyo_keywords');
+      setHistory([]);
     } else {
       localStorage.removeItem('shimpyo_history');
     }
