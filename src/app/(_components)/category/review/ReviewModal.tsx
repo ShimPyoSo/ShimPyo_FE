@@ -97,7 +97,7 @@ export default function ReviewModal({
       {isAlertOpen && (
         <Alert
           title={'후기 등록'}
-          description={'후기가 정상적으로 등록되었습니다.'}
+          description={'후기가 정상적으로 등록되었습니다.\n다른 여행자들에게 도움이 될 거예요.'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => router.push(`/category/${id}/review`)}

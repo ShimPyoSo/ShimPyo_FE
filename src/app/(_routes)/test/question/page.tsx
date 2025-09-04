@@ -1,3 +1,5 @@
+'use client';
+
 import ProtectedRoute from '@/app/ProtectedRoute';
 import Question from '@/app/(_components)/test/Question';
 

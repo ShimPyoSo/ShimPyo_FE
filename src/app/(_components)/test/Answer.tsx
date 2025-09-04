@@ -16,7 +16,7 @@ export default function Answer({ currentIndex, selected, setSelected }: AnswerPr
       <p className={`${currentIndex < 7 ? 'mt-[45px]' : 'mt-[3px]'} text-lg font-semibold whitespace-pre-line`}>
         {currentIndex < 7 ? questions[currentIndex].question : optionals[currentIndex - 7].question}
       </p>
-      <ul className="mt-[30px] space-y-[12px] mb-[20px]">
+      <ul className="mt-[30px] space-y-[12px]">
         {currentIndex < 7
           ? questions[currentIndex].answers.map((answer, idx) => (
               <AnswerItem

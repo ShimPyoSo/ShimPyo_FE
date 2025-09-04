@@ -48,6 +48,7 @@ export default function useQuestion() {
 
   const handlePrev = () => {
     if (currentIndex > 0) {
+      setSelected(-1);
       setCurrentIndex(currentIndex - 1);
     } else router.push('/test');
   };
