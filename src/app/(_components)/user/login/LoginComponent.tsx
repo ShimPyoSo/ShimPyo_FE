@@ -11,7 +11,7 @@ export default function LoginComponent() {
         <p className="mx-[10px] text-xs text-g3 whitespace-nowrap">간편 로그인</p>
         <div className="flex-grow border-t border-g3"></div>
       </div>
-      <KakaoButton />
+      <KakaoButton type="login" />
       <p className="mt-[80px] mb-[20px] text-center text-xs text-g1 tracking-[-0.02em]">
         아직 회원이 아니신가요?{' '}
         <Link className="text-b1 underline" href={'/signup'}>

@@ -9,7 +9,7 @@ import kakao from '/public/images/icons/kakao.svg';
 import { loginAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
 
-export default function KakaoButton() {
+export default function KakaoButton({ type }: { type: 'signup' | 'login' }) {
   const [, login] = useAtom(loginAtom);
   const router = useRouter();
   const params = useSearchParams();
@@ -49,7 +49,7 @@ export default function KakaoButton() {
           onClick={onClick}
         >
           <Image src={kakao} alt="카카오" width={20} height={20} />
-          카카오로 회원가입
+          카카오로 {type === 'login' ? '로그인' : '회원가입'}
         </button>
       )}
     />

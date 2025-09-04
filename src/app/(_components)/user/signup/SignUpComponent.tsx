@@ -20,7 +20,7 @@ export default function SignUpComponent() {
       </h1>
       <Image className="mx-auto" src={illustration} alt="회원가입" width={265} height={263} />
       <div className="flex flex-col items-center">
-        <KakaoButton />
+        <KakaoButton type="signup" />
         <Link
           className="mt-[8px] w-full rounded-lg py-[16px] bg-white border border-w4 text-b1 font-semibold tracking-[-0.013em] text-center"
           href={'/signup/email'}
