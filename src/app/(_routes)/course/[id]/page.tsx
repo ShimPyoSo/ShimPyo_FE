@@ -1,12 +1,19 @@
 'use client';
 
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import Alert from '@/app/(_components)/UI/Alert';
 import ShareCourse from '@/app/(_components)/course/ShareCourse';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
 
 export default function CourseShare() {
   const [isOpen, setIsOpen] = useState(false);
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    setTitle('맞춤 쉼표 코스');
+  }, [setTitle]);
 
   return (
     <Suspense>
