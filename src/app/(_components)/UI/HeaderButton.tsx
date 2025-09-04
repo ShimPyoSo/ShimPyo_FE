@@ -17,6 +17,7 @@ export default function HeaderButton() {
   const handleRestart = () => {
     setCurrentIndex(0);
     resetAll();
+    sessionStorage.setItem('history', JSON.stringify(['/test']));
     router.push('/test/question');
   };
 
