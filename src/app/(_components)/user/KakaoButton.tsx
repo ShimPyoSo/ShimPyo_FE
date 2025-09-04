@@ -24,7 +24,14 @@ export default function KakaoButton({ type }: { type: 'signup' | 'login' }) {
         },
         { withCredentials: true }
       );
-      login({ userId: response.data.userId, nickname: response.data.nickname });
+      login({
+        user: {
+          userId: response.data.userId,
+          nickname: response.data.nickname,
+        },
+        loginType: 'social',
+      });
+
       if (response.data.type === 'signup') {
         router.push('/signup/additional');
       } else router.push(decodeURIComponent(params.get('redirect') ?? '/'));

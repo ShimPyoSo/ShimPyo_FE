@@ -9,20 +9,28 @@ export const isLoggedInAtom = atomWithStorage(
   createJSONStorage(() => sessionStorage)
 );
 
+export const isSocialAtom = atomWithStorage(
+  'isSocial',
+  false,
+  createJSONStorage(() => sessionStorage)
+);
+
 export const userAtom = atomWithStorage<IMember | null>(
   'user',
   null,
   createJSONStorage(() => sessionStorage)
 );
 
-export const loginAtom = atom(null, (get, set, user: IMember) => {
+export const loginAtom = atom(null, (get, set, { user, loginType }: { user: IMember; loginType: string }) => {
   set(isLoggedInAtom, true);
   set(userAtom, user);
+  set(isSocialAtom, loginType === 'social');
 });
 
 export const logoutAtom = atom(null, (get, set) => {
   set(isLoggedInAtom, false);
   set(userAtom, null);
+  set(isSocialAtom, false);
 });
 
 export const updateNicknameAtom = atom(null, (get, set, newNickname: string) => {

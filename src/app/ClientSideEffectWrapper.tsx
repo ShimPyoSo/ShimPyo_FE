@@ -49,7 +49,10 @@ export default function ClientSideEffectWrapper() {
             {},
             { withCredentials: true }
           );
-          login(response.data);
+          login({
+            user: response.data,
+            loginType: 'email',
+          });
         } catch (error) {
           const err = error as AxiosError<IError>;
           handleRefreshExpired(err.response?.data?.name);
