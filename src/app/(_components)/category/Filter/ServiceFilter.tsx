@@ -9,12 +9,19 @@ import arrow from '/public/images/icons/arrow.svg';
 
 interface ServiceFilterProps {
   selectedFilter: string | null;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<string | null>>;
   filter: IFilter;
   setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
   filterItem: { label: string; key: keyof IFilter };
 }
 
-export default function ServiceFilter({ selectedFilter, filterItem, filter, setFilter }: ServiceFilterProps) {
+export default function ServiceFilter({
+  selectedFilter,
+  setSelectedFilter,
+  filterItem,
+  filter,
+  setFilter,
+}: ServiceFilterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
@@ -22,6 +29,13 @@ export default function ServiceFilter({ selectedFilter, filterItem, filter, setF
       setIsExpanded(true);
     }
   }, [selectedFilter, filterItem]);
+
+  const handleToggleExpand = () => {
+    if (isExpanded && selectedFilter === filterItem.label) {
+      setSelectedFilter(null);
+    }
+    setIsExpanded((prev) => !prev);
+  };
 
   return (
     <section className="py-[25px] border-b border-w5">
@@ -34,7 +48,7 @@ export default function ServiceFilter({ selectedFilter, filterItem, filter, setF
           width={24}
           height={24}
           role="button"
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={handleToggleExpand}
         />
       </div>
       <small className="text-g1 tracking-[-0.02em]">보다 편리한 여행을 위한 제공 서비스를 선택해 보세요</small>

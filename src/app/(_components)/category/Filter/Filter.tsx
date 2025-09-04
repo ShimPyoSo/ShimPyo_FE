@@ -38,7 +38,13 @@ export default function Filter({ filter, setFilter, refetch }: FilterProps) {
         filterItem={filterItems}
       />
       <BottomSheet isOpen={isOpen} onClose={handleClose}>
-        <FilterContent selectedFilter={selectedFilter} filter={filter} setFilter={setFilter} filterItem={filterItems} />
+        <FilterContent
+          selectedFilter={selectedFilter}
+          setSelectedFilter={setSelectedFilter}
+          filter={filter}
+          setFilter={setFilter}
+          filterItem={filterItems}
+        />
       </BottomSheet>
     </>
   );

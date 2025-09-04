@@ -9,12 +9,19 @@ import arrow from '/public/images/icons/arrow.svg';
 
 interface TimeFilterProps {
   selectedFilter: string | null;
+  setSelectedFilter: React.Dispatch<React.SetStateAction<string | null>>;
   filter: IFilter;
   setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
   filterItem: { label: string; key: keyof IFilter };
 }
 
-export default function TimeFilter({ selectedFilter, filter, setFilter, filterItem }: TimeFilterProps) {
+export default function TimeFilter({
+  selectedFilter,
+  setSelectedFilter,
+  filter,
+  setFilter,
+  filterItem,
+}: TimeFilterProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
@@ -22,6 +29,13 @@ export default function TimeFilter({ selectedFilter, filter, setFilter, filterIt
       setIsExpanded(true);
     }
   }, [selectedFilter, filterItem]);
+
+  const handleToggleExpand = () => {
+    if (isExpanded && selectedFilter === filterItem.label) {
+      setSelectedFilter(null);
+    }
+    setIsExpanded((prev) => !prev);
+  };
 
   return (
     <section className="py-[25px] border-b border-w5">
@@ -34,7 +48,7 @@ export default function TimeFilter({ selectedFilter, filter, setFilter, filterIt
           width={24}
           height={24}
           role="button"
-          onClick={() => setIsExpanded(!isExpanded)}
+          onClick={handleToggleExpand}
         />
       </div>
       <small className="text-g1 tracking-[-0.02em]">나의 스케줄에 딱 맞는 여행지를 찾아보세요</small>
