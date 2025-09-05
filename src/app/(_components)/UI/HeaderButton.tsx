@@ -50,15 +50,9 @@ export default function HeaderButton() {
         </button>
       )}
       {pathname.startsWith('/course/') && (
-        <Image
-          className="absolute right-[16px] top-[18px] cursor-pointer"
-          src={cancel}
-          alt="닫기"
-          width={24}
-          height={24}
-          role="button"
-          onClick={() => window.close()}
-        />
+        <button className="absolute left-[16px] top-[16px] cursor-pointer">
+          <Image src={cancel} alt="메인으로" width={23} height={23} onClick={() => router.push('/')} />
+        </button>
       )}
     </>
   );

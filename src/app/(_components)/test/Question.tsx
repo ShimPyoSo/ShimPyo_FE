@@ -16,7 +16,7 @@ export default function Question() {
 
   return (
     <div className="grow-1 relative">
-      <div ref={topRef} /> {/* <- sentinel */}
+      <div ref={topRef} />
       {currentIndex < 10 ? (
         <>
           <Progress num={currentIndex} />
