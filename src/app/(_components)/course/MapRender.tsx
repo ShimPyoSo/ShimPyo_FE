@@ -9,6 +9,7 @@ import Marker from './Marker';
 interface MapRenderProps {
   positions: ILatLng[];
   day: number;
+  ids: number[][];
 }
 
 const DAY_COLORS: Record<number, string> = {
@@ -18,7 +19,7 @@ const DAY_COLORS: Record<number, string> = {
   3: '#AEAB40',
 };
 
-export default function MapRender({ positions, day }: MapRenderProps) {
+export default function MapRender({ positions, day, ids }: MapRenderProps) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -68,7 +69,7 @@ export default function MapRender({ positions, day }: MapRenderProps) {
     >
       {path.map((pos, idx) => (
         <CustomOverlayMap key={idx} position={pos} yAnchor={1}>
-          <Marker day={day} />
+          <Marker day={day} id={ids[day]?.[idx] ?? -1} />
         </CustomOverlayMap>
       ))}
 

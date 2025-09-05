@@ -38,6 +38,8 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse, s
     }))
   );
 
+  const idGroup: number[][] = course.days.map((day) => day.list.map((spot) => spot.touristId));
+
   return (
     <>
       <div className="mt-[30px] mb-[24px] flex items-end justify-between">
@@ -63,7 +65,7 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse, s
           {isEditable && <CourseDelete courseId={Number(id as string)} type="detail" />}
         </div>
       </div>
-      <Map positions={positionsGroup} day={course.days.length} />
+      <Map positions={positionsGroup} day={course.days.length} ids={ids} />
       {isEditable && <AddSpot setCourse={setCourse} course={course} />}
       <ul className={`${isEditable ? '' : 'mt-[42px]'} pb-[72px]`}>
         {course.days.map((day, index) => (
