@@ -22,7 +22,7 @@ export default function PasswordDescription({ control }: PasswordDescriptionProp
       }
     >
       {errors.password?.message === '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
-        ? '비밀번호를 양식에 맞춰 다시 설정해 주세요'
+        ? '비밀번호는 영문, 숫자, 특수문자를 포함한 8자 이상이어야 합니다.'
         : errors.passwordConfirm?.message === '비밀번호가 일치하지 않습니다.'
         ? '비밀번호가 일치하지 않아요'
         : errors.password?.message === '기존 비밀번호로 변경할 수 없습니다.'
