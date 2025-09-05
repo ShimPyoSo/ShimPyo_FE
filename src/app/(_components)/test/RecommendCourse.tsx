@@ -19,7 +19,7 @@ export default function RecommendCourse({ setIsOpen, course }: RecommendCoursePr
       await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/survey`,
         {
-          courseId: course.courseId,
+          token: course.token,
         },
         { withCredentials: true }
       );
