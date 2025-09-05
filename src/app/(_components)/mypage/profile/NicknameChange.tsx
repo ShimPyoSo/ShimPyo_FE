@@ -12,10 +12,11 @@ import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 export default function NicknameChange() {
   const { register, handleSubmit, watch, control } = useForm<{ nickname: string }>({ mode: 'onBlur' });
   const { errors } = useFormState({ control });
-  const nickname = watch('nickname');
   const [, updateNickname] = useAtom(updateNicknameAtom);
   const { isAvailable, checkDuplicate } = useNicknameCheck();
   const { handleAccessExpired } = useHandleTokenExpired();
+
+  const nickname = watch('nickname');
 
   const onSubmit = async (data: { nickname: string }) => {
     if (nickname.length < 2 && nickname.length > 8) return; // 닉네임 길이 오류 수 처리 추후 수정
@@ -50,7 +51,7 @@ export default function NicknameChange() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className={`mt-[12px] w-full bg-white border px-[16px] py-[12px] rounded-lg text-sm text-b1 outline-none placeholder:text-g3 ${
-            errors.nickname ? 'border-r' : 'border-w4'
+            errors.nickname && nickname.length > 0 ? 'border-r' : 'border-w4 hover:border-gn1'
           }`}
           placeholder="닉네임을 입력해 주세요"
           {...register('nickname', {
