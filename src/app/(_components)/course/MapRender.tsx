@@ -68,7 +68,7 @@ export default function MapRender({ positions, day, ids }: MapRenderProps) {
       }}
     >
       {path.map((pos, idx) => (
-        <CustomOverlayMap key={idx} position={pos} yAnchor={1}>
+        <CustomOverlayMap key={idx} position={pos} yAnchor={0.9} xAnchor={0.5}>
           <Marker day={day} id={ids[day]?.[idx] ?? -1} />
         </CustomOverlayMap>
       ))}

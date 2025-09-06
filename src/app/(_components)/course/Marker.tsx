@@ -21,5 +21,5 @@ export default function Marker({ day, id }: MarkerProps) {
 
   const src = id === -1 ? selfMarkers[safeDay] : markers[safeDay];
 
-  return <Image src={src} alt="마커" width={63} height={28} />;
+  return <Image src={src} alt="마커" width={24} height={36} />;
 }

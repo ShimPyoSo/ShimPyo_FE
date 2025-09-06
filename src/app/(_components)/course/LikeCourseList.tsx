@@ -48,6 +48,7 @@ export default function LikeCourseList({ setIsOpen, setTitleLength }: LikedCours
   const { data: originalCourse } = useQuery({
     queryKey: ['myCourse', id],
     queryFn: fetchCourse,
+    refetchOnWindowFocus: false,
   });
 
   const isModified =
