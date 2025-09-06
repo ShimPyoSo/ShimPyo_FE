@@ -60,7 +60,7 @@ export default function ReviewModal({
       setIsAlertOpen(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
-      if (err.response?.data?.name === 'INVALID_TOKEN') {
+      if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
         handleAccessExpired('INVALID_TOKEN');
         try {
           await axios.post(
