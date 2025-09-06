@@ -8,6 +8,7 @@ import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import SpotItem from '../SpotItem';
 import SpotRecommend from './SpotRecommend';
 import search from '/public/images/icons/search.svg';
+import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 interface SpotSearchInputProps {
@@ -17,13 +18,14 @@ interface SpotSearchInputProps {
 }
 
 export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProps) {
+  const { id } = useParams();
   const selectedCourse = watch('course');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [detailId, setDetailId] = useState(0);
 
   const openPopup = (type: 'search' | 'kakao') => {
     window.open(
-      `${type === 'search' ? '/course/search' : '/course/kakao'}`,
+      `${type === 'search' ? `/course/search/${id}` : `/course/kakao/${id}`}`,
       '쉼표 여행지 추가하기',
       'width=375,height=600,scrollbars=yes'
     );
@@ -39,6 +41,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
         setValue('course.latitude', e.data.latitude);
         setValue('course.longitude', e.data.longitude);
         setValue('course.tel', e.data.tel);
+        setValue('course.type', e.data.type);
       }
     });
   };
@@ -53,6 +56,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       longitude: undefined,
       tel: '',
       placeURL: '',
+      type: undefined,
     });
   };
 

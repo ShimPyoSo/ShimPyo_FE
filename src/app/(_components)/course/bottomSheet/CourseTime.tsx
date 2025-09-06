@@ -9,7 +9,7 @@ interface CourseSpotContentProps {
 
 export default function CourseTime({ register }: CourseSpotContentProps) {
   return (
-    <section>
+    <section className=" mb-[80px]">
       <p className="mt-[52px] tracking-[-0.02em] text-g1 text-xs">시간 선택</p>
       <input
         className="mt-[12px] text-sm tracking-[-0.02em] text-b3 outline-none"

@@ -60,15 +60,15 @@ export default function SpotDetailComponent({ id, type, setIsOpen }: SpotDetailC
   });
 
   useEffect(() => {
-    if (data?.title) {
+    if (type === 'detail' && data?.title) {
       setTitle(data.title);
     }
-  }, [data?.title, setTitle]);
+  }, [data?.title, setTitle, type]);
 
   return (
     <>
       <div className="min-h-full bg-w1 pb-[40px]">
-        <ImageCarousel images={data?.images as string[] | undefined} />
+        {data?.images[0] && <ImageCarousel images={data?.images as string[]} />}
         <div className="px-[16px] mt-[24px] flex items-center justify-between">
           <div className="flex gap-[6px] items-center">
             <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-sm text-gn7 font-semibold bg-white">

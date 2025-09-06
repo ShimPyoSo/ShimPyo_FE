@@ -183,6 +183,7 @@ export interface ICourseList extends ILatLng {
   address: string;
   tel: string;
   placeURL?: string;
+  type?: 'TOURIST' | 'CUSTOM';
 }
 
 export interface IDay {

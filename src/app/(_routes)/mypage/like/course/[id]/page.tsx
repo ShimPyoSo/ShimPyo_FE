@@ -18,7 +18,7 @@ export default function LikedCourse() {
 
   return (
     <>
-      <div className="bg-w1 px-[16px] pb-[70px]">
+      <div className="bg-w1 px-[16px]">
         <LikeCourseList setIsOpen={setIsOpen} setTitleLength={setTitleLength} />
       </div>
       {isOpen && (

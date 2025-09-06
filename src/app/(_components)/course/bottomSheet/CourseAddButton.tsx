@@ -11,7 +11,11 @@ export default function CourseAddButton({ selectedSpot, type }: CourseAddButtonP
   const handleAdd = () => {
     if (!selectedSpot || !window.opener) return;
 
-    const spotToSend = type === 'kakao' ? { ...selectedSpot, touristId: -1 } : selectedSpot;
+    const spotToSend = {
+      ...selectedSpot,
+      touristId: type === 'kakao' ? -1 : selectedSpot.touristId,
+      type: type === 'kakao' ? 'CUSTOM' : 'TOURIST',
+    };
 
     window.opener.postMessage(spotToSend, window.location.origin);
     window.close();

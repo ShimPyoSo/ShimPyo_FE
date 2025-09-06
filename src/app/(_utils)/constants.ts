@@ -70,8 +70,6 @@ export const notRenderingTabBar = [
   '/find/password',
   '/find/id',
   '/test/question',
-  '/course/search',
-  '/course/kakao',
 ];
 
 export const domainOptions = [

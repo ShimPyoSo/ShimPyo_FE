@@ -81,9 +81,9 @@ export default function SearchSpotItem({
       </div>
 
       {detailId === spot.touristId && (
-        <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
+        <div className="mt-[24px] h-[300px] lg:h-[400px] overflow-y-scroll relative">
           {type === 'search' ? (
-            <SpotDetailComponent id={1} type="course" />
+            <SpotDetailComponent id={spot.touristId} type="course" />
           ) : (
             <iframe src={spot.placeURL} className="flex-1 w-full h-full border-0" />
           )}

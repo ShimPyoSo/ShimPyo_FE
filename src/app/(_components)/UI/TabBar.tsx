@@ -18,7 +18,12 @@ export default function TabBar() {
   const pathname = usePathname();
   const isLoggedIn = useAtomValue(isLoggedInAtom);
 
-  if (notRenderingTabBar.includes(pathname)) return null;
+  if (
+    notRenderingTabBar.includes(pathname) ||
+    pathname.startsWith('/course/kakao') ||
+    pathname.startsWith('/course/search')
+  )
+    return null;
 
   return (
     <nav className="fixed bottom-0 rounded-t-3xl bg-gn11 w-[375px] z-[100]">

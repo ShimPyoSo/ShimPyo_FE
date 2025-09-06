@@ -83,18 +83,20 @@ export default function CourseSpotContent({ course, setCourse, onClose, spot, da
   };
 
   return (
-    <div className="pb-[40px] relative">
+    <div className="relative">
       <form onSubmit={handleSubmit(onSubmit)}>
         <SpotSearchInput register={register} setValue={setValue} watch={watch} />
         <CourseDate register={register} watch={watch} />
         <CourseTime register={register} />
-        <button
-          className={`fixed bottom-[20px] w-[343px] py-[16px] rounded-lg border font-semibold ${
-            isValid && selectedCourse.touristId !== 0 ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
-          }`}
-        >
-          {spot ? '여행지 수정하기' : '여행지 추가하기'}
-        </button>
+        <div className="sticky bottom-[20px] flex justify-center z-[999]">
+          <button
+            className={`w-[343px] py-[16px] border font-semibold rounded-lg ${
+              isValid && selectedCourse.touristId !== 0 ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
+            }`}
+          >
+            {spot ? '여행지 수정하기' : '여행지 추가하기'}
+          </button>
+        </div>
       </form>
     </div>
   );

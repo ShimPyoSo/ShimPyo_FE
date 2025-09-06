@@ -22,7 +22,7 @@ export default function SpotItem({ spot }: { spot: ISpot }) {
         </div>
 
         <div className="mt-[20px] flex justify-between items-center">
-          <p className="max-w-[74px] text-xs text-g3 tracking-[-0.02em] truncate">{spot.category![0]}</p>
+          <p className="max-w-[74px] text-xs text-g3 tracking-[-0.02em] truncate">{spot.category?.[0] || '명상'}</p>
           <div
             onClick={(e) => {
               e.preventDefault();
