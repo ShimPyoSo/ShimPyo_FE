@@ -10,9 +10,10 @@ import { useState } from 'react';
 interface ProfileMenuProps {
   setIsPasswordAlert: React.Dispatch<React.SetStateAction<boolean>>;
   setIsWithdrawAlert: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsNicknameAlert: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert }: ProfileMenuProps) {
+export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert, setIsNicknameAlert }: ProfileMenuProps) {
   const [activeMenu, setActiveMenu] = useState<null | 'profile' | 'password' | 'withdraw'>(null);
 
   return (
@@ -33,7 +34,7 @@ export default function ProfileMenu({ setIsPasswordAlert, setIsWithdrawAlert }: 
             height={24}
           />
         </div>
-        {activeMenu === 'profile' && <NicknameChange />}
+        {activeMenu === 'profile' && <NicknameChange setIsNicknameAlert={setIsNicknameAlert} />}
       </li>
       <li>
         <div

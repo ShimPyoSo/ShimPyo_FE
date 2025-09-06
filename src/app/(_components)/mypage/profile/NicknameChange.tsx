@@ -9,7 +9,11 @@ import { useAtom } from 'jotai';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useNicknameCheck } from '@/app/(_utils)/hooks/useNicknameCheck';
 
-export default function NicknameChange() {
+interface NicknameChangeProps {
+  setIsNicknameAlert: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function NicknameChange({ setIsNicknameAlert }: NicknameChangeProps) {
   const { register, handleSubmit, watch, control } = useForm<{ nickname: string }>({ mode: 'onBlur' });
   const { errors } = useFormState({ control });
   const [, updateNickname] = useAtom(updateNicknameAtom);
@@ -25,6 +29,7 @@ export default function NicknameChange() {
         withCredentials: true,
       });
       updateNickname(nickname);
+      setIsNicknameAlert(true);
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN') {
@@ -34,6 +39,7 @@ export default function NicknameChange() {
             withCredentials: true,
           });
           updateNickname(nickname);
+          setIsNicknameAlert(true);
         } catch {
           // 오류 시 처리
         }
