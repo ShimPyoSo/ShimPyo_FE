@@ -51,7 +51,7 @@ export default function NicknameChange({ setIsNicknameAlert }: NicknameChangePro
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
       <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">닉네임 변경</h3>
-      <p className={isAvailable === false ? 'text-r' : `text-g1`}>
+      <p className={`text-xs ${isAvailable === false ? 'text-r' : `text-g1`}`}>
         {isAvailable === false ? '이미 존재하는 닉네임이예요' : '원하는 닉네임으로 변경해 보세요'}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +74,7 @@ export default function NicknameChange({ setIsNicknameAlert }: NicknameChangePro
           })}
         />
         <button
-          className={`mt-[16px] border px-[12px] py-[8px] rounded-md ${
+          className={`mt-[16px] border px-[12px] py-[8px] text-sm rounded-md ${
             nickname && isAvailable ? 'text-white bg-gn1 border-gn4' : 'text-g4 bg-w3 border-w4'
           }`}
           disabled={!nickname || !isAvailable}

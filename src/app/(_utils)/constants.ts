@@ -41,6 +41,8 @@ export const title: { [key: string]: string } = {
   '/test/question': '쉼표 유형 테스트',
   '/course/search': '쉼표 여행지 추가하기',
   '/course/kakao': '쉼표 여행지 추가하기',
+  '/mypage/social/profile': '프로필 관리',
+  '/mypage/social/withdraw': '회원 탈퇴',
 };
 
 export const notRendering = [

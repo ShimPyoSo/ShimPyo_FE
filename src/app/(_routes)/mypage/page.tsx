@@ -1,13 +1,15 @@
 'use client';
 
+import { isSocialAtom, userAtom } from '@/app/(_store)/auth';
+
 import Link from 'next/link';
 import ProtectedRoute from '@/app/ProtectedRoute';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useLogout } from '@/app/(_utils)/hooks/useLogout';
-import { userAtom } from '@/app/(_store)/auth';
 
 export default function Mypage() {
-  const [user] = useAtom(userAtom);
+  const user = useAtomValue(userAtom);
+  const isSocial = useAtomValue(isSocialAtom);
   const { handleLogout } = useLogout();
 
   return (
@@ -24,8 +26,11 @@ export default function Mypage() {
           </li>
 
           <li className="border-b border-w6">
-            <Link href="/mypage/profile" className="block py-[18px] w-full">
-              계정 관리
+            <Link
+              href={`${isSocial ? '/mypage/social/profile' : '/mypage/profile'}`}
+              className="block py-[18px] w-full"
+            >
+              {isSocial ? '프로필' : '계정'} 관리
             </Link>
           </li>
           <li className="border-b border-w6">
@@ -38,6 +43,13 @@ export default function Mypage() {
               내가 쓴 후기
             </Link>
           </li>
+          {isSocial && (
+            <li className="border-b border-w6">
+              <Link href="/mypage/social/withdraw" className="block py-[18px] w-full">
+                회원 탈퇴
+              </Link>
+            </li>
+          )}
           <li className="border-b border-w6">
             <Link href="/mypage/service" className="block py-[18px] w-full">
               서비스 안내

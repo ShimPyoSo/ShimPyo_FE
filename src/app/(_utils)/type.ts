@@ -47,7 +47,7 @@ export interface IPasswordChange extends IPassword {
 }
 
 export interface IWithdraw {
-  password: string;
+  password?: string;
   isConfirmed: boolean;
 }
 
