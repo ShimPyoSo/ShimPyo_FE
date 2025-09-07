@@ -17,7 +17,7 @@ interface SpotRecommendProps {
   setDetailId: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function SpotRecommend({}: SpotRecommendProps) {
+export default function SpotRecommend({ setDetailId }: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ export default function SpotRecommend({}: SpotRecommendProps) {
         <ul className="pr-[16px] flex gap-[12px] flex-nowrap w-max">
           {isLoading
             ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} />)
-            : data?.map((spot, idx) => <SpotItem spot={spot} key={idx} />)}
+            : data?.map((spot, idx) => <SpotItem spot={spot} key={idx} type="addition" setDetailId={setDetailId} />)}
         </ul>
       </Carousel>
     </section>

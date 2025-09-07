@@ -65,7 +65,7 @@ export default function Recommend() {
         <ul className="pr-[16px] flex gap-[12px] flex-nowrap w-max">
           {isLoading
             ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} />)
-            : spots.map((spot) => <SpotItem key={spot.id} spot={spot} />)}
+            : spots.map((spot) => <SpotItem key={spot.id} spot={spot} type="landing" />)}
         </ul>
       </Carousel>
     </section>
