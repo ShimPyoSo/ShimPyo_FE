@@ -8,6 +8,16 @@ const nextConfig: NextConfig = {
         hostname: `shimpyo.s3.amazonaws.com`,
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: `tong.visitkorea.or.kr`,
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tong.visitkorea.or.kr',
+        pathname: '/**',
+      },
     ],
   },
 };
