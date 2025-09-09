@@ -109,6 +109,7 @@ export const AGE_GROUPS = [
   { label: '60대 이상', value: '60' },
 ] as const;
 
+export type IAgeGroup = (typeof AGE_GROUPS)[number];
 export type IAgeGroupLabel = (typeof AGE_GROUPS)[number]['label'];
 export type IAgeGroupValue = (typeof AGE_GROUPS)[number]['value'];
 
