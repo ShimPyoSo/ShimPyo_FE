@@ -6,7 +6,7 @@ import { IFilter } from '@/app/(_utils)/type';
 import { Range } from 'react-range';
 import { v4 as uuidv4 } from 'uuid';
 
-const MIN = 9;
+const MIN = 5;
 const MAX = 24;
 const STEP = 1;
 
@@ -40,8 +40,8 @@ export default function RangeSlider({ filter, setFilter }: RangeSliderProps) {
   return (
     <div className="w-full mt-[16px] mx-auto">
       <div className="flex justify-between mb-[4px] text-xs text-g3 tracking-[-0.02em]">
-        <span>09:00</span>
-        <span>16:00</span>
+        <span>05:00</span>
+        <span>14:30</span>
         <span>24:00~</span>
       </div>
       <Range
