@@ -14,7 +14,6 @@ import SignUpModal from './SignUpModal';
 import axios from 'axios';
 import { domainOptions } from '@/app/(_utils)/constants';
 import { useForm } from 'react-hook-form';
-import { useRemovePath } from '@/app/(_utils)/hooks/useRemovePath';
 import { useRouter } from 'next/navigation';
 
 export default function SignUpForm() {
@@ -29,13 +28,12 @@ export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [, login] = useAtom(loginAtom);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
-  const { removeReviewWrite } = useRemovePath();
 
   useEffect(() => {
     if (isLoggedIn) {
       router.push('/signup/additional');
     }
-  }, [isLoggedIn, router, removeReviewWrite]);
+  }, [isLoggedIn, router]);
 
   const onSubmit = async (data: ISignUp) => {
     if (!isVerified) {
