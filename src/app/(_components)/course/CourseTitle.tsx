@@ -81,7 +81,7 @@ export default function CourseTitle({ title, setTitle, course, isEditable, setTi
           alt="수정"
           width={24}
           height={24}
-          onClick={() => setTitleModify((prev) => !prev)}
+          onClick={handleSaveTitle}
           role="button"
         />
       )}
