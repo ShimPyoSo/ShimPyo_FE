@@ -3,6 +3,8 @@
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useEffect, useState } from 'react';
 
+import { isMobile } from 'react-device-detect';
+
 interface MapRenderProps {
   latitude: number;
   longitude: number;
@@ -39,6 +41,7 @@ export default function MapRender({ latitude, longitude }: MapRenderProps) {
       style={{ width: '100%', height: '186px', marginTop: '12px' }}
       level={3}
       scrollwheel={false}
+      draggable={!isMobile}
     >
       <MapMarker position={{ lat: latitude, lng: longitude }}></MapMarker>
     </Map>
