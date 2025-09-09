@@ -76,7 +76,7 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
                   </p>
                 </span>
               ) : (
-                <p className="text-g3">정보 알 수 없음</p>
+                <p className="text-g3">정보 미제공</p>
               )}
             </span>
           </div>

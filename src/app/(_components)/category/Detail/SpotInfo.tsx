@@ -16,7 +16,7 @@ export default function SpotInfo({ spot }: { spot: ISpot }) {
   return (
     <ul className="mt-[16px] px-[16px]">
       <SpotInfoItem icon={location} label="장소">
-        {spot.address || '정보 없음'}
+        {spot.address || '정보 미제공'}
         {spot.latitude !== undefined && spot.longitude !== undefined && (
           <MapRender latitude={spot.latitude} longitude={spot.longitude} />
         )}
