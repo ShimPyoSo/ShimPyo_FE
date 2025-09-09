@@ -10,7 +10,7 @@ export default function MainSlider() {
         {CAROUSEL.map((item, idx) => (
           <Link
             key={idx}
-            className="w-[343px] h-[142px] rounded-xl bg-white border border-w4 relative"
+            className="w-[343px] h-[160px] rounded-xl bg-white border border-w4 relative"
             href={item.url}
             target={idx > 1 ? '_blank' : undefined}
             rel={idx > 1 ? 'noopener noreferrer' : undefined}
