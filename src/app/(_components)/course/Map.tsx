@@ -14,10 +14,9 @@ const MapRender = dynamic(() => import('./MapRender'), {
 interface MapProps {
   positions: ILatLng[][];
   day: number;
-  ids: number[][];
 }
 
-export default function Map({ positions, day, ids }: MapProps) {
+export default function Map({ positions, day }: MapProps) {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
   useEffect(() => {
@@ -56,9 +55,7 @@ export default function Map({ positions, day, ids }: MapProps) {
         ))}
       </ul>
 
-      {selectedDay !== null && positions && (
-        <MapRender positions={positions[selectedDay]} day={selectedDay} ids={ids} />
-      )}
+      {selectedDay !== null && positions && <MapRender positions={positions[selectedDay]} day={selectedDay} />}
     </>
   );
 }
