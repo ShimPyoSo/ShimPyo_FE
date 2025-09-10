@@ -33,7 +33,7 @@ export default function SpotItem({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <li className="grow h-[98px] bg-white rounded-lg py-[12px] px-[8px] flex items-center">
+    <li className="min-w-[287px] grow h-[98px] bg-white rounded-lg py-[12px] px-[8px] flex items-center">
       <div className="w-[128px] h-full bg-w1 rounded-md relative">
         <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
       </div>
