@@ -1,8 +1,9 @@
 'use client';
 
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { CustomOverlayMap, Map } from 'react-kakao-maps-sdk';
 import { useEffect, useState } from 'react';
 
+import Marker from '../course/Marker';
 import { isMobile } from 'react-device-detect';
 
 interface MapRenderProps {
@@ -42,8 +43,14 @@ export default function MapRender({ latitude, longitude }: MapRenderProps) {
       level={3}
       scrollwheel={false}
       draggable={!isMobile}
+      onCreate={(map) => {
+        const zoomControl = new window.kakao.maps.ZoomControl();
+        map.addControl(zoomControl, window.kakao.maps.ControlPosition.RIGHT);
+      }}
     >
-      <MapMarker position={{ lat: latitude, lng: longitude }}></MapMarker>
+      <CustomOverlayMap position={{ lat: latitude, lng: longitude }} yAnchor={0.5}>
+        <Marker day={0} />
+      </CustomOverlayMap>
     </Map>
   );
 }
