@@ -55,8 +55,14 @@ export default function IdInput<T extends ISignUp | IFind>({
       <label className={`flex flex-col text-sm text-b3 tracking-[-0.02em] ${type === 'find' ? 'mt-[30px]' : ''}`}>
         아이디
         {type === 'signup' && (
-          <small>
-            {errors.username?.message === '아이디는 영소문자와 숫자로 6~12자여야 합니다.'
+          <small
+            className={`${
+              errors.username?.message === '아이디는 영소문자와 숫자로 6~12자여야 합니다.' ? 'text-r' : 'text-g2'
+            }`}
+          >
+            {errors.username?.message === '아이디는 영소문자와 숫자로 6~12자여야 합니다.' && username?.includes('@')
+              ? '아이디로 이메일은 사용할 수 없어요'
+              : errors.username?.message === '아이디는 영소문자와 숫자로 6~12자여야 합니다.'
               ? '아이디를 양식에 맞춰 설정해 주세요'
               : '아이디는 영문 소문자, 숫자 조합의 6~12자로 설정해요'}
           </small>
