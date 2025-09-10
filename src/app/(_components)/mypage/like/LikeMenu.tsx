@@ -27,11 +27,15 @@ export default function LikeMenu() {
         </div>
         {isActive && <Category />}
       </li>
-      <li className="py-[18px] border-b border-w6">
-        <Link href={'/mypage/like/course'}>맞춤 쉼표 코스</Link>
+      <li className="border-b border-w6">
+        <Link href="/mypage/like/course" className="block py-[18px]">
+          맞춤 쉼표 코스
+        </Link>
       </li>
-      <li className="py-[18px] border-b border-w6">
-        <Link href={'/mypage/like/recent'}>최근 본 여행지</Link>
+      <li className="border-b border-w6">
+        <Link href="/mypage/like/recent" className="block py-[18px]">
+          최근 본 여행지
+        </Link>
       </li>
     </ul>
   );
