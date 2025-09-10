@@ -6,7 +6,6 @@ import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import check from '/public/images/icons/check.svg';
 import location from '/public/images/icons/spot/location.svg';
 import spotDefault from '/public/images/icons/course/spotDefault.svg';
-import tel from '/public/images/icons/spot/call.svg';
 
 interface SearchSpotItemProps {
   spot: ICourseList;
@@ -38,15 +37,12 @@ export default function SearchSpotItem({
   return (
     <li className="py-[18px] border-b border-w5">
       <div className="flex gap-[12px]">
-        <div
-          className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl cursor-pointer relative"
-          onClick={() => setDetailId(detailId === spot.touristId ? 0 : (spot.touristId as number))}
-        >
+        <div className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl relative">
           <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
         </div>
         <div className="grow-1 py-[3px] flex flex-col">
           <div className="flex justify-between items-center">
-            <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-xs text-gn7 font-semibold bg-white">
+            <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">
               {spot.region}
             </div>
             <label>
@@ -59,24 +55,16 @@ export default function SearchSpotItem({
             </label>
           </div>
           <div className="grow-1">
-            <p
-              className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2 cursor-pointer"
-              onClick={() => setDetailId(detailId === spot.touristId ? 0 : (spot.touristId as number))}
-            >
-              {spot.title}
-            </p>
-          </div>
-
-          <div>
+            <p className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2">{spot.title}</p>
             <div className="flex items-center gap-[4px]">
               <Image src={location} alt="위치" width={14} height={14} />
               <p className="text-xs text-g1 truncate">{spot.address}</p>
             </div>
-            <div className="flex items-center gap-[4px]">
-              <Image src={tel} alt="전화번호" width={14} height={14} />
-              <p className="text-xs text-g1">{spot.tel}</p>
-            </div>
           </div>
+
+          <button onClick={() => setDetailId(detailId === spot.touristId ? 0 : (spot.touristId as number))}>
+            상세보기 닫기
+          </button>
         </div>
       </div>
 
