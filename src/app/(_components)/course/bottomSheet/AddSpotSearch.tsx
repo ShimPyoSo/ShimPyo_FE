@@ -1,9 +1,11 @@
 'use client';
 
+import AutoComplete from '../../search/AutoComplete';
 import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import axios from 'axios';
 import search from '/public/images/icons/search.svg';
+import { useState } from 'react';
 
 interface AddSpotSearchProps {
   query: string;
@@ -22,6 +24,8 @@ export default function AddSpotSearch({
   setSelectedSpot,
   setSearchResults,
 }: AddSpotSearchProps) {
+  const [isFocused, setIsFocused] = useState(false);
+
   const handleSearch = async () => {
     if (!query.trim()) return;
 
@@ -68,6 +72,8 @@ export default function AddSpotSearch({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
       <Image
         className="absolute right-[16px] top-[22px] cursor-pointer"
@@ -78,6 +84,7 @@ export default function AddSpotSearch({
         role="button"
         onClick={handleSearch}
       />
+      {isFocused && query.trim().length > 0 && <AutoComplete isActive={false} query={query} />}
     </div>
   );
 }

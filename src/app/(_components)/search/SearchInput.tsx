@@ -57,7 +57,7 @@ export default function SearchInput() {
         onClick={handleSearch}
         role="button"
       />
-      {isFocused && <AutoComplete isActive={isActive} query={query} />}
+      {isFocused && query.trim().length > 0 && <AutoComplete isActive={isActive} query={query} />}
     </div>
   );
 }
