@@ -38,8 +38,9 @@ export default function TodayWellness() {
           const fallbackAddress = await getAddressFromCoords(37.5665, 126.978); // 위치 정보 불러오기 실패 시 default 값
           setLocation(fallbackAddress);
         });
-    } catch (error) {
-      alert('주소를 가져오는 데 실패했습니다: ' + error);
+    } catch {
+      const fallbackAddress = await getAddressFromCoords(37.5665, 126.978); // 위치 정보 불러오기 실패 시 default 값
+      setLocation(fallbackAddress);
     }
   }, []);
 

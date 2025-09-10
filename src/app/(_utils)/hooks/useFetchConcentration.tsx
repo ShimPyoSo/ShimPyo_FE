@@ -23,7 +23,7 @@ export function useFetchConcentration({ address, name }: useFetchConcentrationPr
           setConcentration(items);
         }
       } catch {
-        alert('번잡도 정보를 불러오지 못했습니다.');
+        // 번잡도 불러오기 오류
       }
     };
 

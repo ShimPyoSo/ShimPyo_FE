@@ -36,7 +36,7 @@ export function useFetchWeeklyWeather({ latitude, longitude, address }: useFetch
         const items = response.data;
         setWeather(items);
       } catch {
-        alert('날씨 정보를 불러오지 못했습니다.');
+        // 날씨 불러오기 오류
       }
     };
 
