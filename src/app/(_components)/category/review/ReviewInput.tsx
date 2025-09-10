@@ -14,7 +14,7 @@ export default function ReviewInput({ contents, setContents }: ReviewInputProps)
       </small>
       <div className="relative">
         <textarea
-          className="mt-[16px] w-full h-[175px] p-[16px] rounded-lg bg-w3 border border-w4 text-xs text-b1 overflow-y-auto outline-none resize-none"
+          className="mt-[16px] w-full h-[175px] p-[16px] pb-[46px] rounded-lg bg-w3 border border-w4 text-xs text-b1 overflow-y-auto outline-none resize-none"
           value={contents}
           onChange={(e) => setContents(e.target.value)}
           placeholder="최소 5자의 후기 내용을 입력해 주세요"
