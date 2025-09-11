@@ -56,6 +56,8 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           <ul className="bg-w1">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
+            ) : allSpots.length > 0 ? (
+              allSpots.map((spot, idx) => <SpotListItem key={idx} type="spot" spot={spot} />)
             ) : type === 'like' ? (
               <NoLiked
                 type="spot"
@@ -63,21 +65,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
                 description={'아직 찜한 여행지가 없어요'}
               />
             ) : (
-              <>
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-                <SpotSkeleton type="spot" />
-              </>
+              <NoResult type="category" />
             )}
             <div ref={observerRef} className="h-10" />
           </ul>
