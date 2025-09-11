@@ -5,6 +5,7 @@ import ClientSideEffectWrapper from './ClientSideEffectWrapper';
 import Header from './(_components)/UI/Header';
 import type { Metadata } from 'next';
 import Providers from './Providers';
+import { Suspense } from 'react';
 import TabBar from './(_components)/UI/TabBar';
 
 export const metadata: Metadata = {
@@ -44,7 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="bg-white h-full w-full flex flex-col relative">
               <Providers>
                 <ClientSideEffectWrapper />
-                <Header />
+                <Suspense>
+                  <Header />
+                </Suspense>
                 <div className="flex-1 overflow-auto scrollbar-hide bg-w1 pb-[100px]">{children}</div>
                 <TabBar />
               </Providers>
