@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import { isHydratedAtom, isLoggedInAtom } from './(_store)/auth';
+import { isHydratedAtom, isLoggedInAtom, isSocialAtom } from './(_store)/auth';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useAtomValue } from 'jotai';
@@ -15,15 +15,33 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const pathname = usePathname();
   const isHydrated = useAtomValue(isHydratedAtom);
   const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const isSocial = useAtomValue(isSocialAtom);
 
   useEffect(() => {
-    if (isHydrated && !isLoggedIn) {
+    if (!isHydrated) return;
+
+    if (!isLoggedIn) {
       router.replace(`/login?redirect=${encodeURIComponent(pathname)}`);
+      return;
     }
-  }, [isHydrated, isLoggedIn, pathname, router]);
+
+    if (isSocial && pathname === '/mypage/profile') {
+      router.replace('/mypage');
+      return;
+    }
+
+    if (!isSocial && (pathname === '/mypage/social/profile' || pathname === '/mypage/social/withdraw')) {
+      router.replace('/mypage/profile');
+      return;
+    }
+  }, [isHydrated, isLoggedIn, isSocial, pathname, router]);
 
   if (!isHydrated) return null;
   if (!isLoggedIn) return null;
+  if (isSocial && pathname === '/mypage/profile') return null;
+  if (!isSocial && (pathname === '/mypage/social/profile' || pathname === '/mypage/social/withdraw')) {
+    return null;
+  }
 
   return <>{children}</>;
 }
