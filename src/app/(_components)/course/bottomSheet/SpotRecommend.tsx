@@ -29,6 +29,7 @@ export default function SpotRecommend({ setDetailId }: SpotRecommendProps) {
       });
       return res.data as ISpot[];
     },
+    refetchOnWindowFocus: false,
   });
 
   return (

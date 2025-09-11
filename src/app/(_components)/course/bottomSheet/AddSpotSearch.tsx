@@ -65,7 +65,7 @@ export default function AddSpotSearch({
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       <input
         className="mt-[12px] mb-[8px] w-full bg-white rounded-lg border border-w4 text-sm py-[12px] px-[16px] outline-none placeholder:text-g3 hover:border-gn1"
         placeholder="어떤 여행지에 쉼표를 찍어볼까요?"
@@ -84,7 +84,7 @@ export default function AddSpotSearch({
         role="button"
         onClick={handleSearch}
       />
-      {isFocused && query.trim().length > 0 && <AutoComplete isActive={false} query={query} />}
+      {type === 'search' && isFocused && query.trim().length > 0 && <AutoComplete isActive={false} query={query} />}
     </div>
   );
 }

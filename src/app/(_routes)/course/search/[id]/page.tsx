@@ -39,10 +39,7 @@ export default function SpotSearch() {
   const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
 
   return (
-    <div
-      className="bg-w1 px-[16px] pb-[40px] flex flex-col justify-between"
-      style={{ minHeight: 'calc(100vh - 52px)' }}
-    >
+    <div className="bg-w1 px-[16px] flex flex-col justify-between" style={{ minHeight: 'calc(100vh - 52px)' }}>
       <div>
         <AddSpotSearch
           type="search"

@@ -23,7 +23,7 @@ export default function SpotInfo({ spot }: { spot: ISpot }) {
       </SpotInfoItem>
 
       <SpotInfoItem icon={time} label="운영시간">
-        {`${spot.operationTime?.openTime} - ${spot.operationTime?.closeTime}`}
+        {spot.operationTime}
       </SpotInfoItem>
 
       <SpotInfoItem icon={call} label="문의">

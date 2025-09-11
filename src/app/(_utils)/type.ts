@@ -142,13 +142,6 @@ export type ILatLng = {
   longitude?: number;
 };
 
-export interface IOperationTime {
-  dayoff: string | null;
-  openTime: string;
-  closeTime: string;
-  breakTime: string | null;
-}
-
 export interface IFacilities {
   parking: boolean;
   accessible: boolean;
@@ -166,7 +159,8 @@ export interface ISpot extends ILatLng {
   category?: string[];
   title: string;
   isLiked?: boolean;
-  operationTime?: IOperationTime;
+  operationTime?: string;
+  calcTime?: string;
   address?: string;
   tel?: string | null;
   homepage?: string;

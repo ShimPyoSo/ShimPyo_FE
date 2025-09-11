@@ -1,6 +1,7 @@
 'use client';
 
 import { notRendering, title } from '@/app/(_utils)/constants';
+import { useEffect, useState } from 'react';
 
 import HeaderButton from './HeaderButton';
 import Image from 'next/image';
@@ -15,6 +16,14 @@ export default function Header() {
   const fullPath = useFullPath();
   const router = useRouter();
   const headerTitle = useAtomValue(headerTitleAtom);
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
 
   const handleMoveToPrev = () => {
     const previousPath = getPrevPathname();

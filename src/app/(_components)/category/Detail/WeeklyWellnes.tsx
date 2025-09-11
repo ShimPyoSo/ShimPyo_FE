@@ -1,6 +1,7 @@
 import DataSource from './DataSource';
 import Image from 'next/image';
 import WellnessItem from './WellnessItem';
+import getDayOff from '@/app/(_utils)/getDayOff';
 import getWeeklyDate from '@/app/(_utils)/getWeeklyDate';
 import illu from '/public/images/icons/illustration/wellness.svg';
 import { useFetchConcentration } from '@/app/(_utils)/hooks/useFetchConcentration';
@@ -27,7 +28,7 @@ export default function WeeklyWellness({ longitude, latitude, address, name, day
         <div className="absolute flex items-center bottom-[-30px] w-full bg-gn10 px-[12px] py-[12px] rounded-lg z-0">
           <WellnessItem
             type={type}
-            isDayOff={dayOff.includes(weekData[0].value)}
+            isDayOff={getDayOff(dayOff, weekData[0].value, weekData[0].weekOfMonth)}
             date={weekData[0].date}
             day={weekData[0].day}
             weather={weather[0]}
@@ -36,11 +37,11 @@ export default function WeeklyWellness({ longitude, latitude, address, name, day
         </div>
       </div>
       <ul>
-        {weekData.slice(1).map(({ date, day }, idx) => (
+        {weekData.slice(1).map(({ date, day, value, weekOfMonth }, idx) => (
           <li key={date} className="flex items-center border-b border-w6 px-[12px] py-[12px]">
             <WellnessItem
               type={type}
-              isDayOff={dayOff.includes(weekData[idx].value)}
+              isDayOff={getDayOff(dayOff, value, weekOfMonth)}
               date={date}
               day={day}
               weather={weather[idx + 1]}

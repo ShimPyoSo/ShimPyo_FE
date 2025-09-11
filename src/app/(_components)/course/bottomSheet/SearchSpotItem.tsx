@@ -1,5 +1,6 @@
 'use client';
 
+import DetailButton from './DetailButton';
 import { ICourseList } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
@@ -42,9 +43,7 @@ export default function SearchSpotItem({
         </div>
         <div className="grow-1 py-[3px] flex flex-col">
           <div className="flex justify-between items-center">
-            <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">
-              {spot.region}
-            </div>
+            <div className="p-[3px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">{spot.region}</div>
             <label>
               <input type="checkbox" className="peer hidden" checked={isChecked} onChange={handleCheck} />
               <div className="w-5 h-5 border border-w4 bg-w4 rounded-sm peer-checked:bg-gn4 peer-checked:border-gn1 relative cursor-pointer">
@@ -54,33 +53,24 @@ export default function SearchSpotItem({
               </div>
             </label>
           </div>
-          <div className="grow-1">
+          <div className="grow-1 mt-[3px]">
             <p className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2">{spot.title}</p>
             <div className="flex items-center gap-[4px]">
               <Image src={location} alt="위치" width={14} height={14} />
-              <p className="text-xs text-g1 truncate">{spot.address}</p>
+              <p className="mt-[6px] text-xs text-g1 truncate">{spot.address}</p>
             </div>
           </div>
-
-          <button onClick={() => setDetailId(detailId === spot.touristId ? 0 : (spot.touristId as number))}>
-            상세보기 닫기
-          </button>
+          <DetailButton touristId={spot.touristId as number} detailId={detailId} setDetailId={setDetailId} />
         </div>
       </div>
 
       {detailId === spot.touristId && (
-        <div className="mt-[24px] h-[300px] lg:h-[400px] overflow-y-scroll relative">
+        <div className="mt-[24px] h-[500px] overflow-y-scroll relative">
           {type === 'search' ? (
             <SpotDetailComponent id={spot.touristId} type="course" />
           ) : (
             <iframe src={spot.placeURL} className="flex-1 w-full h-full border-0" />
           )}
-          <button
-            className="sticky bottom-0 w-full py-[16px] rounded-lg border font-semibold bg-gn1 border-gn5 text-white z-[999]"
-            onClick={() => setDetailId(0)}
-          >
-            상세 정보 닫기
-          </button>
         </div>
       )}
     </li>

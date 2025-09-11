@@ -56,7 +56,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
           {type === 'spot' ? (
             <div className="flex items-center gap-[4px]">
               <Image src={time} alt="영업시간" width={14} height={14} />
-              <p className="text-xs text-g1 truncate">{`${spot.operationTime?.openTime} - ${spot.operationTime?.closeTime}`}</p>
+              <p className="text-xs text-g1 truncate">{spot.operationTime}</p>
             </div>
           ) : (
             <div className="flex items-center gap-[4px]">
