@@ -54,7 +54,7 @@ export function useFetchCategorySpot({ filter, type, selectedOption }: useFetchC
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
-        handleAccessExpired('INVALID_TOKEN');
+        await handleAccessExpired('INVALID_TOKEN');
         try {
           const retryRes = await axios.get(url, config);
           return Array.isArray(retryRes.data) ? retryRes.data : [];

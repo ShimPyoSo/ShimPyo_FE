@@ -36,7 +36,7 @@ export default function WithdrawForm({ setIsWithdrawAlert }: WithdrawFormProps) 
       if (err.response?.data?.name === 'PASSWORD_NOT_MATCHED') {
         setIsFailed(true);
       } else if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
-        handleAccessExpired('INVALID_TOKEN');
+        await handleAccessExpired('INVALID_TOKEN');
         try {
           await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/auth`, {
             data: { password: data.password },
