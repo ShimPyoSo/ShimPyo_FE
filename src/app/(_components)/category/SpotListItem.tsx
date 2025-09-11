@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { isLoggedInAtom } from '@/app/(_store)/auth';
 import location from '/public/images/icons/spot/location.svg';
 import review from '/public/images/icons/spot/review.svg';
+import spotDefault from '/public/images/icons/course/spotDefault.svg';
 import time from '/public/images/icons/spot/time.svg';
 import { useAtomValue } from 'jotai';
 
@@ -31,7 +32,18 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
       <Link
         className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl cursor-pointer"
         href={`${type === 'spot' ? `/category/${spot.id}` : `/mypage/review/${spot.touristId}`}`}
-      ></Link>
+      >
+        {spot.images ? (
+          <Image
+            className="w-[102px] h-[113px] rounded-xl bg-white object-cover"
+            src={spot.images as string}
+            alt={spot.title}
+            fill
+          />
+        ) : (
+          <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
+        )}
+      </Link>
       <div className="grow-1 py-[3px] flex flex-col">
         <div className="flex justify-between items-center">
           <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-xs text-gn7 font-semibold bg-white">

@@ -53,7 +53,7 @@ export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx
               <li className="py-[2px] border-b border-[#EFF0F2]">
                 <button
                   onClick={() => {
-                    setIsOpen(false);
+                    setIsBottomSheetOpen(true);
                   }}
                   className="w-full"
                 >

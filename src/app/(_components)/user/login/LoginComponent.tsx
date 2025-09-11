@@ -1,10 +1,21 @@
+'use client';
+
 import Image from 'next/image';
 import KakaoButton from '../KakaoButton';
 import Link from 'next/link';
 import LoginForm from './LoginForm';
 import logo from '/public/images/loginLogo.svg';
+import { setTitleAtom } from '@/app/(_store)/title';
+import { useAtom } from 'jotai';
+import { useEffect } from 'react';
 
 export default function LoginComponent() {
+  const [, setTitle] = useAtom(setTitleAtom);
+
+  useEffect(() => {
+    setTitle('로그인');
+  }, [setTitle]);
+
   return (
     <div
       className="bg-w1 px-[16px] pt-[30px] flex flex-col justify-center items-center"

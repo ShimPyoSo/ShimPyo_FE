@@ -2,6 +2,7 @@ import { ISpot } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import Liked from '../spot/Liked';
 import Link from 'next/link';
+import spotDefault from '/public/images/icons/course/spotDefault.svg';
 
 interface SpotItemProps {
   spot: ISpot;
@@ -21,13 +22,15 @@ export default function SpotItem({ spot, type, setDetailId }: SpotItemProps) {
     <li className="max-w-[102px] flex flex-col" title={spot.title || ''}>
       <Wrapper>
         <div className="relative w-[102px] h-[102px] rounded-lg border border-g3">
-          {spot.images && (
+          {spot.images ? (
             <Image
               className="w-[102px] h-[102px] rounded-lg bg-white object-cover"
               src={spot.images as string}
               alt={spot.title}
               fill
             />
+          ) : (
+            <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
           )}
           <div className="absolute top-[8px] left-[8px] py-[3px] px-[4px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">
             {spot.region}

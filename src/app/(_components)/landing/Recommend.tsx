@@ -2,6 +2,7 @@
 
 import { IError, ISpot } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
+import { useEffect, useRef, useState } from 'react';
 
 import Carousel from '../UI/Carousel';
 import SpotItem from './SpotItem';
@@ -12,12 +13,16 @@ import { isMobile } from 'react-device-detect';
 import { useAtomValue } from 'jotai';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useQuery } from '@tanstack/react-query';
-import { useRef } from 'react';
 
 export default function Recommend() {
   const isLoggedIn = useAtomValue(isLoggedInAtom);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fetchSpots = async (): Promise<ISpot[]> => {
     try {
@@ -48,6 +53,8 @@ export default function Recommend() {
     queryFn: fetchSpots,
     refetchOnWindowFocus: false,
   });
+
+  if (!mounted) return null;
 
   return (
     <section className="mt-[70px]">
