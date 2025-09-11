@@ -52,7 +52,12 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
             isLoading={isLoading}
           />
         </div>
-        <div className="px-[16px] overflow-y-auto scrollbar-hide bg-w1 flex-1 z-8">
+        <div
+          className={`px-[16px] scrollbar-hide bg-w1 flex-1 z-8 ${
+            isLoading || allSpots.length > 0 ? 'overflow-y-auto' : 'overflow-y-hidden'
+          }`}
+          style={{ minHeight: 'calc(100vh - 156px)' }}
+        >
           <ul className="bg-w1">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
@@ -65,7 +70,9 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
                 description={'아직 찜한 여행지가 없어요'}
               />
             ) : (
-              <NoResult type="category" />
+              <li>
+                <NoResult type="category" />
+              </li>
             )}
             <div ref={observerRef} className="h-10" />
           </ul>
