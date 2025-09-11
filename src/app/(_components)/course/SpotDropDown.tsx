@@ -1,11 +1,12 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+
 import BottomSheet from '../UI/BottomSheet';
 import CourseSpotContent from './bottomSheet/CourseSpotContent';
 import { ICourse } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import dropdown from '/public/images/icons/spot/dropdown.svg';
-import { useState } from 'react';
 
 interface SpotDropDownProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ interface SpotDropDownProps {
 
 export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx, day }: SpotDropDownProps) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleDelete = () => {
     if (!setCourse) return;
@@ -40,9 +42,27 @@ export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, setIsOpen]);
+
   return (
     <>
-      <div className="relative">
+      <div className="relative" ref={dropdownRef}>
         <button type="button" onClick={() => setIsOpen((prev) => !prev)} className="p-1">
           <Image src={dropdown} alt="메뉴" width={20} height={20} />
         </button>
@@ -69,11 +89,20 @@ export default function SpotDropDown({ isOpen, setIsOpen, course, setCourse, idx
           </div>
         )}
       </div>
-      <BottomSheet isOpen={isBottomSheetOpen} onClose={() => setIsBottomSheetOpen(false)}>
+      <BottomSheet
+        isOpen={isBottomSheetOpen}
+        onClose={() => {
+          setIsBottomSheetOpen(false);
+          setIsOpen(false);
+        }}
+      >
         <CourseSpotContent
           course={course!}
           setCourse={setCourse}
-          onClose={() => setIsBottomSheetOpen(false)}
+          onClose={() => {
+            setIsBottomSheetOpen(false);
+            setIsOpen(false);
+          }}
           spot={course!.days.find((d) => d.date === day)?.list[idx]}
           date={day}
           idx={idx}

@@ -18,6 +18,7 @@ interface SpotItemProps {
   setCourse?: React.Dispatch<React.SetStateAction<ICourse | null>>;
   idx?: number;
   day?: string;
+  type: 'addition' | 'list';
 }
 
 export default function SpotItem({
@@ -29,15 +30,27 @@ export default function SpotItem({
   setCourse,
   idx,
   day,
+  type,
 }: SpotItemProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <li className="min-w-[287px] grow h-[98px] bg-white rounded-lg py-[12px] px-[8px] flex items-center">
-      <div className="w-[128px] h-full bg-w1 rounded-md relative">
-        <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
+    <li className="grow h-[98px] bg-white rounded-lg py-[12px] px-[8px] flex items-center">
+      <div className={`${type === 'addition' ? 'w-[140px]' : 'w-[115px]'} h-full bg-w1 rounded-md relative`}>
+        {spot.images ? (
+          <Image
+            className={`${type === 'addition' ? 'w-[140px]' : 'w-[115px]'} h-full rounded-md bg-white object-cover`}
+            src={spot.images as string}
+            alt={spot.title}
+            fill
+          />
+        ) : (
+          <Image className="w-[115px] py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
+        )}
       </div>
-      <div className="ml-[7px] h-full grow flex flex-col justify-between">
+      <div
+        className={`${type === 'addition' ? 'w-[180px]' : 'w-[150px]'} ml-[7px] h-full flex flex-col justify-between`}
+      >
         <div className="flex items-center justify-between">
           <p className="max-w-[140px] font-semibold text-sm text-b1 tracking-[-0.02em] line-clamp-1">{spot.title}</p>
           {isEditable ? (
@@ -61,7 +74,7 @@ export default function SpotItem({
           )}
         </div>
         <div>
-          <div className="max-w-[140px] flex items-center gap-[4px]">
+          <div className={`${type === 'addition' ? 'max-w-[170px]' : 'max-w-[140px]'} flex items-center gap-[4px]`}>
             <Image src={location} alt="위치" width={11} height={11} />
             <p className="text-xs text-g1 line-clamp-1">{spot.address}</p>
           </div>

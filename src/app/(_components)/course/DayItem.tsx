@@ -48,6 +48,7 @@ export default function DayItem({ isEditable, day, course, setCourse, idx }: Day
               setCourse={setCourse}
               idx={idx}
               day={day}
+              type="list"
             />
           ))}
         </ul>

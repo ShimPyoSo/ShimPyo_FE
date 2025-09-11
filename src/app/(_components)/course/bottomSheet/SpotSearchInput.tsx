@@ -89,7 +89,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       {selectedCourse?.touristId === 0 ? (
         <SpotRecommend setDetailId={setDetailId} />
       ) : (
-        <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} />
+        <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} type="addition" />
       )}
       {false && (
         <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
