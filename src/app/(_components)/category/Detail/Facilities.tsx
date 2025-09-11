@@ -9,8 +9,8 @@ import parking from '/public/images/icons/spot/service/parking.svg';
 import parkingActive from '/public/images/icons/spot/service/parkingActive.svg';
 import pet from '/public/images/icons/spot/service/pet.svg';
 import petActive from '/public/images/icons/spot/service/petActive.svg';
-import tourDesk from '/public/images/icons/spot/service/tourDesk.svg';
-import tourDeskActive from '/public/images/icons/spot/service/tourDeskActive.svg';
+import reservation from '/public/images/icons/spot/service/reservation.svg';
+import reservationActive from '/public/images/icons/spot/service/reservationActive.svg';
 import wifi from '/public/images/icons/spot/service/wifi.svg';
 import wifiActive from '/public/images/icons/spot/service/wifiActive.svg';
 
@@ -20,7 +20,7 @@ export default function Facilities({ services }: { services: IFacilities | undef
     child: { default: child, active: childActive, label: '유아 동반' },
     parking: { default: parking, active: parkingActive, label: '주차 가능' },
     pet: { default: pet, active: petActive, label: '반려동물 동반' },
-    tourDesk: { default: tourDesk, active: tourDeskActive, label: '관광/안내 데스크' },
+    reservation: { default: reservation, active: reservationActive, label: '예약 가능' },
     wifi: { default: wifi, active: wifiActive, label: '무료 Wi-Fi' },
   };
 
