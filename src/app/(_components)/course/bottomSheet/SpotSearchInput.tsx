@@ -87,7 +87,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       </div>
 
       {selectedCourse?.touristId === 0 ? (
-        <SpotRecommend setDetailId={setDetailId} />
+        <SpotRecommend detailId={detailId} setDetailId={setDetailId} />
       ) : (
         <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} type="addition" />
       )}

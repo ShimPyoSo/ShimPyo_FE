@@ -15,9 +15,8 @@ export default function SpotItem({ spot, type, setDetailId }: SpotItemProps) {
     type === 'landing' ? (
       <Link href={`/category/${spot.id}`}>{children}</Link>
     ) : (
-      <div onClick={() => setDetailId?.((spot.id ?? spot.touristId) as number)}>{children}</div>
+      <div onClick={() => setDetailId?.((prev) => (prev === 0 ? (spot.touristId as number) : 0))}>{children}</div>
     );
-
   return (
     <li className="max-w-[102px] flex flex-col" title={spot.title || ''}>
       <Wrapper>

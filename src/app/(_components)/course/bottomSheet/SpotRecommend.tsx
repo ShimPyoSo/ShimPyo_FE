@@ -3,6 +3,7 @@
 import Carousel from '../../UI/Carousel';
 import { ISpot } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import SpotItem from '../../landing/SpotItem';
 import SpotSkeleton from '../../landing/SpotSkeleton';
 import WebCarouselArrow from '../../UI/WebCarouselArrow';
@@ -15,9 +16,10 @@ import { useRef } from 'react';
 
 interface SpotRecommendProps {
   setDetailId: React.Dispatch<React.SetStateAction<number>>;
+  detailId: number;
 }
 
-export default function SpotRecommend({ setDetailId }: SpotRecommendProps) {
+export default function SpotRecommend({ detailId, setDetailId }: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +51,12 @@ export default function SpotRecommend({ setDetailId }: SpotRecommendProps) {
             : data?.map((spot, idx) => <SpotItem spot={spot} key={idx} type="addition" setDetailId={setDetailId} />)}
         </ul>
       </Carousel>
+
+      {detailId !== 0 && (
+        <div className="mt-[24px] h-[500px] overflow-y-scroll relative">
+          <SpotDetailComponent id={detailId} type="course" />
+        </div>
+      )}
     </section>
   );
 }

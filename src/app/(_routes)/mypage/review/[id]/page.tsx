@@ -74,7 +74,7 @@ export default function Review() {
         {data && <SpotInfo info={data} />}
         <div className="mt-[18px] flex justify-end">
           <button
-            className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-sm tracking-[-0.02em] font-semibold"
+            className="bg-gn1 text-white py-[6px] px-[12px] rounded-md text-xs tracking-[-0.02em] font-semibold"
             onClick={() => {
               setIsConfirmOpen(true);
               setIsAllDelete(true);

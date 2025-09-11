@@ -50,13 +50,14 @@ export default function ReviewItem({
     <li className="p-[12px] bg-[#fbfbfb] border-w4 rounded-xl tracking-[-0.02em]">
       <div className="flex items-center justify-between mb-[8px]">
         {type === 'detail' && <p className="font-semibold text-sm text-b1">{review.nickname}</p>}
-        <div className="flex items-center gap-[6px]">
+        <div className={`flex items-center ${type === 'mypage' ? 'w-full justify-between' : ''} gap-[6px]`}>
           <p className="text-xs text-g1">{review.createdAt}</p>
-          {review.nickname === user?.nickname && (
-            <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
-              삭제하기
-            </button>
-          )}
+          {review.nickname === user?.nickname ||
+            (type === 'mypage' && (
+              <button className="text-xs text-gn1 underline" onClick={handleDeleteClick}>
+                삭제하기
+              </button>
+            ))}
         </div>
       </div>
 

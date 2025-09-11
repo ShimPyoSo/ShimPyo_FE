@@ -30,7 +30,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
   return (
     <li className="py-[18px] flex gap-[12px] border-b border-w5">
       <Link
-        className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl cursor-pointer"
+        className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl cursor-pointer relative"
         href={`${type === 'spot' ? `/category/${spot.id}` : `/mypage/review/${spot.touristId}`}`}
       >
         {spot.images ? (
@@ -54,7 +54,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
         <div className="grow-1">
           <Link
             className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2 cursor-pointer"
-            href={`${type === 'spot' ? '/category' : '/mypage/review'}/${spot.id}`}
+            href={`${type === 'spot' ? `/category/${spot.id}` : `/mypage/review/${spot.touristId}`}`}
           >
             {spot.title}
           </Link>
