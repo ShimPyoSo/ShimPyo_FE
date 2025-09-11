@@ -43,24 +43,21 @@ export const title: { [key: string]: string } = {
   '/course/kakao': '쉼표 여행지 추가하기',
   '/mypage/social/profile': '프로필 관리',
   '/mypage/social/withdraw': '회원 탈퇴',
+  '/category?type=spa': '스파',
+  '/category?type=meditation': '명상',
+  '/category?type=food': '건강식',
+  '/category?type=nature': '자연친화',
+  '/category?type=beauty': 'K뷰티',
+  '/category': '전체',
+  '/mypage/like/spot': '전체',
+  '/mypage/like/spot/food': '건강식',
+  '/mypage/like/spot/beauty': 'K뷰티',
+  '/mypage/like/spot/nature': '자연친화',
+  '/mypage/like/spot/spa': '스파',
+  '/mypage/like/spot/meditation': '명상',
 };
 
-export const notRendering = [
-  '/',
-  '/signup',
-  '/category',
-  '/category?type=food',
-  '/category?type=beauty',
-  '/category?type=nature',
-  '/category?type=spa',
-  '/category?type=meditation',
-  '/mypage/like/spot',
-  '/mypage/like/spot/food',
-  '/mypage/like/spot/beauty',
-  '/mypage/like/spot/nature',
-  '/mypage/like/spot/spa',
-  '/mypage/like/spot/meditation',
-];
+export const notRendering = ['/', '/signup'];
 
 export const notRenderingTabBar = [
   '/signup',

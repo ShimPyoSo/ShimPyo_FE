@@ -39,28 +39,23 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
   return (
     <div className="bg-w1 relative min-h-screen">
       <CategoryHeader />
-      <section className="bg-w1 z-10 min-h-[calc(100vh-318px)]">
-        <FilterNSort
-          filter={filter}
-          setFilter={setFilter}
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          type={type}
-          refetch={refetch}
-          spots={allSpots}
-          isLoading={isLoading}
-        />
-
-        <div
-          className={`sticky bg-w1 z-10 max-h-[calc(100vh-56px)] overflow-auto scrollbar-hide ${
-            type === 'list' ? 'top-[156px]' : 'top-[56px]'
-          }`}
-        >
-          <ul className="px-[16px] pb-[60px]">
+      <div className="bg-w1 flex-1 flex flex-col">
+        <div className="sticky top-0 z-10">
+          <FilterNSort
+            filter={filter}
+            setFilter={setFilter}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+            type={type}
+            refetch={refetch}
+            spots={allSpots}
+            isLoading={isLoading}
+          />
+        </div>
+        <div className="px-[16px] overflow-y-auto scrollbar-hide bg-w1 flex-1 z-8">
+          <ul className="bg-w1">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
-            ) : allSpots.length > 0 ? (
-              allSpots.map((spot, idx) => <SpotListItem key={idx} type="spot" spot={spot} />)
             ) : type === 'like' ? (
               <NoLiked
                 type="spot"
@@ -68,12 +63,26 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
                 description={'아직 찜한 여행지가 없어요'}
               />
             ) : (
-              <NoResult type="category" />
+              <>
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+                <SpotSkeleton type="spot" />
+              </>
             )}
             <div ref={observerRef} className="h-10" />
           </ul>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

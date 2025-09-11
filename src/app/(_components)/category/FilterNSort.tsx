@@ -29,11 +29,11 @@ export default function FilterNSort({
   return (
     <>
       {type === 'list' && (
-        <div className="sticky top-[56px] bg-w1 z-20">
+        <div className="bg-w1 z-20">
           <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
           {(isLoading || spots.length > 0) && (
-            <div className="px-[16px] mb-[6px] flex items-center justify-between">
-              <span className="flex items-center text-xs text-g1 tracking-[-0.02em]">
+            <div className="px-[16px] flex items-center justify-between">
+              <span className="flex items-center text-xs text-g1 tracking-[-0.02em] mb-[6px]">
                 ⓘ&nbsp;
                 <Link className="text-b3" href={'https://knto.or.kr/index'} rel="noopener noreferrer" target="_blank">
                   한국관광공사
