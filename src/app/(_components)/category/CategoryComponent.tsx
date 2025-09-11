@@ -56,7 +56,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           className={`px-[16px] scrollbar-hide bg-w1 flex-1 z-8 ${
             isLoading || allSpots.length > 0 ? 'overflow-y-auto' : 'overflow-y-hidden'
           }`}
-          style={{ minHeight: 'calc(100vh - 156px)' }}
+          style={{ minHeight: 'calc(100vh - 165px)' }}
         >
           <ul className="bg-w1">
             {isLoading ? (

@@ -89,13 +89,13 @@ export default function FilterItems({ isSelected, name, setFilter, filterItem }:
   };
 
   return (
-    <li
+    <div
       className={`rounded-[100px] border py-[5px] px-[16px] text-sm tracking-[-0.02em] w-fit ${
         isSelected ? 'border-gn2 bg-gn4 text-gn1 font-semibold' : 'border-w6 bg-white text-b3'
       }`}
       onClick={() => handleFilterChoice()}
     >
       {name}
-    </li>
+    </div>
   );
 }

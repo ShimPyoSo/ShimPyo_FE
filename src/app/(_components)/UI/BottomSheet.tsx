@@ -18,16 +18,7 @@ export default function BottomSheet({ isOpen, onClose, children }: BottomSheetPr
 
   useEffect(() => {
     setIsMounted(true);
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isOpen]);
+  }, []);
 
   const handleDragEnd = (_: unknown, info: PanInfo) => {
     if (info.offset.y > 100) {
@@ -47,7 +38,7 @@ export default function BottomSheet({ isOpen, onClose, children }: BottomSheetPr
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black/60 z-40 flex justify-center"
+            className="fixed inset-0 bg-black/60 z-40 flex justify-center touch-none"
             onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -55,15 +46,17 @@ export default function BottomSheet({ isOpen, onClose, children }: BottomSheetPr
           />
 
           <motion.div
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 h-[80vh] max-w-[375px] w-full px-[16px] pb-[16px] overflow-y-auto scrollbar-hide"
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 bg-w1 rounded-t-2xl z-50 
+             h-[80vh] max-w-[375px] w-full px-[16px] pb-[16px] 
+             overflow-y-auto scrollbar-hide 
+             [-webkit-overflow-scrolling:touch]"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            drag="y"
+            drag={canDrag() ? 'y' : false}
             dragConstraints={{ top: 0, bottom: 0 }}
             dragElastic={0.2}
-            dragListener={canDrag()}
             onDragEnd={handleDragEnd}
             ref={sheetRef}
           >
