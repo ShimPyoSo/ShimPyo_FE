@@ -31,6 +31,10 @@ export default function BirthYearInput({ register, control }: BirthYearInputProp
               : '유효한 출생연도를 입력해주세요.';
           },
         })}
+        onInput={(e) => {
+          const input = e.currentTarget;
+          input.value = input.value.replace(/[^0-9]/g, '');
+        }}
       />
     </label>
   );
