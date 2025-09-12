@@ -2,18 +2,20 @@
 
 import { IAdditional, IError } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
-import { useForm, useFormState } from 'react-hook-form';
 
 import BirthYearInput from './BirthYearInput';
 import GenderInput from './GenderInput';
+import { useForm } from 'react-hook-form';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useRouter } from 'next/navigation';
 
 export default function AdditionalForm() {
   const { register, handleSubmit, watch, control } = useForm<IAdditional>({ mode: 'onBlur' });
-  const { isValid } = useFormState({ control });
+
   const router = useRouter();
   const { handleAccessExpired } = useHandleTokenExpired();
+  const isFormValid =
+    /^\d{4}$/.test(String(watch('birthYear'))) && (watch('gender') === 'female' || watch('gender') === 'male');
 
   const onSubmit = async (data: IAdditional) => {
     try {
@@ -56,7 +58,7 @@ export default function AdditionalForm() {
       <button
         type="submit"
         className={`absolute bottom-0 mb-[32px] w-full py-[16px] rounded-lg border font-semibold ${
-          isValid ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
+          isFormValid ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
         } `}
       >
         저장하기
