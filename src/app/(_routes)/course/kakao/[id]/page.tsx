@@ -35,7 +35,7 @@ export default function SpotSearchKaKao() {
         <p className="mt-[23px] font-semibold text-b1 tracking-[-0.013em]">이런 여행지는 어때요?</p>
 
         {searchResults === null ? (
-          <SpotRecommend setDetailId={setDetailId} />
+          <SpotRecommend setDetailId={setDetailId} detailId={detailId} />
         ) : (
           <ul className="mt-[12px] mb-[60px] flex flex-col gap-2">
             {searchResults.map((spot, idx) => (

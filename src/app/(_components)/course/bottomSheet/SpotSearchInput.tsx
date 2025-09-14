@@ -20,7 +20,6 @@ interface SpotSearchInputProps {
 export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProps) {
   const { id } = useParams();
   const selectedCourse = watch('course');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [detailId, setDetailId] = useState(0);
 
   const openPopup = (type: 'search' | 'kakao') => {

@@ -52,7 +52,7 @@ export default function SpotSearch() {
         <p className="mt-[23px] font-semibold text-b1 tracking-[-0.013em]">이런 여행지는 어때요?</p>
 
         {allResults.length === 0 && !isLoading ? (
-          <SpotRecommend setDetailId={setDetailId} />
+          <SpotRecommend setDetailId={setDetailId} detailId={detailId} />
         ) : (
           <ul className="mt-[12px] flex flex-col gap-2">
             {allResults.map((spot, idx) => (
