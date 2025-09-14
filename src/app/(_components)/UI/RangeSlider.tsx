@@ -27,7 +27,8 @@ export default function RangeSlider({ filter, setFilter }: RangeSliderProps) {
       setValues([start, end]);
       setIsTouched(true);
     }
-  }, [filter.visitTime]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!isTouched) return;

@@ -50,7 +50,7 @@ export default function LikedSpot() {
       <h3 className="font-[kkubulim] text-gn1 text-xl">쉼표 찍은 여행지</h3>
       <div className="flex items-center justify-between  mb-[16px]">
         <p className="mt-[2px] text-sm text-g1">내가 가고 싶은 여행지를 확인해 보세요</p>
-        {isMobile || <WebCarouselArrow scrollRef={scrollRef} scrollStep={330} />}
+        {!isMobile && spots.length > 0 && <WebCarouselArrow scrollRef={scrollRef} scrollStep={330} />}
       </div>
 
       <Carousel ref={scrollRef}>

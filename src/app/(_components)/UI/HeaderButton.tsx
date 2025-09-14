@@ -6,10 +6,14 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import cancel from '/public/images/icons/cancel.svg';
+import { getPrevPathname } from '@/app/(_utils)/getPrevPathname';
+import prev from '/public/images/icons/prevButton.svg';
 import { useAtom } from 'jotai';
+import { useFullPath } from '@/app/(_utils)/hooks/useFullPath';
 
 export default function HeaderButton() {
   const pathname = usePathname();
+  const fullPath = useFullPath();
   const router = useRouter();
   const [, resetAll] = useAtom(resetAllAtom);
   const [, setCurrentIndex] = useAtom(setCurrentIndexAtom);
@@ -19,6 +23,11 @@ export default function HeaderButton() {
     resetAll();
     sessionStorage.setItem('history', JSON.stringify(['/test']));
     router.push('/test/question');
+  };
+
+  const handleMoveToPrev = () => {
+    const previousPath = getPrevPathname();
+    router.push(previousPath);
   };
 
   return (
@@ -51,9 +60,17 @@ export default function HeaderButton() {
       )}
       {pathname.startsWith('/course/') && (
         <button className="absolute left-[16px] top-[16px] cursor-pointer">
-          <Image src={cancel} alt="메인으로" width={23} height={23} onClick={() => router.push('/')} />
+          <Image src={cancel} alt="메인으로" width={23} height={23} onClick={() => window.close()} />
         </button>
       )}
+      {fullPath === '/search' ||
+        fullPath.startsWith('/test') ||
+        fullPath.startsWith('/course/') ||
+        fullPath === '/signup/additional' || (
+          <button className="absolute left-[16px] top-[16px] cursor-pointer" onClick={handleMoveToPrev}>
+            <Image src={prev} alt="이전 페이지" width={23} height={23} />
+          </button>
+        )}
     </>
   );
 }
