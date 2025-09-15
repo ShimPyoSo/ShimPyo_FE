@@ -50,11 +50,11 @@ export const title: { [key: string]: string } = {
   '/category?type=beauty': 'K뷰티',
   '/category': '전체',
   '/mypage/like/spot': '전체',
-  '/mypage/like/spot/food': '건강식',
-  '/mypage/like/spot/beauty': 'K뷰티',
-  '/mypage/like/spot/nature': '자연친화',
-  '/mypage/like/spot/spa': '스파',
-  '/mypage/like/spot/meditation': '명상',
+  '/mypage/like/spot?type=food': '건강식',
+  '/mypage/like/spot?type=beauty': 'K뷰티',
+  '/mypage/like/spot?type=nature': '자연친화',
+  '/mypage/like/spot?type=spa': '스파',
+  '/mypage/like/spot?type=meditation': '명상',
 };
 
 export const notRendering = ['/', '/signup'];

@@ -44,7 +44,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
           <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
         )}
       </Link>
-      <div className="grow-1 py-[3px] flex flex-col">
+      <div className="max-w-[229px] grow-1 py-[3px] flex flex-col">
         <div className="flex justify-between items-center">
           <div className="px-[5px] py-[3px] border border-gn8 rounded-sm text-xs text-gn7 font-semibold bg-white">
             {spot.region}

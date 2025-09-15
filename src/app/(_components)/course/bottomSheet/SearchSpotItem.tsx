@@ -53,7 +53,7 @@ export default function SearchSpotItem({
               </div>
             </label>
           </div>
-          <div className="grow-1 mt-[3px]">
+          <div className="max-w-[229px] grow-1 mt-[3px]">
             <p className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2">{spot.title}</p>
             <div className="flex items-center gap-[4px]">
               <Image src={location} alt="위치" width={14} height={14} />

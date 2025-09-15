@@ -6,6 +6,7 @@ import { IError } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import trash from '/public/images/icons/course/trash.svg';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
+import { useRemovePath } from '@/app/(_utils)/hooks/useRemovePath';
 import { useRouter } from 'next/navigation';
 
 interface CourseDeleteProps {
@@ -16,6 +17,7 @@ interface CourseDeleteProps {
 
 export default function CourseDelete({ courseId, type, refetch }: CourseDeleteProps) {
   const { handleAccessExpired } = useHandleTokenExpired();
+  const { removeReviewWrite } = useRemovePath();
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -23,8 +25,10 @@ export default function CourseDelete({ courseId, type, refetch }: CourseDeletePr
       await axios.delete(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course?id=${courseId}`, {
         withCredentials: true,
       });
-      if (type === 'detail') router.push('/mypage/like/course');
-      else refetch?.();
+      if (type === 'detail') {
+        removeReviewWrite(`/mypage/like/course/${courseId}`);
+        router.push('/mypage/like/course');
+      } else refetch?.();
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {

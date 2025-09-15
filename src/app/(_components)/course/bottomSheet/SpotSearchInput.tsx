@@ -62,7 +62,11 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
     <section className="mt-[24px]">
       <div className="flex items-center justify-between mb-[18px]">
         <p className="tracking-[1.3%] font-semibold text-b1">여행지 추가하기</p>
-        <button className="tracking-[-0.02em] text-gn5 font-semibold text-xs" onClick={() => openPopup('kakao')}>
+        <button
+          className="tracking-[-0.02em] text-gn5 font-semibold text-xs"
+          onClick={() => openPopup('kakao')}
+          type="button"
+        >
           원하는 여행지를 못 찾았다면?
         </button>
       </div>
