@@ -50,12 +50,12 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
             />
             <div className="ml-[8px] flex items-center">
               <span className="flex items-center">
-                {type === 'detail' && '최소'}
+                {type === 'detail' && '최저'}
                 <p className="text-bl font-semibold">&nbsp;{weather.minTemp}°</p>
               </span>
               <span className="mx-[4px] text-w6">|</span>
               <span className="flex items-center">
-                {type === 'detail' && '최대'}
+                {type === 'detail' && '최고'}
                 <p className="text-r font-semibold">&nbsp;{weather.maxTemp}°</p>
               </span>
             </div>
