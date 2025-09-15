@@ -90,6 +90,7 @@ export default function IdInput<T extends ISignUp | IFind>({
               isIdChecked ? 'border-gn7 bg-gn8 text-gn1' : 'border-[#EDEDED] bg-w2 text-b2'
             }`}
             type="button"
+            disabled={!!errors.username}
             onClick={handleCheckId}
           >
             중복확인

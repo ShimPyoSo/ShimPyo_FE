@@ -4,7 +4,6 @@ import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 import { ICourseAddition } from '@/app/(_utils)/type';
 import Image from 'next/image';
-import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import SpotItem from '../SpotItem';
 import SpotRecommend from './SpotRecommend';
 import search from '/public/images/icons/search.svg';
@@ -94,14 +93,6 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
         />
       ) : (
         <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} type="addition" />
-      )}
-      {false && (
-        <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
-          <SpotDetailComponent id={1} type="course" />
-          <button className="sticky bottom-0 w-full py-[16px] rounded-lg border font-semibold bg-gn1 border-gn5 text-white z-[999]">
-            여행지 추가하기
-          </button>
-        </div>
       )}
     </section>
   );

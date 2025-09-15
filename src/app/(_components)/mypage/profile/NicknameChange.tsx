@@ -51,8 +51,10 @@ export default function NicknameChange({ setIsNicknameAlert }: NicknameChangePro
   return (
     <section className="bg-w3 px-[20px] py-[16px]">
       <h3 className="text-sm text-b1 font-semibold tracking-[-0.02em]">닉네임 변경</h3>
-      <p className={`text-xs ${isAvailable === false ? 'text-r' : `text-g1`}`}>
-        {isAvailable === false ? '이미 존재하는 닉네임이예요' : '원하는 닉네임으로 변경해 보세요'}
+      <p className={`text-xs ${isAvailable === false || errors.nickname ? 'text-r' : 'text-g1'}`}>
+        {isAvailable === false
+          ? '이미 존재하는 닉네임이예요'
+          : '닉네임은 영어, 숫자, 한글, 언더바(_) 2~8자로 사용 가능합니다'}
       </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
@@ -69,6 +71,10 @@ export default function NicknameChange({ setIsNicknameAlert }: NicknameChangePro
             maxLength: {
               value: 8,
               message: '닉네임은 최대 8자까지 입력할 수 있습니다.',
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9가-힣_]{2,8}$/,
+              message: '닉네임은 영어, 숫자, 한글, 언더바(_)만 2~8자로 입력할 수 있습니다.',
             },
             onChange: (e) => checkDuplicate(e.target.value),
           })}

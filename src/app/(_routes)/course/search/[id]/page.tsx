@@ -76,7 +76,7 @@ export default function SpotSearch() {
         )}
       </div>
 
-      <CourseAddButton type="search" selectedSpot={selectedSpot} />
+      {selectedSpot && <CourseAddButton type="search" selectedSpot={selectedSpot} />}
     </div>
   );
 }

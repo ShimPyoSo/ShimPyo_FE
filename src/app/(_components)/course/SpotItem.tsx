@@ -52,7 +52,13 @@ export default function SpotItem({
         className={`${type === 'addition' ? 'w-[180px]' : 'w-[150px]'} ml-[7px] h-full flex flex-col justify-between`}
       >
         <div className="flex items-center justify-between">
-          <p className="max-w-[140px] font-semibold text-sm text-b1 tracking-[-0.02em] line-clamp-1">{spot.title}</p>
+          <p
+            className={`${
+              isPreview ? 'max-w-[120px]' : 'max-w-[140px]'
+            } font-semibold text-sm text-b1 tracking-[-0.02em] line-clamp-1`}
+          >
+            {spot.title}
+          </p>
           {isEditable ? (
             <SpotDropDown
               isOpen={isOpen}

@@ -65,7 +65,7 @@ export default function SpotSearchKaKao() {
         )}
       </div>
 
-      <CourseAddButton selectedSpot={selectedSpot} type="kakao" />
+      {selectedSpot && <CourseAddButton selectedSpot={selectedSpot} type="kakao" />}
     </div>
   );
 }

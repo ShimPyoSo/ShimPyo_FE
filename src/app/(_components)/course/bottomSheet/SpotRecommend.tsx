@@ -25,10 +25,22 @@ interface SpotRecommendProps {
   setSelectedSpot: React.Dispatch<React.SetStateAction<ICourseList | null>> | UseFormSetValue<ICourseAddition>;
 }
 
-export default function SpotRecommend({ detailId, setDetailId }: SpotRecommendProps) {
+export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot }: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
+
+  const handleAddSpot = () => {
+    if (!data) return;
+    const selected = data.find((spot) => spot.touristId === detailId);
+    if (!selected) return;
+
+    if (setSelectedSpot.length === 1) {
+      (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)(selected);
+    } else {
+      (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', selected);
+    }
+  };
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['recommendSpots', id],
@@ -78,6 +90,12 @@ export default function SpotRecommend({ detailId, setDetailId }: SpotRecommendPr
       {detailId !== 0 && (
         <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
           <SpotDetailComponent id={detailId} type="course" />
+          <button
+            className="sticky bottom-0 w-full py-[16px] rounded-lg border font-semibold bg-gn1 border-gn5 text-white z-[999]"
+            onClick={handleAddSpot}
+          >
+            여행지 추가하기
+          </button>
         </div>
       )}
     </section>
