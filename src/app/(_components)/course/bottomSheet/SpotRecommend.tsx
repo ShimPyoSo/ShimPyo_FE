@@ -1,15 +1,19 @@
 'use client';
 
+import { ICourseAddition, ICourseList } from '@/app/(_utils)/type';
+import axios, { AxiosError } from 'axios';
+
 import Carousel from '../../UI/Carousel';
-import { ISpot } from '@/app/(_utils)/type';
+import { IError } from '@/app/(_utils)/type';
 import Image from 'next/image';
+import RecommendItem from './RecommendItem';
 import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
-import SpotItem from '../../landing/SpotItem';
 import SpotSkeleton from '../../landing/SpotSkeleton';
+import { UseFormSetValue } from 'react-hook-form';
 import WebCarouselArrow from '../../UI/WebCarouselArrow';
-import axios from 'axios';
 import { isMobile } from 'react-device-detect';
 import refetchIcon from '/public/images/icons/course/refetch.svg';
+import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useRef } from 'react';
@@ -17,19 +21,36 @@ import { useRef } from 'react';
 interface SpotRecommendProps {
   setDetailId: React.Dispatch<React.SetStateAction<number>>;
   detailId: number;
+  selectedSpot: ICourseList | null;
+  setSelectedSpot: React.Dispatch<React.SetStateAction<ICourseList | null>> | UseFormSetValue<ICourseAddition>;
 }
 
 export default function SpotRecommend({ detailId, setDetailId }: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { handleAccessExpired } = useHandleTokenExpired();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['recommendSpots', id],
     queryFn: async () => {
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/addition?courseId=${id}`, {
-        withCredentials: true,
-      });
-      return res.data as ISpot[];
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/addition?courseId=${id}`, {
+          withCredentials: true,
+        });
+        return res.data as ICourseList[];
+      } catch (error) {
+        const err = error as AxiosError<IError>;
+        if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
+          await handleAccessExpired('INVALID_TOKEN');
+          try {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course/addition?courseId=${id}`, {
+              withCredentials: true,
+            });
+            return res.data as ICourseList[];
+          } catch {}
+        }
+        throw err;
+      }
     },
     refetchOnWindowFocus: false,
   });
@@ -48,12 +69,14 @@ export default function SpotRecommend({ detailId, setDetailId }: SpotRecommendPr
         <ul className="pr-[16px] flex gap-[12px] flex-nowrap w-max">
           {isLoading
             ? Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} />)
-            : data?.map((spot, idx) => <SpotItem spot={spot} key={idx} type="addition" setDetailId={setDetailId} />)}
+            : data?.map((spot, idx) => (
+                <RecommendItem spot={spot} key={idx} detailId={detailId} setDetailId={setDetailId} />
+              ))}
         </ul>
       </Carousel>
 
       {detailId !== 0 && (
-        <div className="mt-[24px] h-[500px] overflow-y-scroll relative">
+        <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
           <SpotDetailComponent id={detailId} type="course" />
         </div>
       )}

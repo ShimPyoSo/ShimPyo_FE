@@ -25,7 +25,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
   const openPopup = (type: 'search' | 'kakao') => {
     window.open(
       `${type === 'search' ? `/course/search/${id}` : `/course/kakao/${id}`}`,
-      '쉼표 여행지 추가하기',
+      '여행지 추가하기',
       'width=375,height=600,scrollbars=yes'
     );
 
@@ -62,7 +62,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
   return (
     <section className="mt-[24px]">
       <div className="flex items-center justify-between mb-[18px]">
-        <p className="tracking-[1.3%] font-semibold text-b1">쉼표 여행지 추가하기</p>
+        <p className="tracking-[1.3%] font-semibold text-b1">여행지 추가하기</p>
         <button className="tracking-[-0.02em] text-gn5 font-semibold text-xs" onClick={() => openPopup('kakao')}>
           원하는 여행지를 못 찾았다면?
         </button>
@@ -86,7 +86,12 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       </div>
 
       {selectedCourse?.touristId === 0 ? (
-        <SpotRecommend detailId={detailId} setDetailId={setDetailId} />
+        <SpotRecommend
+          detailId={detailId}
+          setDetailId={setDetailId}
+          selectedSpot={selectedCourse}
+          setSelectedSpot={setValue}
+        />
       ) : (
         <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} type="addition" />
       )}

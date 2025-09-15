@@ -179,6 +179,7 @@ export interface ICourseList extends ILatLng {
   tel: string;
   placeURL?: string;
   type?: 'TOURIST' | 'CUSTOM';
+  category?: string[];
 }
 
 export interface IDay {

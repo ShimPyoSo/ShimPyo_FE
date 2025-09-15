@@ -20,7 +20,7 @@ export default function SpotSearch() {
   const [, setTitle] = useAtom(setTitleAtom);
 
   useEffect(() => {
-    setTitle('쉼표 여행지 추가하기');
+    setTitle('여행지 추가하기');
   }, [setTitle]);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } = useFetchSearchWord({
@@ -52,7 +52,12 @@ export default function SpotSearch() {
         <p className="mt-[23px] font-semibold text-b1 tracking-[-0.013em]">이런 여행지는 어때요?</p>
 
         {allResults.length === 0 && !isLoading ? (
-          <SpotRecommend setDetailId={setDetailId} detailId={detailId} />
+          <SpotRecommend
+            setDetailId={setDetailId}
+            detailId={detailId}
+            selectedSpot={selectedSpot}
+            setSelectedSpot={setSelectedSpot}
+          />
         ) : (
           <ul className="mt-[12px] flex flex-col gap-2">
             {allResults.map((spot, idx) => (
