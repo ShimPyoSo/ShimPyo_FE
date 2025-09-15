@@ -1,5 +1,7 @@
 'use client';
 
+import { Suspense, useState } from 'react';
+
 import Alert from '@/app/(_components)/UI/Alert';
 import ProfileMenu from '@/app/(_components)/mypage/profile/ProfileMenu';
 import ProtectedRoute from '@/app/ProtectedRoute';
@@ -7,7 +9,6 @@ import { logoutAtom } from '@/app/(_store)/auth';
 import { useAtom } from 'jotai';
 import { useLogout } from '@/app/(_utils)/hooks/useLogout';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 export default function Profile() {
   const [isPasswordAlert, setIsPasswordAlert] = useState(false);
@@ -29,13 +30,16 @@ export default function Profile() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-full bg-w1 px-[16px]">
-        <ProfileMenu
-          setIsPasswordAlert={setIsPasswordAlert}
-          setIsWithdrawAlert={setIsWithdrawAlert}
-          setIsNicknameAlert={setIsNicknameAlert}
-        />
-      </div>
+      <Suspense>
+        <div className="min-h-full bg-w1 px-[16px]">
+          <ProfileMenu
+            setIsPasswordAlert={setIsPasswordAlert}
+            setIsWithdrawAlert={setIsWithdrawAlert}
+            setIsNicknameAlert={setIsNicknameAlert}
+          />
+        </div>
+      </Suspense>
+
       {isNicknameAlert && (
         <Alert
           title={'닉네임 변경 완료'}

@@ -44,8 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="xl:ml-[380px] w-[375px] h-screen overflow-hidden flex flex-col relative z-10">
             <div className="bg-white h-full w-full flex flex-col relative">
               <Providers>
-                <ClientSideEffectWrapper />
                 <Suspense>
+                  <ClientSideEffectWrapper />
                   <Header />
                 </Suspense>
                 <div className="flex-1 overflow-auto scrollbar-hide bg-w1 pb-[100px]">{children}</div>
