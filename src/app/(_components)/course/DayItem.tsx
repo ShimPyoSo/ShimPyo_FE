@@ -17,7 +17,6 @@ export default function DayItem({ isEditable, day, course, setCourse, idx }: Day
   const dayNumber = parseInt(day, 10);
   const dayData = course.days.find((d) => d.date === day);
   const list = dayData?.list ?? [];
-  console.log(list);
 
   return (
     <li className={`${idx !== 0 && 'mt-[42px]'}`}>

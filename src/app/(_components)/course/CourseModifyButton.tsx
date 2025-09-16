@@ -7,10 +7,17 @@ import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpire
 
 interface CourseModifyButtonProps {
   currentCourse: ICourse;
+  setIsModified: React.Dispatch<React.SetStateAction<boolean>>;
   isModified: boolean;
+  refetch: () => void;
 }
 
-export default function CourseModifyButton({ currentCourse, isModified }: CourseModifyButtonProps) {
+export default function CourseModifyButton({
+  currentCourse,
+  setIsModified,
+  isModified,
+  refetch,
+}: CourseModifyButtonProps) {
   const { handleAccessExpired } = useHandleTokenExpired();
 
   const handleUpdateCourse = async () => {
@@ -18,6 +25,8 @@ export default function CourseModifyButton({ currentCourse, isModified }: Course
 
     try {
       await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course`, currentCourse, { withCredentials: true });
+      setIsModified(false);
+      refetch();
     } catch (error) {
       const err = error as AxiosError<IError>;
       if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
@@ -26,6 +35,8 @@ export default function CourseModifyButton({ currentCourse, isModified }: Course
           await axios.patch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/course`, currentCourse, {
             withCredentials: true,
           });
+          setIsModified(false);
+          refetch();
         } catch {
           // reissue 이후 에러처리
           throw error;

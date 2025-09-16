@@ -2,13 +2,13 @@
 
 import { ICourse, IError } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
 
 import CourseList from '@/app/(_components)/course/CourseList';
 import CourseModifyButton from './CourseModifyButton';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 
 interface LikedCourseProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +19,7 @@ export default function LikeCourseList({ setIsOpen, setTitleLength }: LikedCours
   const { id } = useParams();
   const [currentCourse, setCurrentCourse] = useState<ICourse | null>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
+  const [isModified, setIsModified] = useState(false);
 
   const fetchCourse = async (): Promise<ICourse> => {
     try {
@@ -45,14 +46,19 @@ export default function LikeCourseList({ setIsOpen, setTitleLength }: LikedCours
     }
   };
 
-  const { data: originalCourse } = useQuery({
+  const { data: originalCourse, refetch } = useQuery({
     queryKey: ['myCourse', id],
     queryFn: fetchCourse,
     refetchOnWindowFocus: false,
   });
 
-  const isModified =
-    originalCourse && currentCourse ? JSON.stringify(originalCourse) !== JSON.stringify(currentCourse) : false;
+  useEffect(() => {
+    if (originalCourse && currentCourse) {
+      setIsModified(JSON.stringify(originalCourse) !== JSON.stringify(currentCourse));
+    } else {
+      setIsModified(false);
+    }
+  }, [originalCourse, currentCourse]);
 
   return (
     <>
@@ -65,7 +71,12 @@ export default function LikeCourseList({ setIsOpen, setTitleLength }: LikedCours
           setTitleLength={setTitleLength}
         />
       )}
-      <CourseModifyButton isModified={isModified} currentCourse={currentCourse as ICourse} />
+      <CourseModifyButton
+        isModified={isModified}
+        setIsModified={setIsModified}
+        currentCourse={currentCourse as ICourse}
+        refetch={refetch}
+      />
     </>
   );
 }
