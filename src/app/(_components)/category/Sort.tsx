@@ -49,6 +49,9 @@ export default function Sort({ selectedOption, setSelectedOption }: SortProps) {
       borderRadius: '6px',
       boxShadow: '0px 3px 8px 0px rgba(0, 0, 0, 0.1)',
       overflow: 'hidden',
+      width: '70px',
+      right: 0,
+      left: 'auto',
     }),
     option: (base, state) => {
       type Option = (typeof SORT_BY)[number];

@@ -53,7 +53,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           />
         </div>
         <div
-          className={`px-[16px] scrollbar-hide bg-w1 flex-1 z-8 ${
+          className={`px-[16px] scrollbar-hide bg-w1 flex-1 z-8 scrollable-div ${
             isLoading || allSpots.length > 0 ? 'overflow-y-auto' : 'overflow-y-hidden'
           }`}
           style={{ minHeight: 'calc(100vh - 165px)' }}

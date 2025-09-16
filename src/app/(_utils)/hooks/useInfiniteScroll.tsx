@@ -11,6 +11,9 @@ export default function useInfiniteScroll({ hasNextPage, isFetchingNextPage, fet
 
   useEffect(() => {
     if (!hasNextPage || isFetchingNextPage) return;
+    const rootEl = document.querySelector('.scrollable-div');
+
+    if (!rootEl) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -18,7 +21,7 @@ export default function useInfiniteScroll({ hasNextPage, isFetchingNextPage, fet
           fetchNextPage();
         }
       },
-      { threshold: 1 }
+      { root: rootEl, threshold: 0.1 }
     );
 
     const el = observerRef.current;
