@@ -17,7 +17,7 @@ export function useGetImageURL({ setIsImageError }: UseGetImageURLProps) {
   const getImageURL = useCallback(
     async (image: File): Promise<string | undefined> => {
       const validMimeTypes = ['image/png', 'image/jpeg'];
-      const maxSizeMB = 10;
+      const maxSizeMB = 20;
 
       if (!validMimeTypes.includes(image.type)) {
         setIsImageError(true);

@@ -87,7 +87,7 @@ export default function ReviewModal({
       {isConfirmOpen && (
         <Confirm
           title={'후기 등록'}
-          description={'후기를 등록하면 수정할 수 없어요\n정말로 후기를 등록할까요?'}
+          description={'등록한 후기는 수정할 수 없어요\n정말로 후기를 등록할까요?'}
           confirmText={'등록하기'}
           cancelText={'돌아가기'}
           setIsOpen={setIsConfirmOpen}
@@ -97,7 +97,7 @@ export default function ReviewModal({
       {isAlertOpen && (
         <Alert
           title={'후기 등록'}
-          description={'후기가 정상적으로 등록되었습니다.\n다른 여행자들에게 도움이 될 거예요.'}
+          description={'후기가 정상적으로 등록되었어요✨\n다른 여행자들에게 큰 도움이 될 거예요'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => router.push(`/category/${id}/review`)}
@@ -106,7 +106,7 @@ export default function ReviewModal({
       {isImageError && (
         <Alert
           title={'이미지 업로드 실패'}
-          description={'이미지는 10MB 이하의 png, jpg/jpeg 파일만 업로드 가능합니다.'}
+          description={'이미지는 20MB 이하의 png, jpg/jpeg 파일만 등록 가능해요'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => setIsImageError(false)}
@@ -115,7 +115,7 @@ export default function ReviewModal({
       {isImageCountError && (
         <Alert
           title={'이미지 업로드 실패'}
-          description={'이미지는 최대 8개의 이미지만 업로드 가능합니다.'}
+          description={'후기에는 최대 8개의 이미지만 등록할 수 있어요'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => setIsImageCountError(false)}
@@ -124,7 +124,7 @@ export default function ReviewModal({
       {isContentLength && (
         <Alert
           title={'후기 등록 실패'}
-          description={'후기는 최소 5자 이상, 최대 500자 미만으로 작성 가능합니다.'}
+          description={'후기는 최소 5자 이상에서 최대 500자 미만으로 작성이 가능해요'}
           confirmText={'확인'}
           setIsOpen={setIsAlertOpen}
           onConfirm={() => setIsContentLength(false)}

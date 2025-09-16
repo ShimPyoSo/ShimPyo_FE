@@ -96,7 +96,7 @@ export default function Review() {
       {isConfirmOpen && (
         <Confirm
           title={'후기 삭제'}
-          description={'후기를 삭제하면 복구할 수 없어요.\n정말로 삭제할까요?'}
+          description={'후기를 삭제하면 복구할 수 없어요\n정말로 삭제할까요?'}
           confirmText={'삭제하기'}
           cancelText={'취소하기'}
           setIsOpen={setIsConfirmOpen}
