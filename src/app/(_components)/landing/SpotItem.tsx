@@ -28,6 +28,7 @@ export default function SpotItem({ spot, type, setDetailId }: SpotItemProps) {
               src={spot.images as string}
               alt={spot.title}
               fill
+              sizes="200px"
             />
           ) : (
             <Image className="py-[15px] px-[20px]" src={spotDefault} alt="관광지 이미지" fill />
