@@ -155,7 +155,7 @@ export interface ISpot extends ILatLng {
   id?: number;
   touristId?: number;
   region: string;
-  images: string | string[];
+  image: string;
   category?: string[];
   title: string;
   isLiked?: boolean;

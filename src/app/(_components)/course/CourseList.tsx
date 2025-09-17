@@ -59,7 +59,9 @@ export default function CourseList({ isEditable, setIsOpen, course, setCourse, s
           />
         </h2>
         <div className="flex gap-[6px] items-center">
-          <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
+          {course.courseId && course.token && (
+            <Share setIsOpen={setIsOpen} type="course" courseId={course.courseId} token={course.token} />
+          )}
           {isEditable && <CourseDelete courseId={Number(id as string)} type="detail" />}
         </div>
       </div>

@@ -22,10 +22,10 @@ export default function SpotItem({ spot, type, setDetailId }: SpotItemProps) {
     <li className="max-w-[102px] flex flex-col" title={spot.title || ''}>
       <Wrapper>
         <div className="relative w-[102px] h-[102px] rounded-lg border border-g3">
-          {spot.images ? (
+          {spot.image ? (
             <Image
               className="w-[102px] h-[102px] rounded-lg bg-white object-cover"
-              src={spot.images as string}
+              src={spot.image}
               alt={spot.title}
               fill
             />
