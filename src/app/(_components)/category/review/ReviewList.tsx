@@ -73,21 +73,23 @@ export default function ReviewList({
           ))}
         </ul>
       ) : allReviews.length > 0 ? (
-        <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
-          {allReviews.map((review: IReview) => (
-            <ReviewItem
-              key={review.reviewId}
-              review={review}
-              setIsConfirmOpen={setIsOpen}
-              type="detail"
-              setSelectedReviewId={setSelectedReviewId}
-              setReviewImg={setReviewImg}
-              setSelectedNumber={setSelectedNumber}
-            />
-          ))}
-          {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
-          <div ref={observerRef} className="h-10" />
-        </ul>
+        <div className="flex-1 overflow-auto scrollable-div">
+          <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
+            {allReviews.map((review: IReview) => (
+              <ReviewItem
+                key={review.reviewId}
+                review={review}
+                setIsConfirmOpen={setIsOpen}
+                type="detail"
+                setSelectedReviewId={setSelectedReviewId}
+                setReviewImg={setReviewImg}
+                setSelectedNumber={setSelectedNumber}
+              />
+            ))}
+            {isFetchingNextPage && Array.from({ length: 2 }).map((_, i) => <ReviewSkeleton key={`loading-${i}`} />)}
+            <div ref={observerRef} className="h-10" />
+          </ul>
+        </div>
       ) : (
         <div className="flex flex-col justify-center items-center h-[calc(100vh-120px)]">
           <NoReview main="가장 먼저 후기를 남겨보세요!" description="아직 방문객 후기가 없어요" />
