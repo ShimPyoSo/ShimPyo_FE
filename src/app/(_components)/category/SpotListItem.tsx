@@ -33,10 +33,10 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
         className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl cursor-pointer relative"
         href={`${type === 'spot' ? `/category/${spot.id}` : `/mypage/review/${spot.touristId}`}`}
       >
-        {spot.image ? (
+        {spot.images ? (
           <Image
             className="w-[102px] h-[113px] rounded-xl bg-white object-cover"
-            src={spot.image as string}
+            src={spot.images as string}
             alt={spot.title}
             fill
           />
