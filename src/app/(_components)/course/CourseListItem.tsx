@@ -2,8 +2,10 @@
 
 import CourseDelete from './CourseDelete';
 import { ICourseInfo } from '@/app/(_utils)/type';
+import Image from 'next/image';
 import Link from 'next/link';
 import Share from '../UI/Share';
+import spotDefault from '/public/images/icons/course/spotDefault.svg';
 import { testImages } from '@/app/(_utils)/constants';
 
 interface CourseListItemProps {
@@ -18,7 +20,13 @@ export default function CourseListItem({ setIsOpen, item, refetch }: CourseListI
 
   return (
     <li className="py-[12px] flex items-center justify-between border-b border-w6">
-      <div className="w-[73px] h-[73px] bg-white border border-w4 rounded-md"></div>
+      <div className="w-[73px] h-[73px] bg-white border border-w4 rounded-md relative">
+        {item.thumbnail ? (
+          <Image src={item.thumbnail} alt="관광지 이미지" fill className="object-cover rounded-md" />
+        ) : (
+          <Image src={spotDefault} alt="관광지 이미지" fill className="py-[15px] px-[20px]" />
+        )}
+      </div>
       <div className="ml-[12px] flex items-start justify-between grow">
         <div className="flex flex-col font-semibold tracking-[-0.02em]">
           <div
