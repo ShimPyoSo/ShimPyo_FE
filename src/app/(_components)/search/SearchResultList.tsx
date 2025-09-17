@@ -41,9 +41,8 @@ export default function SearchResultList() {
       ) : allResults.length === 0 ? (
         <NoResult type="search" />
       ) : (
-        <div className="flex-1 overflow-auto scrollable-div">
-          {' '}
-          <ul className="px-[16px] pb-[20px] flex-1">
+        <div className="flex-1">
+          <ul className="px-[16px] pb-[20px] flex-1 overflow-auto">
             {allResults.map((spot) => (
               <SpotListItem key={spot.id || spot.touristId} type="spot" spot={spot} />
             ))}

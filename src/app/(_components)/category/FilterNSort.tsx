@@ -11,14 +11,12 @@ interface FilterNSortProps {
   setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
   refetch?: () => void;
   spots: ISpot[];
-  isLoading: boolean;
   setSelectedOption: React.Dispatch<React.SetStateAction<(typeof SORT_BY)[number]>>;
   selectedOption: (typeof SORT_BY)[number];
 }
 
 export default function FilterNSort({
   type,
-  isLoading,
   refetch,
   spots,
   filter,
@@ -31,7 +29,7 @@ export default function FilterNSort({
       {type === 'list' && (
         <div className="bg-w1 z-20">
           <Filter filter={filter} setFilter={setFilter} refetch={refetch} />
-          {(isLoading || spots.length > 0) && (
+          {spots.length > 0 && (
             <div className="px-[16px] flex items-center justify-between">
               <span className="flex items-center text-xs text-g1 tracking-[-0.02em] mb-[6px]">
                 ⓘ&nbsp;

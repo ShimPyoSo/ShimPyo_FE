@@ -49,16 +49,15 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
             type={type}
             refetch={refetch}
             spots={allSpots}
-            isLoading={isLoading}
           />
         </div>
         <div
-          className={`px-[16px] scrollbar-hide bg-w1 flex-1 z-8 scrollable-div ${
+          className={`px-[16px] mb-[85px] bg-w1 flex-1 z-8 ${
             isLoading || allSpots.length > 0 ? 'overflow-y-auto' : 'overflow-y-hidden'
           }`}
           style={{ minHeight: 'calc(100vh - 165px)' }}
         >
-          <ul className="bg-w1">
+          <ul className="bg-w1 overflow-y-auto">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => <SpotSkeleton key={i} type="spot" />)
             ) : allSpots.length > 0 ? (

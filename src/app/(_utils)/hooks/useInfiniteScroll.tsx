@@ -10,27 +10,28 @@ export default function useInfiniteScroll({ hasNextPage, isFetchingNextPage, fet
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const el = observerRef.current;
+    if (!el) return;
     if (!hasNextPage || isFetchingNextPage) return;
-    const rootEl = document.querySelector('.scrollable-div');
-
-    if (!rootEl) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isFetchingNextPage && hasNextPage) {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
           fetchNextPage();
+          observer.unobserve(entries[0].target);
         }
       },
-      { root: rootEl, threshold: 1 }
+      {
+        rootMargin: '200px',
+        threshold: 0.1,
+      }
     );
 
-    const el = observerRef.current;
-    if (el) observer.observe(el);
-
+    observer.observe(el);
     return () => {
-      if (el) observer.unobserve(el);
+      observer.disconnect();
     };
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return observerRef;
 }

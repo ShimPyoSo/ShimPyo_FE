@@ -73,8 +73,8 @@ export default function ReviewList({
           ))}
         </ul>
       ) : allReviews.length > 0 ? (
-        <div className="flex-1 overflow-auto scrollable-div">
-          <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px]">
+        <div className="flex-1 ">
+          <ul className="flex flex-col gap-[12px] mt-[50px] pb-[40px] overflow-auto">
             {allReviews.map((review: IReview) => (
               <ReviewItem
                 key={review.reviewId}
