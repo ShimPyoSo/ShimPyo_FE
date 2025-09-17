@@ -79,22 +79,24 @@ export default function Liked({ liked, id, type }: LikedProps) {
   })();
 
   return (
-    <button
-      className="flex items-center justify-center"
-      onClick={(e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        mutation.mutate();
-      }}
-    >
-      <Image
-        className={`cursor-pointer ${isLoggedIn ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        src={iconSrc}
-        alt="찜"
-        width={24}
-        height={24}
-        aria-hidden={!isLoggedIn}
-      />
-    </button>
+    isLoggedIn && (
+      <button
+        className="flex items-center justify-center"
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          mutation.mutate();
+        }}
+      >
+        <Image
+          className="cursor-pointer pointer-events-auto"
+          src={iconSrc}
+          alt={isLiked ? '찜 해제' : '찜 추가'}
+          width={24}
+          height={24}
+          aria-hidden={!isLoggedIn}
+        />
+      </button>
+    )
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import CategoryHeader from '@/app/(_components)/category/CategoryHeader';
 import FilterNSort from './FilterNSort';
@@ -22,6 +22,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
     visitTime: '',
   });
   const [selectedOption, setSelectedOption] = useState<(typeof SORT_BY)[number]>(SORT_BY[0]);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => setMounted(true), []);
 
@@ -33,6 +34,12 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
 
   const allSpots = data?.pages.flatMap((page) => page) ?? [];
   const observerRef = useInfiniteScroll({ hasNextPage, isFetchingNextPage, fetchNextPage });
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = 0;
+    }
+  }, [filter, selectedOption]);
 
   if (!mounted) return null;
 
@@ -52,6 +59,7 @@ export default function CategoryComponent({ type }: { type: 'list' | 'like' }) {
           />
         </div>
         <div
+          ref={scrollRef}
           className={`px-[16px] mb-[85px] bg-w1 flex-1 z-8 ${
             isLoading || allSpots.length > 0 ? 'overflow-y-auto' : 'overflow-y-hidden'
           }`}
