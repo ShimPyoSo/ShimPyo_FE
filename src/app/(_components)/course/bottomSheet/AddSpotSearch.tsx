@@ -61,11 +61,12 @@ export default function AddSpotSearch({
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSearch();
+      e.currentTarget.blur();
     }
   };
 
   return (
-    <div className="relative z-10">
+    <div className="relative z-[999]">
       <input
         className="mt-[12px] mb-[8px] w-full bg-white rounded-lg border border-w4 text-sm py-[12px] px-[16px] outline-none placeholder:text-g3 hover:border-gn1"
         placeholder="어떤 여행지에 쉼표를 찍어볼까요?"
