@@ -32,14 +32,18 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
       if (e.origin !== window.location.origin) return;
 
       if (e.data?.touristId) {
-        setValue('course.touristId', e.data.touristId);
-        setValue('course.title', e.data.title);
-        setValue('course.address', e.data.address);
-        setValue('course.images', e.data.images);
-        setValue('course.latitude', e.data.latitude);
-        setValue('course.longitude', e.data.longitude);
-        setValue('course.tel', e.data.tel);
-        setValue('course.type', e.data.type);
+        const currentTime = watch('course.time');
+        setValue('course', {
+          touristId: e.data.touristId,
+          title: e.data.title,
+          address: e.data.address,
+          images: e.data.images,
+          latitude: e.data.latitude,
+          longitude: e.data.longitude,
+          tel: e.data.tel,
+          type: e.data.type,
+          time: currentTime,
+        });
       }
     });
   };
@@ -94,6 +98,7 @@ export default function SpotSearchInput({ setValue, watch }: SpotSearchInputProp
           setDetailId={setDetailId}
           selectedSpot={selectedCourse}
           setSelectedSpot={setValue}
+          watch={watch}
         />
       ) : (
         <SpotItem isEditable={false} isPreview={true} onDelete={handleDelete} spot={selectedCourse} type="addition" />

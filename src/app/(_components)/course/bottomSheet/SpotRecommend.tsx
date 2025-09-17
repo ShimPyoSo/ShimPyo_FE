@@ -1,6 +1,7 @@
 'use client';
 
 import { ICourseAddition, ICourseList } from '@/app/(_utils)/type';
+import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import axios, { AxiosError } from 'axios';
 
 import Carousel from '../../UI/Carousel';
@@ -9,7 +10,6 @@ import Image from 'next/image';
 import RecommendItem from './RecommendItem';
 import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import SpotSkeleton from '../../landing/SpotSkeleton';
-import { UseFormSetValue } from 'react-hook-form';
 import WebCarouselArrow from '../../UI/WebCarouselArrow';
 import { isMobile } from 'react-device-detect';
 import refetchIcon from '/public/images/icons/course/refetch.svg';
@@ -23,9 +23,10 @@ interface SpotRecommendProps {
   detailId: number;
   selectedSpot: ICourseList | null;
   setSelectedSpot: React.Dispatch<React.SetStateAction<ICourseList | null>> | UseFormSetValue<ICourseAddition>;
+  watch: UseFormWatch<ICourseAddition>;
 }
 
-export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot }: SpotRecommendProps) {
+export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, watch }: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
@@ -36,10 +37,18 @@ export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot }
     if (!selected) return;
 
     if (setSelectedSpot.length === 1) {
-      (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)(selected);
+      (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)({
+        ...selected,
+        time: watch('course.time'),
+      });
     } else {
-      (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', selected);
+      const currentTime = watch('course.time');
+      (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', {
+        ...selected,
+        time: currentTime,
+      });
     }
+    setDetailId(0);
   };
 
   const { data, isLoading, refetch } = useQuery({

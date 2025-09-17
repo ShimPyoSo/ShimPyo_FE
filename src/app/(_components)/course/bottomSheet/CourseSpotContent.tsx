@@ -18,27 +18,27 @@ interface CourseSpotContentProps {
 }
 
 export default function CourseSpotContent({ course, setCourse, onClose, spot, date, idx }: CourseSpotContentProps) {
-  const {
-    handleSubmit,
-    register,
-    setValue,
-    watch,
-    formState: { isValid },
-  } = useForm<ICourseAddition>({
+  const { handleSubmit, register, setValue, watch } = useForm<ICourseAddition>({
     defaultValues: {
       date: '1일',
       course: {
         touristId: 0,
+        time: '12:00',
       },
     },
   });
+  const selectedDate = watch('date');
+  const selectedTime = watch('course.time');
 
   useEffect(() => {
     if (date) {
       setValue('date', date);
     }
     if (spot) {
-      setValue('course', spot);
+      setValue('course', {
+        ...spot,
+        time: spot.time || '12:00',
+      });
     }
   }, [spot, date, setValue]);
 
@@ -62,7 +62,7 @@ export default function CourseSpotContent({ course, setCourse, onClose, spot, da
   };
 
   const onSubmit: SubmitHandler<ICourseAddition> = (data) => {
-    const updatedCourse: ICourse = { ...course };
+    const updatedCourse: ICourse = JSON.parse(JSON.stringify(course));
 
     if (spot && date !== undefined && idx !== undefined) {
       updatedCourse.days = updatedCourse.days.map((day) => {
@@ -77,7 +77,6 @@ export default function CourseSpotContent({ course, setCourse, onClose, spot, da
     }
 
     insertCourse(updatedCourse, data);
-
     setCourse?.(updatedCourse);
     onClose();
   };
@@ -88,7 +87,7 @@ export default function CourseSpotContent({ course, setCourse, onClose, spot, da
         <SpotSearchInput register={register} setValue={setValue} watch={watch} />
         <CourseDate register={register} watch={watch} />
         <CourseTime register={register} />
-        {isValid && selectedCourse.touristId !== 0 && (
+        {selectedDate && selectedTime && selectedCourse.touristId !== 0 && (
           <div className="sticky bottom-[20px] flex justify-center z-[999]">
             <button className={`w-[343px] py-[16px] border font-semibold rounded-lg bg-gn1 border-gn5 text-white`}>
               {spot ? '여행지 수정하기' : '여행지 추가하기'}
