@@ -17,11 +17,11 @@ export default function useInfiniteScroll({ hasNextPage, isFetchingNextPage, fet
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && !isFetchingNextPage && hasNextPage) {
           fetchNextPage();
         }
       },
-      { root: rootEl, threshold: 0.1 }
+      { root: rootEl, threshold: 1 }
     );
 
     const el = observerRef.current;

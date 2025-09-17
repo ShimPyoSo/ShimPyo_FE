@@ -41,12 +41,15 @@ export default function SearchResultList() {
       ) : allResults.length === 0 ? (
         <NoResult type="search" />
       ) : (
-        <ul className="px-[16px] pb-[20px] flex-1">
-          {allResults.map((spot) => (
-            <SpotListItem key={spot.id || spot.touristId} type="spot" spot={spot} />
-          ))}
-          <div ref={observerRef} className="h-10" />
-        </ul>
+        <div className="flex-1 overflow-auto scrollable-div">
+          {' '}
+          <ul className="px-[16px] pb-[20px] flex-1">
+            {allResults.map((spot) => (
+              <SpotListItem key={spot.id || spot.touristId} type="spot" spot={spot} />
+            ))}
+            <div ref={observerRef} className="h-10" />
+          </ul>
+        </div>
       )}
     </section>
   );

@@ -23,7 +23,7 @@ interface SpotRecommendProps {
   detailId: number;
   selectedSpot: ICourseList | null;
   setSelectedSpot: React.Dispatch<React.SetStateAction<ICourseList | null>> | UseFormSetValue<ICourseAddition>;
-  watch: UseFormWatch<ICourseAddition>;
+  watch?: UseFormWatch<ICourseAddition>;
 }
 
 export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, watch }: SpotRecommendProps) {
@@ -39,10 +39,10 @@ export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, 
     if (setSelectedSpot.length === 1) {
       (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)({
         ...selected,
-        time: watch('course.time'),
+        time: watch?.('course.time'),
       });
     } else {
-      const currentTime = watch('course.time');
+      const currentTime = watch?.('course.time');
       (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', {
         ...selected,
         time: currentTime,
