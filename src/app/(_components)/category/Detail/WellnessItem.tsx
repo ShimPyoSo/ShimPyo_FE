@@ -60,7 +60,7 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
               </span>
             </div>
           </div>
-          <div className="px-[8px] py-[8px] flex items-center justify-between bg-white rounded-lg text-xs text-b3">
+          <div className="min-w-[110px] px-[8px] py-[8px] flex items-center justify-between bg-white rounded-lg text-xs text-b3">
             <Image
               src={concentration === -1 ? no : concentration < 40 ? good : concentration < 70 ? mid : bad}
               alt="집중률"
@@ -70,13 +70,13 @@ export default function WellnessItem({ date, day, weather, concentration, isDayO
             <span className="flex ml-[4px] text-xs text-b3">
               {concentration >= 0 ? (
                 <span className="flex items-center">
-                  집중률&nbsp;
+                  혼잡도&nbsp;
                   <p className="font-semibold">
                     {Number.isInteger(concentration) ? concentration : concentration.toFixed(1)}%
                   </p>
                 </span>
               ) : (
-                <p className="text-g3">정보 미제공</p>
+                <p className="text-g3">정보가 없어요</p>
               )}
             </span>
           </div>
