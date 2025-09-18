@@ -38,7 +38,7 @@ export default function SearchInput() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-[999]">
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
