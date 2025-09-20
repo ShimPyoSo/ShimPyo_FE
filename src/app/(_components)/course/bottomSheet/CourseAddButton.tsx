@@ -22,7 +22,7 @@ export default function CourseAddButton({ selectedSpot, type }: CourseAddButtonP
   };
 
   return (
-    <div className="fixed bottom-[20px] flex justify-center z-[999]">
+    <div className="fixed w-[343px] bottom-[20px] flex justify-center z-[999]">
       <button
         className={`w-[343px] py-[16px] border font-semibold rounded-lg ${
           selectedSpot ? 'bg-gn1 border-gn5 text-white' : 'bg-w3 border-w4 text-g2'
