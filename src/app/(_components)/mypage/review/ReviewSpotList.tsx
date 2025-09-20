@@ -43,7 +43,7 @@ export default function ReviewSpotList() {
   });
 
   return (
-    <ul className="h-full">
+    <ul className="h-full overflow-y-auto scrollbar-hide">
       {isLoading ? (
         Array.from({ length: 8 }).map((_, i) => <SpotSkeleton key={i} type="review" />)
       ) : spots.length > 0 ? (
