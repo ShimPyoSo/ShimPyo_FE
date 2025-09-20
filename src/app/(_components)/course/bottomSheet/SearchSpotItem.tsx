@@ -38,14 +38,14 @@ export default function SearchSpotItem({
   return (
     <li className="py-[18px] border-b border-w5">
       <div className="flex gap-[12px]">
-        <div className="w-[102px] h-[113px] bg-white border border-w4 rounded-xl relative">
+        <div className="min-w-[102px] h-[113px] bg-white border border-w4 rounded-xl relative">
           {type === 'search' && spot.images ? (
             <Image src={spot.images} alt="관광지 이미지" fill className="object-cover rounded-xl" />
           ) : (
             <Image src={spotDefault} alt="관광지 이미지" fill className="py-[15px] px-[20px]" />
           )}
         </div>
-        <div className="max-w-[194px] grow-1 py-[3px] flex flex-col">
+        <div className="min-w-[229px] grow-1 py-[3px] flex flex-col">
           <div className="flex justify-between items-center">
             <div className="p-[3px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">{spot.region}</div>
             <label>
