@@ -45,7 +45,7 @@ export default function SearchSpotItem({
             <Image src={spotDefault} alt="관광지 이미지" fill className="py-[15px] px-[20px]" />
           )}
         </div>
-        <div className="grow-1 py-[3px] flex flex-col">
+        <div className="max-w-[194px] grow-1 py-[3px] flex flex-col">
           <div className="flex justify-between items-center">
             <div className="p-[3px] rounded-sm text-white bg-gn2 text-xs tracking-[-0.02em]">{spot.region}</div>
             <label>
