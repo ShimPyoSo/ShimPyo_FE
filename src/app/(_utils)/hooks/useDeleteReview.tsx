@@ -44,7 +44,7 @@ export function useDeleteReview() {
           `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review?touristId=${touristId}&reviewId=${reviewId}`,
           { withCredentials: true }
         );
-        refetch();
+        await refetch();
       } catch (error) {
         const err = error as AxiosError<IError>;
         if (err.response?.data?.name === 'INVALID_TOKEN' || err.response?.data?.message === '만료된 토큰입니다.') {
@@ -54,11 +54,10 @@ export function useDeleteReview() {
               `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/user/mypage/review?touristId=${touristId}&reviewId=${reviewId}`,
               { withCredentials: true }
             );
-            refetch();
-          } catch {
-            // reissue 이후 에러처리
-          }
+            await refetch();
+          } catch {}
         }
+
         console.log(err.response?.data?.message);
       }
     }

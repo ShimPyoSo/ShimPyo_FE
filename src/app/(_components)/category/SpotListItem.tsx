@@ -23,6 +23,7 @@ export default function SpotListItem({ type, spot }: SpotListItemProps) {
 
   useEffect(() => {
     if (spot.isLiked) setIsLiked(spot.isLiked);
+    else if (spot.isLiked == null) setIsLiked(true);
   }, [spot]);
 
   const isLoggedIn = useAtomValue(isLoggedInAtom);

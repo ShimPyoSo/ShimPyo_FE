@@ -3,6 +3,7 @@
 import { IError, IReviewResponse } from '@/app/(_utils)/type';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 
 import Confirm from '@/app/(_components)/UI/Confirm';
 import ImageModal from '@/app/(_components)/image/ImageModal';
@@ -13,8 +14,8 @@ import { setTitleAtom } from '@/app/(_store)/title';
 import { useAtom } from 'jotai';
 import { useDeleteReview } from '@/app/(_utils)/hooks/useDeleteReview';
 import { useHandleTokenExpired } from '@/app/(_utils)/hooks/useHandleTokenExpired';
-import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { useRemovePath } from '@/app/(_utils)/hooks/useRemovePath';
 
 export default function Review() {
   const { id } = useParams();
@@ -26,6 +27,8 @@ export default function Review() {
   const { handleDeleteReview } = useDeleteReview();
   const [, setTitle] = useAtom(setTitleAtom);
   const { handleAccessExpired } = useHandleTokenExpired();
+  const router = useRouter();
+  const { removeReviewWrite } = useRemovePath();
 
   useEffect(() => {
     setTitle('내가 쓴 후기');
@@ -52,7 +55,18 @@ export default function Review() {
             }
           );
           return res.data;
-        } catch {}
+        } catch (error) {
+          if (err.response?.status === 404 || err.response?.data?.name === 'REVIEW_NOT_FOUND') {
+            const err = error as AxiosError<IError>;
+            removeReviewWrite(`/mypage/review/${id}`);
+            router.push('/mypage/review');
+            return Promise.reject(err);
+          }
+        }
+      } else if (err.response?.status === 404 || err.response?.data?.name === 'REVIEW_NOT_FOUND') {
+        removeReviewWrite(`/mypage/review/${id}`);
+        router.push('/mypage/review');
+        return Promise.reject(err);
       }
       throw err;
     }
