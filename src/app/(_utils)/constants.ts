@@ -96,7 +96,7 @@ export const categoryList = [
   },
   {
     href: 'spa',
-    label: '스파',
+    label: '스파·한방',
     icon: spa,
     illustration: spaIllu,
     mainDescription: '심신의 피로를 씻어내고',
