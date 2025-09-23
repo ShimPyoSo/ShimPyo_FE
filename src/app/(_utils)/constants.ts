@@ -1,4 +1,6 @@
 import { IQuestion } from './type';
+import activity from '/public/images/icons/category/activity.svg';
+import activityIllu from '/public/images/category/activity.svg';
 import all from '/public/images/icons/category/all.svg';
 import allIllu from '/public/images/category/all.svg';
 import beauty from '/public/images/icons/category/beauty.svg';
@@ -19,6 +21,8 @@ import relaxing from '/public/images/test/spa.svg';
 import rest from '/public/images/test/rest.svg';
 import spa from '/public/images/icons/category/spa.svg';
 import spaIllu from '/public/images/category/spa.svg';
+import stay from '/public/images/icons/category/stay.svg';
+import stayIllu from '/public/images/category/stay.svg';
 import temple from '/public/images/carousel/temple.jpg';
 import test from '/public/images/carousel/test.jpg';
 import variety from '/public/images/test/variety.svg';
@@ -48,6 +52,8 @@ export const title: { [key: string]: string } = {
   '/category?type=food': '건강식',
   '/category?type=nature': '자연친화',
   '/category?type=beauty': 'K뷰티',
+  '/category?type=stay': '스테이',
+  '/category?type=activity': '체험',
   '/category': '전체',
   '/mypage/like/spot': '전체',
   '/mypage/like/spot?type=food': '건강식',
@@ -55,6 +61,8 @@ export const title: { [key: string]: string } = {
   '/mypage/like/spot?type=nature': '자연친화',
   '/mypage/like/spot?type=spa': '스파',
   '/mypage/like/spot?type=meditation': '명상',
+  '/mypage/like/spot?type=stay': '스테이',
+  '/mypage/like/spot?type=activity': '체험',
 };
 
 export const notRendering = ['/', '/signup'];
@@ -117,6 +125,22 @@ export const categoryList = [
     illustration: foodIllu,
     mainDescription: '가볍고 건강한 일상을',
     subDescription: '원하는 분들께 추천해요',
+  },
+  {
+    href: 'stay',
+    label: '스테이',
+    icon: stay,
+    illustration: stayIllu,
+    mainDescription: '잠시 쉬어가는 힐링이',
+    subDescription: '필요한 분들께 추천해요',
+  },
+  {
+    href: 'activity',
+    label: '체험',
+    icon: activity,
+    illustration: activityIllu,
+    mainDescription: '몸과 마음의 활기를 돋구고',
+    subDescription: '싶은 분들께 추천해요',
   },
   {
     href: '',
