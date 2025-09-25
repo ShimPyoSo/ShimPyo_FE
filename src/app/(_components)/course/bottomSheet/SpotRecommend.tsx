@@ -4,11 +4,11 @@ import { ICourseAddition, ICourseList } from '@/app/(_utils)/type';
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import axios, { AxiosError } from 'axios';
 
+import AddSpotButton from './AddSpotButton';
 import Carousel from '../../UI/Carousel';
 import { IError } from '@/app/(_utils)/type';
 import Image from 'next/image';
 import RecommendItem from './RecommendItem';
-import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 import SpotSkeleton from '../../landing/SpotSkeleton';
 import WebCarouselArrow from '../../UI/WebCarouselArrow';
 import { isMobile } from 'react-device-detect';
@@ -30,26 +30,6 @@ export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, 
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
-
-  const handleAddSpot = () => {
-    if (!data) return;
-    const selected = data.find((spot) => spot.touristId === detailId);
-    if (!selected) return;
-
-    if (setSelectedSpot.length === 1) {
-      (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)({
-        ...selected,
-        time: watch?.('course.time'),
-      });
-    } else {
-      const currentTime = watch?.('course.time');
-      (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', {
-        ...selected,
-        time: currentTime,
-      });
-    }
-    setDetailId(0);
-  };
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['recommendSpots', id],
@@ -96,17 +76,13 @@ export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, 
         </ul>
       </Carousel>
 
-      {detailId !== 0 && (
-        <div className="mt-[24px] h-[400px] overflow-y-scroll relative">
-          <SpotDetailComponent id={detailId} type="course" />
-          <button
-            className="sticky bottom-0 w-full py-[16px] rounded-lg border font-semibold bg-gn1 border-gn5 text-white z-[999]"
-            onClick={handleAddSpot}
-          >
-            여행지 추가하기
-          </button>
-        </div>
-      )}
+      <AddSpotButton
+        detailId={detailId}
+        setDetailId={setDetailId}
+        setSelectedSpot={setSelectedSpot}
+        watch={watch}
+        data={data}
+      />
     </section>
   );
 }
