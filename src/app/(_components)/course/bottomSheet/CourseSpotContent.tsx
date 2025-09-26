@@ -85,7 +85,12 @@ export default function CourseSpotContent({ course, setCourse, onClose, spot, da
     <div className="relative">
       <form onSubmit={handleSubmit(onSubmit)}>
         <SpotSearchInput register={register} setValue={setValue} watch={watch} />
-        <CourseDate register={register} watch={watch} />
+        <CourseDate
+          isFixed={!!(course && course.duration !== null)}
+          duration={course.days.length}
+          register={register}
+          watch={watch}
+        />
         <CourseTime register={register} />
         {selectedDate && selectedTime && selectedCourse.touristId !== 0 && (
           <div className="sticky bottom-[20px] flex justify-center z-[999]">

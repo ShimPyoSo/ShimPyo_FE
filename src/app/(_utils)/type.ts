@@ -192,6 +192,7 @@ export interface ICourseInfo {
   title: string;
   typename: IResultType;
   token: string;
+  duration?: string | null;
   thumbnail: string;
 }
 

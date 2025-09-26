@@ -5,18 +5,20 @@ import Image from 'next/image';
 import check from '/public/images/icons/check.svg';
 
 interface CourseDateProps {
+  isFixed: boolean;
+  duration: number;
   register: UseFormRegister<ICourseAddition>;
   watch: UseFormWatch<ICourseAddition>;
 }
 
-export default function CourseDate({ register, watch }: CourseDateProps) {
+export default function CourseDate({ isFixed, duration, register, watch }: CourseDateProps) {
   const selectedDate = watch('date');
 
   return (
     <section>
       <p className="mt-[52px] tracking-[-0.02em] text-g1 text-xs">날짜 선택</p>
       <ul className="mt-[12px] flex gap-[12px] items-center">
-        {Array.from({ length: 5 }, (_, i) => {
+        {Array.from({ length: isFixed ? duration : duration + 1 }, (_, i) => {
           const dayValue = `${i + 1}일`;
           return (
             <li key={i} className="flex items-center gap-[4px] tracking-[-0.02em] text-b3 text-sm">
