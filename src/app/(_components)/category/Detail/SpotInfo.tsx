@@ -52,7 +52,7 @@ export default function SpotInfo({ spot }: { spot: ISpot }) {
             예약 사이트 확인하기
           </Link>
         ) : (
-          <p className="underline">예약 사이트 미제공</p>
+          <p className="underline">{spot.facilities?.reservation ? '전화 또는 직접 문의' : '예약 서비스 미제공'}</p>
         )}
       </SpotInfoItem>
     </ul>
