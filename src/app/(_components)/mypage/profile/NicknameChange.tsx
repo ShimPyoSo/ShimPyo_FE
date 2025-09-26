@@ -44,7 +44,6 @@ export default function NicknameChange({ setIsNicknameAlert }: NicknameChangePro
           // 오류 시 처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

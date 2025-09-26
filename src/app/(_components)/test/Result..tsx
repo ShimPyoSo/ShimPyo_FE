@@ -59,7 +59,6 @@ export default function Result({ setCourse }: ResultProps) {
           // reissue 이후 오류 처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

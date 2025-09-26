@@ -48,7 +48,6 @@ export default function SpotDetailComponent({ id, type, setIsOpen }: SpotDetailC
           throw error;
         }
       }
-      console.log(err.response?.data?.message);
       throw error;
     }
   };

@@ -56,7 +56,6 @@ export default function ClientSideEffectWrapper() {
         } catch (error) {
           const err = error as AxiosError<IError>;
           handleRefreshExpired(err.response?.data?.name);
-          console.log(err.response?.data?.message);
         }
       };
 

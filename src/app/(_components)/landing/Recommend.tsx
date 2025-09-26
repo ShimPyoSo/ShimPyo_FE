@@ -43,7 +43,7 @@ export default function Recommend() {
           return [];
         }
       }
-      console.log(err.response?.data?.message);
+
       return [];
     }
   };

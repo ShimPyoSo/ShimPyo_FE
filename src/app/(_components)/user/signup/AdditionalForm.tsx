@@ -46,7 +46,6 @@ export default function AdditionalForm() {
           // reissue 후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

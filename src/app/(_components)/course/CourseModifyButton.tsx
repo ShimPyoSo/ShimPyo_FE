@@ -42,7 +42,7 @@ export default function CourseModifyButton({
           throw error;
         }
       }
-      console.log(err.response?.data?.message);
+
       throw error;
     }
   };

@@ -38,7 +38,7 @@ export default function CourseItemList({ setIsOpen }: CourseItemListProps) {
           return [];
         }
       }
-      console.log(err.response?.data?.message);
+
       return [];
     }
   };

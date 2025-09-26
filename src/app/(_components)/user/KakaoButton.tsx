@@ -42,7 +42,7 @@ export default function KakaoButton({ type }: { type: 'signup' | 'login' }) {
 
   const handleFailure = (error: unknown) => {
     // 로그인 실패 코드
-    console.log(error);
+    throw error;
   };
 
   return (

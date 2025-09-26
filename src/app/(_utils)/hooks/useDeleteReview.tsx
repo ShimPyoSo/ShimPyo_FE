@@ -36,7 +36,6 @@ export function useDeleteReview() {
             // reissue 이후 에러처리
           }
         }
-        console.log(err.response?.data?.message);
       }
     } else {
       try {
@@ -57,8 +56,6 @@ export function useDeleteReview() {
             await refetch();
           } catch {}
         }
-
-        console.log(err.response?.data?.message);
       }
     }
   };

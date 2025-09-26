@@ -62,7 +62,6 @@ export function useFetchCategorySpot({ filter, type, selectedOption }: useFetchC
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

@@ -55,7 +55,6 @@ export default function PasswordChange({ setIsPasswordAlert }: PasswordChangePro
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

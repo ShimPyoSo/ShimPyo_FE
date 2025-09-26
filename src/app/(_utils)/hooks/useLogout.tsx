@@ -38,7 +38,6 @@ export function useLogout() {
           router.push('/');
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

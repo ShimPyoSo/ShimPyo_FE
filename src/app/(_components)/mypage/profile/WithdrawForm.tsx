@@ -47,7 +47,6 @@ export default function WithdrawForm({ setIsWithdrawAlert }: WithdrawFormProps) 
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
 
       setIsFailed(true);
     }

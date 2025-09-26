@@ -48,7 +48,6 @@ export default function Review() {
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

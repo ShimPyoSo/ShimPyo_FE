@@ -35,7 +35,7 @@ export default function LikedSpot() {
           return [];
         }
       }
-      console.log(err.response?.data?.message);
+
       return [];
     }
   };

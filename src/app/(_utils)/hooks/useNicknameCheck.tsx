@@ -41,7 +41,6 @@ export function useNicknameCheck() {
             setIsAvailable(false);
           }
         }
-        console.log(err.response?.data?.message);
       }
     }, 500);
   };

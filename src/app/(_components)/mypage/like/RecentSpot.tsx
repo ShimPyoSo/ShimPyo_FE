@@ -34,7 +34,7 @@ export default function RecentSpot() {
           return [];
         }
       }
-      console.log(err.response?.data?.message);
+
       return [];
     }
   };

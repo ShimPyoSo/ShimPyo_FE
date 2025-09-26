@@ -56,9 +56,7 @@ export default function SignUpForm() {
         user: response.data,
         loginType: 'email',
       });
-    } catch (error) {
-      console.log(error); // error 처리 컴포넌트 구현 후 수정
-    }
+    } catch {}
   };
 
   return (

@@ -64,7 +64,6 @@ export default function EmailAuth<T extends ISignUp | IFind>({
       if (err.response?.data?.name === 'EMAIL_DUPLICATION' || err.response?.data?.name === 'EMAIL_NOT_FOUNDED') {
         setIsEmailError(true);
       }
-      console.log(err.response?.data?.message);
     } finally {
       setIsLoading(false);
     }

@@ -54,7 +54,6 @@ export default function CourseTitle({ title, setTitle, course, isEditable, setTi
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 

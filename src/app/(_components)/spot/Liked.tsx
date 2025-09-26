@@ -57,7 +57,6 @@ export default function Liked({ liked, id, type }: LikedProps) {
           // reissue 이후 에러처리
         }
       }
-      console.log(err.response?.data?.message);
     }
   };
 
@@ -66,9 +65,7 @@ export default function Liked({ liked, id, type }: LikedProps) {
     onSuccess: () => {
       setIsLiked((prev) => !prev);
     },
-    onError: (err) => {
-      console.log(err); // 에러 시 추후 수정
-    },
+    onError: () => {},
   });
 
   const iconSrc = (() => {
