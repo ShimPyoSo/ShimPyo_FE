@@ -18,7 +18,7 @@ export default function SocialProfile() {
       {isNicknameAlert && (
         <Alert
           title={'닉네임 변경 완료'}
-          description={'닉네임 변경이 완료되었습니다.\n변경된 닉네임이 즉시 적용됩니다.'}
+          description={'닉네임 변경이 완료되었어요👌\n지금부터 변경된 닉네임으로 활동해 보세요'}
           confirmText={'확인'}
           setIsOpen={setIsNicknameAlert}
           onConfirm={() => router.push('/mypage')}

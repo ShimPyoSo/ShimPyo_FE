@@ -32,7 +32,7 @@ export default function SocialWithdraw() {
       {isWithdrawAlert && (
         <Alert
           title={'회원 탈퇴 완료'}
-          description={'회원 탈퇴가 완료되었습니다.\n서비스를 이용해주셔서 감사합니다.'}
+          description={'회원 탈퇴가 완료되었어요\n그동안 쉼표를 이용해 주셔서 감사합니다🙏'}
           confirmText={'확인'}
           setIsOpen={setIsWithdrawAlert}
           onConfirm={handleWithdrawLogout}
