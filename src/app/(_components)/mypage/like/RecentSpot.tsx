@@ -47,7 +47,7 @@ export default function RecentSpot() {
   return (
     <>
       {data && data.length > 0 ? (
-        <ul className="overflow-y-auto">
+        <ul className="overflow-y-auto pb-[120px]">
           {data.map((spot) => (
             <SpotListItem key={spot.id} type="spot" spot={spot} />
           ))}
