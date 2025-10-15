@@ -73,7 +73,7 @@ export default function SearchSpotItem({
           {type === 'search' ? (
             <SpotDetailComponent id={spot.touristId} type="course" />
           ) : (
-            <iframe src={spot.placeURL} className="flex-1 w-full h-full border-0" />
+            <iframe src={spot.placeURL} className="w-full h-full border-0" />
           )}
         </div>
       )}

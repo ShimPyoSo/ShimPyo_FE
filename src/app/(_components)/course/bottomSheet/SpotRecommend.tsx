@@ -26,7 +26,13 @@ interface SpotRecommendProps {
   watch?: UseFormWatch<ICourseAddition>;
 }
 
-export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, watch }: SpotRecommendProps) {
+export default function SpotRecommend({
+  detailId,
+  setDetailId,
+  selectedSpot,
+  setSelectedSpot,
+  watch,
+}: SpotRecommendProps) {
   const { id } = useParams();
   const scrollRef = useRef<HTMLDivElement>(null);
   const { handleAccessExpired } = useHandleTokenExpired();
@@ -79,6 +85,7 @@ export default function SpotRecommend({ detailId, setDetailId, setSelectedSpot, 
       <AddSpotButton
         detailId={detailId}
         setDetailId={setDetailId}
+        selectedSpot={selectedSpot}
         setSelectedSpot={setSelectedSpot}
         watch={watch}
         data={data}

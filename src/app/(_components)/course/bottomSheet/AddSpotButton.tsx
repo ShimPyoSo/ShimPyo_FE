@@ -8,30 +8,43 @@ import SpotDetailComponent from '../../category/Detail/SpotDetailComponent';
 interface SpotRecommendProps {
   setDetailId: React.Dispatch<React.SetStateAction<number>>;
   detailId: number;
+  selectedSpot: ICourseAddition | ICourseList | null;
   setSelectedSpot: React.Dispatch<React.SetStateAction<ICourseList | null>> | UseFormSetValue<ICourseAddition>;
   watch?: UseFormWatch<ICourseAddition>;
   data: ICourseList[] | undefined | null;
 }
 
-export default function AddSpotButton({ detailId, setDetailId, setSelectedSpot, watch, data }: SpotRecommendProps) {
+export default function AddSpotButton({
+  detailId,
+  setDetailId,
+  selectedSpot,
+  setSelectedSpot,
+  watch,
+  data,
+}: SpotRecommendProps) {
   const handleAddSpot = () => {
     if (!data) return;
     const selected = data.find((spot) => spot.touristId === detailId);
     if (!selected) return;
 
-    if (setSelectedSpot.length === 1) {
-      (setSelectedSpot as React.Dispatch<React.SetStateAction<ICourseList | null>>)({
-        ...selected,
-        time: watch?.('course.time'),
-      });
-    } else {
-      const currentTime = watch?.('course.time');
-      (setSelectedSpot as UseFormSetValue<ICourseAddition>)('course', {
-        ...selected,
-        time: currentTime,
-      });
-    }
+    const selectedValue: ICourseAddition | ICourseList =
+      setSelectedSpot.length === 1
+        ? { ...selected, time: watch?.('course.time') } // ICourseList 타입
+        : { ...selected, time: watch?.('course.time') }; // ICourseAddition 타입
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (setSelectedSpot as any)(selectedValue);
     setDetailId(0);
+
+    handleClosePopup(selectedValue);
+  };
+
+  const handleClosePopup = (value?: ICourseList | ICourseAddition) => {
+    const sendValue = value || selectedSpot;
+    if (!sendValue || !window.opener) return;
+
+    window.opener.postMessage(sendValue, window.location.origin);
+    window.close();
   };
 
   return (
