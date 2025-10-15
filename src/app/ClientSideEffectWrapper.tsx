@@ -68,7 +68,7 @@ export default function ClientSideEffectWrapper() {
       {isSessionExpired && (
         <Alert
           title="로그인 만료"
-          description={'안전한 서비스 이용을 위해 자동 로그아웃 되었어요🔒\n계속 이용하시려면 다시 로그인해 보세요'}
+          description={'안전한 서비스 이용을 위해 로그아웃 되었어요🔒\n계속 이용하시려면 다시 로그인해 보세요'}
           confirmText="확인"
           setIsOpen={sessionExpired}
           onConfirm={() => {

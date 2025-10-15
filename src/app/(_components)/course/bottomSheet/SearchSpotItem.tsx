@@ -59,9 +59,9 @@ export default function SearchSpotItem({
           </div>
           <div className="grow-1 mt-[3px]">
             <p className="text-sm text-b3 font-semibold tracking-[-0.02em] line-clamp-2">{spot.title}</p>
-            <div className="flex items-center gap-[4px]">
+            <div className="mt-[6px] flex items-center gap-[4px]">
               <Image src={location} alt="위치" width={14} height={14} />
-              <p className="mt-[6px] text-xs text-g1 truncate">{spot.address}</p>
+              <p className="text-xs text-g1 truncate">{spot.address}</p>
             </div>
           </div>
           <DetailButton touristId={spot.touristId as number} detailId={detailId} setDetailId={setDetailId} />
