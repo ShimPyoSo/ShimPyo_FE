@@ -71,6 +71,7 @@ export default function DomainInput({
           components={{
             IndicatorSeparator: null,
           }}
+          isSearchable={false}
         />
       )}
     </>
