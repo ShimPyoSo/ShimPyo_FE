@@ -5,17 +5,25 @@ import { useRouter } from 'next/navigation';
 interface WordItemProps {
   isActive: boolean;
   searchWord: string;
+  type: 'search' | 'addition';
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function WordItem({ isActive, searchWord }: WordItemProps) {
+export default function WordItem({ isActive, searchWord, type, setQuery }: WordItemProps) {
   const router = useRouter();
 
   const handleSearch = (word: string) => {
+    if (type === 'addition' && setQuery) {
+      setQuery(word);
+      return;
+    }
+
     if (isActive) {
       const existing = JSON.parse(localStorage.getItem('shimpyo_keywords') || '[]');
       const updated = [word, ...existing.filter((q: string) => q !== word)].slice(0, 10);
       localStorage.setItem('shimpyo_keywords', JSON.stringify(updated));
     }
+
     router.push(`/search/${encodeURIComponent(word)}`);
   };
 

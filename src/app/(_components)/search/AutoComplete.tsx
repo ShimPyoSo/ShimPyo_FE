@@ -10,9 +10,11 @@ import noSuggestions from '/public/images/noSuggestions.svg';
 interface SearchInputProps {
   isActive: boolean;
   query: string;
+  type: 'search' | 'addition';
+  setQuery?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function AutoComplete({ isActive, query }: SearchInputProps) {
+export default function AutoComplete({ isActive, query, type, setQuery }: SearchInputProps) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -48,7 +50,9 @@ export default function AutoComplete({ isActive, query }: SearchInputProps) {
           <p className="mt-[12px] text-sm text-b3 tracking-[-0.013em]">관련 검색어가 없어요</p>
         </li>
       ) : (
-        suggestions.map((word, idx) => <WordItem isActive={isActive} searchWord={word} key={idx} />)
+        suggestions.map((word, idx) => (
+          <WordItem isActive={isActive} searchWord={word} key={idx} type={type} setQuery={setQuery} />
+        ))
       )}
     </ul>
   );

@@ -85,7 +85,9 @@ export default function AddSpotSearch({
         role="button"
         onClick={handleSearch}
       />
-      {type === 'search' && isFocused && query.trim().length > 0 && <AutoComplete isActive={false} query={query} />}
+      {type === 'search' && isFocused && query.trim().length > 0 && (
+        <AutoComplete isActive={false} query={query} type="addition" setQuery={setQuery} />
+      )}
     </div>
   );
 }
